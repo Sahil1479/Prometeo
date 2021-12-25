@@ -22,6 +22,10 @@ Procedure:
     python manage.py makemigrations
     python manage.py migrate
     ```
+- Collect static files
+    ```
+    python manage.py collectstatic
+    ```
 - Create a superuser
     ```
     python manage.py createsuperuser
