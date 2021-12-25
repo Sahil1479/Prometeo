@@ -1,0 +1,36 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Setup environment variables
+      run: |
+        cp .env.example .env
+        export DJANGO_SETTINGS_MODULE=prometeo.settings
+    - name: Install dependencies
+      run: |
+        sudo apt-get install libpq-dev 
+        pip install -r requirements.txt
+        pip install coverage
+    
+    - name: Linting
+      run: |
+        flake8 .
+    - name: Migrations
+      run: |
+        python manage.py makemigrations home
+        python manage.py migrate home
+        python manage.py makemigrations
+        python manage.py migrate
+    - name: Coverage
+      run: |
+        coverage run --source='.' manage.py test
+        bash <(curl -s https://codecov.io/bash) || echo 'Codecov failed to upload'
