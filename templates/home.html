@@ -2,25 +2,341 @@
 {% load static %}
 
 {% block title %}
-<!-- title -->
+Home
 {% endblock %}
 
 {% block head_links %}
-<!-- header links -->
 {% endblock %}
 
 {% block style %}
-<!-- import css files or write css code-->
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+<link href="{% static 'css/particle.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<!-- write your code here -->
-<div style="height: 500px; width:100%; background:rgb(4, 206, 179);align-items: center;
-justify-content: center; display:flex">
-    <h1>Home Page</h1>
-</div>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div id="particles-js"></div>
+    <div id="stars1"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <div class="brand">
+            <h1 style="letter-spacing:3px; font-family: 'Orbitron', sans-serif;" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">PROMETEO</h1>
+
+            <div>
+              <h3 data-aos="fade-left" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">INNOVATE</h3>
+              <h3 class="sep-bar" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">&nbsp|&nbsp</h3>
+              <h3 data-aos="fade-down" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">IMPLEMENT</h3>
+              <h3 class="sep-bar" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">&nbsp|&nbsp</h3 class="sep-bar">
+              <h3 data-aos="fade-right" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">IMPROVE</h3>
+            </div>
+            <h3 data-aos="fade-down" data-aos-delay="1500" data-aos-duration="500" data-aos-once="true">IIT JODHPUR</h3>
+          </div>
+          <div class="countdown d-flex" id="countdown" data-count="2022/1/26">
+            <div>
+              <h3>%d</h3>
+              <h4>Days</h4>
+            </div>
+            <div>
+              <h3>%h</h3>
+              <h4>Hours</h4>
+            </div>
+            <div>
+              <h3>%m</h3>
+              <h4>Minutes</h4>
+            </div>
+            <div>
+              <h3>%s</h3>
+              <h4>Seconds</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <img src="{% static 'img/hero-img.png' %}" class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Number of Events Section ======= -->
+    <section id="numberofevents" class="numberofevents">
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-lg-11">
+          <div class="row justify-content-end">
+
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box py-5">
+                <i class="bi bi-code-square"></i>
+                <span data-purecounter-start="0" data-purecounter-end="65" class="purecounter">0</span>
+                <p>Competitions</p>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box py-5">
+                <i class="bi bi-easel2"></i>
+                <span data-purecounter-start="0" data-purecounter-end="85" class="purecounter">0</span>
+                <p>Events</p>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box pb-5 pt-0 pt-lg-5">
+                <i class="bi bi-boxes"></i>
+                <span data-purecounter-start="0" data-purecounter-end="27" class="purecounter">0</span>
+                <p>Workshops</p>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+              <div class="count-box pb-5 pt-0 pt-lg-5">
+                <i class="bi bi-people"></i>
+                <span data-purecounter-start="0" data-purecounter-end="22" class="purecounter">0</span>
+                <p>Exhibitions</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Number of Events Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>INTRODUCTION</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 video-box">
+            <!-- <img src="{% static 'img/why-us.jpg" class="img-fluid" alt="">
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
+            <video src="{% static 'img/video1.mp4' %}" width="100%" height="100%" controls
+                            poster="{% static 'img/videothumbnail.png' %}" style="vertical-align: middle;"></video>
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+            <div class="icon-box">
+              <p class="description"><b>Prometeo 2022</b> is the second edition of IIT Jodhpur's National Technical+Entrepreneurial Festival. Prometeo derives its name from the Greek word for forethinker, and celebrates disruptive technologies through talks, workshops, and competitions.<br> This year's theme for Prometeo 2022 is <b>'India in 2030-40-50'</b> with the objective to address the major existing challenges of our society, provide exposure of different technologies to build the new India by expanding the technical and economical orbit</p>
+            </div>
+            <a href="#" class="btn-learn-more">Read More</a>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+      <div class="row" data-aos="fade-up" data-aos-delay="300">
+        <section class="page">
+          <div class="container">
+            <div class="circle-carousel" data-speed="2000" data-autoplay="2500">
+              <div class="slides">
+                <div class="slide">
+                  <h2>
+                    Broadband Highways
+                  </h2>
+                </div>
+                <div class="slide">
+                  <h2>Universal Access to Mobile Connectivity</h2>
+                </div>
+                <div class="slide">
+                  <h2>Public Internet Access Programme</h2>
+                </div>
+                <div class="slide">
+                  <h2>
+                    Reforming Government through Technology</h2>
+                </div>
+                <div class="slide">
+                  <h2>Electronic delivery of services</h2>
+                </div>
+                <div class="slide">
+                  <h2>Electronics Manufacturing</h2>
+                </div>
+                <div class="slide">
+                  <h2>
+                    Information for All
+                  </h2>
+                </div>
+                <div class="slide">
+                  <h2>IT for Jobs</h2>
+                </div>
+                <div class="slide">
+                  <h2>
+                    Early Harvest Programmes</h2>
+                </div>
+              </div>
+              <div class="pagination">
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/wifi.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:70%;
+                        height:70%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/public_internet.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:65%;
+                        height:65%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/internet.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:70%;
+                        height:70%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/government.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:65%;
+                        height:65%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/touch-control.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:70%;
+                        height:70%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/conveyor.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:65%;
+                        height:65%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/database-storage.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:65%;
+                        height:65%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/job.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:65%;
+                        height:65%;">
+                      </span>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dot">
+                    <span 
+                      style="
+                        background: url('../static/img/building.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        width:65%;
+                        height:65%;">
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+      </div>
+
+    </div>
+  </section><!-- End Features Section -->
+
+  <!-- ======= Gallery Section ======= -->
+  <section id="gallery">
+
+    <div class="container" data-aos="fade-up">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Gallery</h2>
+      </div>
+    </div>
+
+    <div class="gallery-slider swiper">
+      <div class="swiper-wrapper align-items-center">
+        {% for slide in carousel %}
+          <div class="swiper-slide"><a href="{{ slide.image.url }}" class="gallery-lightbox"><img src="{{ slide.image.url }}" class="img-fluid" alt=""></a></div>
+        {% endfor %}
+        <!-- <div class="swiper-slide"><a href="{% static 'img/gallery/1.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/1.jpg' %}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide"><a href="{% static 'img/gallery/2.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/2.jpg' %}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide"><a href="{% static 'img/gallery/3.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/3.jpg' %}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide"><a href="{% static 'img/gallery/4.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/4.jpg' %}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide"><a href="{% static 'img/gallery/5.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/5.jpg' %}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide"><a href="{% static 'img/gallery/6.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/6.jpg' %}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide"><a href="{% static 'img/gallery/7.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/7.jpg' %}" class="img-fluid" alt=""></a></div>
+        <div class="swiper-slide"><a href="{% static 'img/gallery/8.jpg' %}" class="gallery-lightbox"><img src="{% static 'img/gallery/8.jpg' %}" class="img-fluid" alt=""></a></div> -->
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </section><!-- End Gallery Section -->
+</main><!-- End #main -->
 {% endblock %}
 
 {% block scripts %}
-<!-- import js files or write js code-->
+<script src="{% static 'js/particle.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/orbit.js' %}"></script>
 {% endblock %}

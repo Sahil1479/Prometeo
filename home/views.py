@@ -3,7 +3,7 @@ from .models import Carousel
 
 
 def home(request):
-    carousel = Carousel.objects.all()
+    carousel = Carousel.objects.filter(active=True)
     return render(request, 'home.html', {'carousel': carousel})
 
 
