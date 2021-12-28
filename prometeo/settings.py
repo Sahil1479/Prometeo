@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'home',
     'team',
     'users',
+    'events',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',

@@ -120,7 +120,9 @@
     </header>
     <!-- End Header -->
 
-    <main id="main">{% block content %} {% endblock %}</main>
+    {% block content %}
+    {% endblock %}
+
     <!-- ======= Footer ======= -->
     <footer id="footer">
       <div class="footer-top">
@@ -210,11 +212,6 @@
       ><i class="bi bi-arrow-up-short"></i
     ></a>
 
-    <!-- Template Main JS File -->
-    <script src="{% static 'js/base.js' %}"></script>
-
-    {% block script %} {% endblock %}
-
     <!-- Vendor JS Files -->
     <script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
     <script src="{% static 'vendor/aos/aos.js' %}"></script>
@@ -223,5 +220,12 @@
     <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
     <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
     <script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}"></script>
-  </body>
+    
+    <!-- Template Main JS File -->
+    <script src="{% static 'js/main.js' %}"></script>
+    
+    {% block scripts %}
+    {% endblock %}
+
+</body>
 </html>
