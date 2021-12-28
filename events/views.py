@@ -1,30 +1,24 @@
-import os
-from django.shortcuts import render, redirect
-from django.conf import settings
+from django.shortcuts import render
 from .models import Event
-# from users.models import CustomUser
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required, user_passes_test
-import xlsxwriter
-from django.contrib import messages
-# from users.views import user_profile
+
 
 # Create your views here.
 def events(request, type):
     events = Event.objects.filter(type=type)
-    return render(request, 'events.html', {'events' : events, 'type' : type})
+    return render(request, 'events.html', {'events': events, 'type': type})
+
 
 def event(request, type, eventid):
     event = get_object_or_404(Event, pk=eventid)
-    return render(request, 'event.html', {'event' : event})
-    
+    return render(request, 'event.html', {'event': event})
+
 
 # @login_required
 # def registered(request):
 #     events = request.user.events.all()
 #     types = ['technical', 'informal', 'workshop']
-#     categories = [] 
+#     categories = []
 #     for type in types:
 #         if(request.user.events.filter(type=type).exists()):
 #             categories.append(type)

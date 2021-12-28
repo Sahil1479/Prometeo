@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 EVENT_CHOICES = (
-    ('technical','Technical'),
-    ('workshop','Workshop'),
-    ('informal','Informal'),
+    ('technical', 'Technical'),
+    ('workshop', 'Workshop'),
+    ('informal', 'Informal'),
 )
 
 EVENT_PARTICIPATION = (
@@ -13,11 +13,12 @@ EVENT_PARTICIPATION = (
     ('none', 'None')
 )
 
+
 class Event(models.Model):
     name = models.CharField(max_length=50, verbose_name="Event Name", unique=True)
     image = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Cover Image")
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
-    participation_type = models.CharField(max_length=25,choices=EVENT_PARTICIPATION,default='team', verbose_name="Participation Type")
+    participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='team', verbose_name="Participation Type")
     min_team_size = models.IntegerField(verbose_name="Minimum Team Size (leave unchanged for individual event)", default=3)
     max_team_size = models.IntegerField(verbose_name="Maximum Team Size (leave unchanged for individual event)", default=5)
     prize = models.IntegerField(verbose_name="Prize Money (Rs.)", null=True, blank=True)
@@ -30,8 +31,7 @@ class Event(models.Model):
     time = models.TimeField(null=True, blank=True, verbose_name="Event Time")
     venue = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Venue")
     registration_open = models.BooleanField(verbose_name="Registrations Open", default=True, blank=True)
-    type = models.CharField(max_length=15,choices=EVENT_CHOICES,default='event', verbose_name='Event Type')
+    type = models.CharField(max_length=15, choices=EVENT_CHOICES, default='event', verbose_name='Event Type')
+
     def __str__(self):
         return self.name
-
-    
