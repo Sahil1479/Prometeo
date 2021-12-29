@@ -1,0 +1,38 @@
+body{
+background-color: rgb(235, 235, 235);
+     
+}
+.btn-learn-more {
+    width: fit-content;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    
+    align-content: center;
+   
+    padding: 12px 32px;
+    border-radius: 4px;
+    transition: 0.3s;
+    line-height: 1;
+    color: #47b2e4;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    margin-top: 12px;
+    border: 2px solid #47b2e4;
+  }
+  .btn-learn-more:hover {
+    background: #47b2e4;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .overlay{
+    background-image: url("/static/img/technicaleventsbg.png");
+    width: 100%;
+    height: 80vh;
+    background-attachment:f;
+    opacity: 1;
+    position: absolute;
+    z-index: -1;
+}
+  

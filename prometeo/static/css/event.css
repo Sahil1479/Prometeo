@@ -1,0 +1,7 @@
+body{
+    background-image: url("/static/img/technicaleventsbg.png");
+    background-attachment: fixed;
+}
+footer{
+    position: absolute;
+}

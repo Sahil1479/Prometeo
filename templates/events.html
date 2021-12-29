@@ -1,0 +1,128 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+Events-{{type}}
+{% endblock %}
+
+
+{% block style %}
+<!-- import css files or write css code-->
+<link href="{% static 'css/events.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+
+
+{% block content %}
+<!-- <div class="overlay" ></div> -->
+<div style="height: 60vh; width:100%;background-color: black ;align-items: center;; 
+justify-content: center; display:flex">
+    {% block pageheader %}
+    <div class="page-header header-filter" data-parallax="true" style="background-color:transparent; ">
+     <div class="container  my-5 bg-transparent text-white">
+       <div class="row">
+         <div class="col-md-auto ml-auto mr-auto">
+             {% block brand %}
+             <div class="brand" style="position: relative;  background-color: transparent; ">
+                 {% block heading %}
+                 <h1 style="font-family: 'Calistoga', cursive; letter-spacing:2px;"> Events</h1>
+                 <h2 style="text-transform: capitalize; font-family: 'Comfortaa', cursive; ">
+                 {% if type == 'Technical' %}
+                 Technical
+                 {% elif type == 'Informal' %}
+                 Informal
+                 {% elif type == 'Live' %}
+                 Live/Upcoming
+                 {% else %}
+                 Workshops/Sessions
+                 {% endif %}
+                 
+             </h2>
+             
+                 {% endblock %}
+             </div>
+             {% endblock %}
+           <br>
+         </div>
+       </div>
+     </div>
+   </div>
+   {% endblock %}
+   
+</div>
+
+<div class="container p-5 mb-5  shadow" style="background-color:white;position: relative;top: -70px; width: min-width;border-radius: 5px;">
+    <div class="row">
+        <div class="col-md-4 ml-auto mr-auto justify-content-center">
+            
+            <!-- event cards -->
+            {% if events.count == 0 %}
+            <p style="font-size: xx-large;">Coming Soon!!</p>
+            {% else %}
+                {% for event in events %}
+                
+                <div class="card pb-3 shadow" style="width:fit-content;">
+                    <img class="card-img-top" src="{% static 'img/technicaleventsbg.png' %}" alt="Card image">
+                    <div class="card-body">
+                    <a href="{% url 'events:event' event.type event.pk %}" style="text-decoration: none;color: inherit;">
+                    <h4 class="card-title " style="text-align: center;">{{event.name}}
+                    <!-- card header with bage starts -->
+                    {% if user.is_authenticated and not user.is_superuser %}
+                        {% if event in user.events.all %}
+                        <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
+                        {% elif not event.registration_open %}
+                        <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                        {% endif %}
+                    {% elif not event.registration_open %}
+                    <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                    {% endif %}
+                        </h4></a>
+                    <!-- card header with badge ends -->
+                        <p class="card-text">{{event.description}}</p>
+                    
+                    {% if event.date %} 
+                    <p class="card-text medium text-body">
+                        
+                            Date: {{event.date}}
+                        
+                        </p>
+                        <p class="card-text medium text-dark">
+                            Time: {{event.time}}
+                        </p>
+                        {% else %}
+                        Date and time: Coming Soon!!
+                        {% endif %}
+
+                    
+                        {% if user.is_superuser %}
+                        <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more ">View More</a>
+                        {% elif user.is_authenticated %}
+                        <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more">View More</a>
+                        {% else %}
+                        <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more">View More</a>
+                        {% endif %}
+                        <!-- {% if user.is_authenticated and not user.is_superuser %}
+                            {% if event in user.events.all %}
+                            <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
+                            {% elif not event.registration_open %}
+                            <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                            {% endif %}
+                        {% elif not event.registration_open %}
+                        <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span> -->
+                        <!-- {% endif %} -->
+                
+                    </div>
+                </div>
+            
+                <!-- end card -->
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+

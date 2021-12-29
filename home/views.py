@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Carousel
-
+from django.shortcuts import get_object_or_404
 
 def home(request):
     carousel = Carousel.objects.filter(active=True)
