@@ -5,6 +5,10 @@ EVENT_CHOICES = (
     ('technical', 'Technical'),
     ('workshop', 'Workshop'),
     ('informal', 'Informal'),
+    ('exhibition', 'Exhibition'),
+    ('talk', 'Talk'),
+    ('panel discussion', 'Panel Discussion'),
+    ('initiative', 'Initiative'),
 )
 
 EVENT_PARTICIPATION = (
@@ -16,6 +20,7 @@ EVENT_PARTICIPATION = (
 
 class Event(models.Model):
     name = models.CharField(max_length=50, verbose_name="Event Name", unique=True)
+    speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty")
     image = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Cover Image")
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
     participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='team', verbose_name="Participation Type")
@@ -31,7 +36,7 @@ class Event(models.Model):
     time = models.TimeField(null=True, blank=True, verbose_name="Event Time")
     venue = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Venue")
     registration_open = models.BooleanField(verbose_name="Registrations Open", default=True, blank=True)
-    type = models.CharField(max_length=15, choices=EVENT_CHOICES, default='event', verbose_name='Event Type')
+    type = models.CharField(max_length=30, choices=EVENT_CHOICES, default='event', verbose_name='Event Type')
 
     def __str__(self):
         return self.name
