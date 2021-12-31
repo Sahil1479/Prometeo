@@ -32,7 +32,7 @@ Home
     margin:auto;
     height:100px;
     margin-top:65px;
-    left:15vw;
+    left:18.7%;
   }
   
   #progress-bar-container ul {
@@ -142,8 +142,15 @@ Home
     width:90%;
     margin: auto;
     background: none;
-    border: 1px solid white;
+    position: relative;
+    /* border: 1px solid white; */
     border-radius: 4px;
+  }
+
+  @media(max-width:960px){
+    .container {
+      left: 19% !important; 
+    }
   }
   
   #progress-content-section .section-content {
@@ -487,9 +494,9 @@ Home
   <!-- Theme timeline Section -->
   <section id="themetimeline">
     <div class="container" data-aos="fade-up">
-      <div class="section-title"  data-aos="fade-up">
+      <!-- <div class="section-title"  data-aos="fade-up">
         <h2 id="themehead">Theme</h2>
-      </div>
+      </div> -->
       <div class="row" data-aos="fade-up" data-aos-delay="300">
          <!-- testing progress bar -->
          <div class="process-wrapper">
@@ -511,31 +518,59 @@ Home
             <div class="section-content discovery active">
               <!-- <h2>HOME SECTION</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p> -->
-              <div class="container">
-                <div class="card col-lg-4 center">
-                  <p class="card-text" style="color: black;">
-                    asdhjk
-                  </p>
-              </div>
+              <div class="container" style="position: relative; left: 10%; ">
+                <div class="row justify-center">
+                 
+                    {% for theme in theme2030 %}
+                    <div class="col col-md-4 lg-4 sm-6 justify-content-center pb-3" >
+                    <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
+                      <img class="card-image-top"  src="{{theme.image.url}}">
+                      <p class="card-text" style="line-height: 15px;">{{theme.name}}</p>
+                    </div>
+                  </div>
+                    {% endfor %}
+                  
+                </div>
               </div>
               
             </div>
             
           
             <div class="section-content creative">
-              <h2>Creative CREATIONS</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+              <div class="container" style="position: relative; left: 10%;">
+                <div class="row justify-center">
+                 
+                    {% for theme in theme2040 %}
+                    <div class="col col-md-4 lg-4 sm-6 justify-content-center pb-3" >
+                    <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
+                      <img class="card-image-top"  src="{{theme.image.url}}">
+                      <p class="card-text" style="line-height: 15px;">{{theme.name}}</p>
+                    </div>
+                  </div>
+                    {% endfor %}
+                  
+                </div>
+              </div>
             </div>
             
             <div class="section-content production">
-              <h2>TESTIMONIALS NOW</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
+              <div class="container" style="position: relative; left: 10%;">
+                <div class="row justify-center">
+                 
+                    {% for theme in theme2050 %}
+                    <div class="col col-md-4 lg-4 sm-6 justify-content-center pb-3" >
+                    <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
+                      <img class="card-image-top"  src="{{theme.image.url}}">
+                      <p class="card-text" style="line-height: 15px;">{{theme.name}}</p>
+                    </div>
+                  </div>
+                    {% endfor %}
+                  
+                </div>
+              </div>
             </div>
             
-            <div class="section-content analysis">
-              <h2>OUR LOCATIONS</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p>
-            </div>
+           
             </div>
           </div>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -593,7 +628,7 @@ Home
           <div class="swiper-slide"><a href="{{ slide.image.url }}" class="gallery-lightbox"><img src="{{ slide.image.url }}" class="img-fluid" alt=""></a></div>
         {% endfor %}
       </div>
-      <div class="swiper-pagination"></div>
+      <!-- <div class="swiper-pagination"></div> -->
     </div>
 
   </section><!-- End Gallery Section -->

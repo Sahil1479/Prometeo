@@ -35,7 +35,7 @@ justify-content: center; display:flex">
 
 <div class="container p-5 mb-5  shadow" style="background-color:white;position: relative;top: -60px; width: min-width;border-radius: 5px;">
     <div class="row">
-        <div class="col-md-4 ml-auto mr-auto justify-content-center">
+       
             
             <!-- event cards -->
             {% if events.count == 0 %}
@@ -48,7 +48,7 @@ justify-content: center; display:flex">
 
             {% else %}
                 {% for event in events %}
-                
+                <div class="col-md-4 ml-auto mr-auto justify-content-center"> 
                 <div class="card pb-3 shadow " id="card" data-aos="fade-left" data-aos-delay="30000" data-aos-duration="3000" data-aos-once = "true" style="width:fit-content;">
                     <img class="card-img-top" src="{% static 'img/technicaleventsbg.png' %}" alt="Card image">
                     <div class="card-body">
@@ -101,7 +101,7 @@ justify-content: center; display:flex">
                 
                     </div>
                 </div>
-            
+            </div>
                 <!-- end card -->
                 {% endfor %}
             {% endif %}

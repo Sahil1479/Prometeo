@@ -73,3 +73,13 @@ bottom:0vh
   /* background-repeat: no-repeat; */
   background-size: cover;
 }
+.pageheadbg-Workshop{
+  height: 70vh;
+  background-image:url('/static/img/workshopbg.jpg');
+  background-attachment: fixed;
+  /* background-repeat: no-repeat; */
+  background-size: cover;
+  position: relative;
+  background-position-y: top;
+}
+
