@@ -13,6 +13,7 @@ def event(request, type, eventid):
     event = get_object_or_404(Event, pk=eventid)
     return render(request, 'event.html', {'event': event})
 
+
 def schedule(request):
     day1 = Event.objects.filter(date="2022-02-26").order_by('time')
     day2 = Event.objects.filter(date="2022-02-27").order_by('time')

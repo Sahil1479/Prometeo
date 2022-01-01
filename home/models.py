@@ -22,4 +22,4 @@ class Themeimgs(models.Model):
     image = models.ImageField(upload_to='theme_images/', verbose_name='icons related to theme')
 
     def __str__(self):
-        return self.name       
+        return self.name
