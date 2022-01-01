@@ -1,14 +1,7 @@
-import os
-from django.shortcuts import render, redirect
-from django.conf import settings
+from django.shortcuts import render
 from .models import Event
-# from users.models import CustomUser
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required, user_passes_test
-import xlsxwriter
-from django.contrib import messages
-# from users.views import user_profile
+
 
 # Create your views here.
 def events(request, type):
@@ -17,24 +10,12 @@ def events(request, type):
 
 def event(request, type, eventid):
     event = get_object_or_404(Event, pk=eventid)
-    return render(request, 'event.html', {'event' : event})
-    
+    return render(request, 'event.html', {'event': event})
 
-# @login_required
-# def registered(request):
-#     events = request.user.events.all()
-#     types = ['technical', 'informal', 'workshop']
-#     categories = [] 
-#     for type in types:
-#         if(request.user.events.filter(type=type).exists()):
-#             categories.append(type)
-#     return render(request, 'registered.html', {'events' : events, 'categories':categories})
 
-# @login_required
-# def register_for_event(request, eventid):
-#     event = Event.objects.get(pk=eventid)
-#     if(not event.registration_open):
-#         return redirect('event', event.type, event.pk)
-#     request.user.events.add(event)
-#     messages.success(request, f"Successfully registered for '{event.name}'.")
-#     return redirect(user_profile)
+def schedule(request):
+    day1 = Event.objects.filter(date="2022-02-26").order_by('time')
+    day2 = Event.objects.filter(date="2022-02-27").order_by('time')
+    day3 = Event.objects.filter(date="2022-02-28").order_by('time')
+    day4 = Event.objects.filter(date="2022-03-01").order_by('time')
+    return render(request, 'schedule.html', {'day1': day1, 'day2': day2, 'day3': day3, 'day4': day4})
