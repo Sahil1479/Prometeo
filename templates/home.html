@@ -33,7 +33,7 @@ Home
     margin:auto;
     height:100px;
     margin-top:65px;
-    left:25%;
+    left:23%;
   }
 
   #progress-bar-container ul {
@@ -186,6 +186,12 @@ Home
     #progress-content-section{
       position: relative;
       left:0%;
+    }
+
+    #cardcontentcontainer{
+      width: 80px;
+      position: relative;
+      left: -3rem;
     }
   }
   
@@ -384,7 +390,7 @@ Home
                             <div class="row justify-center">
                              
                                 {% for theme in theme2030 %}
-                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center" >
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center" id="cardcontentcontainer">
                                 <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent; border: none;">
                                   <img class="card-image-top"  src="{{theme.image.url}}">
                                   <p class="card-text" >{{theme.name}}</p>
@@ -403,7 +409,7 @@ Home
                             <div class="row justify-center">
                              
                                 {% for theme in theme2040 %}
-                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " >
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " id="cardcontentcontainer" >
                                 <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
                                   <img class="card-image-top"  src="{{theme.image.url}}">
                                   <p class="card-text">{{theme.name}}</p>
@@ -420,7 +426,7 @@ Home
                             <div class="row justify-center">
                              
                                 {% for theme in theme2050 %}
-                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " >
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " id="cardcontentcontainer" >
                                 <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
                                   <img class="card-image-top"  src="{{theme.image.url}}">
                                   <p class="card-text">{{theme.name}}</p>
