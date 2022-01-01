@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 TEAM_CHOICES = (
-    ("DevOps", "DevOps"),
+    ("Web Development", "Web Development"),
     ("Marketing", "Marketing"),
     ("Public Relations", "Public Relations"),
     ("Resourse Management", "Resourse Management"),
@@ -25,7 +25,7 @@ class Team(models.Model):
     github_link         = models.URLField(max_length=1000, blank=True, null=True)
     instagram_link      = models.URLField(max_length=1000, blank=True, null=True)
     facebook_link       = models.URLField(max_length=1000, blank=True, null=True)
-    linkedin_link        = models.URLField(max_length=1000, blank=True, null=True)
+    linkedin_link       = models.URLField(max_length=1000, blank=True, null=True)
     email               = models.CharField(max_length=100, blank=False, null=False)
     phoneNo             = models.CharField(max_length=100, blank=False, null=False)
 

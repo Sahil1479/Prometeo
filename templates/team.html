@@ -1,23 +1,24 @@
 {% extends 'base.html' %} {% load static %} {% block title %}
-<!-- title -->
+Team
 {% endblock %} {% block head_links %}
 <!-- header links -->
 {% endblock %} {% block style %}
 <link href="{% static 'css/team/team.css' %}" rel="stylesheet" />
 <style>
   .mainDiv {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-      url("{% static 'img/bgColor2.jpg' %}");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
+      url("{% static 'img/bgColor4.jpg' %}");
   }
 </style>
 <!-- import css files or write css code-->
 {% endblock %} {% block content %}
 <!-- write your code here -->
-<div style="height: 80vh; width:100%; align-items: center;
+<!-- <div style="height: 80vh; width:100%; align-items: center;
 justify-content: center; display:flex; font-family: 'Montserrat', sans-serif; color: white; background: linear-gradient(#111, #040720);">
     <h1>Our Team</h1>
-</div>
+</div> -->
 <div class="mainDiv">
+  <div style="padding-top: 40px;"></div>
   <!-- <h1 id="headingTag">Our team</h1> -->
   {% for data in ourTeam %}
   <div class="teamContainer">
@@ -71,7 +72,7 @@ justify-content: center; display:flex; font-family: 'Montserrat', sans-serif; co
         <div class="img-text">
           <h4>{{data.name}}</h4>
           <h5>{{data.email}}</h5>
-          <h5><i class="fas fa-phone"></i> {{data.phoneNo}}</h5>
+          <h5>{{data.phoneNo}}</h5>
         </div>
       </div>
       {% endfor %}

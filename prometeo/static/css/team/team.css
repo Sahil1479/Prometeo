@@ -19,7 +19,7 @@
     color: white;
   }
   .teamContainer {
-    padding: 50px 100px;
+    padding: 50px 100px 0px 100px;
   }
 
   .card-grid {
@@ -138,7 +138,7 @@
 
   .lined-h1 h1 {
     font-family: sans-serif;
-    margin: 25px 0px;
+    margin: 75px 0px 75px 0px;
     color: white;
     text-align: center;
     font-size: 33px;

@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Team
 
 # Create your views here.
 def team(request):
+    user = request.user
+    if user.is_authenticated and user.extendeduser.isProfileCompleted == False:
+        # In that case, the user must have to complete its profile first.
+        return redirect("/users/profile")
     teams = Team.objects.all()
     teamTypes = []
     for team in teams:
