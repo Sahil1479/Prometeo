@@ -128,8 +128,7 @@
     </header>
     <!-- End Header -->
 
-    {% block content %}
-    {% endblock %}
+    {% block content %} {% endblock %}
 
     <!-- ======= Footer ======= -->
     <footer id="footer">
@@ -221,19 +220,26 @@
     ></a>
 
     <!-- Vendor JS Files -->
-    <script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
     <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
     <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
     <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
     <script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}"></script>
-    
+
     <!-- Template Main JS File -->
     <script src="{% static 'js/main.js' %}"></script>
-    
-    {% block scripts %}
-    {% endblock %}
+    <script>
+      AOS.init({
+        duration: 1000,
+        easing: "ease-in-out",
+        once: true,
+        mirror: false,
+      });
+    </script>
 
 </body>
+    {% block scripts %} {% endblock %}
+  </body>
 </html>

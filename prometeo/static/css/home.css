@@ -24,6 +24,18 @@
   margin-bottom: 50px;
   font-size: 24px;
 }
+<<<<<<< HEAD
+=======
+#hero h3 {
+  margin-bottom: 0;
+  /* display: contents; */
+}
+#hero .hero-video {
+  display: inline-flex;
+  margin-top: 20px;
+  align-items: center;
+}
+>>>>>>> upstream/master
 #hero .btn-get-started {
   font-weight: 500;
   font-size: 16px;
@@ -44,14 +56,21 @@
   display: flex;
   align-items: center;
   transition: 0.5s;
+<<<<<<< HEAD
   margin: 10px 0 0 25px;
+=======
+  margin: 0 0 0 25px;
+>>>>>>> upstream/master
   color: #fff;
   line-height: 1;
 }
 #hero .btn-watch-video i {
   line-height: 0;
   color: #fff;
+<<<<<<< HEAD
   font-size: 32px;
+=======
+>>>>>>> upstream/master
   transition: 0.3s;
   margin-right: 8px;
 }
@@ -72,6 +91,7 @@
   }
   #hero .hero-img {
     text-align: center;
+<<<<<<< HEAD
   }
   #hero .hero-img img {
     width: 50%;
@@ -230,6 +250,168 @@
     font-size: 14px;
     font-weight: 500;
   }
+=======
+  }
+  #hero .hero-img img {
+    width: 50%;
+  }
+}
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h3 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+  #hero .hero-img img {
+    width: 70%;
+  }
+  #hero .hero-video {
+    margin-top: 5px;
+  }
+}
+@media (max-width: 575px) {
+  #hero .hero-img img {
+    width: 80%;
+  }
+  #hero h3 {
+    font-size: 16px;
+  }
+}
+
+@-webkit-keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+/**
+   * Change animation duration
+   */
+.animated {
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInRight {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+
+.brand {
+  margin: 10px 10px;
+}
+
+.brand h3 {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.brand div h3 {
+  display: inline-block;
+  margin-top: 0px;
+}
+
+@media only screen and (max-width: 530px) {
+  .index-page .brand h1 {
+    font-size: 12vw;
+  }
+}
+#main {
+  position: relative;
+}
+/*--------------------------------------------------------------
+  # Countdown
+  --------------------------------------------------------------*/
+#countdown {
+  margin-bottom: 80px;
+  justify-content: left;
+}
+#countdown div {
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  margin: 10px 10px;
+  width: 100px;
+  padding: 15px 0;
+}
+#countdown div h3 {
+  font-weight: 700;
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+#countdown div h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+@media (max-width: 1000px) {
+  #countdown {
+    justify-content: center;
+  }
+}
+@media (max-width: 575px) {
+  #countdown {
+    justify-content: center;
+  }
+  #countdown div {
+    width: 70px;
+    padding: 10px 0;
+    margin: 10px 8px;
+  }
+  #countdown div h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  #countdown div h4 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+>>>>>>> upstream/master
 }
 
 /*--------------------------------------------------------------
