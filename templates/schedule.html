@@ -1,0 +1,164 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Schedule
+{%endblock %} {% block head_links %}
+<!-- header links -->
+{% endblock %} {% block style %}
+<link href="{% static 'css/schedule.css' %}" rel="stylesheet" />
+{% endblock %} {% block content %}
+<!-- ======= Schedule Section ======= -->
+<section id="schedule" class="section-with-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="section-header" data-aos="fade-in">
+      <h2>Event Schedule</h2>
+    </div>
+    <ul
+      class="nav nav-tabs"
+      role="tablist"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <li class="nav-item">
+        <a class="nav-link active" href="#day-1" role="tab" data-bs-toggle="tab"
+          >Day 1</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#day-2" role="tab" data-bs-toggle="tab"
+          >Day 2</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#day-3" role="tab" data-bs-toggle="tab"
+          >Day 3</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#day-4" role="tab" data-bs-toggle="tab"
+          >Day 4</a
+        >
+      </li>
+    </ul>
+    <div
+      class="tab-content row justify-content-center"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <!-- Schdule Day 1 -->
+      <div
+        role="tabpanel"
+        class="col-lg-9 tab-pane fade show active"
+        id="day-1"
+      >
+        {% for event in day1 %}
+        <div class="row schedule-item">
+          <div class="col-md-2"><time>{{event.time}}</time></div>
+          <div class="col-md-10">
+            <div class="speaker">
+              <img src="{{ event.image.url }}" alt="Brenden Legros" />
+            </div>
+            <h4>{{event.name}}</h4>
+            <p>
+              {% if event.type == 'talk' %}<span
+                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+              >{% endif %}<span
+                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
+              >
+            </p>
+            {% if event.description != '' %}
+            <p class="description">
+              <span> {{event.description}} </span>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- End Schdule Day 1 -->
+
+      <!-- Schdule Day 2 -->
+      <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-2">
+        {% for event in day2 %}
+        <div class="row schedule-item">
+          <div class="col-md-2"><time>{{event.time}}</time></div>
+          <div class="col-md-10">
+            <div class="speaker">
+              <img src="{{ event.image.url }}" alt="Brenden Legros" />
+            </div>
+            <h4>{{event.name}}</h4>
+            <p>
+              {% if event.type == 'talk' %}<span
+                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+              >{% endif %}<span
+                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
+              >
+            </p>
+            {% if event.description != '' %}
+            <p class="description">
+              <span> {{event.description}} </span>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- End Schdule Day 2 -->
+
+      <!-- Schdule Day 3 -->
+      <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-3">
+        {% for event in day3 %}
+        <div class="row schedule-item">
+          <div class="col-md-2"><time>{{event.time}}</time></div>
+          <div class="col-md-10">
+            <div class="speaker">
+              <img src="{{ event.image.url }}" alt="Brenden Legros" />
+            </div>
+            <h4>{{event.name}}</h4>
+            <p>
+              {% if event.type == 'talk' %}<span
+                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+              >{% endif %}<span
+                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
+              >
+            </p>
+            {% if event.description != '' %}
+            <p class="description">
+              <span> {{event.description}} </span>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- End Schdule Day 3 -->
+
+      <!-- Schdule Day 4 -->
+      <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-4">
+        {% for event in day4 %}
+        <div class="row schedule-item">
+          <div class="col-md-2"><time>{{event.time}}</time></div>
+          <div class="col-md-10">
+            <div class="speaker">
+              <img src="{{ event.image.url }}" alt="Brenden Legros" />
+            </div>
+            <h4>{{event.name}}</h4>
+            <p>
+              {% if event.type == 'talk' %}<span
+                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+              >{% endif %}<span
+                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
+              >
+            </p>
+            {% if event.description != '' %}
+            <p class="description">
+              <span> {{event.description}} </span>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- End Schdule Day 4 -->
+    </div>
+  </div>
+</section>
+<!-- End Schedule Section -->
+{% endblock %} {% block scripts %} {% endblock %}
