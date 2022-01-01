@@ -24,6 +24,7 @@ Home
   .process-wrapper {
     margin:auto;
     max-width:1080px;
+    position: relative;
   }
   
   #progress-bar-container {
@@ -32,9 +33,9 @@ Home
     margin:auto;
     height:100px;
     margin-top:65px;
-    left:18.7%;
+    left:25%;
   }
-  
+
   #progress-bar-container ul {
     padding:0;
     margin:0;
@@ -52,13 +53,13 @@ Home
     width:30px;
     height:30px;
     border-radius:50%;
-    border:solid 1px white;
+    border:solid 1px #47b2e4;
     transition:all ease 0.3s;
        
   }
   
   #progress-bar-container li.active:before, #progress-bar-container li:hover:before {
-    border:none;
+    border: solid 2px #47b2e4;
       background-color: #47b2e4;
     /* background: linear-gradient(to right, #9c27b0, transparent);  */
   }
@@ -68,7 +69,7 @@ Home
     float:left;
     width:20%;
     text-align:center;
-    color:white;
+    color:rgb(43, 42, 42);
     text-transform:uppercase;
     font-size:11px;
     cursor:pointer;
@@ -87,7 +88,7 @@ Home
   }
   
   #progress-bar-container li.active, #progress-bar-container li:hover {
-    color:white;
+    color:#47b2e4;
   }
   
   #progress-bar-container li:after {
@@ -95,9 +96,9 @@ Home
     display:block;
     width:6px;
     height:6px;
-    background:#777;
+    background:rgb(95, 190, 228);
     margin:auto;
-    border:solid 7px #fff;
+    border:solid 7px #47b2e4;
     border-radius:50%;
     margin-top:40px;
     box-shadow:0 2px 13px -1px rgba(0,0,0,0.3);
@@ -116,7 +117,7 @@ Home
   #progress-bar-container #line {
     width:40%;
     margin:auto;
-    background: #eee;
+    background: rgb(235, 235, 235);
     height:6px;
     position:absolute;
     left:10%;
@@ -125,7 +126,16 @@ Home
     border-radius:50px;
     transition:all ease 0.9s;
   }
-  
+  .card{
+    border: none;
+    padding: 10px;
+    word-wrap: normal;
+  }
+
+  .card-text{
+    color: cornflowerblue;
+    padding: 0px;
+  }
   #progress-bar-container #line-progress {
     content:" ";
     width:3%;
@@ -142,19 +152,45 @@ Home
     width:90%;
     margin: auto;
     background: none;
-    position: relative;
+   
+
     /* border: 1px solid white; */
     border-radius: 4px;
   }
 
   @media(max-width:960px){
     .container {
-      left: 19% !important; 
+      left: 15% !important; 
+      
+    }
+   #progress-bar-container{
+     position: relative;
+     left: 16%;
+   }
+    #progress-content-section{
+      position: relative;
+      left:-10%;
+    }
+  }
+
+  
+  @media(max-width:380px){
+    .container {
+      left: 15% !important; 
+      
+    }
+   #progress-bar-container{
+     position: relative;
+     left: 16%;
+   }
+    #progress-content-section{
+      position: relative;
+      left:0%;
     }
   }
   
   #progress-content-section .section-content {
-    padding:30px 40px;
+    padding:0px 40px;
     text-align:center;
   }
   
@@ -167,8 +203,8 @@ Home
   
   #progress-content-section .section-content p {
     font-size:16px;
-    line-height:1.8em;
-    color:white;
+    line-height:1.5em;
+    color:black;
   }
   
   #progress-content-section .section-content {
@@ -303,22 +339,155 @@ Home
           <h2>INTRODUCTION</h2>
         </div>
 
-        <div class="row">
-          <div class="col-lg-6 video-box">
-            <!-- <img src="{% static 'img/why-us.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
-            <video src="{% static 'img/video1.mp4' %}" width="100%" height="100%" controls
-                            poster="{% static 'img/videothumbnail.png' %}" style="vertical-align: middle;"></video>
-          </div>
-
-          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+        <div class="row " data-masonry='{"percentPosition": true }'>
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5 " >
 
             <div class="icon-box">
-              <p class="description"><b>Prometeo 2022</b> is the second edition of IIT Jodhpur's National Technical+Entrepreneurial Festival. Prometeo derives its name from the Greek word for forethinker, and celebrates disruptive technologies through talks, workshops, and competitions.<br> This year's theme for Prometeo 2022 is <b>'India in 2030-40-50'</b> with the objective to address the major existing challenges of our society, provide exposure of different technologies to build the new India by expanding the technical and economical orbit</p>
+              <p class="description" ><b>Prometeo 2022</b> is the second edition of IIT Jodhpur's National Technical+Entrepreneurial Festival. Prometeo derives its name from the Greek word for forethinker, and celebrates disruptive technologies through talks, workshops, and competitions.<br> This year's theme for Prometeo 2022 is <b>'India in 2030-40-50'</b> with the objective to address the major existing challenges of our society, provide exposure of different technologies to build the new India by expanding the technical and economical orbit</p>
             </div>
             <a href="#" class="btn-learn-more">Read More</a>
 
           </div>
+          <div class="col-lg-6 video-box">
+            <!-- <img src="{% static 'img/why-us.jpg" class="img-fluid" alt="">
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
+            <!-- <video src="{% static 'img/video1.mp4' %}" width="100%" height="100%" controls
+                            poster="{% static 'img/videothumbnail.png' %}" style="vertical-align: middle;"></video> -->
+
+                <!-- timeline -->
+                <div  data-aos="fade-up">
+                  <!-- <div class="section-title"  data-aos="fade-up">
+                    <h2 id="themehead">Theme</h2>
+                  </div> -->
+                  <div class="row" data-aos="fade-up" data-aos-delay="300">
+                     <!-- testing progress bar -->
+                     <div class="process-wrapper">
+                      <div id="progress-bar-container">
+                        <ul >
+                          <!-- <li class="step step01 active"><div class="step-inner">2030</div></li> -->
+                          <li class="step step02"><div class="step-inner">2030</div></li>
+                          <li class="step step03"><div class="step-inner">2040</div></li>
+                          <li class="step step04"><div class="step-inner">2050</div></li>
+                          <!-- <li class="step step03"><div class="step-inner">2050</div></li> -->
+                        </ul>
+                        
+                        <div id="line">
+                          <div id="line-progress"></div>
+                        </div>
+                      </div>
+                      
+                      <div id="progress-content-section">
+                        <div class="section-content discovery active">
+                          <!-- <h2>HOME SECTION</h2>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p> -->
+                          <div class="container" style="position: relative; left: 10%; ">
+                            <div class="row justify-center">
+                             
+                                {% for theme in theme2030 %}
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center" >
+                                <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent; border: none;">
+                                  <img class="card-image-top"  src="{{theme.image.url}}">
+                                  <p class="card-text" >{{theme.name}}</p>
+                                </div>
+                              </div>
+                                {% endfor %}
+                              
+                            </div>
+                          </div>
+                          
+                        </div>
+                        
+                      
+                        <div class="section-content creative">
+                          <div class="container" style="position: relative; left: 10%;">
+                            <div class="row justify-center">
+                             
+                                {% for theme in theme2040 %}
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " >
+                                <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
+                                  <img class="card-image-top"  src="{{theme.image.url}}">
+                                  <p class="card-text">{{theme.name}}</p>
+                                </div>
+                              </div>
+                                {% endfor %}
+                              
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="section-content production">
+                          <div class="container" style="position: relative; left: 10%;">
+                            <div class="row justify-center">
+                             
+                                {% for theme in theme2050 %}
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " >
+                                <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
+                                  <img class="card-image-top"  src="{{theme.image.url}}">
+                                  <p class="card-text">{{theme.name}}</p>
+                                </div>
+                              </div>
+                                {% endfor %}
+                              
+                            </div>
+                          </div>
+                        </div>
+                        
+                       
+                        </div>
+                      </div>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+                       <script>
+                          let time=12000;
+                           $('.step').each(function(i){ 
+                                    var aTag = this;
+                                   var starter= setTimeout(function() { 
+                                        $(aTag).click();
+                                        clearInterval(starter);
+                                        }, 4000 * (i + 1)) 
+                                })
+                          setInterval(function () {
+                                $('.step').each(function(i){ 
+                                    var aTag = this;
+                                    setTimeout(function() { 
+                                        $(aTag).click();
+                                        }, 4000 * (i + 1)) 
+                                })
+                            },time );
+                      
+
+
+                        $(".step").click( function() {
+                        $(this).addClass("active").prevAll().addClass("active");
+                        $(this).nextAll().removeClass("active");
+                      });
+                      
+                                          
+                      $(".step02").click( function() {
+                        $("#line-progress").css("width", "3%");
+                        $(".discovery").addClass("active").siblings().removeClass("active");
+                      });
+                      
+                      $(".step03").click( function() {
+                        $("#line-progress").css("width", "50%");
+                        $(".creative").addClass("active").siblings().removeClass("active");
+                      });
+                      
+                      $(".step04").click( function() {
+                        $("#line-progress").css("width", "100%");
+                        $(".production").addClass("active").siblings().removeClass("active");
+                      });
+                      
+                    
+                       
+                          </script>
+                     <!-- test ends -->
+                  </div>
+                </div>
+                <!-- timeline ended -->
+          </div>
+
+         
         </div>
 
       </div>
@@ -492,127 +661,9 @@ Home
   </section><!-- End Features Section -->
 
   <!-- Theme timeline Section -->
-  <section id="themetimeline">
-    <div class="container" data-aos="fade-up">
-      <!-- <div class="section-title"  data-aos="fade-up">
-        <h2 id="themehead">Theme</h2>
-      </div> -->
-      <div class="row" data-aos="fade-up" data-aos-delay="300">
-         <!-- testing progress bar -->
-         <div class="process-wrapper">
-          <div id="progress-bar-container">
-            <ul >
-              <!-- <li class="step step01 active"><div class="step-inner">2030</div></li> -->
-              <li class="step step02"><div class="step-inner">2030</div></li>
-              <li class="step step03"><div class="step-inner">2040</div></li>
-              <li class="step step04"><div class="step-inner">2050</div></li>
-              <!-- <li class="step step03"><div class="step-inner">2050</div></li> -->
-            </ul>
-            
-            <div id="line">
-              <div id="line-progress"></div>
-            </div>
-          </div>
-          
-          <div id="progress-content-section">
-            <div class="section-content discovery active">
-              <!-- <h2>HOME SECTION</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p> -->
-              <div class="container" style="position: relative; left: 10%; ">
-                <div class="row justify-center">
-                 
-                    {% for theme in theme2030 %}
-                    <div class="col col-md-4 lg-4 sm-6 justify-content-center pb-3" >
-                    <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
-                      <img class="card-image-top"  src="{{theme.image.url}}">
-                      <p class="card-text" style="line-height: 15px;">{{theme.name}}</p>
-                    </div>
-                  </div>
-                    {% endfor %}
-                  
-                </div>
-              </div>
-              
-            </div>
-            
-          
-            <div class="section-content creative">
-              <div class="container" style="position: relative; left: 10%;">
-                <div class="row justify-center">
-                 
-                    {% for theme in theme2040 %}
-                    <div class="col col-md-4 lg-4 sm-6 justify-content-center pb-3" >
-                    <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
-                      <img class="card-image-top"  src="{{theme.image.url}}">
-                      <p class="card-text" style="line-height: 15px;">{{theme.name}}</p>
-                    </div>
-                  </div>
-                    {% endfor %}
-                  
-                </div>
-              </div>
-            </div>
-            
-            <div class="section-content production">
-              <div class="container" style="position: relative; left: 10%;">
-                <div class="row justify-center">
-                 
-                    {% for theme in theme2050 %}
-                    <div class="col col-md-4 lg-4 sm-6 justify-content-center pb-3" >
-                    <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
-                      <img class="card-image-top"  src="{{theme.image.url}}">
-                      <p class="card-text" style="line-height: 15px;">{{theme.name}}</p>
-                    </div>
-                  </div>
-                    {% endfor %}
-                  
-                </div>
-              </div>
-            </div>
-            
-           
-            </div>
-          </div>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-           <script>
-              
-              $(".step").click( function() {
-            $(this).addClass("active").prevAll().addClass("active");
-            $(this).nextAll().removeClass("active");
-          });
-          
-          // $(".step01").click( function() {
-          //   $("#line-progress").css("width", "3%");
-          //   $(".discovery").addClass("active").siblings().removeClass("active");
-          // });
-          
-          $(".step02").click( function() {
-            $("#line-progress").css("width", "3%");
-            $(".discovery").addClass("active").siblings().removeClass("active");
-          });
-          
-          $(".step03").click( function() {
-            $("#line-progress").css("width", "50%");
-            $(".creative").addClass("active").siblings().removeClass("active");
-          });
-          
-          $(".step04").click( function() {
-          	$("#line-progress").css("width", "100%");
-          	$(".production").addClass("active").siblings().removeClass("active");
-          });
-          
-          // $(".step05").click( function() {
-          // 	$("#line-progress").css("width", "100%");
-          // 	$(".analysis").addClass("active").siblings().removeClass("active");
-          // });
-          
-           
-              </script>
-         <!-- test ends -->
-      </div>
-    </div>
-  </section>
+  <!-- <section id="themetimeline">
+    
+  </section> -->
   <!-- ======= Gallery Section ======= -->
   <section id="gallery">
 
