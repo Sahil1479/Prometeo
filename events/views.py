@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def events(request, type):
-    events = Event.objects.filter(type=type)
+    events = Event.objects.filter(type=type.lower())
     return render(request, 'events.html', {'events': events, 'type': type})
 
 

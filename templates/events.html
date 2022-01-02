@@ -1,23 +1,121 @@
-{% extends 'base.html' %} {% load static %} {% block title %}
-<!-- title -->
-{% endblock %} {% block head_links %}
-<!-- header links -->
-{% endblock %} {% block style %}
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+Events-{{type}}
+{% endblock %}
+
+
+{% block style %}
 <!-- import css files or write css code-->
-{% endblock %} {% block content %}
-<!-- write your code here -->
-<div
-  style="
-    height: 500px;
-    width: 100%;
-    background: rgb(4, 206, 179);
-    align-items: center;
-    justify-content: center;
-    display: flex;
-  "
->
-  <h1>events.html</h1>
+<link href="{% static 'css/events.css' %}" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<!-- <div class="overlay" ></div> -->
+<div class="pageheadbg-{{type}}" style=" width:100%; background-attachment: fixed;align-items: center; 
+justify-content: center; display:flex">
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col">
+                <h1 id="pagehead" data-aos="fade-down" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true" style="color: rgb(216, 217, 236); font-weight: 600;">{{type}}  Events</h2>
+            </div>
+        </div>
+    </div>
+
 </div>
-{% endblock %} {% block scripts %}
-<!-- import js files or write js code-->
+  
+   
+
+<div class="container p-5 mb-5  shadow" style="background-color:white;position: relative;top: -60px; width: min-width;border-radius: 5px;">
+    <div class="row">
+       
+            
+            <!-- event cards -->
+            {% if events.count == 0 %}
+            <p data-aos="fade-left" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large;">Coming Soon!!</p>
+            {% elif type == 'Live' %}
+                
+                {% for event in events %}
+
+                {% endfor %}
+
+            {% else %}
+                {% for event in events %}
+                <div class="col-md-4 ml-auto mr-auto justify-content-center"> 
+                <div class="card pb-3 shadow " id="card" data-aos="fade-left" data-aos-delay="3000" data-aos-duration="3000" data-aos-once = "true" style="width:fit-content;">
+                    <img class="card-img-top" src="{% static 'img/technicaleventsbg.png' %}" alt="Card image">
+                    <div class="card-body">
+                    <a href="{% url 'events:event' event.type event.pk %}" style="text-decoration: none;color: inherit;">
+                    <h4 class="card-title " style="text-align: center;">{{event.name}}
+                    <!-- card header with bage starts -->
+                    {% if user.is_authenticated and not user.is_superuser %}
+                        {% if event in user.events.all %}
+                        <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
+                        {% elif not event.registration_open %}
+                        <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                        {% endif %}
+                    {% elif not event.registration_open %}
+                    <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                    {% endif %}
+                        </h4></a>
+                    <!-- card header with badge ends -->
+                        <p class="card-text">{{event.description}}</p>
+                    
+                    {% if event.date %} 
+                    <p class="card-text medium text-body">
+                        
+                            Date: {{event.date}}
+                        
+                        </p>
+                        <p class="card-text medium text-dark">
+                            Time: {{event.time}}
+                        </p>
+                        {% else %}
+                        Date and time: Coming Soon!!
+                        {% endif %}
+
+                    
+                        {% if user.is_superuser %}
+                        <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more ">View More</a>
+                        {% elif user.is_authenticated %}
+                        <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more">View More</a>
+                        {% else %}
+                        <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more">View More</a>
+                        {% endif %}
+                        <!-- {% if user.is_authenticated and not user.is_superuser %}
+                            {% if event in user.events.all %}
+                            <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
+                            {% elif not event.registration_open %}
+                            <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                            {% endif %}
+                        {% elif not event.registration_open %}
+                        <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span> -->
+                        <!-- {% endif %} -->
+                
+                    </div>
+                </div>
+            </div>
+                <!-- end card -->
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'js/main.js' %}"></script>
+<script>
+    AOS.init();
+</script>
 {% endblock %}

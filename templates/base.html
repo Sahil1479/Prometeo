@@ -58,53 +58,44 @@
     <!-- Template Main CSS File -->
     <link href="{% static 'css/base.css' %}" rel="stylesheet" />
     {% block style %} {% endblock %}
-  </head>
-  <body>
+</head>
+<body>
+   
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-      <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto">
-          <a href="http://iitj.ac.in/">
-            <img
-              src="{% static 'img/iitj_pro_white.png' %}"
-              width="75"
-              height="48"
-              align="top"
-              alt=""
-              id="logo-img"
-            />
-          </a>
-          <a class="navbar-brand" href="/"> Prometeo </a>
-        </h1>
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li>
-              <a class="nav-link scrollto" href="{% url 'schedule' %}"
-                >Schedule</a
-              >
-            </li>
-            <li><a class="nav-link scrollto" href="#team">Team</a></li>
-            <li class="dropdown">
-              <a href="#"
-                ><span>Drop Down</span> <i class="bi bi-chevron-down"></i
-              ></a>
-              <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="getstarted scrollto" href="#about">Get Started</a>
-            </li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
-      </div>
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto">
+                <a href="http://iitj.ac.in/">
+                    <img src="{% static 'img/iitj_pro_white.png' %}" width="75" height="48" align="top" alt="" id="logo-img">
+                </a>
+                <a class="navbar-brand" href="/">
+                    Prometeo
+                </a>
+            </h1>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    <li>
+                      <a class="nav-link scrollto" href="{% url 'events:schedule' %}"
+                        >Schedule</a
+                      >
+                    </li>
+                    <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                    <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="{% url 'events:events' 'Live' %}">Live Events</a></li>
+                            <li><a href="{% url 'events:events' 'Technical' %}">Technical Events</a></li>
+                            <li><a href="{% url 'events:events' 'Informal' %}">Informal Events</a></li>
+                            <li><a href="{% url 'events:events' 'Workshop' %}">Workshops</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+        </div>
     </header>
     <!-- End Header -->
 
@@ -218,7 +209,9 @@
         mirror: false,
       });
     </script>
+    {% block scripts %}
+    {% endblock %}
 
-    {% block scripts %} {% endblock %}
-  </body>
+</body>
 </html>
+
