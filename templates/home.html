@@ -123,15 +123,8 @@ Home
           <h2>INTRODUCTION</h2>
         </div>
 
-        <div class="row">
-          <div class="col-lg-6 video-box">
-            <!-- <img src="{% static 'img/why-us.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
-            <video src="{% static 'img/video1.mp4' %}" width="100%" height="100%" controls
-                            poster="{% static 'img/videothumbnail.png' %}" style="vertical-align: middle;"></video>
-          </div>
-
-          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+        <div class="row " data-masonry='{"percentPosition": true }'>
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5 " >
 
             <div class="icon-box">
               <p style="text-align: justify;" class="description"><b>Prometeo 2022</b> is the second edition of IIT Jodhpur's National Technical+Entrepreneurial Festival. Prometeo derives its name from the Greek word for forethinker, and celebrates disruptive technologies through talks, workshops, and competitions.<br> This year's theme for Prometeo 2022 is <b>'India in 2030-40-50'</b> with the objective to address the major existing challenges of our society, provide exposure of different technologies to build the new India by expanding the technical and economical orbit</p>
@@ -139,6 +132,100 @@ Home
             <a href="#" class="btn-learn-more">Read More</a>
 
           </div>
+          <div class="col-lg-6 video-box">
+            <!-- <img src="{% static 'img/why-us.jpg" class="img-fluid" alt="">
+            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> -->
+            <!-- <video src="{% static 'img/video1.mp4' %}" width="100%" height="100%" controls
+                            poster="{% static 'img/videothumbnail.png' %}" style="vertical-align: middle;"></video> -->
+
+                <!-- timeline -->
+                <div  data-aos="fade-up">
+                  <!-- <div class="section-title"  data-aos="fade-up">
+                    <h2 id="themehead">Theme</h2>
+                  </div> -->
+                  <div class="row" data-aos="fade-up" data-aos-delay="300">
+                     <!-- testing progress bar -->
+                     <div class="process-wrapper">
+                      <div id="progress-bar-container">
+                        <ul >
+                          <!-- <li class="step step01 active"><div class="step-inner">2030</div></li> -->
+                          <li class="step step02"><div class="step-inner">2030</div></li>
+                          <li class="step step03"><div class="step-inner">2040</div></li>
+                          <li class="step step04"><div class="step-inner">2050</div></li>
+                          <!-- <li class="step step03"><div class="step-inner">2050</div></li> -->
+                        </ul>
+                        
+                        <div id="line">
+                          <div id="line-progress"></div>
+                        </div>
+                      </div>
+                      
+                      <div id="progress-content-section">
+                        <div class="section-content discovery active">
+                          <!-- <h2>HOME SECTION</h2>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec neque justo, consequat non fermentum ac, tempor eu turpis. Proin nulla eros, placerat non ipsum ut, dapibus ullamcorper ex. Nulla in dapibus lorem. Suspendisse vitae velit ac ante consequat placerat ut sed eros. Nullam porttitor mattis mi, id fringilla ex consequat eu. Praesent pulvinar tincidunt leo et condimentum. Maecenas volutpat turpis at felis egestas malesuada. Phasellus sem odio, venenatis at ex a, lacinia suscipit orci.</p> -->
+                          <div class="container" style="position: relative; left: 10%; ">
+                            <div class="row justify-center">
+                             
+                                {% for theme in theme2030 %}
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center" id="cardcontentcontainer">
+                                <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent; border: none;">
+                                  <img class="card-image-top"  src="{{theme.image.url}}">
+                                  <p class="card-text" >{{theme.name}}</p>
+                                </div>
+                              </div>
+                                {% endfor %}
+                              
+                            </div>
+                          </div>
+                          
+                        </div>
+                        
+                      
+                        <div class="section-content creative">
+                          <div class="container" style="position: relative; left: 10%;">
+                            <div class="row justify-center">
+                             
+                                {% for theme in theme2040 %}
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " id="cardcontentcontainer" >
+                                <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
+                                  <img class="card-image-top"  src="{{theme.image.url}}">
+                                  <p class="card-text">{{theme.name}}</p>
+                                </div>
+                              </div>
+                                {% endfor %}
+                              
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class="section-content production">
+                          <div class="container" style="position: relative; left: 10%;">
+                            <div class="row justify-center">
+                             
+                                {% for theme in theme2050 %}
+                                <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " id="cardcontentcontainer" >
+                                <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
+                                  <img class="card-image-top"  src="{{theme.image.url}}">
+                                  <p class="card-text">{{theme.name}}</p>
+                                </div>
+                              </div>
+                                {% endfor %}
+                              
+                            </div>
+                          </div>
+                        </div>
+                                     
+                        </div>
+                      </div>
+                      
+                     <!-- test ends -->
+                  </div>
+                </div>
+                <!-- timeline ended -->
+          </div>
+
+         
         </div>
 
       </div>
@@ -311,6 +398,10 @@ Home
     </div>
   </section><!-- End Features Section -->
 
+  <!-- Theme timeline Section -->
+  <!-- <section id="themetimeline">
+    
+  </section> -->
   <!-- ======= Gallery Section ======= -->
   <section id="gallery">
 
@@ -334,12 +425,51 @@ Home
 {% endblock %}
 
 {% block scripts %}
-<script>
-  AOS.init({
-    duration: 1200,
-  })
-</script>
-<script src="{% static 'js/particle.js' %}"></script>
-<script src="{% static 'js/app.js' %}"></script>
-<script src="{% static 'js/orbit.js' %}"></script>
+    <script src="{% static 'js/particle.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/orbit.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script>
+          let time=12000;
+            $('.step').each(function(i){ 
+                    var aTag = this;
+                    var starter= setTimeout(function() { 
+                        $(aTag).click();
+                        clearInterval(starter);
+                        }, 4000 * (i + 1)) 
+                })
+          setInterval(function () {
+                $('.step').each(function(i){ 
+                    var aTag = this;
+                    setTimeout(function() { 
+                        $(aTag).click();
+                        }, 4000 * (i + 1)) 
+                })
+            },time );
+      
+
+
+        $(".step").click( function() {
+        $(this).addClass("active").prevAll().addClass("active");
+        $(this).nextAll().removeClass("active");
+      });
+      
+                          
+      $(".step02").click( function() {
+        $("#line-progress").css("width", "3%");
+        $(".discovery").addClass("active").siblings().removeClass("active");
+      });
+      
+      $(".step03").click( function() {
+        $("#line-progress").css("width", "50%");
+        $(".creative").addClass("active").siblings().removeClass("active");
+      });
+      
+      $(".step04").click( function() {
+        $("#line-progress").css("width", "100%");
+        $(".production").addClass("active").siblings().removeClass("active");
+      });
+      
+    </script>
 {% endblock %}

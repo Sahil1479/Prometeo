@@ -27,9 +27,9 @@ wheels/
 *.egg
 *.sqlite3
 migrations/
-# staticfiles/
+staticfiles/
 ads/
-media/
+# media/
 .idea/
 
 # PyInstaller
