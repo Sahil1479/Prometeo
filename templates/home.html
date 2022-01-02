@@ -11,7 +11,6 @@ Home
 {% block style %}
 <link href="{% static 'css/home.css' %}" rel="stylesheet">
 <link href="{% static 'css/particle.css' %}" rel="stylesheet">
-
 {% endblock %}
 
 {% block content %}
@@ -213,8 +212,7 @@ Home
                             </div>
                           </div>
                         </div>
-                        
-                       
+                                     
                         </div>
                       </div>
                       
@@ -416,7 +414,7 @@ Home
           <div class="swiper-slide"><a href="{{ slide.image.url }}" class="gallery-lightbox"><img src="{{ slide.image.url }}" class="img-fluid" alt=""></a></div>
         {% endfor %}
       </div>
-      <!-- <div class="swiper-pagination"></div> -->
+      <div class="swiper-pagination"></div>
     </div>
 
   </section><!-- End Gallery Section -->
@@ -424,55 +422,51 @@ Home
 {% endblock %}
 
 {% block scripts %}
-<script>
-  AOS.init({
-    duration: 1200,
-  })
-</script>
-<script src="{% static 'js/particle.js' %}"></script>
-<script src="{% static 'js/app.js' %}"></script>
-<script src="{% static 'js/orbit.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script>
-  let time=12000;
-  $('.step').each(function(i){ 
-          var aTag = this;
-          var starter= setTimeout(function() { 
-              $(aTag).click();
-              clearInterval(starter);
-              }, 4000 * (i + 1)) 
-      })
-setInterval(function () {
-      $('.step').each(function(i){ 
-          var aTag = this;
-          setTimeout(function() { 
-              $(aTag).click();
-              }, 4000 * (i + 1)) 
-      })
-  },time );
+    <script src="{% static 'js/particle.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/orbit.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script>
+          let time=12000;
+            $('.step').each(function(i){ 
+                    var aTag = this;
+                    var starter= setTimeout(function() { 
+                        $(aTag).click();
+                        clearInterval(starter);
+                        }, 4000 * (i + 1)) 
+                })
+          setInterval(function () {
+                $('.step').each(function(i){ 
+                    var aTag = this;
+                    setTimeout(function() { 
+                        $(aTag).click();
+                        }, 4000 * (i + 1)) 
+                })
+            },time );
+      
 
 
-
-    $(".step").click( function() {
-    $(this).addClass("active").prevAll().addClass("active");
-    $(this).nextAll().removeClass("active");
-  });
-  
-                      
-  $(".step02").click( function() {
-    $("#line-progress").css("width", "3%");
-    $(".discovery").addClass("active").siblings().removeClass("active");
-  });
-  
-  $(".step03").click( function() {
-    $("#line-progress").css("width", "50%");
-    $(".creative").addClass("active").siblings().removeClass("active");
-  });
-  
-  $(".step04").click( function() {
-    $("#line-progress").css("width", "100%");
-    $(".production").addClass("active").siblings().removeClass("active");
-  });
-</script>               
+        $(".step").click( function() {
+        $(this).addClass("active").prevAll().addClass("active");
+        $(this).nextAll().removeClass("active");
+      });
+      
+                          
+      $(".step02").click( function() {
+        $("#line-progress").css("width", "3%");
+        $(".discovery").addClass("active").siblings().removeClass("active");
+      });
+      
+      $(".step03").click( function() {
+        $("#line-progress").css("width", "50%");
+        $(".creative").addClass("active").siblings().removeClass("active");
+      });
+      
+      $(".step04").click( function() {
+        $("#line-progress").css("width", "100%");
+        $(".production").addClass("active").siblings().removeClass("active");
+      });
+      
+    </script>
 {% endblock %}

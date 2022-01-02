@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Carousel,Themeimgs
+from .models import Carousel, Themeimgs
 
 
 @admin.register(Carousel)
@@ -10,4 +10,6 @@ class CarouselAdmin(admin.ModelAdmin):
     class Meta:
         model = Carousel
         fields = '__all__'
+
+
 admin.site.register(Themeimgs)

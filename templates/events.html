@@ -49,7 +49,7 @@ justify-content: center; display:flex">
             {% else %}
                 {% for event in events %}
                 <div class="col-md-4 ml-auto mr-auto justify-content-center"> 
-                <div class="card pb-3 shadow " id="card" data-aos="fade-left" data-aos-delay="30000" data-aos-duration="3000" data-aos-once = "true" style="width:fit-content;">
+                <div class="card pb-3 shadow " id="card" data-aos="fade-left" data-aos-delay="3000" data-aos-duration="3000" data-aos-once = "true" style="width:fit-content;">
                     <img class="card-img-top" src="{% static 'img/technicaleventsbg.png' %}" alt="Card image">
                     <div class="card-body">
                     <a href="{% url 'events:event' event.type event.pk %}" style="text-decoration: none;color: inherit;">
@@ -117,5 +117,5 @@ justify-content: center; display:flex">
 <script src="{% static 'js/main.js' %}"></script>
 <script>
     AOS.init();
-  </script>
+</script>
 {% endblock %}

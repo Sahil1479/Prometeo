@@ -544,7 +544,6 @@
   }
 }
 
-
 #themetimeline{
   background-image:url("{% static 'img/themetimeline.png' %}");
   background-attachment: fixed;

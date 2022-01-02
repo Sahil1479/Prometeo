@@ -58,10 +58,9 @@
     <!-- Template Main CSS File -->
     <link href="{% static 'css/base.css' %}" rel="stylesheet" />
     {% block style %} {% endblock %}
-
 </head>
 <body>
-    
+   
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
@@ -77,6 +76,11 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    <li>
+                      <a class="nav-link scrollto" href="{% url 'events:schedule' %}"
+                        >Schedule</a
+                      >
+                    </li>
                     <li><a class="nav-link scrollto" href="#team">Team</a></li>
                     <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
@@ -205,7 +209,9 @@
         mirror: false,
       });
     </script>
+    {% block scripts %}
+    {% endblock %}
 
-    {% block scripts %} {% endblock %}
-  </body>
+</body>
 </html>
+
