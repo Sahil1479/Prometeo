@@ -326,6 +326,11 @@
   --------------------------------------------------------------*/
 .about {
   position: relative;
+  background: url("../img/intro_bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 .about .content h3 {
   font-weight: 600;
@@ -379,7 +384,7 @@
 --------------------------------------------------------------*/
 .features {
   position: relative;
-  padding-bottom: 0;
+  padding: 0;
 }
 .features .page {
   min-height: auto;
