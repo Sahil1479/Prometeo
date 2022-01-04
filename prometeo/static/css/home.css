@@ -705,7 +705,30 @@
   }
 }
 
+@media (min-width:553px) and (max-width:576px) {
+  #cardcontentcontainer{
+    padding: 0 30px;
+  }
+}
 
+@media (max-width: 420px) and (min-width: 380px){
+  #cardcontentcontainer{
+    width: min-content;
+    position: relative;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+}
+@media (max-width: 316px) {
+  #cardcontentcontainer{
+    width: min-content;
+    position: relative;
+    align-content: center;
+    padding: 0 40px;
+  }
+
+}
 @media(max-width:380px){
   .container {
     left: 15% !important; 
