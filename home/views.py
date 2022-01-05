@@ -12,8 +12,10 @@ def home(request):
                                          }
                   )
 
+
 def theme(request):
     return render(request, 'theme.html')
+
 
 def home_redirect(request):
     return redirect(home)
