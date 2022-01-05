@@ -21,5 +21,5 @@ class Themeimgs(models.Model):
     year = models.CharField(max_length=5, choices=THEME_CHOICES, default='2030')
     image = models.ImageField(upload_to='theme_images/', verbose_name='icons related to theme')
 
-    def __str__(self):
+    def __int__(self):
         return self.pk

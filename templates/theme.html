@@ -7,13 +7,175 @@ Theme
 <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
 {% endblock %} {% block content %}
 <!-- write your code here -->
+<div class="mainWrapper">
 <div>
-  <div class="IndiaTheme">
-    <h1>Here India Theme</h1>
+  <!-- ======= Features Section ======= -->
+  <section id="features" class="features">
+    <div class="row">
+      <section class="page">
+        <div class="container">
+          <div class="circle-carousel" data-speed="2000" data-autoplay="2500">
+            <div class="slides">
+              <div class="slide">
+                <h2>
+                  Broadband Highways
+                </h2>
+              </div>
+              <div class="slide">
+                <h2>Universal Access to Mobile Connectivity</h2>
+              </div>
+              <div class="slide">
+                <h2>Public Internet Access Programme</h2>
+              </div>
+              <div class="slide">
+                <h2>
+                  Reforming Government through Technology</h2>
+              </div>
+              <div class="slide">
+                <h2>Electronic delivery of services</h2>
+              </div>
+              <div class="slide">
+                <h2>Electronics Manufacturing</h2>
+              </div>
+              <div class="slide">
+                <h2>
+                  Information for All
+                </h2>
+              </div>
+              <div class="slide">
+                <h2>IT for Jobs</h2>
+              </div>
+              <div class="slide">
+                <h2>
+                  Early Harvest Programmes</h2>
+              </div>
+            </div>
+            <div class="pagination">
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/wifi.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:70%;
+                      height:70%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/public_internet.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:65%;
+                      height:65%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/internet.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:70%;
+                      height:70%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/government.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:65%;
+                      height:65%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/touch-control.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:70%;
+                      height:70%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/conveyor.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:65%;
+                      height:65%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/database-storage.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:65%;
+                      height:65%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/job.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:65%;
+                      height:65%;">
+                    </span>
+                </div>
+              </div>
+              <div class="item">
+                <div class="dot">
+                  <span 
+                    style="
+                      background: url('../static/img/building.png');
+                      background-size: contain;
+                      background-repeat: no-repeat;
+                      background-position: center;
+                      width:65%;
+                      height:65%;">
+                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>
   </div>
+  </section><!-- End Features Section -->
   <div class="contentDiv">
     <div class="content">
-      <h1>INTRODUCTION</h1>
       <div class="row mt-2">
         <div style="padding: 0px 25px;" class="col-xl-6 mb-3">
           <p style="margin: auto;">
@@ -44,6 +206,8 @@ Theme
     </div>
   </div>
 </div>
+</div>
 {% endblock %} {% block scripts %}
 <!-- import js files or write js code-->
+<script src="{% static 'js/orbit.js' %}"></script>
 {% endblock %}

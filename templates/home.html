@@ -113,6 +113,7 @@ Home
     <!-- End Number of Events Section -->
 
     <!-- ======= About Us Section ======= -->
+    <section class="homeWrapper">
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
@@ -126,7 +127,7 @@ Home
             <div class="icon-box">
               <p class="description" style="color: #fff;" ><b>Prometeo 2022</b> is the second edition of IIT Jodhpur's National Technical+Entrepreneurial Festival. Prometeo derives its name from the Greek word for forethinker, and celebrates disruptive technologies through talks, workshops, and competitions.<br> This year's theme for Prometeo 2022 is <b>'India in 2030-40-50'</b> with the objective to address the major existing challenges of our society, provide exposure of different technologies to build the new India by expanding the technical and economical orbit</p>
             </div>
-            <a href="#" class="btn-learn-more">Read More</a>
+            <a href="{% url 'home:theme' %}" class="btn-learn-more">Read More</a>
 
           </div>
           <div class="col-lg-6 video-box">
@@ -168,7 +169,7 @@ Home
                                 <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center" id="cardcontentcontainer">
                                 <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent; border: none;">
                                   <img class="card-image-top"  src="{{theme.image.url}}">
-                                  <p class="card-text" style="color: #fff">{{theme.name}}</p>
+                                  <p class="card-text" style="color: #fff">{% if theme.name is none %} {% else %} {{theme.name}} {% endif %}</p>
                                 </div>
                               </div>
                                 {% endfor %}
@@ -187,7 +188,7 @@ Home
                                 <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " id="cardcontentcontainer" >
                                 <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
                                   <img class="card-image-top"  src="{{theme.image.url}}">
-                                  <p class="card-text" style="color: #fff">{{theme.name}}</p>
+                                  <p class="card-text" style="color: #fff">{% if theme.name is none %} {% else %} {{theme.name}} {% endif %}</p>
                                 </div>
                               </div>
                                 {% endfor %}
@@ -204,7 +205,7 @@ Home
                                 <div class="col col-md-4 col-lg-4 col-sm-6 justify-content-center " id="cardcontentcontainer" >
                                 <div class="card"  data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000"  style=" width: 100px;background-color: transparent;">
                                   <img class="card-image-top"  src="{{theme.image.url}}">
-                                  <p class="card-text" style="color: #fff">{{theme.name}}</p>
+                                  <p class="card-text" style="color: #fff">{% if theme.name is none %} {% else %} {{theme.name}} {% endif %}</p>
                                 </div>
                               </div>
                                 {% endfor %}
@@ -229,7 +230,7 @@ Home
     </section><!-- End About Us Section -->
 
     <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
+    <!-- <section id="features" class="features">
       <div class="row">
         <section class="page">
           <div class="container">
@@ -393,7 +394,7 @@ Home
       </div>
 
     </div>
-  </section><!-- End Features Section -->
+  </section>End Features Section -->
 
   <!-- Theme timeline Section -->
   <!-- <section id="themetimeline">
@@ -418,6 +419,7 @@ Home
     </div>
 
   </section><!-- End Gallery Section -->
+  </section>
 </main><!-- End #main -->
 {% endblock %}
 

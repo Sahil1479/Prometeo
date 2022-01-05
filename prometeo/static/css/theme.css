@@ -1,27 +1,131 @@
-* {
+.mainWrapper{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  .IndiaTheme {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-      url("../img/theme_bg_1.jpg");
+    background: url("../img/features_bg.png");
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
-    background-size: 100% 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
   }
+  /*--------------------------------------------------------------
+# Features
+--------------------------------------------------------------*/
+.features {
+  position: relative;
+  padding: 0;
+}
+.features .page {
+  min-height: auto;
+  overflow: hidden;
+}
+
+.features .container {
+  max-width: 100vh;
+  margin: 5px auto;
+}
+
+.features .circle-carousel {
+  position: relative;
+  padding-top: 100%;
+}
+.features .circle-carousel .slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.features .circle-carousel .slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  background: url("../img/india_n.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.features .circle-carousel .slide h2 {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: #a7a5cfb4;
+  color: white;
+  padding: 20px 10px 20px 10px;
+  max-width: 70%;
+}
+.features .circle-carousel .slide.active {
+  z-index: 1;
+  opacity: 1;
+}
+.features .circle-carousel .pagination {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  border: 3px solid rgb(170, 170, 170);
+  transition-property: transform;
+  transition-timing-function: ease-out;
+  pointer-events: none;
+  user-select: none;
+}
+.features .circle-carousel .pagination .dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  pointer-events: auto;
+  transition: all ease 0.5s;
+  background-color: #a1bdff;
+  /* box-shadow: 0 4px 94px #7f8ff7; */
+}
+@media (max-width: 500px) {
+  .features .circle-carousel .pagination .dot {
+    width: 50px;
+    height: 50px;
+  }
+  .features .circle-carousel .slide h2 {
+    font-size: 15px;
+  }
+}
+.features .circle-carousel .pagination .dot:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  cursor: pointer;
+  color: black;
+}
+.features .circle-carousel .pagination .item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.features .circle-carousel .pagination .item.active .dot {
+  background-color: #576dff;
+  box-shadow: 0 4px 94px #576dff;
+  color: rgb(255, 255, 255);
+  border: 3px solid white;
+}
   .contentDiv {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-      url("../img/theme_bg_2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: 100% 100%;
     display: flex;
     justify-content: center;
