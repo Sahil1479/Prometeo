@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .IndiaTheme {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+      url("../img/theme_bg_1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  .contentDiv {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+      url("../img/theme_bg_2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    color: white;
+  }
+  
+  .content {
+    width: 100%;
+    margin: 40px 20px;
+    padding: 20px;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);	
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+      background: inherit;
+      overflow: hidden;
+  }
+  
+  @media (max-width: 1250px) {
+    .content {
+      width: 90%;
+    }
+  }
+  @media (max-width: 500px) {
+    .content {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+  .content:before {
+      content: "";
+      position: absolute;
+      background: inherit;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+      filter: blur(10px);
+      margin: -20px;
+  }
+  
+  .content h1 {
+    margin: 0px 0px 30px 0px;
+    color: white;
+    text-align: center;
+    font-size: 33px;
+    position: relative;
+  }
+  .content h1:after {
+    content: "";
+    width: 70px;
+    height: 6px;
+    font-size: 2.5rem;
+    display: block;
+    margin: 0px auto;
+    border-bottom: 4px solid rgb(0, 255, 255);
+  }
+  
+  .content p {
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+    font-weight: 500;
+    text-align: justify;
+  }
+  
