@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Coordinator
 
-# Create your views here.
+
 def coordinator(request):
     teams = Coordinator.objects.all()
     teamTypes = []
@@ -15,4 +15,4 @@ def coordinator(request):
         obj["teamName"] = data
         obj["teamData"] = Coordinator.objects.filter(team=data).all()
         our_team.append(obj)
-    return render(request, "coordinator.html", {"ourTeam" : our_team})
+    return render(request, "coordinator.html", {"ourTeam": our_team})

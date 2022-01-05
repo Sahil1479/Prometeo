@@ -12,4 +12,10 @@ class CarouselAdmin(admin.ModelAdmin):
         fields = '__all__'
 
 
-admin.site.register(Themeimgs)
+@admin.register(Themeimgs)
+class ThemeimgsAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'year', ]
+
+    class Meta:
+        model = Themeimgs
+        fields = '__all__'

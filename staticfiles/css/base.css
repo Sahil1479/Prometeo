@@ -1,5 +1,5 @@
 body {
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Share Tech Mono', monospace;
   color: #444444;
   margin: 0;
   padding: 0;
@@ -386,12 +386,12 @@ section {
 --------------------------------------------------------------*/
 #footer {
   font-size: 14px;
-  background: #37517e;
+  background: #253657;
   position: relative;
 }
 #footer .footer-top {
   padding: 60px 0 30px 0;
-  background: #fff;
+  background: #101724f0;
 }
 #footer .footer-top .footer-contact {
   margin-bottom: 30px;
@@ -403,18 +403,18 @@ section {
   line-height: 1;
   text-transform: uppercase;
   font-weight: 600;
-  color: #37517e;
+  color: #429dcb;
 }
 #footer .footer-top .footer-contact p {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  color: #5e5e5e;
+  color: #d7e6ff;
 }
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: bold;
-  color: #37517e;
+  color: #429dcb;
   position: relative;
   padding-bottom: 12px;
 }
@@ -441,7 +441,7 @@ section {
   padding-top: 0;
 }
 #footer .footer-top .footer-links ul a {
-  color: #777777;
+  color: #d7e6ff;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
@@ -484,7 +484,7 @@ section {
 #footer .footer-bottom {
   padding-top: 30px;
   padding-bottom: 30px;
-  color: #fff;
+  color: #d7e6ff;
 }
 #footer .copyright {
   float: left;
