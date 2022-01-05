@@ -321,11 +321,21 @@
   color: #8b9578;
 }
 
+.homeWrapper {
+  background: url("../img/about_bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
 /*--------------------------------------------------------------
   # About Us
   --------------------------------------------------------------*/
 .about {
   position: relative;
+}
+.about h2 {
+  color: #d7e6ff;
 }
 .about .content h3 {
   font-weight: 600;
@@ -379,7 +389,7 @@
 --------------------------------------------------------------*/
 .features {
   position: relative;
-  padding-bottom: 0;
+  padding: 0;
 }
 .features .page {
   min-height: auto;
@@ -504,11 +514,11 @@
   padding: 60px;
   overflow: hidden;
   position: relative;
-  background: url("../img/gallery_bg_1.png");
+  /* background: url("../img/gallery_bg_1.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: fixed; */
 }
 #gallery h2 {
   color: #d7e6ff;
@@ -522,10 +532,10 @@
   height: 12px;
   background-color: #d7e6ff;
   opacity: 1;
-  border: 1px solid #f82249;
+  border: 1px solid #47b2e4;
 }
 #gallery .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #f82249;
+  background-color: #47b2e4;
 }
 #gallery .swiper-slide-active {
   text-align: center;
@@ -535,9 +545,9 @@
     padding: 40px 0;
   }
   #gallery .swiper-slide-active {
-    border: 5px solid #f82249;
+    border: 5px solid #47b2e4;
     padding: 4px;
-    background: #d7e6ff;
+    /* background: #d7e6ff; */
     z-index: 1;
     transform: scale(1.15);
     margin-top: 6px;
@@ -665,7 +675,7 @@
 }
 
 .card-text{
-  color: cornflowerblue;
+  color: #fff;
   padding: 0px;
 }
 #progress-bar-container #line-progress {
@@ -707,7 +717,7 @@
 
 @media (min-width:553px) and (max-width:576px) {
   #cardcontentcontainer{
-    padding: 0 30px;
+    padding: 0 30px !important;
   }
 }
 
@@ -715,8 +725,8 @@
   #cardcontentcontainer{
     width: min-content;
     position: relative;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
   }
 
 }
