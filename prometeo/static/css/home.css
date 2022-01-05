@@ -326,11 +326,14 @@
   --------------------------------------------------------------*/
 .about {
   position: relative;
-  background: url("../img/intro_bg.jpg");
+  background: url("../img/about_bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+}
+.about h2 {
+  color: #d7e6ff;
 }
 .about .content h3 {
   font-weight: 600;
@@ -670,7 +673,7 @@
 }
 
 .card-text{
-  color: cornflowerblue;
+  color: #fff;
   padding: 0px;
 }
 #progress-bar-container #line-progress {

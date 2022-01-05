@@ -28,6 +28,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
 
     <!-- Vendor CSS Files -->
     <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet" />
@@ -78,14 +86,14 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li>
+                    <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
+                    <!-- <li>
                       <a class="nav-link scrollto" href="{% url 'events:schedule' %}"
                         >Schedule</a
                       >
-                    </li>
-                    <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                    <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
+                    </li> -->
+                    <li><a class="nav-link scrollto" href="{% url 'coordinator' %}">Team</a></li>
+                    <!-- <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="{% url 'events:events' 'Live' %}">Live Events</a></li>
                             <li><a href="{% url 'events:events' 'Technical' %}">Technical Events</a></li>
@@ -93,7 +101,7 @@
                             <li><a href="{% url 'events:events' 'Workshop' %}">Workshops</a></li>
                         </ul>
                     </li>
-                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -123,16 +131,16 @@
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Quick Links</h4>
               <ul>
-                <li>
+                <!-- <li>
                   <i class="bx bx-chevron-right"></i>
                   <a href="#">Live Events</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="#">All Events</a>
-                </li>
+                </li> -->
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="#">Meet our team</a>
+                  <a href="{% url 'coordinator' %}">Meet our team</a>
                 </li>
               </ul>
             </div>
