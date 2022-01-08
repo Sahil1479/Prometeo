@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY', cast=str)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['192.168.43.110', '127.0.0.1', '142.93.216.166', '206.189.133.128', 'prometeo.in', 'www.prometeo.in', 'localhost']
+ALLOWED_HOSTS = ['prometeo.iitj.ac.in', '192.168.43.110', '127.0.0.1', '142.93.216.166', 'www.prometeo.in', 'localhost']
 
 
 # Application definition
