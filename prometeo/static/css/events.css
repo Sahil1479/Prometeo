@@ -1,6 +1,18 @@
-body{
-background-color: rgb(235, 235, 235);
-bottom:0vh
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.liveeventwrapper{
+  background-image:url("../img/themetimeline.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-learn-more {
@@ -28,7 +40,7 @@ bottom:0vh
   }
 
 
-
+/*
 .card{
   transition: 0.1s
 }
@@ -48,8 +60,8 @@ bottom:0vh
 }
 #card:hover{
   transform: scale(1.01);
-}
-
+} */
+/* 
 .pageheadbg-Technical{
   height: 60vh;
   width:100%; 
@@ -70,16 +82,114 @@ bottom:0vh
   height: 70vh;
   background-image:url('/static/img/liveeventbg.jpg');
   background-attachment: fixed;
-  /* background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   background-size: cover;
 }
 .pageheadbg-Workshop{
   height: 70vh;
   background-image:url('/static/img/workshopbg.jpg');
   background-attachment: fixed;
-  /* background-repeat: no-repeat; */
   background-size: cover;
   position: relative;
   background-position-y: top;
+} */
+
+
+
+.section-header h2 {
+    font-size: 36px;
+    text-transform: uppercase;
+    text-align: center !important;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
+.section-header {
+    position: relative;
+    padding-bottom: 10px;
+    margin: 40px;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-header::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 5px;
+  background: #f82249;
+  bottom: 0;
+  left: calc(50% - 25px);
+}
+
+.event-card{
+  background-color: whitesmoke;
+}
+#livecardrow{
+ 
+  padding: 20px;
+ 
+  border-radius: 5px;
+  
+}
+
+#livecard{
+  
+}
+
+.card-date{
+  border-right: 2px solid rgb(9, 183, 252);
+}
+
+.card-date-head{
+  font-size: 16px;
+  text-align: center;
+}
+
+.card-date-num{
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 0px;
+}
+
+
+.card-date-mon{
+  font-size: 20px;
+  text-align: center;
+}
+
+.card-event-details p{
+  
+  align-content: center;
+  text-align: center;
+}
+
+.card-event-name{
+  font-weight: 900;
+  font-size: 24px;
+}
+
+.card-event-description{
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.card-event-type-tag{
+  position: relative;
+  right: 0px;
+  width: fit-content;
+  height: fit-content;
+  padding: 3px;
+ 
+  margin-bottom: 2px;
+  border: 3px solid turquoise;
+  
+}
+
+.row.card-buttons{
+  position: relative;
+  
+  margin-left: 2rem;
+}
