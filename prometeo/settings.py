@@ -35,13 +35,27 @@ INSTALLED_APPS = [
     'home',
     'events',
     'coordinator',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sites',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'crispy_forms',
+    'widget_tweaks',
+    'django_inlinecss',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,6 +97,11 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 
 
 # Password validation
@@ -138,3 +157,31 @@ EMAIL_HOST = config('SERVER_EMAIL_HOST', cast=str, default="smtp.gmail.com")
 EMAIL_HOST_USER = config('SERVER_EMAIL', cast=str)
 EMAIL_HOST_PASSWORD = config('SERVER_EMAIL_PASSWORD', cast=str)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
+# django-allauth registraion settings
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 0.25
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_UNIQUE_EMAIL = True
+
+
+LOGIN_REDIRECT_URL = "/"
+
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.SignUpForm',
+    'login': 'users.forms.CustomLoginForm'
+}

@@ -19,9 +19,18 @@ TEAM_CHOICES = (
 )
 
 
+class Designation(models.Model):
+    designationName = models.CharField(max_length=100, blank=False, null=False)
+    rank = models.IntegerField(blank=False, null=False, default=1)
+
+    def __str__(self):
+        return self.designationName
+
+
 class Coordinator(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
-    team = models.CharField(choices=TEAM_CHOICES, max_length=100, blank=False, null=False, default="DevOps")
+    team = models.ForeignKey(Designation, on_delete=models.CASCADE)
+    # category = models.CharField(max_length=100, choices=CHOICE_CATEGORY)
     image = models.ImageField(upload_to="uploads/team/")
     github_link = models.URLField(max_length=1000, blank=True, null=True)
     instagram_link = models.URLField(max_length=1000, blank=True, null=True)
@@ -32,3 +41,5 @@ class Coordinator(models.Model):
 
     def __str__(self):
         return f"{self.name} [{self.team}]"
+
+

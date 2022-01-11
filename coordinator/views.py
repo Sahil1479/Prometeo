@@ -1,18 +1,14 @@
 from django.shortcuts import render
-from .models import Coordinator
+from .models import Coordinator, Designation
 
 
 def coordinator(request):
-    teams = Coordinator.objects.all()
-    teamTypes = []
-    for team in teams:
-        if team.team not in teamTypes:
-            teamTypes.append(team.team)
-    print(teamTypes)
+    teamTypes = Designation.objects.all().order_by('rank')
     our_team = []
     for data in teamTypes:
         obj = {}
-        obj["teamName"] = data
+        obj["teamName"] = data.designationName
         obj["teamData"] = Coordinator.objects.filter(team=data).all()
-        our_team.append(obj)
+        if obj["teamData"]:
+            our_team.append(obj)
     return render(request, "coordinator.html", {"ourTeam": our_team})

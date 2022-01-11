@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block title %} Sign In {% endblock %}
+
+{% block head_links %}
+<!-- header links -->
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/account/login.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="mainWrapperLogin">
+  <div style="color: white;" class="loginContainer">
+    <h4 style="text-align: center;">Login to Prometeo</h4>
+    {% get_providers as socialaccount_providers %}
+
+    {% if socialaccount_providers %}
+      <div class="socialaccount_ballot">
+        <ul class="socialaccount_providers">
+          {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
+      </div>
+
+      {% include "socialaccount/snippets/login_extra.html" %}
+
+    {% else %}
+      <p>{% blocktrans %}If you have not created an account yet, then please
+      <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    {% endif %}
+      <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        <!-- {{ form.as_p }} -->
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <a style="text-decoration: none; margin: 20px 0px; color: white;" href="{% url 'account_reset_password' %}">Forgot Password?</a><br>
+        <button class="btn btn-sm btn-primary mt-2" type="submit">{% trans "Login" %}</button>
+        <p style="margin-top: 15px;">If you don't have a account please <a style="text-decoration: none;" href="{{ signup_url }}">sign up</a> here </p>
+      </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+

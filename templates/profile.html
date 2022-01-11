@@ -1,0 +1,216 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Profile 
+{% endblock %} {% block head_links %}
+<!-- header links -->
+{% endblock %} {% block style %}
+<!-- import css files or write css code-->
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+{% endblock %} {% block content %}
+<!-- write your code here -->
+
+<div class="mainWrapperProfile">
+
+<div class="profileContainer">
+  <h3 style="text-align: center; margin: 90px 0px 35px 0px">
+    Complete your profile
+  </h3>
+  <form
+    class="needs-validation"
+    validate
+    action="/users/profile/"
+    method="POST"
+  >
+    {% csrf_token %}
+    <div class="row my-2">
+      <div class="form-group col-md-6">
+        <label for="first_name">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="first_name"
+          name="first_name"
+          value="{{user.first_name}}"
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="last_name">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="last_name"
+          name="last_name"
+          value="{{user.last_name}}"
+          required
+        />
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="form-group col-md-6">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          value="{{user.email}}"
+          readonly
+          required
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="college_name">College</label>
+        {% if user.extendeduser.college %}
+        <input
+          type="text"
+          class="form-control"
+          id="college_name"
+          name="college_name"
+          value="{{user.extendeduser.college}}"
+          required
+        />
+        {% else %}
+        <input
+          type="text"
+          class="form-control"
+          id="college_name"
+          name="college_name"
+          required
+        />
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row my-2">
+      <div class="form-group col-md-6">
+        <label for="phone_no">Phone No.</label>
+        {% if user.extendeduser.college %}
+        <input
+          type="tel"
+          class="form-control"
+          id="phone_no"
+          name="phone_no"
+          value="{{user.extendeduser.contact}}"
+          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+          maxlength="10"
+          minlength="10"
+          title="Ten digits code"
+          required
+        />
+        <!-- <input type="text" class="form-control" id="phone_no" name="phone_no" value="{{user.extendeduser.contact}}" maxlength="10" required /> -->
+        {% else %}
+        <input
+          type="tel"
+          class="form-control"
+          id="phone_no"
+          name="phone_no"
+          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+          maxlength="10"
+          minlength="10"
+          title="Ten digits code"
+          required
+        />
+        {% endif %}
+      </div>
+      <div class="form-group col-md-6">
+        <label for="city">City</label>
+        {% if user.extendeduser.city %}
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          name="city"
+          value="{{user.extendeduser.city}}"
+          required
+        />
+        {% else %}
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          name="city"
+          required
+        />
+        {% endif %}
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="form-group col-md-6">
+        <label for="gender">Gender</label>
+        <select id="gender" class="form-control" name="gender">
+          <option selected value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="NotSay">Prefer not to say</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="current_year">Current Year</label>
+            <select id="current_year" class="form-control" name="current_year">
+              <option selected value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+              <option value="5">5th Year</option>
+            </select>
+          </div>
+          {% if user.extendeduser.isProfileCompleted == False %}
+          <div class="form-group col-md-6">
+            <label for="referral_code">Referral Code(Optional)</label>
+            <input
+              type="text"
+              class="form-control"
+              id="referral_code"
+              name="referral_code"
+            />
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% if user.extendeduser.isProfileCompleted == False %}
+    
+    <div class="row my-2">
+      <div class="form-group col-md-12">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="isCampusAmbassador"
+            name="isCampusAmbassador"
+          />
+          <label class="form-check-label" for="isCampusAmbassador">
+            Become Campus Ambassador
+          </label>
+          <p style="font-size: 0.7rem; color: gray">
+            &#42;By checking this, you will receive a seprate mail in which your referral id is present, which you can share with others.
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+
+</div>
+
+{% endblock %} {% block scripts %}
+<!-- import js files or write js code-->
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+<script>
+  $(
+    `select[id='current_year'] option[value={{user.extendeduser.current_year}}]`
+  ).attr("selected", true);
+  $(`select[id='gender'] option[value={{user.extendeduser.gender}}]`).attr(
+    "selected",
+    true
+  );
+</script>
+{% endblock %}
