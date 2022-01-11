@@ -284,7 +284,12 @@
       background-position: 0 50%;
     }
   } */
+/* .numberofevents .count-box {
+  width: 100%;
+} */
 .numberofevents .count-box {
+  align-items: center;
+  display: inline-flex;
   width: 100%;
 }
 .numberofevents .count-box i {
@@ -302,12 +307,24 @@
   color: #aaf6ff;
   margin-left: 60px;
 }
-.numberofevents .count-box p {
+/* .numberofevents .count-box p {
   padding: 5px 0 0 0;
   margin: 0 0 0 60px;
   font-weight: 600;
   font-size: 14px;
   color: #cdff6f;
+} */
+.numberofevents .count-box p {
+  padding: 5px 0 0 0;
+  margin: 0 0 0 15px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #cdff6f;
+}
+@media (max-width: 380px) {
+  .numberofevents .count-box p {
+    font-size: 14px;
+  }
 }
 .numberofevents .count-box a {
   font-weight: 600;

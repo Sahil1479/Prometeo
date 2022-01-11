@@ -39,7 +39,7 @@ class Coordinator(models.Model):
     email = models.CharField(max_length=100, blank=False, null=False)
     phoneNo = models.CharField(max_length=100, blank=False, null=False)
 
-    def __str__(self):
+    def _str_(self):
         return f"{self.name} [{self.team}]"
 
 

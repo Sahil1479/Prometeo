@@ -7,11 +7,11 @@ services:
       - ./data/db:/var/lib/postgresql/data
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:3000
+    command: python manage.py runserver 0.0.0.0:7777
     volumes:
       - .:/app
     ports:
-      - "88:3000"
+      - "7777:7777"
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
