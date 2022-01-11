@@ -8,6 +8,7 @@ from django.contrib import messages
 
 User = get_user_model()
 
+
 @login_required
 def user_profile(request):
     if(request.method == "POST"):
