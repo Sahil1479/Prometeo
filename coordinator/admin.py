@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Designation, Coordinator
 
+
 @admin.register(Coordinator)
 class CoordinatorAdmin(admin.ModelAdmin):
     list_display = ['name', 'team', 'email', 'phoneNo']

@@ -49,7 +49,7 @@ def user_profile(request):
             extendeduser.invite_referral = invite_referral
             send_mail(
                 'Campus Ambassador',
-                f'Dear {user.first_name},\nYou have been enrolled as a campus ambassador. Your referral code for inviting others is {invite_referral}.\nRegards,\nPrometeo 2022 Team',
+                f"Dear {user.first_name},\nYou are now a campus ambassador. Your referral code is {invite_referral}.\nRegards,\nPrometeo 2022 Team",
                 'iitj.iotwebportal@gmail.com',
                 [user.email],
                 fail_silently=False,

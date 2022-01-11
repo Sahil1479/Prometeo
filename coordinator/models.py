@@ -41,5 +41,3 @@ class Coordinator(models.Model):
 
     def _str_(self):
         return f"{self.name} [{self.team}]"
-
-

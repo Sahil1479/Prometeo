@@ -1,13 +1,18 @@
-{% extends "account/base.html" %}
-
+{% extends "base.html" %}
+{% load static %} 
 {% load i18n %}
 {% load account %}
 
-{% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
+{% block title %}Confirm E-mail Address{% endblock %}
 
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/account/logout.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>{% trans "Confirm E-mail Address" %}</h1>
+<div class="mainWrapperLogout">
+    <div style="color: white; width: 35vw;" class="logoutContainer">
+      <h4>Confirm E-mail Address</h4>
 
 {% if confirmation %}
 
@@ -17,7 +22,7 @@
 
 <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
 {% csrf_token %}
-    <button type="submit">{% trans 'Confirm' %}</button>
+    <button class="btn btn-sm btn-success" type="submit">{% trans 'Confirm' %}</button>
 </form>
 
 {% else %}
@@ -27,5 +32,7 @@
 <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
 
 {% endif %}
+    </div>
+</div>
 
 {% endblock %}
