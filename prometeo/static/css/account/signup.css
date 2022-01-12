@@ -39,6 +39,9 @@
     margin: -20px;
   }
 
+  input[type=email], input[type=password], input[type=text] {
+    margin: 2px 0px 6px 0px;
+  }
 
   .socialaccount_ballot {
     margin: 10px auto;

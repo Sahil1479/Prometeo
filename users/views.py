@@ -44,7 +44,7 @@ def user_profile(request):
             extendeduser.ambassador = True
         # If the user wants to be the campus ambassador.
         invite_referral = 'CA' + str(uuid.uuid4().int)[:6]
-        if extendeduser.ambassador is True:
+        if extendeduser.isProfileCompleted is False and extendeduser.ambassador is True:
             invite_referral = 'CA' + str(uuid.uuid4().int)[:6]
             extendeduser.invite_referral = invite_referral
             send_mail(
@@ -56,5 +56,5 @@ def user_profile(request):
             )
         extendeduser.isProfileCompleted = True
         extendeduser.save()
-        messages.success(request, 'Your profile was updated.')
+        messages.success(request, 'Your profile has been updated.')
     return render(request, 'profile.html')
