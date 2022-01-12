@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from .models import Event
 from django.shortcuts import get_object_or_404
+from datetime import date, datetime
 
 
 # Create your views here.
 def events(request, type):
-    events = Event.objects.filter(type=type.lower())
-    return render(request, 'events.html', {'events': events, 'type': type})
+    events = Event.objects.all()
+    today = date.today()
+    liveevents = Event.objects.filter(date=today).order_by('time')
+    return render(request, 'events.html', {'events': events, 'type': type,
+                                           'present_time': datetime.now().time,
+                                           'liveevents': liveevents})
 
 
 def event(request, type, eventid):

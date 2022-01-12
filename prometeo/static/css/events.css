@@ -5,14 +5,17 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+
+
 .liveeventwrapper{
-  background-image:url("../img/themetimeline.png");
+  background-image:url("../img/about_bg.png");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 0px;
+  
   width: 100%;
   height: 100%;
+ 
 }
 
 .btn-learn-more {
@@ -22,19 +25,20 @@
     letter-spacing: 1px;
     
     align-content: center;
-   
+    background-color: white;
     padding: 12px 32px;
     border-radius: 4px;
     transition: 0.3s;
     line-height: 1;
-    color: #47b2e4;
+    color: #006391;
     -webkit-animation-delay: 0.8s;
     animation-delay: 0.8s;
-    margin-top: 12px;
+    margin-bottom: 12px;
     border: 2px solid #47b2e4;
+    
   }
   .btn-learn-more:hover {
-    background: #47b2e4;
+    background-color:#47b2e4;
     color: #fff;
     text-decoration: none;
   }
@@ -124,33 +128,94 @@
   left: calc(50% - 25px);
 }
 
-.event-card{
-  background-color: whitesmoke;
+.customcard{
+  perspective: 600px;
 }
-#livecardrow{
- 
-  padding: 20px;
- 
-  border-radius: 5px;
+.livecard{
   
+  padding: 20px;
+  background-color: white;
+  min-height: 150px;
+  border-radius: 5px;
+  margin: 2rem;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  transition-delay: 0.2s;
+
+ 
 }
 
-#livecard{
-  
+.cardface{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+  top: 0px;
 }
+
+.livecard:hover  {
+  transform: rotatex(180deg);
+}
+
+.bcard .card-date-head{
+  stroke: indigo;
+  color:rgb(216, 208, 255);
+}
+
+.bcard .card-date-mon{
+  stroke: indigo;
+  color:rgb(227, 221, 255);
+}
+
+.bcard{
+  transform: rotateX( 180deg );
+}
+
+.bcard-informal{
+  
+    background-image: url("../img/generalheaderbg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.bcard-technical{
+  
+     background-image: url("../img/technicaleventsbg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.bcard-workshop{
+ 
+  background-image: url("../img/workshopbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
 
 .card-date{
-  border-right: 2px solid rgb(9, 183, 252);
+  border-right: 3px solid rgb(9, 183, 252);
+  height: 90%;
+  margin-top: 7px;
+  padding: 20px;
+  
 }
 
 .card-date-head{
-  font-size: 16px;
+  font-size: 12px;
+  font-weight: 500;
   text-align: center;
+  text-transform: uppercase;
+  color: rgb(34, 20, 95);;
 }
 
 .card-date-num{
   text-align: center;
   font-size: 24px;
+  font-weight: 900;
   margin-bottom: 0px;
 }
 
@@ -158,22 +223,31 @@
 .card-date-mon{
   font-size: 20px;
   text-align: center;
+  font-weight: 800;
+  color: rgb(95, 66, 221);
+  text-transform: uppercase;
+}
+
+.card-event-details{
+  padding: 20px;
 }
 
 .card-event-details p{
   
   align-content: center;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 .card-event-name{
-  font-weight: 900;
+  font-weight: 800;
   font-size: 24px;
 }
 
 .card-event-description{
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .card-event-type-tag{
@@ -188,8 +262,78 @@
   
 }
 
-.row.card-buttons{
-  position: relative;
+
+.card-helper{
+  margin-top: 25px;
+}
+
+
+
+
+
+
+@media (max-width: 576px) { 
+
+  #livecardrow{
+    width: 70vw !important;
+    position: relative;
+    left: 6% !important;
+   
+  }
+
+  .livecard{
+    height: 450px;
+  }
   
-  margin-left: 2rem;
+  .livecard:hover  {
+    transform: rotateY(180deg);
+  }
+  
+  .card-helper{
+    margin-top: 25px;
+  }
+
+  .card-date{
+    border-right: none;
+    border-bottom: 2px solid rgb(9, 183, 252);
+    height: 35%;
+  }
+  .bcard{
+    transform: rotateY( 180deg );
+  }
+}
+
+@media (max-width: 767.98px) { 
+  #livecardrow{
+    width: 70vw !important;
+    position: relative;
+    left: 7%;
+  }
+  .livecard{
+    height: 450px;
+    width: 400px;
+    
+  }
+  .customcard{
+    display: flex;
+    justify-content: center;
+  }
+  .livecard:hover  {
+    transform: rotateY(180deg);
+  }
+  
+  .card-helper{
+    margin-top: 25px;
+  }
+  .bcard{
+    transform: rotateY( 180deg );
+  }
+  .card-event-details{
+    padding-bottom: 0px;
+  }
+  .card-date{
+    border-right: none;
+    border-bottom: 2px solid rgb(9, 183, 252);
+    height: 30%;
+  }
 }
