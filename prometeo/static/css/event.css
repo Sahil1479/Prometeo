@@ -1,7 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 body{
     background-image: url("/static/img/technicaleventsbg.png");
     background-attachment: fixed;
+    overflow-x: hidden;
 }
 footer{
     position: absolute;
+}
+
+.card-body{
+    padding-bottom: 0rem;
+}
+
+.event-card{
+    width: 140%;
+    color: white;
+    border-color: white;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.title-heading{
+    margin-top: 1%;
+    margin-bottom: 0px !important;
+}
+
+.title{
+    color: white;
+    margin-bottom: 10px; 
+    text-align: center;
+    position: relative;
+    left: 18%;
+}
+
+.title-subheading{
+    margin-bottom: 0px;
+}
+
+.nav-link{
+    color: #47b2e4;
+}
+
+.nav-link:hover{
+    color: white;
+}
+
+h4{
+    color: white;
+}
+
+.rulebook{
+    background: transparent;
+    border-color: #47b2e4;
+    margin-top: 5%;
+    width: 96%;
+}
+
+.btn:focus{
+    box-shadow: none !important;
+}
+
+.event-type {
+    margin-top: 45px;
+}
+
+.card-img-top{
+    padding-right: 4%;
+}
+
+.description {
+    margin:auto;
+}
+
+
+.info-horizontal .icon {
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.info {
+    max-width: 360px;
+    margin-bottom: 20px;
+    padding: 70px 0 30px;
+}
+
+.info-horizontal .icon>i {
+    font-size: 2.25rem;
+    color: #e91e63;
 }

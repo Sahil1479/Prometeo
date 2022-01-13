@@ -21,7 +21,7 @@ EVENT_PARTICIPATION = (
 class Event(models.Model):
     name = models.CharField(max_length=50, verbose_name="Event Name", unique=True)
     speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty")
-    image = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Cover Image")
+    image = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Cover Image(prefer uploading square images)")
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
     participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='team', verbose_name="Participation Type")
     min_team_size = models.IntegerField(verbose_name="Minimum Team Size (leave unchanged for individual event)", default=3)
