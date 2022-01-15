@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+ 
+/* font-family: 'Montserrat', sans-serif; */
 }
 
 
@@ -20,18 +21,18 @@
 }
 
 .btn-learn-more {
-    width: fit-content;
+    
     font-weight: 700;
     font-size: 1em;
     letter-spacing: 1px;
     
     align-content: center;
-    background-color: rgb(255, 253, 253);
+    background-color: transparent;
     padding: 12px 32px;
     border-radius: 4px;
     transition: 0.3s;
     line-height: 1;
-    color: #006391;
+    color: white;
     -webkit-animation-delay: 0.8s;
     animation-delay: 0.8s;
     margin-bottom: 12px;
@@ -84,6 +85,7 @@
   transition: transform 0.3s;
   transition-delay: 0.1s;
   opacity: 1;
+  border: 1px solid cornflowerblue;
  
 }
 
@@ -96,33 +98,43 @@
 
 .fa {
   opacity: 1 !important;
-  font-size: 30px !important;
+  font-size: 1.8em !important;
   text-align: center;
   text-decoration: none;
   height: min-content;
+  border-radius: 50%;
   width: min-content !important;
   margin: 5px 2px !important;
-  background-color: white;
+  background-color:transparent;
 }
 .fa-youtube{
-  padding:0.5rem;
-  color: #bb0000;
+  padding:1rem;
+  color: #05d9ff;
   width: 3.125em;
+ 
 }
 .fa-youtube:hover{
   color: white;
-  background-color:#bb0000 ;
+  background-color:#132970;
   transition:  0.3s;
 }
 .fa-video-camera{
-  padding:0.5rem;
-  width: 3.125em;
-  color: #bb0000
+ 
+ font-size: 1em !important;
+  color: #05d9ff;
 }
-
+.fa-info-circle{
+  font-size: 1em !important;
+ 
+  color: #05d9ff;
+}
+.join-link{
+  padding: 10px 20px;
+  text-align: center !important;
+}
 .fa-video-camera:hover{
 color: white;
-background-color:#bb0000 ;
+background-color:#132970 ;
 transition:  0.3s;
 }
 
@@ -137,7 +149,7 @@ transition:  0.3s;
     width: 1em;
     font-size: 1.5em !important;
     text-shadow: 1px 1px rgba(255, 250, 250, 0.514);
-    padding-right: 0.4em !important;
+    padding-right: 0.3em !important;
     background-color: transparent!important;
     color: rgba(19, 82, 255, 0.63) !important;
 }
@@ -161,19 +173,20 @@ transition:  0.3s;
 .card-date{
   
   border-right: 3px solid rgb(9, 183, 252);
-  height: 90%;
-  margin-top: 7px;
-  padding: 20px;
+  
+  top: 25px;
+  padding: 1.25em;
+ 
   
 }
 
 .card-date-head{
   text-shadow: 1px 1px rgba(255, 250, 250, 0.678);
-  font-size: 0.8em;
+  font-size: 1.25em;
   font-weight: 500;
   text-align: center;
   text-transform: uppercase;
-  color: rgb(115, 117, 255);;
+  color: rgb(115, 117, 255);
 }
 
 .card-date-num{
@@ -187,10 +200,10 @@ transition:  0.3s;
 
 
 .card-date-mon{
-  text-shadow: 1px 1px rgba(255, 255, 255, 0.678);
-  font-size: 1em;
+  text-shadow: 1px 1px rgba(255, 250, 250, 0.678);
+  font-size: 1.1em;
   text-align: center;
-  font-weight: 800;
+  font-weight: 500;
   color: rgb(115, 117, 255);
   text-transform: uppercase;
   opacity: 1 !important;
@@ -204,15 +217,13 @@ transition:  0.3s;
 .badge{
   opacity: 1 !important;
   color: rgb(255, 255, 255) !important;
-  background-color: rgb(116, 109, 109) !important;
-  padding: 5px;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.712);
+  padding: 10px;
 }
 .card-event-details p{
-  
-  align-content: center;
-  text-align: left;
- 
-  margin-bottom: 0px;
+   text-align: left;
+   margin-bottom: 0px;
 }
 
 .card-event-name{
@@ -223,13 +234,13 @@ transition:  0.3s;
 .card-event-description{
   opacity: 1 !important;
   font-weight: 400;
-  font-size: 0.9em;
+  
   margin-top: 10px;
   
 }
 .card-event-badge{
   font-weight: 400;
-  font-size: 0.9em;
+ 
   margin-top: 10px;
   width: auto;
   
@@ -250,9 +261,15 @@ transition:  0.3s;
 
 .card-helper{
   opacity: 1 !important;
-  margin-top: 25px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
-
+.card-date-content{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 
 
@@ -267,16 +284,15 @@ transition:  0.3s;
    
   }
 
-   .card-helper{
-    margin-top: 1.5em;
-  }
-
-  .card-date{
+   .card-date{
     border-right: none;
     border-bottom: 2px solid rgb(9, 183, 252);
-    height: 35%;
+   
   }
-  
+
+  .card-date-mon{
+    font-size: 1em; 
+   }
   .fa-video-camera{
     width: 1em !important;
     margin-right:5px !important;
@@ -294,12 +310,7 @@ transition:  0.3s;
 }
 
 @media (max-width: 767.98px) { 
-  #livecardrow{
-    width: 70vw !important;
-    position: relative;
-    left: 7%;
-  }
-  
+ 
   .customcard{
     display: flex;
     justify-content: center;
@@ -308,24 +319,20 @@ transition:  0.3s;
     justify-content: center !important;
   }
  
-  .card-helper{
-    margin-top: 25px;
-  }
- 
+ .card-event-name{
+   font-size: 1.5em !important;
+ }
   .card-event-details p{
     padding-bottom: 0px;
     text-align: center;
-
   }
-  .card-event-name{
-    font-size: 0.7rem;
-  }
-  .card-event-description{
-    font-size: 0.6rem;
-  }
+ .card-event-description{
+  font-size: 0.9em !important;
+ }
+ 
   .card-date{
     border-right: none;
     border-bottom: 2px solid rgb(9, 183, 252);
-    height: 30%;
+    
   }
 }

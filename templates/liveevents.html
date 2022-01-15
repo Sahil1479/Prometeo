@@ -28,20 +28,23 @@ Events-{{type}}
                     <h2>Live Events</h2>
                 </div>
                 <div class="container justify-content-center align-items-center"  style="max-width: 950px;">
-                    {{liveevents.count}}
+                   
                     {% for event in liveevents %}
                         
-                        {% if event.time >= present_time and event.event_started %}
+                        {% if event.end_time >= present_time.time and event.event_started  %}
                         <div class="customcard">
                             <div class="row no-gutters justify-content-center livecard " id="livecard-{{event.type}}">
-                                <div class="row cardface fcard">
+                               
                                     <div class="col-md-4  card-date">
-                                        <div class="card-date-head">Ends on</div>
-                                        <p class="card-date-num">{{event.date|date:"d"}} {{event.date|date:"M"}}</p>
-                                        <p class="card-date-mon">{{event.end_time}}</p>
+                                        <div class="card-date-content" >
+                                            <div class="card-date-head">Ends on</div>
+                                            <p class="card-date-num">{{event.end_date|date:"d"}} {{event.end_date|date:"M"}}</p>
+                                            <p class="card-date-mon">{{event.end_time}}</p>
+                                        </div>
+                                        
                                     </div>
             
-                                    <div class="col-md-4 card-event-details">
+                                    <div class="col-md-5 card-event-details">
                                         <div class="row ">
                                             <p class="card-event-name">{{event.name.capitalize}}</p>
                                         </div>
@@ -62,20 +65,14 @@ Events-{{type}}
                                         </div>
                                         
                                     </div>
-                                    <div class="col-md-4 card-helper-links">
-                                        <div class="card-helper" style="{% if not event.youtube_link and not event.gmeet_link and  not event.webx_link %}position: relative;top: 15%;{% endif %}">
+                                    <div class="col-md-3 card-helper-links">
+                                        <div class="card-helper" >
                                             <div class="row card-buttons justify-content-center" >
-                                                <button class="btn-learn-more">View More</button>
+                                                <a href="#" class="btn-learn-more join-link"><span class="fa fa-info-circle"></span> View More</a>
                                             </div>
                                             <div class="row justify-content-center ">
-                                                {% if event.youtube_link %}
-                                                    <a href="{{event.youtube_link}}" target="_blank" class="fa fa-youtube"></a>
-                                                {% endif %}
-                                                {% if event.gmeet_link %}
-                                                    <a href="{{event.gmeet_link}}" target="_blank" class="fa fa-video-camera"></a>
-                                                {% endif %}
-                                                {% if event.webx_link %}
-                                                     <a href="{{event.webx_link}}" target="_blank" class="fa icons8-cisco-webex-meetings"></a>
+                                                {% if event.meet_link %}
+                                                  <a class="btn-learn-more join-link" target="_blank" href="{{event.meet_link}}"><span class="fa fa-video-camera"></span> Join Now</a>
                                                 {% endif %}
                                             </div>
                                             
@@ -83,7 +80,7 @@ Events-{{type}}
                                     
                                     </div>
                    
-                                </div>
+                                
 
                                 
                                               
@@ -92,37 +89,6 @@ Events-{{type}}
                             
                         {% endif %}
                     {% endfor %}
-                        <!-- <span class="card-event-type-tag">tech</span> -->
-                        
-                    
-                        <!-- <div class="row no-gutters justify-content-center" id="livecardrow">
-                       
-                            <div class="col-md-4  card-date">
-                                <div class="card-date-head">Ends in</div>
-                                <p class="card-date-num">30</p>
-                                <p class="card-date-mon">Jan</p>
-                            </div>
-    
-                            <div class="col-md-4 card-event-details">
-                                <p class="card-event-name">Event details</p>
-                                <p class="card-event-description">Technical| 8:00PM</p>
-                                
-                            </div>
-                            <div class="col-md-4 card-helper-links">
-                                <div class="card-helper">
-                                    <div class="row card-buttons justify-content-center" >
-                                        <button class="btn-learn-more">View More</button>
-                                    </div>
-                                    <div class="row card-buttons justify-content-center">
-                                        <button class="btn-learn-more">Registered</button>
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            
-                        </div>
-                     -->
-                    
                 </div>
             </section>
             <!-- <section id="upcoming">

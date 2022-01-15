@@ -40,8 +40,9 @@ class Event(models.Model):
     registration_open = models.BooleanField(verbose_name="Registrations Open", default=True, blank=True)
     type = models.CharField(max_length=30, choices=EVENT_CHOICES, default='event', verbose_name='Event Type')
     event_started = models.BooleanField(verbose_name="Event started", default=False, blank=True)
-    youtube_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="youtube Link for streaming") 
-    gmeet_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="gmeet Link for streaming") 
-    webx_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="webX Link for streaming") 
+    meet_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="meet Link for streaming")
+    youtube_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="youtube Link for streaming")
+    webx_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="webX Link for streaming")
+
     def __str__(self):
         return self.name
