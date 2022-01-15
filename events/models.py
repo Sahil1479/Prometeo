@@ -34,9 +34,15 @@ class Event(models.Model):
     external_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="External Link for Registration")
     date = models.DateField(verbose_name="Event Date", null=True, blank=True)
     time = models.TimeField(null=True, blank=True, verbose_name="Event Time")
+    end_date = models.DateField(verbose_name="Event end Date", null=True, blank=True)
+    end_time = models.TimeField(null=True, blank=True, verbose_name="Event end Time")
     venue = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Venue")
     registration_open = models.BooleanField(verbose_name="Registrations Open", default=True, blank=True)
     type = models.CharField(max_length=30, choices=EVENT_CHOICES, default='event', verbose_name='Event Type')
+    event_started = models.BooleanField(verbose_name="Event started", default=False, blank=True)
+    meet_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="meet Link for streaming")
+    youtube_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="youtube Link for streaming")
+    webx_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="webX Link for streaming")
 
     def __str__(self):
         return self.name
