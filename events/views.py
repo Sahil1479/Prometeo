@@ -9,9 +9,12 @@ def events(request, type):
     events = Event.objects.all()
     today = date.today()
     liveevents = Event.objects.filter(date=today).order_by('time')
-    return render(request, 'events.html', {'events': events, 'type': type,
+    if type=='Live':
+         return render(request, 'liveevents.html', {'events': events, 'type': type,
                                            'present_time': datetime.now().time,
                                            'liveevents': liveevents})
+    else:
+        return render(request, 'events.html', {'events': events, 'type': type})
 
 
 def event(request, type, eventid):
