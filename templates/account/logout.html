@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% load static %}
+{% load i18n %} 
+{% block title %}Sign Out{% endblock%} 
+
+{% block style %}
+
+<link rel="stylesheet" href="{% static 'css/account/logout.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+
+<div class="mainWrapperLogout">
+  <div style="color: white" class="logoutContainer">
+    <h4 style="text-align: center">Are you sure you want to sign out?</h4>
+
+    <form style="justify-content: center; display: flex;" method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %} {% if redirect_field_value %}
+      <input
+        type="hidden"
+        name="{{ redirect_field_name }}"
+        value="{{ redirect_field_value }}"
+      />
+      {% endif %}
+      <button class="btn btn-danger btn-sm my-2" type="submit">
+        Sign Out
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

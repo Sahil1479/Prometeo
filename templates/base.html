@@ -63,30 +63,30 @@
 </head>
 
 <body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto">
-        <a href="http://iitj.ac.in/">
-          <img src="{% static 'img/iitj_pro_white.png' %}" width="75" height="48" align="top" alt="" id="logo-img">
-        </a>
-        <a class="navbar-brand" href="/">
-          Prometeo
-        </a>
-      </h1>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
-          <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
-          <!-- <li>
+   
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo me-auto">
+                <a href="http://iitj.ac.in/">
+                    <img src="{% static 'img/iitj_pro_white.png' %}" width="75" height="48" align="top" alt="" id="logo-img">
+                </a>
+                <a class="navbar-brand" href="/">
+                    Prometeo
+                </a>
+            </h1>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
+                    <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
+                    <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
+                    <li>
                       <a class="nav-link scrollto" href="{% url 'events:schedule' %}"
                         >Schedule</a
                       >
-                    </li> -->
-          <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'coordinator' %}">Team</a></li>
-          <!-- <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
+                    </li>
+                    <li><a class="nav-link scrollto" href="{% url 'coordinator' %}">Team</a></li>
+                    <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="{% url 'events:events' 'Live' %}">Live Events</a></li>
                             <li><a href="{% url 'events:events' 'Technical' %}">Technical Events</a></li>
@@ -95,32 +95,50 @@
                         </ul>
                     </li>
                     <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      <!-- .navbar -->
-    </div>
-  </header>
-  <!-- End Header -->
+                    {% if user.is_authenticated %}
+                      <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
+                      <li class="dropdown">
+                        <a href=""
+                          ><span>{{user.first_name}}</span> <i class="bi bi-chevron-down"></i
+                        ></a>
+                        <ul>
+                          {% if user.is_superuser %}                
+                          <li><a href="#">Dashboard</a></li>
+                          {% endif %}
+                          <li><a href="/users/profile/">Profile</a></li>
+                          <li><a href="#">My Events</a></li>
+                        </ul>
+                      </li>
+                    {% else %}
+                      <li><a class="nav-link scrollto" href="/accounts/login">Login</a></li>
+                      <li><a class="nav-link scrollto" href="/accounts/signup">SignUp</a></li>
+                    {% endif %}
+                </ul>
+                
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+        </div>
+    </header>
+    <!-- End Header -->
 
-  {% block content %} {% endblock %}
+    {% block content %} {% endblock %}
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>PROMETEO</h3>
-            <p>
-              Indian Institute of Technology Jodhpur <br />
-              NH 65 Nagaur Road<br />
-              Karwar 342037, Jodhpur District <br /><br />
-              <strong>Phone:</strong> +91 9523218750<br />
-              <strong>Email:</strong> prometeo@iitj.ac.in<br />
-            </p>
-          </div>
-
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 footer-contact">
+              <h3>PROMETEO</h3>
+              <p>
+                Indian Institute of Technology Jodhpur <br />
+                NH 65 Nagaur Road<br />
+                Karwar 342037, Jodhpur District <br /><br />
+                <strong>Phone:</strong> +91 9523218750<br />
+                <strong>Email:</strong> prometeo@iitj.ac.in<br />
+              </p>
+            </div>
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Quick Links</h4>
             <ul>
@@ -131,17 +149,20 @@
                 <li>
                   <i class="bx bx-chevron-right"></i> <a href="#">All Events</a>
                 </li> -->
-              <li>
-                <i class="bx bx-chevron-right"></i>
-                <a href="{% url 'home:theme' %}">Theme</a>
-              </li>
-              <li>
-                <i class="bx bx-chevron-right"></i>
-                <a href="{% url 'coordinator' %}">Meet our team</a>
-              </li>
-            </ul>
-          </div>
-
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="{% url 'home:theme' %}">Theme</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="{% url 'events:schedule' %}">Schedule</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="{% url 'coordinator' %}">Meet our team</a>
+                </li>
+              </ul>
+            </div>
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>External Links</h4>
             <ul>
