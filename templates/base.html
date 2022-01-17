@@ -98,12 +98,12 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
                     <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
-                    <!-- <li>
+                    <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
+                    <li>
                       <a class="nav-link scrollto" href="{% url 'events:schedule' %}"
                         >Schedule</a
                       >
-                    </li> -->
-                    <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
+                    </li>
                     <li><a class="nav-link scrollto" href="{% url 'coordinator' %}">Team</a></li>
                     <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
@@ -113,8 +113,27 @@
                             <li><a href="{% url 'events:events' 'Workshop' %}">Workshops</a></li>
                         </ul>
                     </li>
-                    <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
+                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
+                    {% if user.is_authenticated %}
+                      <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
+                      <li class="dropdown">
+                        <a href=""
+                          ><span>{{user.first_name}}</span> <i class="bi bi-chevron-down"></i
+                        ></a>
+                        <ul>
+                          {% if user.is_superuser %}                
+                          <li><a href="#">Dashboard</a></li>
+                          {% endif %}
+                          <li><a href="/users/profile/">Profile</a></li>
+                          <li><a href="#">My Events</a></li>
+                        </ul>
+                      </li>
+                    {% else %}
+                      <li><a class="nav-link scrollto" href="/accounts/login">Login</a></li>
+                      <li><a class="nav-link scrollto" href="/accounts/signup">SignUp</a></li>
+                    {% endif %}
                 </ul>
+                
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
             <!-- .navbar -->
@@ -153,6 +172,10 @@
                 <li>
                   <i class="bx bx-chevron-right"></i>
                   <a href="{% url 'home:theme' %}">Theme</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="{% url 'events:schedule' %}">Schedule</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
