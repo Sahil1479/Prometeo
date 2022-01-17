@@ -1,0 +1,111 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+Events-{{type}}
+{% endblock %}
+
+
+{% block style %}
+<!-- import css files or write css code-->
+<link href="{% static 'css/liveevents.css' %}" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+    {% if type == 'Live' %}
+
+        <div class="liveeventwrapper">
+            <div style="padding-top: 50px;"></div>
+            <section id="live">
+                <div class="section-header">
+                    <h2>Live Events</h2>
+                </div>
+                <div class="container justify-content-center align-items-center"  style="max-width: 950px;">
+                   
+                    {% for event in liveevents %}
+                        
+                        {% if event.end_time >= present_time.time and event.event_started  %}
+                        <div class="customcard">
+                            <div class="row no-gutters justify-content-center livecard " id="livecard-{{event.type}}">
+                               
+                                    <div class="col-md-4  card-date">
+                                        <div class="card-date-content" >
+                                            <div class="card-date-head">Ends on</div>
+                                            <p class="card-date-num">{{event.end_date|date:"d"}} {{event.end_date|date:"M"}}</p>
+                                            <p class="card-date-mon">{{event.end_time}}</p>
+                                        </div>
+                                        
+                                    </div>
+            
+                                    <div class="col-md-5 card-event-details">
+                                        <div class="row ">
+                                            <p class="card-event-name">{{event.name.capitalize}}</p>
+                                        </div>
+                                        
+                                        {% if event.venue %}
+                                        <div class="row">
+                                            <p class="card-event-description"><span><i class="fa fa-map-marker"></i>Venue:</span> {{event.venue}}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if  event.speaker %}
+                                        <div class="row">
+                                            <p class="card-event-description"><span><i class="fa fa-user"></i>Speaker:</span> {{event.speaker}}</p>
+                                        </div>
+                                        {% endif %}
+                                        <div class="row event-badge">
+                                        {% if event in user.events %}
+                                             <p class="card-event-badge"><span class="badge bg">Registered</span></p>
+                                        {% endif %}
+                                        <p class="card-event-badge"><span class="badge bg">{{event.type.capitalize}}</span></p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-3 card-helper-links">
+                                        <div class="card-helper" >
+                                            <div class="row card-buttons justify-content-center" >
+                                                <a href="#" class="btn-learn-more join-link"><span class="fa fa-info-circle"></span> View More</a>
+                                            </div>
+                                            <div class="row justify-content-center ">
+                                                {% if event.meet_link %}
+                                                  <a class="btn-learn-more join-link" target="_blank" href="{{event.meet_link}}"><span class="fa fa-video-camera"></span> Join Now</a>
+                                                {% endif %}
+                                            </div>
+                                            
+                                        </div>
+                                    
+                                    </div>
+                   
+                                
+
+                                
+                                              
+                             </div>
+                        </div>
+                            
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            <!-- <section id="upcoming">
+                <div class="section-header">
+                    <h2>Upcoming Events</h2>
+                </div>
+                
+            </section> -->
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
