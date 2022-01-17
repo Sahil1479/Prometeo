@@ -1,7 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 body{
     background-image: url("/static/img/technicaleventsbg.png");
     background-attachment: fixed;
+    overflow-x: hidden;
 }
 footer{
     position: absolute;
+}
+
+.card-body{
+    padding-bottom: 0rem;
+}
+
+.event-card{
+    width: 140%;
+    color: white;
+    background-color: #23202073 !important;
+    border-color: white;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.title-heading{
+    margin-top: 1%;
+    margin-bottom: 5px !important;
+}
+
+.title{
+    color: white;
+    text-align: center;
+    position: relative;
+    left: 18%;
+}
+
+.title-subheading{
+    margin-bottom: 0px;
+}
+
+.nav-tabs .nav-link.active{
+    color: white;
+    background-color: transparent;
+    border-bottom-color: #0F0E0E;
+}
+
+.nav-link{
+    color: #47b2e4;
+}
+
+.nav-link:hover{
+    color: white;
+}
+
+h4{
+    color: white;
+}
+
+.rulebook{
+    background: transparent;
+    border-color: #47b2e4;
+    margin-top: 5%;
+    width: 86%;
+}
+
+.btn:hover{
+    background-color: #47b2e4 !important;
+    color: black;
+}
+
+.btn:focus{
+    box-shadow: none !important;
+}
+
+.event-type {
+    margin-top: 45px;
+}
+
+.card-img-top{
+    width: 90%;
+    padding-right: 4%;
+}
+
+.description {
+    margin:auto;
+}
+
+
+.info-horizontal .icon {
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.info {
+    max-width: 360px;
+    margin-bottom: 20px;
+    padding: 70px 0 30px;
+}
+
+.info-horizontal .icon>i {
+    font-size: 2.25rem;
+    color: #47b2e4;
+}
+
+.contact-col{
+    margin: 2%;
+}
+
+.contact-icons{
+    position: relative;
+    top: 5px;
+    color: #47b2e4;
+}
+
+@media screen and (max-width:992px) {
+    .image{
+        margin: auto;
+        position: relative;
+        left: 6%;
+        padding-top: 20px;
+    }
+
+    .card-img-top{
+        width: 82% !important;
+    }
+
+    .rulebook{
+        width: 78%;
+    }
+
+    .title{
+        left: -1%;
+    }
+
+    .event-card{
+        position: relative;
+        left: 6%;
+    }
+
+    .row{
+        padding-bottom: 10%;
+    }
+}
+
+@media screen and (max-width:778px) {
+    .event-card{
+        width: 90%;
+    }
+
+    .title{
+        left: 1%;
+    }
+
+    .card-img-top{
+        height: 270px;
+        width: 76% !important;
+    }
+
+    .rulebook{
+        width: 73%;
+    }
+
+    .image{
+        position: relative;
+        left: 13%;
+    }
 }
