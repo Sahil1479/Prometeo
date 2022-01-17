@@ -16,6 +16,7 @@ footer{
 .event-card{
     width: 140%;
     color: white;
+    background-color: #23202073 !important;
     border-color: white;
     border-radius: 20px;
     border-width: 1px;
@@ -23,12 +24,11 @@ footer{
 
 .title-heading{
     margin-top: 1%;
-    margin-bottom: 0px !important;
+    margin-bottom: 5px !important;
 }
 
 .title{
     color: white;
-    margin-bottom: 10px; 
     text-align: center;
     position: relative;
     left: 18%;
@@ -36,6 +36,12 @@ footer{
 
 .title-subheading{
     margin-bottom: 0px;
+}
+
+.nav-tabs .nav-link.active{
+    color: white;
+    background-color: transparent;
+    border-bottom-color: #0F0E0E;
 }
 
 .nav-link{
@@ -54,7 +60,12 @@ h4{
     background: transparent;
     border-color: #47b2e4;
     margin-top: 5%;
-    width: 96%;
+    width: 86%;
+}
+
+.btn:hover{
+    background-color: #47b2e4 !important;
+    color: black;
 }
 
 .btn:focus{
@@ -66,6 +77,7 @@ h4{
 }
 
 .card-img-top{
+    width: 90%;
     padding-right: 4%;
 }
 
@@ -88,5 +100,69 @@ h4{
 
 .info-horizontal .icon>i {
     font-size: 2.25rem;
-    color: #e91e63;
+    color: #47b2e4;
+}
+
+.contact-col{
+    margin: 2%;
+}
+
+.contact-icons{
+    position: relative;
+    top: 5px;
+    color: #47b2e4;
+}
+
+@media screen and (max-width:992px) {
+    .image{
+        margin: auto;
+        position: relative;
+        left: 6%;
+        padding-top: 20px;
+    }
+
+    .card-img-top{
+        width: 82% !important;
+    }
+
+    .rulebook{
+        width: 78%;
+    }
+
+    .title{
+        left: -1%;
+    }
+
+    .event-card{
+        position: relative;
+        left: 6%;
+    }
+
+    .row{
+        padding-bottom: 10%;
+    }
+}
+
+@media screen and (max-width:778px) {
+    .event-card{
+        width: 90%;
+    }
+
+    .title{
+        left: 1%;
+    }
+
+    .card-img-top{
+        height: 270px;
+        width: 76% !important;
+    }
+
+    .rulebook{
+        width: 73%;
+    }
+
+    .image{
+        position: relative;
+        left: 13%;
+    }
 }

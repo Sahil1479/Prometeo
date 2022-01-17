@@ -28,13 +28,15 @@
     <div class="row">
         <h2 class="title title-heading">{{ event.name }}</h2>
         {% if event.host %}
-        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }} by {{ event.host }}
+        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> by <a
+                href="{{ event.sponsor_website }}"> <img src="{{ event.sponsor_image1.url }}" alt="Sponser"
+                    height="60"></a>
         </h4>
         {% else %}
         <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
         {% endif %}
         <!-- <div class="row"></div> -->
-        <div class="col-lg-4 col-md-4 col-sm-12 ml-auto mr-auto" style="padding-bottom: 10%;">
+        <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mr-auto image" style="padding-bottom: 10%;">
             <img class="card-img-top" src="{{ event.image.url }}" height="360" width="360" alt="">
             {% if event.rulebook %}
             <a href="{{ event.rulebook.url }}" target="_blank"><button class="rulebook btn btn-primary"
@@ -42,7 +44,7 @@
 
             {% endif %}
         </div>
-        <div class="col-lg-6 col-md-4 col-sm-12 ml-auto mr-auto" style="padding-bottom: 10%;">
+        <div class="col-lg-6 col-md-8 col-sm-12 ml-auto mr-auto" style="padding-bottom: 5%;">
             <div class="event-card card text-center" style="background-color: transparent">
                 <div class="card-header ">
                     <ul class="nav nav-tabs justify-content-center">
@@ -105,12 +107,15 @@
                             <a class="nav-link" href="{% url 'events:event' event.type event.pk %}">Registered Users</a>
                         </li>
                         {% endif %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" data-toggle="modal"
+                                onclick="openTab(event, 'contact')">Contact
+                                Us</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body" id="details" style="display:block; text-align:left">
-
-
-
                     <div class="row" style="margin-left:5%;">
                         <div class="col-lg-6 col-md-6">
                             {% if event.prize %}
@@ -230,6 +235,20 @@
                         members). Create or join a team:</p>
                     <a href="#" class="btn btn-primary">Create Team</a>
                     <a href="#" class="btn btn-primary">Join a Team</a>
+                </div>
+                <div class="card-body tab-content" id="contact" style="display:none; text-align:left">
+                    <div class="row">
+                        {% for contact in event.contacts_set.all %}
+                        <div class="col contact-col">
+                            <h3>{{ contact.name }}</h3>
+                            <h5><i class="material-icons contact-icons">phone</i> +91 {{ contact.phone }}</h5>
+                            <h5>
+                                <i class="material-icons contact-icons">email</i>
+                                {{ contact.email }}
+                            </h5>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
 
             </div>
