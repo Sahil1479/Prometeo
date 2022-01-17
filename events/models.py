@@ -1,5 +1,3 @@
-from distutils.command.upload import upload
-from unicodedata import name
 from django.db import models
 
 # Create your models here.
@@ -25,8 +23,8 @@ class Event(models.Model):
     speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty")
     image = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Cover Image(prefer uploading square images)")
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
-    sponsor_image1 = models.ImageField(upload_to="images/", null=True, blank = True, verbose_name="Sponser Image 1(preferably upload rectangular images)")
-    sponsor_website = models.URLField(max_length=1000, null=True, blank = True, verbose_name="Link to Sponsors Website")
+    sponsor_image1 = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Sponser Image 1(upload rectangular images)")
+    sponsor_website = models.URLField(max_length=1000, null=True, blank=True, verbose_name="Link to Sponsors Website")
     participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='team', verbose_name="Participation Type")
     min_team_size = models.IntegerField(verbose_name="Minimum Team Size (leave unchanged for individual event)", default=3)
     max_team_size = models.IntegerField(verbose_name="Maximum Team Size (leave unchanged for individual event)", default=5)

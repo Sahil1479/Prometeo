@@ -1,10 +1,10 @@
-from pyexpat import model
 from django.contrib import admin
 from .models import Event, Contacts
 
 
 class ContactsAdmin(admin.StackedInline):
     model = Contacts
+
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'time', 'venue', 'registration_open', 'type')
