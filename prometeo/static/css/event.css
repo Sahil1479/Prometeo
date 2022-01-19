@@ -73,7 +73,7 @@ h4{
 }
 
 .event-type {
-    margin-top: 45px;
+    margin-top: 50px;
 }
 
 .card-img-top{
@@ -100,7 +100,7 @@ h4{
 
 .info-horizontal .icon>i {
     font-size: 2.25rem;
-    color: #47b2e4;
+    color: #97d7ff;
 }
 
 .contact-col{
@@ -110,7 +110,7 @@ h4{
 .contact-icons{
     position: relative;
     top: 5px;
-    color: #47b2e4;
+    color: #97d7ff;
 }
 
 @media screen and (max-width:992px) {

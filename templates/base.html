@@ -93,7 +93,6 @@
             </ul>
           </li>
           {% if user.is_authenticated %}
-          <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
           <li class="dropdown">
             <a href=""><span>{{user.first_name}}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -102,6 +101,7 @@
               {% endif %}
               <li><a href="/users/profile/">Profile</a></li>
               <li><a href="#">My Events</a></li>
+              <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
             </ul>
           </li>
           {% else %}
