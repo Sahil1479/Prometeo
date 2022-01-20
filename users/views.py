@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import ExtendedUser
+from .models import ExtendedUser, Team
+from events.models import Event
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 import uuid
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from .forms import TeamCreationForm, TeamJoiningForm
 
 User = get_user_model()
 
@@ -58,3 +61,62 @@ def user_profile(request):
         extendeduser.save()
         messages.success(request, 'Your profile has been updated.')
     return render(request, 'profile.html')
+
+
+@login_required
+def create_team(request, eventid):
+    event = get_object_or_404(Event, pk=eventid)
+    if(request.user.teams.filter(event=event).exists()):
+        return redirect(f'/events/{event.type}/{event.pk}')
+    if request.method == 'POST':
+        form = TeamCreationForm(request.POST)
+        if form.is_valid():
+            team = form.save(commit=False)
+            team.id = 'PRO' + str(uuid.uuid4().int)[:6]
+            team.leader = request.user
+            team.event = event
+            team.save()
+            team.members.add(request.user)
+            team.save()
+            request.user.extendeduser.events.add(event)
+            message = f'You have just created team "{team.name}" for the {event.type} event {event.name}. The team ID is {team.id}. Share this ID with your friends who can join your team using this ID.'
+            send_mail(
+                'Team Details',
+                message,
+                'iitj.iotwebportal@gmail.com',
+                [request.user.email],
+                fail_silently=False,
+            )
+            # form.save_m2m()
+            # return redirect('team_created', team.pk)
+            return redirect(f'/events/{event.type}/{event.pk}')
+    else:
+        form = TeamCreationForm()
+        return render(request, 'create_team.html', {'form': form, 'event':event})
+
+@login_required
+def join_team(request):
+    if request.method == 'POST':
+        form = TeamJoiningForm(request.POST)
+        if form.is_valid():
+            teamId = form.cleaned_data['teamId']
+            if(Team.objects.filter(pk=teamId).exists()):
+                team = Team.objects.get(pk=teamId)
+                if request.user in team.members.all():
+                    form.add_error(None, 'You are already a member of this team')
+                elif team.event in request.user.events.all():
+                    form.add_error(None, 'You have already registered for the event ' + team.event.name + ' from a different team')
+                elif (team.members.all().count() >= team.event.max_team_size):
+                    form.add_error(None, 'Team is already full')
+                else:
+                    response = redirect('join_team_confirm')
+                    response['Location'] += '?id=' + teamId
+                    return response
+                    
+            else:
+                form.add_error('teamId', 'No team with the given team ID exists')
+            # form.save_m2m()
+            
+    else:
+        form = TeamJoiningForm()
+    return render(request, 'join_team.html', {'form': form})

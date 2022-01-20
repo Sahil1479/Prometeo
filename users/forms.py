@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from allauth.account.forms import LoginForm
+from .models import Team
 CustomUser = get_user_model()
 
 
@@ -28,3 +29,11 @@ class CustomLoginForm(LoginForm):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
         self.fields['login'].label = 'Email'
         # self.fields['login'].placeholder = 'Compulsory'
+
+class TeamCreationForm(forms.ModelForm):
+    class Meta:
+        model = Team
+        fields = ['name']
+
+class TeamJoiningForm(forms.Form):
+    teamId = forms.CharField(label="Team ID", max_length=9, min_length=9)
