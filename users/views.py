@@ -60,6 +60,7 @@ def user_profile(request):
         extendeduser.isProfileCompleted = True
         extendeduser.save()
         messages.success(request, 'Your profile has been updated.')
+
     return render(request, 'profile.html')
 
 

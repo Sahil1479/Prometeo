@@ -11,7 +11,10 @@
 
 <div class="profileContainer">
   <h3 style="text-align: center; margin: 35px 0px 35px 0px">
-    Complete your profile
+    {% if user.extendeduser.isProfileCompleted == False %}
+      Complete your profile
+    {% else %}
+    {% endif %}
   </h3>
   {% if messages %}
   <ul class="messages">
@@ -193,14 +196,14 @@
           <label class="form-check-label" for="isCampusAmbassador">
             Become Campus Ambassador
           </label>
-          <p style="font-size: 0.7rem; color: gray">
+          <p style="font-size: 0.9rem; color: red;">
             &#42;By checking this, you will receive a seprate mail in which your referral id is present, which you can share with others.
           </p>
         </div>
       </div>
     </div>
     {% endif %}
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Save</button>
   </form>
 </div>
 
