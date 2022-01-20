@@ -215,7 +215,7 @@
                         </div>
                     </div>
                     {% elif event.description %}
-                    <div class="row" style="margin-bottom: 30px">
+                    <div class="row" style="margin-bottom: 10px">
                         <div class="description col-lg-11 ml-auto mr-auto">
                             <h4 class="card-title">
                                 Description
@@ -233,8 +233,8 @@
                 <div class="card-body" id="register" style="display:none;">
                     <p class="card-text">This is a team event ({{ event.min_team_size }} to {{ event.max_team_size }}
                         members). Create or join a team:</p>
-                    <a href="#" class="btn btn-primary">Create Team</a>
-                    <a href="#" class="btn btn-primary">Join a Team</a>
+                    <a href="#" class="btn register-btn btn-primary">Create Team <i class="fas fa-users"></i></a>
+                    <a href="#" class="btn register-btn btn-primary">Join a Team <i class="fas fa-sign-in-alt"></i></a>
                 </div>
                 <div class="card-body tab-content" id="contact" style="display:none; text-align:left">
                     <div class="row">

@@ -9,10 +9,6 @@ footer{
     position: absolute;
 }
 
-.card-body{
-    padding-bottom: 0rem;
-}
-
 .event-card{
     width: 140%;
     color: white;
@@ -41,7 +37,16 @@ footer{
 .nav-tabs .nav-link.active{
     color: white;
     background-color: transparent;
-    border-bottom-color: #0F0E0E;
+    border-bottom-color: #1a79e1;
+    border-bottom-width: thick;
+}
+
+.nav-tabs .nav-link {
+    background: 0 0;
+    margin: 4px;
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
 }
 
 .nav-link{
@@ -63,9 +68,15 @@ h4{
     width: 86%;
 }
 
+.register-btn {
+    margin: 5px;
+    width: 150px;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
 .btn:hover{
-    background-color: #47b2e4 !important;
-    color: black;
+    background-color: #1acae1 !important;
+    color: rgb(41, 39, 39);
 }
 
 .btn:focus{

@@ -59,3 +59,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=CustomUser)
 def save_user_profile(sender, instance, **kwargs):
     instance.extendeduser.save()
+
+
+class Team(models.Model):
+    id = models.CharField(max_length=9, primary_key=True, verbose_name='Team ID')
+    name = models.CharField(max_length=50, verbose_name="Team Name", unique=True)
+    leader = models.ForeignKey(ExtendedUser, blank=True, related_name="teams_created", on_delete=models.CASCADE)
+    members = models.ManyToManyField(ExtendedUser, related_name="teams")
+    event = models.ForeignKey(Event, blank=True, related_name="participating_teams", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
