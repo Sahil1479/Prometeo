@@ -1,5 +1,6 @@
 body {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Share Tech', sans-serif;
+  /* font-family: 'Share Tech Mono', monospace; */
   color: #444444;
   margin: 0;
   padding: 0;
@@ -81,7 +82,7 @@ section {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #37517e;
+  border: 6px solid #1b2b46;
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-radius: 50%;
