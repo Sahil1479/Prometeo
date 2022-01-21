@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %} 
 {% load crispy_forms_tags %}
-{% block title %}Create Team{% endblock%} 
+{% block title %}Join Team{% endblock%} 
 
 {% block style %}
 
@@ -14,11 +14,11 @@
 
 <div class="mainWrapperLogout">
   <div style="color: white" class="logoutContainer">
-    <h4 style="text-align: center">Create Your Team</h4>
-      <form style="justify-content: center;" action="/users/create_team/{{event.id}}/", method="post">
+    <h4 style="text-align: center">Join Team</h4>
+      <form style="justify-content: center;" action="/users/join_team/", method="post">
         {% csrf_token %}
         {{form|crispy}}
-        <button type="submit" class="btn btn-primary btn-sm my-2">Create</button>
+        <button type="submit" class="btn btn-primary btn-sm my-2">Join</button>
     </form>
   </div>
 </div>

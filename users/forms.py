@@ -37,3 +37,15 @@ class TeamCreationForm(forms.ModelForm):
 
 class TeamJoiningForm(forms.Form):
     teamId = forms.CharField(label="Team ID", max_length=9, min_length=9)
+
+class EditTeamForm(forms.ModelForm):
+
+    # members = forms.ModelMultipleChoiceField(CustomUser.objects.all(), required=False)
+
+    class Meta:
+        model = Team
+        fields = ['name', 'members']
+
+    def __init__(self, team, *args, **kwargs):
+        super(EditTeamForm, self).__init__(*args, **kwargs)
+        self.fields['members'].queryset = team.members.all()

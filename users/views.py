@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 import uuid
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-from .forms import TeamCreationForm, TeamJoiningForm
+from .forms import TeamCreationForm, TeamJoiningForm, EditTeamForm
 
 User = get_user_model()
 
@@ -68,6 +68,10 @@ def user_profile(request):
 def create_team(request, eventid):
     event = get_object_or_404(Event, pk=eventid)
     if(request.user.teams.filter(event=event).exists()):
+        messages.info(request, 'You have already created a team for this event.')
+        return redirect(f'/events/{event.type}/{event.pk}')
+    if event.registration_open is False:
+        messages.info(request, 'Registration for this event is currently closed.')
         return redirect(f'/events/{event.type}/{event.pk}')
     if request.method == 'POST':
         form = TeamCreationForm(request.POST)
@@ -88,8 +92,7 @@ def create_team(request, eventid):
                 [request.user.email],
                 fail_silently=False,
             )
-            # form.save_m2m()
-            # return redirect('team_created', team.pk)
+            messages.info(request, f'Team Successfully Created, your teamId is {team.id}, which is also sent to your respective email address.')
             return redirect(f'/events/{event.type}/{event.pk}')
     else:
         form = TeamCreationForm()
@@ -103,16 +106,21 @@ def join_team(request):
             teamId = form.cleaned_data['teamId']
             if(Team.objects.filter(pk=teamId).exists()):
                 team = Team.objects.get(pk=teamId)
+                if team.event.registration_open is False:
+                    messages.info(request, 'Registration for this event is currently closed.')
+                    return redirect(f'/events/{team.event.type}/{team.event.pk}')
                 if request.user in team.members.all():
                     form.add_error(None, 'You are already a member of this team')
-                elif team.event in request.user.events.all():
+                elif team.event in request.user.extendeduser.events.all():
                     form.add_error(None, 'You have already registered for the event ' + team.event.name + ' from a different team')
                 elif (team.members.all().count() >= team.event.max_team_size):
                     form.add_error(None, 'Team is already full')
                 else:
-                    response = redirect('join_team_confirm')
-                    response['Location'] += '?id=' + teamId
-                    return response
+                    team.members.add(request.user)
+                    team.save()
+                    request.user.extendeduser.events.add(team.event)
+                    messages.success(request, f"Successfully joined team '{team.name}'.")
+                    return redirect(f'/events/{team.event.type}/{team.event.pk}')
                     
             else:
                 form.add_error('teamId', 'No team with the given team ID exists')
@@ -121,3 +129,40 @@ def join_team(request):
     else:
         form = TeamJoiningForm()
     return render(request, 'join_team.html', {'form': form})
+
+@login_required
+def edit_team(request, teamid):
+    team = get_object_or_404(Team, id=teamid)
+    if(request.user != team.leader):
+        messages.info(request, "Only the team leader (creator) can edit the team details.")
+        return redirect(f'/events/{team.event.type}/{team.event.pk}')
+    elif(request.method == 'POST'):
+        form = EditTeamForm(team, request.POST, instance=team)
+        if(form.is_valid()):
+            
+            if(team.leader not in form.cleaned_data['members']):
+                form.add_error('members', 'You cannot remove the leader (creator) of the team from the team.')
+            else:
+                form.save()
+                for member in team.members.all():
+                    if member not in form.cleaned_data['members']:
+                        member.extendeduser.events.remove(team.event)
+
+                messages.success(request, f"The team details have been updated.")
+                return redirect(f'/events/{team.event.type}/{team.event.pk}')
+    else:
+        form = EditTeamForm(team, instance=team)
+    return render(request, 'edit_team.html', {'form':form, 'team':team})
+
+
+@login_required
+def delete_team(request, teamid):
+    team = get_object_or_404(Team, id=teamid)
+    if(request.user != team.leader):
+        messages.info(request, "Only the team leader (creator) can delete the team.")
+        return redirect(f'/events/{team.event.type}/{team.event.pk}')
+    for member in team.members.all():
+        member.extendeduser.events.remove(team.event)
+    team.delete()
+    messages.success(request, f"Successfully deleted team '{team.name}'.")
+    return redirect(f'/events/{team.event.type}/{team.event.pk}')
