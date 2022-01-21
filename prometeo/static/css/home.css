@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   overflow: hidden;
   background: radial-gradient(ellipse at bottom, #344861 0%, #070708 100%);
   margin-bottom: -80px;
@@ -13,11 +13,12 @@
   margin-top: auto;
 }
 #hero h1 {
-  margin: 0 0 10px 0;
-  font-size: 48px;
+  margin: 0 0 25px 0;
+  font-size: 70px;
   font-weight: 700;
   line-height: 56px;
-  color: #fff;
+  color: #96f8ff;
+  text-shadow: 0 4px 17px rgb(106 207 254 / 89%);
 }
 #hero h2 {
   color: rgba(255, 255, 255, 0.6);
@@ -32,6 +33,9 @@
   display: inline-flex;
   margin-top: 20px;
   align-items: center;
+}
+#hero .hero-video h3 {
+  font-size: 18px;
 }
 #hero .btn-get-started {
   font-weight: 500;
@@ -53,13 +57,13 @@
   display: flex;
   align-items: center;
   transition: 0.5s;
-  margin: 0 0 0 25px;
+  margin: 0 0 0 0px;
   color: #fff;
   line-height: 1;
 }
 #hero .btn-watch-video i {
   line-height: 0;
-  color: #fff;
+  color: rgb(203 255 142);
   transition: 0.3s;
   margin-right: 8px;
 }
@@ -87,7 +91,7 @@
 }
 @media (max-width: 768px) {
   #hero h1 {
-    font-size: 28px;
+    font-size: 40px;
     line-height: 36px;
   }
   #hero h3 {
@@ -108,6 +112,14 @@
   }
   #hero h3 {
     font-size: 16px;
+  }
+  #hero .hero-video h3 {
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  #hero .hero-video h3 {
+    font-size: 14px;
   }
 }
 
@@ -214,7 +226,7 @@
   color: #fff;
 }
 #countdown div h4 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #fff;
 }
@@ -358,24 +370,8 @@
   font-weight: 600;
   font-size: 26px;
 }
-.about .content ul {
-  list-style: none;
-  padding: 0;
-}
-.about .content ul li {
-  padding-left: 28px;
-  position: relative;
-}
-.about .content ul li + li {
-  margin-top: 10px;
-}
-.about .content ul i {
-  position: absolute;
-  left: 0;
-  top: 2px;
-  font-size: 20px;
-  color: #47b2e4;
-  line-height: 1;
+#about .description {
+  font-size: 18px;
 }
 .about .content p:last-child {
   margin-bottom: 0;
@@ -383,7 +379,7 @@
 .about .btn-learn-more {
   width: fit-content;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 1px;
   display: inline-block;
   padding: 12px 32px;
