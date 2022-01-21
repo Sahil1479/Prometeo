@@ -397,129 +397,123 @@
   color: #fff;
   text-decoration: none;
 }
+
 /*--------------------------------------------------------------
-# Features
+# Competitions Section
 --------------------------------------------------------------*/
-.features {
-  position: relative;
-  padding: 0;
-}
-.features .page {
-  min-height: auto;
+#competitions {
+  padding: 5px;
   overflow: hidden;
-  background: url("../img/features_bg.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-.features .container {
-  max-width: 100vh;
-  margin: 5px auto;
-}
-
-.features .circle-carousel {
   position: relative;
-  padding-top: 100%;
+  margin-bottom: 50px;
 }
-.features .circle-carousel .slides {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+#competitions h2 {
+  color: #d7e6ff;
 }
-.features .circle-carousel .slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0;
-  background: url("../img/india_n.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.features .circle-carousel .slide h2 {
-  align-items: center;
-  display: flex;
-  justify-content: center;
+#competitions .member {
+  width: auto;
+  padding: 0px;
+  margin-inline: 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
   text-align: center;
-  background: #a7a5cfb4;
-  color: white;
-  padding: 20px 10px 20px 10px;
-  max-width: 70%;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  border-block: 4px solid #47b2e4 !important;
 }
-.features .circle-carousel .slide.active {
-  z-index: 1;
+#competitions .member .member-img {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+  width: 250px;
+}
+@media (max-width: 575px) {
+  #competitions .member .member-img {
+    height: 140px;
+    width: 170px;
+  }
+}
+#competitions .member .member-img .img-fluid {
+  width: 100%;
+  height: 100%;
+}
+#competitions .member .social {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  background: rgba(255, 255, 255, 0.85);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+#competitions .member .social a {
+  transition: color 0.3s;
+  color: #222222;
+  margin: 0 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+#competitions .member .social a i {
+  line-height: 0;
+}
+#competitions .member .social a:hover {
+  color: #3498db;
+}
+#competitions .member .social i {
+  font-size: 18px;
+  margin: 0 2px;
+}
+#competitions .member .member-info {
+  padding: 25px 15px;
+}
+#competitions .member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #222222;
+}
+#competitions .member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #aaaaaa;
+}
+#competitions .member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 26px;
+  color: #777777;
+}
+#competitions .member:hover .social {
   opacity: 1;
 }
-.features .circle-carousel .pagination {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  width: 90%;
-  height: 90%;
-  border-radius: 50%;
-  border: 3px solid rgb(170, 170, 170);
-  transition-property: transform;
-  transition-timing-function: ease-out;
-  pointer-events: none;
-  user-select: none;
+#competitions .btn-learn-more {
+  width: fit-content;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 4px;
+  transition: 0.3s;
+  line-height: 1;
+  color: #47b2e4;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+  margin-top: 6px;
+  border: 2px solid #47b2e4;
 }
-.features .circle-carousel .pagination .dot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  pointer-events: auto;
-  transition: all ease 0.5s;
-  background-color: #a1bdff;
-  /* box-shadow: 0 4px 94px #7f8ff7; */
+#competitions .btn-learn-more:hover {
+  background: #47b2e4;
+  color: #fff;
+  text-decoration: none;
 }
-@media (max-width: 500px) {
-  .features .circle-carousel .pagination .dot {
-    width: 50px;
-    height: 50px;
-  }
-  .features .circle-carousel .slide h2 {
-    font-size: 15px;
-  }
-}
-.features .circle-carousel .pagination .dot:hover {
-  transform: translate(-50%, -50%) scale(1.05);
-  cursor: pointer;
-  color: black;
-}
-.features .circle-carousel .pagination .item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-.features .circle-carousel .pagination .item.active .dot {
-  background-color: #576dff;
-  box-shadow: 0 4px 94px #576dff;
-  color: rgb(255, 255, 255);
-  border: 3px solid white;
-}
-
 /*--------------------------------------------------------------
 # Gallery Section
 --------------------------------------------------------------*/
