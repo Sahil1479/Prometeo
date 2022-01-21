@@ -31,7 +31,7 @@ Events-{{type}}
                    
                     {% for event in liveevents %}
                         
-                        {% if event.end_time >= present_time.time and event.event_started  %}
+                        {% if event.end_time >= present_time.time and event.event_started == True  %}
                         <div class="customcard">
                             <div class="row no-gutters justify-content-center livecard " id="livecard-{{event.type}}">
                                

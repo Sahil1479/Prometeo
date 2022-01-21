@@ -67,5 +67,6 @@ class Team(models.Model):
     leader = models.ForeignKey(CustomUser, blank=True, related_name="teams_created", on_delete=models.CASCADE)
     members = models.ManyToManyField(CustomUser, related_name="teams")
     event = models.ForeignKey(Event, blank=True, related_name="participating_teams", on_delete=models.CASCADE)
+    isEligible = models.BooleanField(default=False, verbose_name="Is Team Eligible or Not")
     def __str__(self):
         return self.name

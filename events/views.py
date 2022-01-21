@@ -8,8 +8,9 @@ from datetime import date, datetime
 def events(request, type):
     events = Event.objects.all()
     today = date.today()
-    liveevents = Event.objects.filter(end_date__gte=today).filter(date__lte=today).filter(event_started=True).order_by('time')
     if type == 'Live':
+        liveevents = Event.objects.filter(end_date__gte=today).filter(date__lte=today).filter(event_started=True).order_by('time')
+        print(liveevents)
         return render(request, 'liveevents.html', {'liveevents': liveevents, 'type': type,
                                                    'present_time': datetime.now(),
                                                    })
