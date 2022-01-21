@@ -70,7 +70,7 @@ Events-{{type}}
                                     <div class="col-md-3 card-helper-links">
                                         <div class="card-helper" >
                                             <div class="row card-buttons justify-content-center" >
-                                                <a href="#" class="btn-learn-more join-link"><span class="fa fa-info-circle"></span> View More</a>
+                                                <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more join-link"><span class="fa fa-info-circle"></span> View More</a>
                                             </div>
                                             <div class="row justify-content-center ">
                                                 {% if event.meet_link %}
