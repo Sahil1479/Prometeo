@@ -64,9 +64,10 @@ def save_user_profile(sender, instance, **kwargs):
 class Team(models.Model):
     id = models.CharField(max_length=9, primary_key=True, verbose_name='Team ID')
     name = models.CharField(max_length=50, verbose_name="Team Name", unique=True)
-    leader = models.ForeignKey(ExtendedUser, blank=True, related_name="teams_created", on_delete=models.CASCADE)
-    members = models.ManyToManyField(ExtendedUser, related_name="teams")
+    leader = models.ForeignKey(CustomUser, blank=True, related_name="teams_created", on_delete=models.CASCADE)
+    members = models.ManyToManyField(CustomUser, related_name="teams")
     event = models.ForeignKey(Event, blank=True, related_name="participating_teams", on_delete=models.CASCADE)
+    isEligible = models.BooleanField(default=False, verbose_name="Is Team Eligible or Not")
 
     def __str__(self):
         return self.name

@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block title %}Change Password{% endblock %}
+{% block title %}Topic{% endblock %}
 
 {% block style %}
 
@@ -16,7 +16,8 @@
 
 <div class="mainWrapperGeneral">
     <div style="color: white;" class="generalContainer">
-        <h4 style="text-align: center;">Change Password</h4>
+        <h4 style="text-align: center;">Topic</h4>
+        
         <form method="POST" action="{% url 'account_change_password' %}" class="password_change">
             {% csrf_token %}
             {{ form|crispy }}
