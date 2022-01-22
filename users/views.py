@@ -1,3 +1,4 @@
+from pickle import FALSE
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import ExtendedUser
@@ -59,3 +60,31 @@ def user_profile(request):
         messages.success(request, 'Your profile has been updated.')
 
     return render(request, 'profile.html')
+
+
+@login_required
+def make_ca(request):
+    user = request.user
+    if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
+        messages.success(request, 'Complete your profile first.')
+        return redirect("/users/profile")
+
+    extendeduser = ExtendedUser.objects.filter(user=user).first()
+    if(extendeduser.ambassador==False):
+        extendeduser.ambassador = True
+        invite_referral = 'CA' + str(uuid.uuid4().int)[:6]
+        extendeduser.invite_referral = invite_referral
+        extendeduser.save()
+        send_mail(
+            'Campus Ambassador',
+            f"Dear {user.first_name},\nYou are now a campus ambassador. Your referral code is {invite_referral}.\nRegards,\nPrometeo 2022 Team",
+            'iitj.iotwebportal@gmail.com',
+            [user.email],
+            fail_silently=False,
+        )
+        messages.success(request, 'You are now a campus ambassador. Please check you email for referral code.')
+        return redirect('/')
+
+    else:
+        messages.success(request, 'Your are already campus ambassador')
+        return redirect('/')

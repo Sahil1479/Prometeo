@@ -106,8 +106,47 @@
             </ul>
           </li>
           {% else %}
-          <li><a class="nav-link scrollto" href="/accounts/login">Login</a></li>
-          <li><a class="nav-link scrollto" href="/accounts/signup">SignUp</a></li>
+          <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link scrollto" href="/accounts/login">Login</a></li>
+              <li><a class="nav-link scrollto" href="/accounts/signup">SignUp</a></li>
+            </ul>
+          </li>
+          {% endif %}
+          {% if not user.is_authenticated %}
+            <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
+            <div id="popup1" class="overlay">
+              <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content" style="padding-top: 40px;">
+                  <a href="../static/img/PR_Poster.png" style="padding: 0px; padding-bottom: 10px">
+                    <img src="../static/img/PR_Poster.png" class="img-fluid" alt="PR Poster">
+                  </a>
+                  You are not logged in. Do it and try again. Follow the below link.
+                </div>
+                <div class="content" style="display: flex; justify-content: center; padding-top: 20px;">
+                  <a href="/accounts/login" class="btn register-btn btn-primary">Login</a>
+                  <a href="/accounts/signup" class="btn register-btn btn-primary">Register</a>
+                </div>
+              </div>
+            </div>
+          {% elif not user.extendeduser.ambassador %}
+            <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
+            <div id="popup1" class="overlay">
+              <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content" style="padding-top: 40px;">
+                  <a href="../static/img/PR_Poster.png" style="padding: 0px; padding-bottom: 10px">
+                    <img src="../static/img/PR_Poster.png" class="img-fluid" alt="PR Poster">
+                  </a>
+                  Are you sure?
+                </div>
+                <div class="content" style="display: flex; justify-content: center; padding-top: 20px;">
+                  <a href="/users/make_ca" class="btn register-btn btn-primary">Yes</a>
+                  <a href="#" class="btn register-btn btn-primary">No</a>
+                </div>
+              </div>
+            </div>
           {% endif %}
         </ul>
 

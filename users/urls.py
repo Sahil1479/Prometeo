@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('profile/', views.user_profile, name='user_profile'),
+    path('make_ca/', views.make_ca, name='make_ca'),
     # path('join_team/', join_team, name='join_team'),
     # path('team_created/<slug:teamid>/', team_created, name='team_created'),
     # path('join_team/confirm/', join_team_confirm, name='join_team_confirm'),
