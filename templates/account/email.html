@@ -1,12 +1,24 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
+{% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "E-mail Addresses" %}{% endblock %}
+{% block title %}Email Address{% endblock %}
+
+{% block style %}
+
+<link rel="stylesheet" href="{% static 'css/account/general.css' %}" />
+
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans "E-mail Addresses" %}</h1>
-{% if user.emailaddress_set.all %}
+
+
+<div class="mainWrapperGeneral">
+  <div style="color: white;" class="generalContainer">
+      <h4 style="text-align: center;">E-mail Addresses</h4>
+      {% if user.emailaddress_set.all %}
 <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
 
 <form action="{% url 'account_email' %}" class="email_list" method="post">
@@ -31,9 +43,9 @@
   {% endfor %}
 
 <div class="buttonHolder">
-      <button class="secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-      <button class="secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-      <button class="primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+      <button class="btn btn-sm btn-primary my-2 mr-4 secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+      <button class="btn btn-sm btn-primary my-2 mr-4 secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+      <button class="btn btn-sm btn-primary my-2 primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
 </div>
 
 </fieldset>
@@ -49,15 +61,17 @@
 
     <form method="post" action="{% url 'account_email' %}" class="add_email">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+        {{ form|crispy }}
+        <button class="btn btn-sm btn-primary my-2" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
     </form>
   {% endif %}
+  </div>
+</div>
 
 {% endblock %}
 
 
-{% block extra_body %}
+{% block script %}
 <script type="text/javascript">
 (function() {
   var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";

@@ -23,9 +23,20 @@
 <div
     style="height:100% ;margin:0px;top: 0px;left: 0px; width: 100%; background-color: black; opacity: 0.75; display: flex;align-items: center; justify-content: center;position: fixed;z-index: 0;">
 </div>
+
 <div class="event-container container p-2 mb-5 shadow"
     style="background-color: transparent; width: fit-content;position: relative;top: 10vh;">
     <div class="row">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+        {% endif %}
         <h2 class="title title-heading">{{ event.name }}</h2>
         {% if event.host %}
         <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> by <a
@@ -54,7 +65,7 @@
                         </li>
 
                         {% if user.is_authenticated %}
-                        {% if event in user.events.all %}
+                        {% if event in user.extendeduser.events.all %}
                         <li class="nav-item">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="modal"
                                 data-target="#registeredModal">
@@ -108,6 +119,16 @@
                         </li>
                         {% endif %}
 
+                        {% if user.is_authenticated %}
+                            {% for team in user.teams.all %}
+                                {% if event == team.event and user == team.leader %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users/edit_team/{{team.id}}">Edit Team</a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="javascript:void(0)" data-toggle="modal"
                                 onclick="openTab(event, 'contact')">Contact
@@ -233,8 +254,8 @@
                 <div class="card-body" id="register" style="display:none;">
                     <p class="card-text">This is a team event ({{ event.min_team_size }} to {{ event.max_team_size }}
                         members). Create or join a team:</p>
-                    <a href="#" class="btn register-btn btn-primary">Create Team <i class="fas fa-users"></i></a>
-                    <a href="#" class="btn register-btn btn-primary">Join a Team <i class="fas fa-sign-in-alt"></i></a>
+                    <a href="/users/create_team/{{event.id}}" class="btn btn-primary">Create Team</a>
+                    <a href="/users/join_team" class="btn btn-primary">Join a Team</a>
                 </div>
                 <div class="card-body tab-content" id="contact" style="display:none; text-align:left">
                     <div class="row">
