@@ -95,7 +95,7 @@
           </li>
           {% if user.is_authenticated %}
           <li class="dropdown">
-            <a href=""><span>{{user.first_name}}</span> <i class="bi bi-chevron-down"></i></a>
+            <a href="#"><span>{{user.first_name}}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               {% if user.is_superuser %}
               <li><a href="#">Dashboard</a></li>
@@ -116,9 +116,18 @@
       <!-- .navbar -->
     </div>
   </header>
+  {% if messages %}
+    {% for message in messages %}
+    <div id="alert" style="position: absolute; top: 10%; width: 70%; left: 50%; transform: translateX(-50%); opacity: 1; z-index: 10;" class="alert alert-info alert-dismissible" role="alert">
+        {{message}}
+        <p style="color: #055160; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 1rem; cursor: pointer;" onclick="document.getElementById('alert').style.display = 'none'"><i class="fas fa-times"></i></p>
+      </div>
+    {% endfor %}
+  {% endif %}
   <!-- End Header -->
-
-  {% block content %} {% endblock %}
+  {% block content %} 
+  
+  {% endblock %}
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -215,6 +224,9 @@
   <!-- Template Main JS File -->
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/tabs.js' %}"></script>
+
+  
+
   <script>
     AOS.init({
       duration: 1000,

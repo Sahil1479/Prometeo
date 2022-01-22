@@ -1,11 +1,18 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %} 
+{% load static %} 
+{% load i18n %} 
+{% block title %}Account Inactive{% endblock %} 
 
-{% load i18n %}
-
-{% block head_title %}{% trans "Account Inactive" %}{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/account/general.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>{% trans "Account Inactive" %}</h1>
-
-<p>{% trans "This account is inactive." %}</p>
-{% endblock %}
+<div class="mainWrapperGeneral">
+  <div style="color: white; width: 90vw;" class="generalContainer">
+    <h4 style="text-align: center">Account Inactive</h4>
+    <p>
+        This account is inactive.
+    </p>
+  </div>
+</div>

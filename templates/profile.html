@@ -4,6 +4,9 @@
 {% endblock %} {% block style %}
 <!-- import css files or write css code-->
 <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<style>
+  .input-group-addon{color:#253529; background-color: #e7e7e7; padding: 6px 10px 4px 10px; border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
+  </style>
 {% endblock %} {% block content %}
 <!-- write your code here -->
 
@@ -12,20 +15,11 @@
 <div class="profileContainer">
   <h3 style="text-align: center; margin: 35px 0px 35px 0px">
     {% if user.extendeduser.isProfileCompleted == False %}
-      Complete your profile
+      Complete your registration
     {% else %}
+      Update your profile
     {% endif %}
   </h3>
-  {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-        {{message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    {% endfor %}
-  {% endif %}
   <form
     class="needs-validation"
     validate
@@ -36,175 +30,220 @@
     <div class="row my-2">
       <div class="form-group col-md-6">
         <label for="first_name">First Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="first_name"
-          name="first_name"
-          value="{{user.first_name}}"
-          required
-        />
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fas fa-user"></i>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            id="first_name"
+            name="first_name"
+            value="{{user.first_name}}"
+            required
+          />
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="last_name">Last Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="last_name"
-          name="last_name"
-          value="{{user.last_name}}"
-          required
-        />
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fas fa-user"></i>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            id="last_name"
+            name="last_name"
+            value="{{user.last_name}}"
+            required
+          />
+        </div>
       </div>
     </div>
     <div class="row my-2">
       <div class="form-group col-md-6">
         <label for="email">Email</label>
-        <input
-          type="text"
-          class="form-control"
-          id="email"
-          name="email"
-          value="{{user.email}}"
-          readonly
-          required
-        />
+        <div class="input-group">
+          <div class="input-group-addon">
+            @
+          </div>
+          <input
+            style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;cursor: not-allowed;" 
+            unselectable="on"
+            onselectstart="return false;" 
+            onmousedown="return false;"
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            value="{{user.email}}"
+            readonly
+            required
+          />
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="college_name">College</label>
-        {% if user.extendeduser.college %}
-        <input
-          type="text"
-          class="form-control"
-          id="college_name"
-          name="college_name"
-          value="{{user.extendeduser.college}}"
-          required
-        />
-        {% else %}
-        <input
-          type="text"
-          class="form-control"
-          id="college_name"
-          name="college_name"
-          required
-        />
-        {% endif %}
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fas fa-university"></i>
+          </div>
+          {% if user.extendeduser.college %}
+          <input
+            type="text"
+            class="form-control"
+            id="college_name"
+            name="college_name"
+            value="{{user.extendeduser.college}}"
+            required
+          />
+          {% else %}
+          <input
+            type="text"
+            class="form-control"
+            id="college_name"
+            name="college_name"
+            required
+          />
+          {% endif %}
+        </div>
       </div>
     </div>
 
     <div class="row my-2">
       <div class="form-group col-md-6">
         <label for="phone_no">Phone No.</label>
-        {% if user.extendeduser.college %}
-        <input
-          type="tel"
-          class="form-control"
-          id="phone_no"
-          name="phone_no"
-          value="{{user.extendeduser.contact}}"
-          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-          maxlength="10"
-          minlength="10"
-          title="Ten digits code"
-          required
-        />
-        <!-- <input type="text" class="form-control" id="phone_no" name="phone_no" value="{{user.extendeduser.contact}}" maxlength="10" required /> -->
-        {% else %}
-        <input
-          type="tel"
-          class="form-control"
-          id="phone_no"
-          name="phone_no"
-          onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
-          maxlength="10"
-          minlength="10"
-          title="Ten digits code"
-          required
-        />
-        {% endif %}
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          {% if user.extendeduser.college %}
+          <input
+            type="tel"
+            class="form-control"
+            id="phone_no"
+            name="phone_no"
+            value="{{user.extendeduser.contact}}"
+            onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+            maxlength="10"
+            minlength="10"
+            title="Ten digits code"
+            required
+          />
+          <!-- <input type="text" class="form-control" id="phone_no" name="phone_no" value="{{user.extendeduser.contact}}" maxlength="10" required /> -->
+          {% else %}
+          <input
+            type="tel"
+            class="form-control"
+            id="phone_no"
+            name="phone_no"
+            onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+            maxlength="10"
+            minlength="10"
+            title="Ten digits code"
+            required
+          />
+          {% endif %}
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="city">City</label>
-        {% if user.extendeduser.city %}
-        <input
-          type="text"
-          class="form-control"
-          id="city"
-          name="city"
-          value="{{user.extendeduser.city}}"
-          required
-        />
-        {% else %}
-        <input
-          type="text"
-          class="form-control"
-          id="city"
-          name="city"
-          required
-        />
-        {% endif %}
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fas fa-city"></i>
+          </div>
+          {% if user.extendeduser.city %}
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            name="city"
+            value="{{user.extendeduser.city}}"
+            required
+          />
+          {% else %}
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            name="city"
+            required
+          />
+          {% endif %}
+        </div>
       </div>
     </div>
     <div class="row my-2">
       <div class="form-group col-md-6">
         <label for="gender">Gender</label>
-        <select id="gender" class="form-control" name="gender">
-          <option selected value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-          <option value="NotSay">Prefer not to say</option>
-        </select>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fas fa-users"></i>
+          </div>
+          <select id="gender" class="form-control" name="gender">
+            <option selected value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="NotSay">Prefer not to say</option>
+          </select>
+        </div>
       </div>
       <div class="col-md-6">
         <div class="row">
+          {% if user.extendeduser.isProfileCompleted == True %}
+          <div class="form-group col-md-12">
+            <label for="current_year">Current Year</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fas fa-calendar-plus"></i>
+              </div>
+              <select id="current_year" class="form-control" name="current_year">
+                <option selected value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+                <option value="5">5th Year</option>
+              </select>
+            </div>
+          </div>
+          {% else %}
           <div class="form-group col-md-6">
             <label for="current_year">Current Year</label>
-            <select id="current_year" class="form-control" name="current_year">
-              <option selected value="1">1st Year</option>
-              <option value="2">2nd Year</option>
-              <option value="3">3rd Year</option>
-              <option value="4">4th Year</option>
-              <option value="5">5th Year</option>
-            </select>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="far fa-calendar-plus"></i>
+              </div>
+              <select id="current_year" class="form-control" name="current_year">
+                <option selected value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+                <option value="5">5th Year</option>
+              </select>
+            </div>
           </div>
-          {% if user.extendeduser.isProfileCompleted == False %}
           <div class="form-group col-md-6">
             <label for="referral_code">Referral Code(Optional)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="referral_code"
-              name="referral_code"
-            />
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fas fa-code"></i>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                id="referral_code"
+                name="referral_code"
+              />
+            </div>
           </div>
           {% endif %}
         </div>
       </div>
     </div>
-    {% if user.extendeduser.isProfileCompleted == False %}
-    
-    <div class="row my-2">
-      <div class="form-group col-md-12">
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="isCampusAmbassador"
-            name="isCampusAmbassador"
-          />
-          <label class="form-check-label" for="isCampusAmbassador">
-            Become Campus Ambassador
-          </label>
-          <p style="font-size: 0.9rem; color: red;">
-            &#42;By checking this, you will receive a seprate mail in which your referral id is present, which you can share with others.
-          </p>
-        </div>
-      </div>
-    </div>
-    {% endif %}
-    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Save</button>
+    <button type="submit" class="btn btn-primary mb-2" style="margin-top: 5px;">Save</button>
   </form>
+  <a style="margin-top: 20px;" href="{% url 'account_change_password' %}">Change Password?</a>
 </div>
 
 </div>

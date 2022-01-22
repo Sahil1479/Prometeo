@@ -25,6 +25,17 @@
       overflow: hidden;
       color: white;
   }
+  @media(max-width:1400px){
+    .profileContainer {
+      width: 80vw;
+    }
+  }
+  @media(max-width:900px){
+    .profileContainer {
+      width: 95vw;
+      margin: 80px 20px;
+    }
+  }
   
   .profileContainer:before {
     content: "";

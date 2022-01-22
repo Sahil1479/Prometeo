@@ -25,6 +25,17 @@
     overflow: hidden;
 }
 
+@media(max-width:1400px){
+  .loginContainer {
+    width: 50vw;
+  }
+}
+@media(max-width:800px){
+  .loginContainer {
+    width: 90vw;
+  }
+}
+
 .loginContainer:before {
   content: "";
   position: absolute;
