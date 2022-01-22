@@ -435,6 +435,16 @@ Home
 
   </section><!-- End Gallery Section -->
 </div>
+
+<style>
+  
+</style>
+<div id='popUpOverlay' class='popUpOverlay'></div>
+<div id="campusAmbassadorPopUp">
+  <p style="color: white; position: absolute; right: 7px; top: 3px; font-size: 1.2rem; cursor: pointer;" onclick="closePopUp()"><i class="fas fa-times"></i></p>
+  <img src="{% static 'img/popupImg.jpeg' %}" alt="PopUp Img">
+</div>
+
 </main><!-- End #main -->
 {% endblock %}
 
@@ -485,5 +495,23 @@ Home
         $(".production").addClass("active").siblings().removeClass("active");
       });
       
+      function showPopUp() {
+        var isPopUpShown = window.localStorage.getItem('isPopUpShown');
+        if(isPopUpShown == null && isPopUpShown!=true) {
+          $('#campusAmbassadorPopUp').fadeIn(600);
+          $("#popUpOverlay").css('display', 'block')
+          window.localStorage.setItem('isPopUpShown', true);
+        }
+      }
+
+      function closePopUp() {
+        $('#campusAmbassadorPopUp').fadeOut();
+        $("#popUpOverlay").css('display', 'none')
+      }
+
+      $('#campusAmbassadorPopUp').hide();
+      window.onload = function() {
+        setTimeout(function() { showPopUp(); }, 5000);
+	    };
     </script>
 {% endblock %}
