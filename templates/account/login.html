@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load account socialaccount %}
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block title %} Sign In {% endblock %}
 
@@ -13,6 +14,7 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/account/login.css' %}" />
+<link rel="stylesheet" href="{% static 'css/account/googlebtn.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -20,7 +22,7 @@
 <div class="mainWrapperLogin">
   <div style="color: white;" class="loginContainer">
     <h4 style="text-align: center;">Login to Prometeo</h4>
-    {% get_providers as socialaccount_providers %}
+    <!-- {% get_providers as socialaccount_providers %}
 
     {% if socialaccount_providers %}
       <div class="socialaccount_ballot">
@@ -34,10 +36,20 @@
     {% else %}
       <p>{% blocktrans %}If you have not created an account yet, then please
       <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-    {% endif %}
+    {% endif %} -->
+
+    <div style="display: flex; justify-content: center; margin: 10px;">
+      <a href='{% provider_login_url "google" %}'>
+        <div class="google-btn">
+          <div class="google-icon-wrapper">
+            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+          </div>
+          <p class="btn-text"><b>Sign in with google</b></p>
+        </div>
+      </a>
+    </div>
       <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
-        <!-- {{ form.as_p }} -->
         {{ form|crispy }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />

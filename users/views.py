@@ -31,7 +31,14 @@ def user_profile(request):
 
             extendeduser = ExtendedUser.objects.filter(user=request.user).first()
             extendeduser.gender = data['gender']
+
             extendeduser.contact = data['phone_no']
+            phone_no = data['phone_no']
+            if phone_no.isdecimal() and len(phone_no) == 10:
+                extendeduser.contact = phone_no
+            else:
+                messages.info(request, 'Enter a valid contact number.')
+                return render(request, 'profile.html')
             extendeduser.current_year = data['gender']
             extendeduser.college = data['college_name']
             extendeduser.city = data['city']
