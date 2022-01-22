@@ -9,7 +9,7 @@ def registrationNotCompleted(request):
         messages.info(request, 'Complete your registration first.')
         return True
     return False
-        
+
 
 def home(request):
     if registrationNotCompleted(request):

@@ -19,6 +19,7 @@ def isRegistrationFormValid(data):
             return False
     return True
 
+
 @login_required
 def user_profile(request):
     if(request.method == "POST"):
@@ -35,7 +36,7 @@ def user_profile(request):
             extendeduser.college = data['college_name']
             extendeduser.city = data['city']
             extendeduser.current_year = data['current_year']
-            if 'referral_code' in data and data['referral_code']!='' and extendeduser.isProfileCompleted is False:
+            if 'referral_code' in data and data['referral_code'] != '' and extendeduser.isProfileCompleted is False:
                 referralCode = data['referral_code']
                 if ExtendedUser.objects.filter(invite_referral=referralCode).exists():
                     referredBy = ExtendedUser.objects.filter(invite_referral=referralCode).first()
@@ -43,7 +44,7 @@ def user_profile(request):
                 else:
                     messages.info(request, 'Invalid Referral Code.')
                     return render(request, 'profile.html')
-            
+
             extendeduser.isProfileCompleted = True
             extendeduser.save()
             user.save()
@@ -76,7 +77,7 @@ def create_team(request, eventid):
             team.members.add(request.user)
             team.save()
             request.user.extendeduser.events.add(event)
-            message = f'You have just created team "{team.name}" for the {event.type} event {event.name}. The team ID is {team.id}. Share this ID with your friends who can join your team using this ID.'
+            message = (f'You have just created team "{team.name}" for the {event.type} event {event.name}. The team ID is {team.id}. Share this ID with your friends who can join your team using this ID.')
             send_mail(
                 'Team Details',
                 message,
@@ -88,7 +89,8 @@ def create_team(request, eventid):
             return redirect(f'/events/{event.type}/{event.pk}')
     else:
         form = TeamCreationForm()
-        return render(request, 'create_team.html', {'form': form, 'event':event})
+        return render(request, 'create_team.html', {'form': form, 'event': event})
+
 
 @login_required
 def join_team(request):
@@ -113,14 +115,13 @@ def join_team(request):
                     request.user.extendeduser.events.add(team.event)
                     messages.success(request, f"Successfully joined team '{team.name}'.")
                     return redirect(f'/events/{team.event.type}/{team.event.pk}')
-                    
+
             else:
                 form.add_error('teamId', 'No team with the given team ID exists')
-            # form.save_m2m()
-            
     else:
         form = TeamJoiningForm()
     return render(request, 'join_team.html', {'form': form})
+
 
 @login_required
 def edit_team(request, teamid):
@@ -131,7 +132,6 @@ def edit_team(request, teamid):
     elif(request.method == 'POST'):
         form = EditTeamForm(team, request.POST, instance=team)
         if(form.is_valid()):
-            
             if(team.leader not in form.cleaned_data['members']):
                 form.add_error('members', 'You cannot remove the leader (creator) of the team from the team.')
             else:
@@ -140,11 +140,11 @@ def edit_team(request, teamid):
                     if member not in form.cleaned_data['members']:
                         member.extendeduser.events.remove(team.event)
 
-                messages.success(request, f"The team details have been updated.")
-                return redirect(f'/events/{team.event.type}/{team.event.pk}')
+                messages.success(request, "The team details have been updated.")
+                return redirect((f'/events/{team.event.type}/{team.event.pk}'))
     else:
         form = EditTeamForm(team, instance=team)
-    return render(request, 'edit_team.html', {'form':form, 'team':team})
+    return render(request, 'edit_team.html', {'form': form, 'team': team})
 
 
 @login_required

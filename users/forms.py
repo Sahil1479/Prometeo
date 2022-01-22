@@ -30,13 +30,16 @@ class CustomLoginForm(LoginForm):
         self.fields['login'].label = 'Email'
         # self.fields['login'].placeholder = 'Compulsory'
 
+
 class TeamCreationForm(forms.ModelForm):
     class Meta:
         model = Team
         fields = ['name']
 
+
 class TeamJoiningForm(forms.Form):
     teamId = forms.CharField(label="Team ID", max_length=9, min_length=9)
+
 
 class EditTeamForm(forms.ModelForm):
 
