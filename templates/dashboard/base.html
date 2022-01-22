@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %} {% endblock %}</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="{% static 'dashboard/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{% static 'dashboard/css/sb-admin.css' %}" rel="stylesheet">
+  <link href="{% static 'dashboard/css/base.css' %}" rel="stylesheet">
+
+  {% block styles %}{% endblock %}
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+    {% block sidebar %}
+    <!-- Sidebar -->
+    {% endblock %}
+    <div id="content-wrapper">
+      <div class="container-fluid">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-info">
+              <div class="container">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+                <b>{{ message }}</b>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+        </div>
+        <!-- Sticky Footer -->
+        {% block footer %}
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright © Prometeo 2k22</span>
+            </div>
+            </div>
+        </footer>
+        {% endblock %}
+    </div>
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% static 'dashboard/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'dashboard/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="{% static 'dashboard/vendor/datatables/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'dashboard/vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'dashboard/js/sb-admin.min.js' %}"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="{% static 'dashboard/js/demo/datatables-demo.js' %}"></script>
+
+  {% block scripts %}{% endblock %}
+
+</body>
+
+</html>

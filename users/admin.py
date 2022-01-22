@@ -2,7 +2,17 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import ugettext_lazy as _
 from .models import ExtendedUser, CustomUser, Team
-admin.site.register(ExtendedUser)
+
+
+@admin.register(ExtendedUser)
+class ExtendedUserAdmin(admin.ModelAdmin):
+    list_display = ('user', 'college', 'ambassador')
+    list_filter = ('ambassador',)
+    search_fields = ['user', 'college', 'contact', 'city']
+
+    class Meta:
+        model = ExtendedUser
+        fields = '__all__'
 
 
 @admin.register(CustomUser)

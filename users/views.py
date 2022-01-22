@@ -115,11 +115,29 @@ def make_ca(request):
             [user.email],
             fail_silently=False,
         )
-        messages.success(request, 'You are now a campus ambassador. Please check you email for referral code.')
+        messages.info(request, 'You are now a campus ambassador. Please check you email for referral code.')
         return redirect('/')
 
     else:
-        messages.success(request, 'Your are already campus ambassador')
+        messages.info(request, 'Your are already campus ambassador')
+        return redirect('/')
+
+
+@login_required
+def ca_dashboard(request):
+    user = request.user
+    if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
+        messages.info(request, 'Complete your profile first.')
+        return redirect("/users/profile")
+
+    extendeduser = ExtendedUser.objects.filter(user=user).first()
+    if(extendeduser.ambassador==True):
+        referral_id = extendeduser.invite_referral
+        referred_users = ExtendedUser.objects.filter(referred_by=user)
+        count = len(referred_users)
+        return render(request, 'dashboard/ca_dashboard.html', {'referral_id': referral_id, 'referred_users': referred_users, 'count': count})
+    else:
+        messages.info(request, 'Your are not a campus ambassador')
         return redirect('/')
 
 

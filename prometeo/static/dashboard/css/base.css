@@ -1,0 +1,7 @@
+td a {
+    color:rgb(40, 0, 151);
+}
+
+#dataTable-wrapper row:nth-child(1) {
+    position:absolute;
+}
