@@ -9,6 +9,7 @@ EVENT_CHOICES = (
     ('talk', 'Talk'),
     ('panel discussion', 'Panel Discussion'),
     ('initiative', 'Initiative'),
+    ('entrepreneurial', 'Entrepreneurial'),
 )
 
 EVENT_PARTICIPATION = (
@@ -19,9 +20,9 @@ EVENT_PARTICIPATION = (
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=50, verbose_name="Event Name", unique=True)
+    name = models.CharField(max_length=50, verbose_name="Event Name", unique=True, blank=False, null=False)
     speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty")
-    image = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Cover Image(prefer uploading square images)")
+    image = models.ImageField(upload_to="images/", verbose_name="Cover Image(prefer uploading square images)", blank=False, null=False)
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
     sponsor_image1 = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Sponser Image 1(upload rectangular images)")
     sponsor_website = models.URLField(max_length=1000, null=True, blank=True, verbose_name="Link to Sponsors Website")
@@ -34,10 +35,10 @@ class Event(models.Model):
     rulebook_text = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Rulebook Text (HTML Format)")
     host = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Host")
     external_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="External Link for Registration")
-    date = models.DateField(verbose_name="Event Date", null=True, blank=True)
-    time = models.TimeField(null=True, blank=True, verbose_name="Event Time")
-    end_date = models.DateField(verbose_name="Event end Date", null=True, blank=True)
-    end_time = models.TimeField(null=True, blank=True, verbose_name="Event end Time")
+    date = models.DateField(verbose_name="Event Date", null=False, blank=False)
+    time = models.TimeField(null=False, blank=False, verbose_name="Event Time")
+    end_date = models.DateField(verbose_name="Event end Date", null=False, blank=False)
+    end_time = models.TimeField(null=False, blank=False, verbose_name="Event end Time")
     venue = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Venue")
     registration_open = models.BooleanField(verbose_name="Registrations Open", default=True, blank=True)
     type = models.CharField(max_length=30, choices=EVENT_CHOICES, default='event', verbose_name='Event Type')

@@ -1,0 +1,152 @@
+body{
+    background: url("../img/about_bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: rgb(255, 255, 255);
+    bottom:0vh
+  }
+  
+  .post-modules{
+    width: 100%;
+    border-radius: 5px 5px 0px 0px !important;
+    font-family: GothamLight !important;
+    margin: 0px auto;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card{
+    background: black;
+    overflow: hidden;
+    
+  }
+
+  .badge-pill{
+    font-size: 0.8em;
+    font-weight: 100;
+    position:absolute;
+    top: 1.5%;
+    right: 1.5%;
+  }
+
+  .badge-success {
+    background-color: rgb(29, 110, 47);
+  }
+
+  .badge-danger {
+    background-color: rgb(136, 0, 0);
+  }
+
+  .cover-img{
+    object-fit: cover;
+    opacity: 0.6;
+  }
+  
+  .thumbnail{
+    height: 18vw;
+    position: relative;
+    overflow: hidden;
+    margin: -2px;
+    /*filter: blur(5px);*/
+    background-size: cover;
+    /* transition: all 0.3s ease-in-out; */
+  }
+  
+  .post-content{
+    padding: 9px 12px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .title{
+    /*font-style: normal;*/
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    color: #fff;
+    padding-bottom:5px;
+  }
+  
+  .title:hover{
+    color: white;
+  }
+  
+  .sub-title{
+    font-style: normal;
+    /* font-size: 18px; */
+    line-height: 23px;
+    color: #fff;
+    margin-bottom:10px;
+  }
+  
+  .description{
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #fff;
+    display:none;
+    padding-left: 0;
+    padding-top: 0px;
+    padding-bottom:0px;
+    margin-bottom: 0;
+    transition: ease-in-out;
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .buttonfntr{
+    backdrop-filter: blur(5px);
+    background: rgba(93, 109, 143, 0.1);
+    font-style: normal;
+    font-weight: normal;
+    font-family: euro;
+    letter-spacing: 1px;
+    font-size: 18px;
+    line-height: 25px;
+    color: #FFFFFF;
+  }
+  
+  .buttonfntr:hover{
+    color: #FFFFFF;
+    background: rgba(93, 109, 143, 0.4);
+  
+  }
+  
+  .btn-learn-more {
+    width: fit-content;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    
+    align-content: center;
+    
+    padding: 12px 32px;
+    border-radius: 4px;
+    transition: 0.3s;
+    line-height: 1;
+    color: #47b2e4;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    margin-top: 12px;
+    border: 2px solid #47b2e4;
+  }
+  
+  .btn-learn-more:hover {
+    background: #47b2e4;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .page-header{
+    text-transform: uppercase;
+    text-shadow: 5px 5px 2px rgb(0, 0, 0)
+   
+  }

@@ -1,11 +1,23 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
+{% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
-{% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
+{% block title %}Sign Up Closed{% endblock %}
+
+{% block style %}
+
+<link rel="stylesheet" href="{% static 'css/account/general.css' %}" />
+
+{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up Closed" %}</h1>
 
-<p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+<div class="mainWrapperGeneral">
+    <div style="color: white;" class="generalContainer">
+        <h4 style="text-align: center;">Sign Up Closed</h4>
+        <p style="text-align: center;">We are sorry, but the sign up is currently closed.</p>
+    </div>
+</div>
 {% endblock %}

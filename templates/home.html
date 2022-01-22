@@ -28,14 +28,17 @@ Home
 
             <div>
               <h3 data-aos="fade-left" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">INNOVATE</h3>
-              <h3 class="sep-bar" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">&nbsp|&nbsp</h3>
+              <h3 class="sep-bar" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true" style="color: #f9c33be6;">&nbsp|&nbsp</h3>
               <h3 data-aos="fade-down" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">IMPLEMENT</h3>
-              <h3 class="sep-bar" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">&nbsp|&nbsp</h3 class="sep-bar">
+              <h3 class="sep-bar" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true" style="color: #f9c33be6;">&nbsp|&nbsp</h3 class="sep-bar">
               <h3 data-aos="fade-right" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">IMPROVE</h3>
             </div>
             <div class="hero-video">
-              <h3 data-aos="fade-down" data-aos-delay="1500" data-aos-duration="500" data-aos-once="true">IIT JODHPUR</h3>
-              <a href="https://youtu.be/8lOSuBvGfjo" class="glightbox btn-watch-video"><h3 data-aos="fade-down" data-aos-delay="1500" data-aos-duration="500" data-aos-once="true"><i class="bi bi-play-circle"></i><span>Theme Reveal</span></h3></a>
+              <h3 data-aos="fade-down" data-aos-delay="1500" data-aos-duration="500" data-aos-once="true"><i class="fas fa-map-marker-alt" style="color: #ff4b4b;"></i> IIT JODHPUR</h3>
+              <h3 data-aos="fade-down" data-aos-delay="1500" data-aos-duration="500" data-aos-once="true" style="margin-left: 30px; margin-right:20px"> <i class="far fa-calendar-alt" style="color: #00c0ff; margin-right: 5px"></i> 26th Feb - 1st Mar</h3>
+            </div>
+            <div class="hero-video">
+              <a href="https://youtu.be/8lOSuBvGfjo" class="glightbox btn-watch-video"><h3 data-aos="fade-up" data-aos-delay="1500" data-aos-duration="500" data-aos-once="true"><i class="bi bi-play-circle"></i><span>Theme Reveal</span></h3></a>
             </div>
           </div>
           <div class="countdown d-flex" id="countdown" data-count="2022/2/26">
@@ -77,7 +80,7 @@ Home
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box py-5">
                 <i class="bi bi-code-square"></i>
-                <span data-purecounter-start="0" data-purecounter-end="65" class="purecounter">0</span>
+                <!-- <span data-purecounter-start="0" data-purecounter-end="65" class="purecounter">0</span> -->
                 <p>Competitions</p>
               </div>
             </div>
@@ -85,7 +88,7 @@ Home
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box py-5">
                 <i class="bi bi-easel2"></i>
-                <span data-purecounter-start="0" data-purecounter-end="85" class="purecounter">0</span>
+                <!-- <span data-purecounter-start="0" data-purecounter-end="85" class="purecounter">0</span> -->
                 <p>Talks</p>
               </div>
             </div>
@@ -93,7 +96,7 @@ Home
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box pb-5 pt-0 pt-lg-5">
                 <i class="bi bi-boxes"></i>
-                <span data-purecounter-start="0" data-purecounter-end="27" class="purecounter">0</span>
+                <!-- <span data-purecounter-start="0" data-purecounter-end="27" class="purecounter">0</span> -->
                 <p>Workshops</p>
               </div>
             </div>
@@ -101,7 +104,7 @@ Home
             <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
               <div class="count-box pb-5 pt-0 pt-lg-5">
                 <i class="bi bi-people"></i>
-                <span data-purecounter-start="0" data-purecounter-end="22" class="purecounter">0</span>
+                <!-- <span data-purecounter-start="0" data-purecounter-end="22" class="purecounter">0</span> -->
                 <p>Exhibitions</p>
               </div>
             </div>
@@ -125,7 +128,7 @@ Home
           <div class="col-lg-6 d-flex flex-column justify-content-center p-5 " >
 
             <div class="icon-box">
-              <p class="description" style="color: #fff;" ><b>Prometeo 2022</b> is the second edition of IIT Jodhpur's National Technical+Entrepreneurial Festival. Prometeo derives its name from the Greek word for forethinker, and celebrates disruptive technologies through talks, workshops, and competitions.<br> This year's theme for Prometeo 2022 is <b>'India in 2030-40-50'</b> with the objective to address the major existing challenges of our society, provide exposure of different technologies to build the new India by expanding the technical and economical orbit</p>
+              <p class="description" style="color: #fff;" ><b>Prometeo 2022</b> is the second edition of IIT Jodhpur's National Technical + Entrepreneurial Festival. Prometeo derives its name from the Greek word for forethinker, and celebrates disruptive technologies through talks, workshops, and competitions.<br> This year's theme for Prometeo 2022 is <b>'India in 2030-40-50'</b> with the objective to address the major existing challenges of our society, provide exposure of different technologies to build the new India by expanding the technical and economical orbit</p>
             </div>
             <a href="{% url 'home:theme' %}" class="btn-learn-more">Read More</a>
 
@@ -229,177 +232,184 @@ Home
       </div>
     </section><!-- End About Us Section -->
 
-    <!-- ======= Features Section ======= -->
-    <!-- <section id="features" class="features">
-      <div class="row">
-        <section class="page">
-          <div class="container">
-            <div class="circle-carousel" data-speed="2000" data-autoplay="2500">
-              <div class="slides">
-                <div class="slide">
-                  <h2>
-                    Broadband Highways
-                  </h2>
-                </div>
-                <div class="slide">
-                  <h2>Universal Access to Mobile Connectivity</h2>
-                </div>
-                <div class="slide">
-                  <h2>Public Internet Access Programme</h2>
-                </div>
-                <div class="slide">
-                  <h2>
-                    Reforming Government through Technology</h2>
-                </div>
-                <div class="slide">
-                  <h2>Electronic delivery of services</h2>
-                </div>
-                <div class="slide">
-                  <h2>Electronics Manufacturing</h2>
-                </div>
-                <div class="slide">
-                  <h2>
-                    Information for All
-                  </h2>
-                </div>
-                <div class="slide">
-                  <h2>IT for Jobs</h2>
-                </div>
-                <div class="slide">
-                  <h2>
-                    Early Harvest Programmes</h2>
-                </div>
-              </div>
-              <div class="pagination">
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/wifi.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:70%;
-                        height:70%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/public_internet.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:65%;
-                        height:65%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/internet.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:70%;
-                        height:70%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/government.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:65%;
-                        height:65%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/touch-control.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:70%;
-                        height:70%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/conveyor.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:65%;
-                        height:65%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/database-storage.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:65%;
-                        height:65%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/job.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:65%;
-                        height:65%;">
-                      </span>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="dot">
-                    <span 
-                      style="
-                        background: url('../static/img/building.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        width:65%;
-                        height:65%;">
-                      </span>
-                  </div>
-                </div>
+  <!-- ======= Speakers Section ======= -->
+  <!-- <section id="competitions">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Speakers</h2>
+      </div>
+      <div class="row" style="place-content: space-around;">
+          <div class="member" data-aos="fade-up" data-aos-delay="100">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
-        </section>
+            <div class="member-info">
+              <h4>Walter White</h4>
+              <span>Chief Executive Officer</span>
+            </div>
+          </div>
+          <div class="member" data-aos="fade-up" data-aos-delay="200">
+            <div class="member-img">
+              <img src="../static/img/test.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+              <span>Product Manager</span>
+            </div>
+          </div>
+
+          <div class="member" data-aos="fade-up" data-aos-delay="300">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+              <span>Accountant</span>
+            </div>
+          </div>
+
+          <div class="member" data-aos="fade-up" data-aos-delay="400">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-twitter"></i></a>
+                <a href=""><i class="bi bi-facebook"></i></a>
+                <a href=""><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+              <span>Accountant</span>
+            </div>
+          </div>
+
       </div>
-
     </div>
-  </section>End Features Section -->
+    <div class="section-title" data-aos="fade-up" style="padding-top: 15px;">
+      <a href="{% url 'events:events' 'Technical' %}" class="btn-learn-more">View More</a>
+    </div>
 
-  <!-- Theme timeline Section -->
-  <!-- <section id="themetimeline">
-    
-  </section> -->
+  </section>End Speakers Section -->
+
+  <!-- ======= Competitions Section ======= -->
+  <!-- <section id="competitions">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Competitions</h2>
+      </div>
+      <div class="row" style="place-content: space-around;">
+          <div class="member" data-aos="fade-up" data-aos-delay="100">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Walter White</h4>
+            </div>
+          </div>
+          <div class="member" data-aos="fade-up" data-aos-delay="200">
+            <div class="member-img">
+              <img src="../static/img/test.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+            </div>
+          </div>
+
+          <div class="member" data-aos="fade-up" data-aos-delay="300">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+            </div>
+          </div>
+
+          <div class="member" data-aos="fade-up" data-aos-delay="400">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+            </div>
+          </div>
+
+      </div>
+    </div>
+    <div class="section-title" data-aos="fade-up" style="padding-top: 15px;">
+      <a href="{% url 'events:events' 'Technical' %}" class="btn-learn-more">View More</a>
+    </div>
+
+  </section>End Competitions Section -->
+
+  <!-- ======= Workshops Section ======= -->
+  <!-- <section id="competitions">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Workshops</h2>
+      </div>
+      <div class="row" style="place-content: space-around;">
+          <div class="member" data-aos="fade-up" data-aos-delay="100">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Walter White</h4>
+            </div>
+          </div>
+          <div class="member" data-aos="fade-up" data-aos-delay="200">
+            <div class="member-img">
+              <img src="../static/img/PR_Poster.png" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+            </div>
+          </div>
+
+          <div class="member" data-aos="fade-up" data-aos-delay="300">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+            </div>
+          </div>
+
+          <div class="member" data-aos="fade-up" data-aos-delay="400">
+            <div class="member-img">
+              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+            </div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+            </div>
+          </div>
+
+      </div>
+    </div>
+    <div class="section-title" data-aos="fade-up" style="padding-top: 15px;">
+      <a href="{% url 'events:events' 'Workshop' %}" class="btn-learn-more">View More</a>
+    </div>
+
+  </section>End Workshops Section -->
+
   <!-- ======= Gallery Section ======= -->
   <section id="gallery">
 
@@ -425,6 +435,16 @@ Home
 
   </section><!-- End Gallery Section -->
 </div>
+
+<style>
+  
+</style>
+<div id='popUpOverlay' class='popUpOverlay'></div>
+<div id="campusAmbassadorPopUp">
+  <p style="color: white; position: absolute; right: 7px; top: 3px; font-size: 1.2rem; cursor: pointer;" onclick="closePopUp()"><i class="fas fa-times"></i></p>
+  <img src="{% static 'img/popupImg.jpeg' %}" alt="PopUp Img">
+</div>
+
 </main><!-- End #main -->
 {% endblock %}
 
@@ -475,5 +495,23 @@ Home
         $(".production").addClass("active").siblings().removeClass("active");
       });
       
+      function showPopUp() {
+        var isPopUpShown = window.localStorage.getItem('isPopUpShown');
+        if(isPopUpShown == null && isPopUpShown!=true) {
+          $('#campusAmbassadorPopUp').fadeIn(600);
+          $("#popUpOverlay").css('display', 'block')
+          window.localStorage.setItem('isPopUpShown', true);
+        }
+      }
+
+      function closePopUp() {
+        $('#campusAmbassadorPopUp').fadeOut();
+        $("#popUpOverlay").css('display', 'none')
+      }
+
+      $('#campusAmbassadorPopUp').hide();
+      window.onload = function() {
+        setTimeout(function() { showPopUp(); }, 5000);
+	    };
     </script>
 {% endblock %}

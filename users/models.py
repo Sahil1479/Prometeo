@@ -35,6 +35,8 @@ class CustomUser(AbstractUser):
 
 class ExtendedUser(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, default='fname')
+    last_name = models.CharField(max_length=100, default='lname')
     events = models.ManyToManyField(Event, blank=True, related_name="participants")
     referred_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='referred_users', null=True, blank=True)
     invite_referral = models.CharField(max_length=8, unique=True, null=True, blank=True, verbose_name='Referral Code for Inviting')
@@ -59,3 +61,15 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=CustomUser)
 def save_user_profile(sender, instance, **kwargs):
     instance.extendeduser.save()
+
+
+class Team(models.Model):
+    id = models.CharField(max_length=9, primary_key=True, verbose_name='Team ID')
+    name = models.CharField(max_length=50, verbose_name="Team Name", unique=True)
+    leader = models.ForeignKey(CustomUser, blank=True, related_name="teams_created", on_delete=models.CASCADE)
+    members = models.ManyToManyField(CustomUser, related_name="teams")
+    event = models.ForeignKey(Event, blank=True, related_name="participating_teams", on_delete=models.CASCADE)
+    isEligible = models.BooleanField(default=False, verbose_name="Is Team Eligible or Not")
+
+    def __str__(self):
+        return self.name

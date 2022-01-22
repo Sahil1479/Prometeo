@@ -50,11 +50,12 @@
       >
         {% for event in day1 %}
         <div class="row schedule-item">
-          <div class="col-md-2"><time>{{event.time}}</time></div>
-          <div class="col-md-10">
+          <div class="col-md-2">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
+        </div>
+          <div class="col-md-10">
             <h4>{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
@@ -63,6 +64,7 @@
                 ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
               >
             </p>
+            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -78,11 +80,12 @@
       <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-2">
         {% for event in day2 %}
         <div class="row schedule-item">
-          <div class="col-md-2"><time>{{event.time}}</time></div>
-          <div class="col-md-10">
+          <div class="col-md-2">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
+        </div>
+          <div class="col-md-10">
             <h4>{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
@@ -91,6 +94,7 @@
                 ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
               >
             </p>
+            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -106,11 +110,12 @@
       <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-3">
         {% for event in day3 %}
         <div class="row schedule-item">
-          <div class="col-md-2"><time>{{event.time}}</time></div>
-          <div class="col-md-10">
+          <div class="col-md-2">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
+        </div>
+          <div class="col-md-10">
             <h4>{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
@@ -119,6 +124,7 @@
                 ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
               >
             </p>
+            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -134,11 +140,12 @@
       <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-4">
         {% for event in day4 %}
         <div class="row schedule-item">
-          <div class="col-md-2"><time>{{event.time}}</time></div>
-          <div class="col-md-10">
+          <div class="col-md-2">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
+        </div>
+          <div class="col-md-10">
             <h4>{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
@@ -147,6 +154,7 @@
                 ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
               >
             </p>
+            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>

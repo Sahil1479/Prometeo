@@ -1,0 +1,25 @@
+{% extends "base.html" %} 
+{% load static %}
+{% load i18n %} 
+{% load crispy_forms_tags %}
+{% block title %}Create Team{% endblock%} 
+
+{% block style %}
+
+<link rel="stylesheet" href="{% static 'css/account/logout.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+
+<div class="mainWrapperLogout">
+  <div style="color: white" class="logoutContainer">
+    <h4 style="text-align: center">Create Your Team</h4>
+      <form style="justify-content: center;" action="/users/create_team/{{event.id}}/", method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary btn-sm my-2">Create</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

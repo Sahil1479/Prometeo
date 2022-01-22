@@ -3,10 +3,16 @@ from .models import Carousel, Themeimgs
 from django.contrib import messages
 
 
-def home(request):
+def registrationNotCompleted(request):
     user = request.user
     if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
-        messages.success(request, 'Complete your profile first.')
+        messages.info(request, 'Complete your registration first.')
+        return True
+    return False
+
+
+def home(request):
+    if registrationNotCompleted(request):
         return redirect("/users/profile")
     carousel = Carousel.objects.filter(active=True)
     themes = Themeimgs.objects.all()
@@ -19,17 +25,13 @@ def home(request):
 
 
 def theme(request):
-    user = request.user
-    if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
-        messages.success(request, 'Complete your profile first.')
+    if registrationNotCompleted(request):
         return redirect("/users/profile")
 
     return render(request, 'theme.html')
 
 
 def home_redirect(request):
-    user = request.user
-    if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
-        messages.success(request, 'Complete your profile first.')
+    if registrationNotCompleted(request):
         return redirect("/users/profile")
     return redirect(home)

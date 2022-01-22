@@ -1,6 +1,6 @@
 .mainWrapperSignup{
     margin: 0;
-    padding: 100px;
+    padding: 0;
     box-sizing: border-box;
     background: url("../../img/features_bg.png");
     background-size: cover;
@@ -15,7 +15,7 @@
   
   .signupContainer {
       width: 25vw;
-      margin: 40px 20px;
+      margin: 100px 20px 40px 20px;
       padding: 10px;
       box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);	
       border-radius: 5px;
@@ -23,6 +23,17 @@
       z-index: 1;
       background: inherit;
       overflow: hidden;
+  }
+
+  @media(max-width:1400px){
+    .signupContainer {
+      width: 50vw;
+    }
+  }
+  @media(max-width:800px){
+    .signupContainer {
+      width: 90vw;
+    }
   }
 
   .signupContainer:before {
@@ -40,7 +51,7 @@
   }
 
   input[type=email], input[type=password], input[type=text] {
-    margin: 2px 0px 6px 0px;
+    margin: 5px 0px 9px 0px;
   }
 
   .socialaccount_ballot {
