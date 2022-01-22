@@ -35,6 +35,8 @@ class CustomUser(AbstractUser):
 
 class ExtendedUser(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, default='fname')
+    last_name = models.CharField(max_length=100, default='lname')
     events = models.ManyToManyField(Event, blank=True, related_name="participants")
     referred_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='referred_users', null=True, blank=True)
     invite_referral = models.CharField(max_length=8, unique=True, null=True, blank=True, verbose_name='Referral Code for Inviting')

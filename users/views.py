@@ -1,4 +1,3 @@
-from pickle import FALSE
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import ExtendedUser, Team
@@ -11,6 +10,8 @@ from django.shortcuts import get_object_or_404
 from .forms import TeamCreationForm, TeamJoiningForm, EditTeamForm
 
 User = get_user_model()
+
+sendMailID = "iitj.iotwebportal@gmail.com"
 
 
 def isRegistrationFormValid(data):
@@ -32,7 +33,14 @@ def user_profile(request):
 
             extendeduser = ExtendedUser.objects.filter(user=request.user).first()
             extendeduser.gender = data['gender']
+
             extendeduser.contact = data['phone_no']
+            phone_no = data['phone_no']
+            if phone_no.isdecimal() and len(phone_no) == 10:
+                extendeduser.contact = phone_no
+            else:
+                messages.info(request, 'Enter a valid contact number.')
+                return render(request, 'profile.html')
             extendeduser.current_year = data['gender']
             extendeduser.college = data['college_name']
             extendeduser.city = data['city']
@@ -46,9 +54,11 @@ def user_profile(request):
                     messages.info(request, 'Invalid Referral Code.')
                     return render(request, 'profile.html')
 
+            extendeduser.first_name = data['first_name']
+            extendeduser.last_name = data['last_name']
             extendeduser.isProfileCompleted = True
-            extendeduser.save()
             user.save()
+            extendeduser.save()
             messages.info(request, 'Your profile has been updated.')
             return redirect('/')
 
@@ -82,7 +92,7 @@ def create_team(request, eventid):
             send_mail(
                 'Team Details',
                 message,
-                'iitj.iotwebportal@gmail.com',
+                sendMailID,
                 [request.user.email],
                 fail_silently=False,
             )
@@ -103,7 +113,7 @@ def make_ca(request):
         return redirect("/users/profile")
 
     extendeduser = ExtendedUser.objects.filter(user=user).first()
-    if(extendeduser.ambassador==False):
+    if extendeduser.ambassador is False:
         extendeduser.ambassador = True
         invite_referral = 'CA' + str(uuid.uuid4().int)[:6]
         extendeduser.invite_referral = invite_referral
@@ -111,7 +121,7 @@ def make_ca(request):
         send_mail(
             'Campus Ambassador',
             f"Dear {user.first_name},\nYou are now a campus ambassador. Your referral code is {invite_referral}.\nRegards,\nPrometeo 2022 Team",
-            'iitj.iotwebportal@gmail.com',
+            sendMailID,
             [user.email],
             fail_silently=False,
         )
@@ -131,7 +141,7 @@ def ca_dashboard(request):
         return redirect("/users/profile")
 
     extendeduser = ExtendedUser.objects.filter(user=user).first()
-    if(extendeduser.ambassador==True):
+    if extendeduser.ambassador is True:
         referral_id = extendeduser.invite_referral
         referred_users = ExtendedUser.objects.filter(referred_by=user)
         count = len(referred_users)
