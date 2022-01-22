@@ -51,7 +51,7 @@
   }
 
   input[type=email], input[type=password], input[type=text] {
-    margin: 2px 0px 6px 0px;
+    margin: 5px 0px 9px 0px;
   }
 
   .socialaccount_ballot {

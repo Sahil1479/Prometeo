@@ -197,3 +197,5 @@ ACCOUNT_FORMS = {
     'signup': 'users.forms.SignUpForm',
     'login': 'users.forms.CustomLoginForm'
 }
+
+ACCOUNT_ADAPTER = 'prometeo.account_adapter.NoNewUsersAccountAdapter'
