@@ -1,0 +1,49 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %}  CA Dashboard {% endblock %}
+{% block styles %}
+    <link href="{% static 'dashboard/css/ca_dashboard.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block pagehead %} CA Dashboard {% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block footer %} 
+ 
+{% endblock %}
+{% block content %}
+<h2>Referred Users</h2>
+<hr>
+<div class="card mb-3">
+    <div class="card-header">
+      <i class="fas fa-table"></i>
+      <strong>Referral ID: </strong>{{referral_id}}
+      <p class="card-text "><strong><i class="fas fa-users"></i> Count: </strong>{{count}}</p>
+    </div>
+     
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>College Name</th>
+                   
+                </thead>
+                <tbody>
+                    {% for student in referred_users %}
+                        <tr>
+                            <td>{{student.user.first_name}} {{student.user.last_name}}</td>
+                            <td>{{student.user.email}}</td>
+                            <td>{{student.college}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

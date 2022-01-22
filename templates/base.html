@@ -80,11 +80,11 @@
           <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
           <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
           <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
-          <li>
+          <!-- <li>
             <a class="nav-link scrollto" href="{% url 'events:schedule' %}">Schedule</a>
-          </li>
+          </li> -->
           <li><a class="nav-link scrollto" href="{% url 'coordinator' %}">Team</a></li>
-          <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
+          <!-- <li class="dropdown"><a href="#"><span>Events</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'events:events' 'Live' %}">Live Events</a></li>
               <li><a href="{% url 'events:events' 'Technical' %}">Technical Events</a></li>
@@ -92,7 +92,7 @@
               <li><a href="{% url 'events:events' 'Entrepreneurial' %}">Entrepreneurial Events</a></li>
               <li><a href="{% url 'events:events' 'Workshop' %}">Workshops</a></li>
             </ul>
-          </li>
+          </li> -->
           {% if user.is_authenticated %}
           <li class="dropdown">
             <a href="#"><span>{{user.first_name}}</span> <i class="bi bi-chevron-down"></i></a>
@@ -100,14 +100,69 @@
               {% if user.is_superuser %}
               <li><a href="#">Dashboard</a></li>
               {% endif %}
+              {% if user.extendeduser.ambassador %}
+              <li><a href="/users/ca_dashboard/">CA Dashboard</a></li>
+              {% endif %}
               <li><a href="/users/profile/">Profile</a></li>
-              <li><a href="#">My Events</a></li>
+              <!-- <li><a href="#">My Events</a></li> -->
               <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
             </ul>
           </li>
           {% else %}
-          <li><a class="nav-link scrollto" href="/accounts/login">Login</a></li>
-          <li><a class="nav-link scrollto" href="/accounts/signup">SignUp</a></li>
+          <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a class="nav-link scrollto" href="/accounts/login">Login</a></li>
+              <li><a class="nav-link scrollto" href="/accounts/signup">SignUp</a></li>
+            </ul>
+          </li>
+          {% endif %}
+          {% if not user.is_authenticated %}
+            <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
+            <div id="popup1" class="overlay">
+              <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content" style="padding-top: 40px;">
+                  <a href="../static/img/PR_Poster.png" style="padding: 0px; padding-bottom: 10px">
+                    <img src="../static/img/PR_Poster.png" class="img-fluid" alt="PR Poster">
+                  </a>
+                  <p style="text-align: center; font-size: 18px">You are not logged in. Do it and try again. Follow the below link.</p>
+                </div>
+                <div class="content" style="display: flex; justify-content: center; padding-top: 20px;">
+                  <a href="/accounts/login" class="btn register-btn btn-primary">Login</a>
+                  <a href="/accounts/signup" class="btn register-btn btn-primary">Register</a>
+                </div>
+              </div>
+            </div>
+          {% elif not user.extendeduser.ambassador %}
+            <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
+            <div id="popup1" class="overlay">
+              <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content" style="padding-top: 40px;">
+                  <a href="../static/img/PR_Poster.png" style="padding: 0px; padding-bottom: 10px">
+                    <img src="../static/img/PR_Poster.png" class="img-fluid" alt="PR Poster">
+                  </a>
+                  <p style="text-align: center; font-size: 18px">Are you sure?</p>
+                </div>
+                <div class="content" style="display: flex; justify-content: center; padding-top: 20px;">
+                  <a href="/users/make_ca" class="btn register-btn btn-primary">Yes</a>
+                  <a href="#" class="btn register-btn btn-primary">No</a>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
+            <div id="popup1" class="overlay">
+              <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content" style="padding-top: 40px;">
+                  <a href="../static/img/PR_Poster.png" style="padding: 0px; padding-bottom: 10px">
+                    <img src="../static/img/PR_Poster.png" class="img-fluid" alt="PR Poster">
+                  </a>
+                  <p style="text-align: center; font-size: 18px">Your are already campus ambassador</p>
+                </div>
+              </div>
+            </div>
           {% endif %}
         </ul>
 
@@ -139,7 +194,7 @@
             <p>
               Indian Institute of Technology Jodhpur <br />
               NH 65 Nagaur Road<br />
-              Karwar 342037, Jodhpur District <br /><br />
+              Karwar 342030, Jodhpur District <br /><br />
               <strong>Phone:</strong> +91 9523218750<br />
               <strong>Email:</strong> prometeo@iitj.ac.in<br />
             </p>
@@ -159,10 +214,10 @@
                 <i class="bx bx-chevron-right"></i>
                 <a href="{% url 'home:theme' %}">Theme</a>
               </li>
-              <li>
+              <!-- <li>
                 <i class="bx bx-chevron-right"></i>
                 <a href="{% url 'events:schedule' %}">Schedule</a>
-              </li>
+              </li> -->
               <li>
                 <i class="bx bx-chevron-right"></i>
                 <a href="{% url 'coordinator' %}">Meet our team</a>
@@ -177,10 +232,10 @@
                 <i class="bx bx-chevron-right"></i>
                 <a href="https://iitj.ac.in/">IIT Jodhpur</a>
               </li>
-              <li>
+              <!-- <li>
                 <i class="bx bx-chevron-right"></i>
                 <a href="https://students.iitj.ac.in/">Student Gymkhana</a>
-              </li>
+              </li> -->
             </ul>
           </div>
 
@@ -190,7 +245,7 @@
               <a href="https://www.facebook.com/SnT.iitj" class="facebook"><i class="bx bxl-facebook"></i></a>
               <a href="https://www.instagram.com/prometeo.iitj/" class="instagram"><i class="bx bxl-instagram"></i></a>
               <!-- <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
-              <a href="https://github.com/Sahil1479/Prometeo" class="github"><i class="bx bxl-github"></i></a>
+              <!-- <a href="https://github.com/Sahil1479/Prometeo" class="github"><i class="bx bxl-github"></i></a> -->
             </div>
           </div>
         </div>
