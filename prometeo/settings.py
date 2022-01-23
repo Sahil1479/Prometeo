@@ -163,9 +163,12 @@ MEDIA_URL = '/media/'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # email config
+DEFAULT_FROM_EMAIL = config('SERVER_EMAIL', cast=str)
+
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_PORT = config('SERVER_EMAIL_PORT', cast=int, default=587)
-EMAIL_HOST = config('SERVER_EMAIL_HOST', cast=str, default="smtp.gmail.com")
+EMAIL_HOST = config('SERVER_EMAIL_HOST', cast=str, default="smtp.zoho.in")
 EMAIL_HOST_USER = config('SERVER_EMAIL', cast=str)
 EMAIL_HOST_PASSWORD = config('SERVER_EMAIL_PASSWORD', cast=str)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -11,7 +11,7 @@ from .forms import TeamCreationForm, TeamJoiningForm, EditTeamForm
 
 User = get_user_model()
 
-sendMailID = "iitj.iotwebportal@gmail.com"
+sendMailID = "no-reply@prometeo.in"
 
 
 def isRegistrationFormValid(data):
