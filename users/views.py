@@ -8,10 +8,11 @@ import uuid
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .forms import TeamCreationForm, TeamJoiningForm, EditTeamForm
+from django.conf import settings
 
 User = get_user_model()
 
-sendMailID = "iitj.iotwebportal@gmail.com"
+sendMailID = settings.EMAIL_HOST_USER
 
 
 def isRegistrationFormValid(data):
