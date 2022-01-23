@@ -3,15 +3,19 @@ from django.contrib.auth.decorators import login_required
 from .models import ExtendedUser, Team
 from events.models import Event
 from django.contrib.auth import get_user_model
-from django.core.mail import send_mail
+from django.core.mail import send_mail, get_connection, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 import uuid
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .forms import TeamCreationForm, TeamJoiningForm, EditTeamForm
+from django.conf import settings
+from django.contrib.sites.models import Site
 
 User = get_user_model()
 
-sendMailID = "no-reply@prometeo.in"
+sendMailID = settings.EMAIL_HOST_USER
 
 
 def isRegistrationFormValid(data):
@@ -118,13 +122,18 @@ def make_ca(request):
         invite_referral = 'CA' + str(uuid.uuid4().int)[:6]
         extendeduser.invite_referral = invite_referral
         extendeduser.save()
-        send_mail(
-            'Campus Ambassador',
-            f"Dear {user.first_name},\nYou are now a campus ambassador. Your referral code is {invite_referral}.\nRegards,\nPrometeo 2022 Team",
-            sendMailID,
-            [user.email],
-            fail_silently=False,
-        )
+
+        with get_connection(
+                username=sendMailID,
+                password=settings.EMAIL_HOST_PASSWORD
+        ) as connection:
+            html_content = render_to_string("ca_confirmation.html", {'first_name': user.first_name, 'invite_referral': invite_referral})
+            text_content = strip_tags(html_content)
+            message = EmailMultiAlternatives(subject='Campus Ambassador', body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
+            message.attach_alternative(html_content, "text/html")
+            message.mixed_subtype = 'related'
+            message.send()
+
         messages.info(request, 'You are now a campus ambassador. Please check you email for referral code.')
         return redirect('/')
 

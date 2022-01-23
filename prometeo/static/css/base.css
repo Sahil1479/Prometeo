@@ -432,12 +432,12 @@ section {
 #popup1 .popup .close:hover {
   color: #1acae1;
 }
-#popup1 .popup .content {
+#popup1 .popup .ca_content {
   max-height: 30%;
   overflow: auto;
   color: rgb(255, 255, 255);
 }
-#popup1 .popup .content .register-btn {
+#popup1 .popup .ca_content .register-btn {
   padding: 10px;
   justify-content: center;
   margin: 5px;
@@ -446,12 +446,12 @@ section {
   transition-timing-function: linear;
   color: rgb(231, 231, 231);
 }
-#popup1 .popup .content .btn:hover{
+#popup1 .popup .ca_content .btn:hover{
   background-color: #1acae1 !important;
   color: rgb(231, 231, 231);
 }
 
-#popup1 .popup .content .btn:focus{
+#popup1 .popup .ca_content .btn:focus{
   box-shadow: none !important;
 }
 
