@@ -50,9 +50,10 @@
   margin: -20px;
 }
 
-input[type=email], input[type=password], input[type=text] {
+input[type=email], input[type=password], input[type=text], input[type=radio] {
   margin: 5px 0px 15px 0px;
 }
+
 
 .socialaccount_ballot {
     margin: 10px auto;

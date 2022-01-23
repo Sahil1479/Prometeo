@@ -11,6 +11,7 @@
 
 <link rel="stylesheet" href="{% static 'css/account/signup.css' %}" />
 <link rel="stylesheet" href="{% static 'css/account/googlebtn.css' %}" />
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 {% endblock %}
 
@@ -56,6 +57,7 @@
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
+    <!-- <div class="g-recaptcha" data-sitekey="6LdYSi4eAAAAALZ-CL3IAvcOcmD_IR3Kr_RUpiyU"></div> -->
     <button class="btn btn-sm btn-primary my-2" type="submit">Sign Up &raquo;</button>
     <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
   </form>
@@ -64,4 +66,8 @@
 
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 {% endblock %}
