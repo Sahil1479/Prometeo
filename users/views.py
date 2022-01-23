@@ -12,6 +12,7 @@ from django.conf import settings
 
 User = get_user_model()
 
+
 sendMailID = settings.EMAIL_HOST_USER
 
 

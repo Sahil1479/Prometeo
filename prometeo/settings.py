@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY', cast=str)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['prometeo.iitj.ac.in', '192.168.43.110', '127.0.0.1', '142.93.216.166', 'www.prometeo.in', 'localhost']
+ALLOWED_HOSTS = ['prometeo.iitj.ac.in', '192.168.43.110', '127.0.0.1', '142.93.216.166', 'dev.prometeo.in', 'prometeo.in', 'www.prometeo.in', 'localhost']
 
 
 # Application definition
@@ -165,9 +165,12 @@ MEDIA_URL = '/media/'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # email config
+DEFAULT_FROM_EMAIL = config('SERVER_EMAIL', cast=str)
+
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_PORT = config('SERVER_EMAIL_PORT', cast=int, default=587)
-EMAIL_HOST = config('SERVER_EMAIL_HOST', cast=str, default="smtp.gmail.com")
+EMAIL_HOST = config('SERVER_EMAIL_HOST', cast=str, default="smtp.zoho.in")
 EMAIL_HOST_USER = config('SERVER_EMAIL', cast=str)
 EMAIL_HOST_PASSWORD = config('SERVER_EMAIL_PASSWORD', cast=str)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
