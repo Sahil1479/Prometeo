@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'django_inlinecss',
+
+    'captcha'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -175,7 +177,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-
 # django-allauth registraion settings
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 0.25
 ACCOUNT_EMAIL_REQUIRED = True
@@ -202,3 +203,7 @@ ACCOUNT_FORMS = {
 }
 
 ACCOUNT_ADAPTER = 'prometeo.account_adapter.NoNewUsersAccountAdapter'
+
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY', cast=str)
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY', cast=str)
+RECAPTCHA_USE_SSL = config('RECAPTCHA_USE_SSL', cast=str, default=True)
