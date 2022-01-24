@@ -9,8 +9,17 @@ from django.core.mail import send_mail, EmailMessage
 from django.contrib import messages
 from django.views.generic.edit import FormView
 from .forms import *
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
+
+@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
+def update_event_state(request,type,eventid,redirect_url_name):
+    updated_event = get_object_or_404(Event, pk=eventid)
+    updated_event.event_started = not updated_event.event_started
+    updated_event.save()
+    events = Event.objects.all()
+    return HttpResponseRedirect(reverse(redirect_url_name))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def users_info(request):
@@ -19,7 +28,7 @@ def users_info(request):
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def user_info(request, userid):
-    user = get_object_or_404(CustomUser, pk=userid)
+    user = get_object_or_404(ExtendedUser, pk=userid)
     teams = {}
     for team in user.teams.all():
         teams[team.event.pk] = team.name
@@ -36,7 +45,10 @@ def event_type_info(request, type):
     wbname = f'Events ({type}) Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
+    print(workbook)
     for event in events:
+        participants = ExtendedUser.objects.filter(events=event)
+        participating_teams = Team.objects.filter(event=event)
         if(len(event.name) > 31):
             worksheet = workbook.add_worksheet(event.name[:31])
         else:
@@ -84,7 +96,7 @@ def event_type_info(request, type):
             worksheet.write(1, 7, "City", header_format)
             worksheet.write(1, 8, "Gender", header_format)
             row = 2
-            for participant in event.participants.all():
+            for participant in participants:
                 worksheet.write(row, 0, participant.username)
                 worksheet.write(row, 1, participant.email)
                 worksheet.write(row, 2, participant.first_name)
@@ -106,16 +118,16 @@ def event_type_info(request, type):
             worksheet.write(1, event.max_team_size+2, "Created By", header_format)
             worksheet.write(1, event.max_team_size+3, "Status", header_format)
             row = 2
-            for team in event.participating_teams.all():
+            for team in participating_teams:
                 if(row%2):
                     worksheet.set_row(row, cell_format=light_format)
                 worksheet.write(row, 0, team.pk)
                 worksheet.write(row, 1, team.name)
                 i = 2
                 for member in team.members.all():
-                    worksheet.write(row, i, member.username + f' ({member.email}, {member.contact})')
+                    worksheet.write(row, i, member.first_name + ' ' + member.last_name + f' ({member.user.email}, {member.contact})')
                     i = i + 1
-                worksheet.write(row, event.max_team_size+2, team.leader.username + f' ({team.leader.email})')
+                worksheet.write(row, event.max_team_size+2, team.leader.first_name + team.leader.last_name + f' ({team.leader.user.email})')
                 if (team.members.all().count() < event.min_team_size or team.members.all().count() > event.max_team_size):
                     worksheet.write(row, event.max_team_size+3, "INELIGIBLE")
                     worksheet.set_row(row, cell_format=invalid_format)
@@ -132,7 +144,8 @@ def event_info(request, type, eventid):
     wbname = f'{event.name} Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-
+    print(workbook)
+    print(wbpath)
     if(len(event.name) > 31):
         worksheet = workbook.add_worksheet(event.name[:31])
     else:
@@ -170,26 +183,24 @@ def event_info(request, type, eventid):
     })
     if (event.participation_type == 'individual'):
         worksheet.merge_range('A1:B1', event.name + ' - Participants', merge_format)
-        worksheet.write(1, 0, "Username", header_format)
-        worksheet.write(1, 1, "Email", header_format)
-        worksheet.write(1, 2, "First Name", header_format)
-        worksheet.write(1, 3, "Last Name", header_format)
-        worksheet.write(1, 4, "Contact", header_format)
-        worksheet.write(1, 5, "Current Year", header_format)
-        worksheet.write(1, 6, "College", header_format)
-        worksheet.write(1, 7, "City", header_format)
-        worksheet.write(1, 8, "Gender", header_format)
+        worksheet.write(1, 0, "Email", header_format)
+        worksheet.write(1, 1, "First Name", header_format)
+        worksheet.write(1, 2, "Last Name", header_format)
+        worksheet.write(1, 3, "Contact", header_format)
+        worksheet.write(1, 4, "Current Year", header_format)
+        worksheet.write(1, 5, "College", header_format)
+        worksheet.write(1, 6, "City", header_format)
+        worksheet.write(1, 7, "Gender", header_format)
         row = 2
         for participant in event.participants.all():
-            worksheet.write(row, 0, participant.username)
-            worksheet.write(row, 1, participant.email)
-            worksheet.write(row, 2, participant.first_name)
-            worksheet.write(row, 3, participant.last_name)
-            worksheet.write(row, 4, participant.contact)
-            worksheet.write(row, 5, participant.current_year.replace("_", " ").capitalize())
-            worksheet.write(row, 6, participant.college)
-            worksheet.write(row, 7, participant.city)
-            worksheet.write(row, 8, participant.gender.capitalize())
+            worksheet.write(row, 0, participant.email)
+            worksheet.write(row, 1, participant.first_name)
+            worksheet.write(row, 2, participant.last_name)
+            worksheet.write(row, 3, participant.contact)
+            worksheet.write(row, 4, participant.current_year.replace("_", " ").capitalize())
+            worksheet.write(row, 5, participant.college)
+            worksheet.write(row, 6, participant.city)
+            worksheet.write(row, 7, participant.gender.capitalize())
             if(row%2):
                 worksheet.set_row(row, cell_format=light_format)
             row = row + 1
@@ -209,9 +220,9 @@ def event_info(request, type, eventid):
             worksheet.write(row, 1, team.name)
             i = 2
             for member in team.members.all():
-                worksheet.write(row, i, member.username + f' ({member.email}, {member.contact})')
+                worksheet.write(row, i, f' ({member.user.email}, {member.contact})')
                 i = i + 1
-            worksheet.write(row, event.max_team_size+2, team.leader.username + f' ({team.leader.email})')
+            worksheet.write(row, event.max_team_size+2, f'{team.leader.first_name} {team.leader.last_name}' + f' ({team.leader.user.email})')
             if (team.members.all().count() < event.min_team_size or team.members.all().count() > event.max_team_size):
                 worksheet.write(row, event.max_team_size+3, "INELIGIBLE")
                 worksheet.set_row(row, cell_format=invalid_format)

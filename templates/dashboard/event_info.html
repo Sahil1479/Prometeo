@@ -51,6 +51,10 @@
         <a class="dropdown-item" href="{% url 'event_type_info' 'technical' %}">Technical Events</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'informal' %}">Informals</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'workshop' %}">Workshops</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'talks' %}">Talks</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'exhibitions' %}">Exhibitions</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
       </div>
     </li>
     <!-- <li>
@@ -103,6 +107,10 @@
       <a class="dropdown-item" href="{% url 'event_type_info' 'technical' %}">Technical Events</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'informal' %}">Informals</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'workshop' %}">Workshops</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'talks' %}">Talks</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'exhibitions' %}">Exhibitions</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
     </div>
   </li>
   <li class="nav-item">
@@ -146,7 +154,7 @@
 {% else %} 
 <a href="{% url 'change_registration' event.type event.pk 'open' %}" class="btn btn-primary" style="margin-bottom: 20px;">Reopen Registration</a><br>
 {% endif %}
-<i class="fas fa-external-link-alt"></i> <a href="{% url 'event' event.type event.pk %}">Go to actual page</a><br>
+<i class="fas fa-external-link-alt"></i> <a href="{% url 'events:event' event.type event.pk %}">Go to actual page</a><br>
 <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname }}" download="{{ wbname }}"> Download Participants Excel Sheet</a>
 <hr>
 

@@ -51,6 +51,11 @@
         <a class="dropdown-item" href="{% url 'event_type_info' 'technical' %}">Technical Events</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'informal' %}">Informals</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'workshop' %}">Workshops</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'talks' %}">Talks</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'exhibitions' %}">Exhibitions</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
+
       </div>
     </li>
     <!-- <li>
@@ -103,6 +108,11 @@
       <a class="dropdown-item" href="{% url 'event_type_info' 'technical' %}">Technical Events</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'informal' %}">Informals</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'workshop' %}">Workshops</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'talks' %}">Talks</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'exhibitions' %}">Exhibitions</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
+      
     </div>
   </li>
   <li class="nav-item">
@@ -141,6 +151,7 @@
                     <th>External Link</th>
                     <th>Participants</th>
                     <th>Registration</th>
+                    <th>Event Live</th>
                 </thead>
                 <tbody>
                     {% for event in events %}
@@ -161,6 +172,13 @@
                             {{ event.participants.all.count }}
                         </td>
                         <td>{% if event.registration_open %} Open {% else %} Closed {% endif %}</td>
+                        <td>
+                            {% if event.event_started %}
+                            <a href="{% url 'update_event_state' event.type event.id 'events_info' %}"><button class="btn btn-danger" style="font-size: 0.8em;">End Event </button></a>  
+                            {% else %}
+                             <a href="{% url 'update_event_state' event.type event.id 'events_info' %}" ><button class="btn btn-primary" style="font-size: 0.8em;">Start Event </button></a>  
+                            {% endif %}
+                        </td>
                         </tr>
                     {% endfor %}
 
