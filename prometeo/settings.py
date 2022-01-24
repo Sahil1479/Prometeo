@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'events',
     'coordinator',
     'users',
+    'dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
