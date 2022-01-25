@@ -5,13 +5,14 @@ from events.models import *
 import xlsxwriter
 import os
 from django.conf import settings
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import send_mail, EmailMessage,EmailMultiAlternatives
 from django.contrib import messages
 from django.views.generic.edit import FormView
 from .forms import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
+sendMailID = settings.EMAIL_HOST_USER
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
 def update_event_state(request,type,eventid,redirect_url_name):
@@ -138,27 +139,25 @@ def event_type_info(request, type):
             'valign': 'vcenter',
         })
         if (event.participation_type == 'individual'):
-            worksheet.merge_range('A1:B1', event.name + ' - Participants', merge_format)
-            worksheet.write(1, 0, "Username", header_format)
-            worksheet.write(1, 1, "Email", header_format)
-            worksheet.write(1, 2, "First Name", header_format)
-            worksheet.write(1, 3, "Last Name", header_format)
-            worksheet.write(1, 4, "Contact", header_format)
-            worksheet.write(1, 5, "Current Year", header_format)
-            worksheet.write(1, 6, "College", header_format)
-            worksheet.write(1, 7, "City", header_format)
-            worksheet.write(1, 8, "Gender", header_format)
+            worksheet.merge_range('A1:H1', event.name + ' - Participants', merge_format)
+            worksheet.write(1, 0, "Email", header_format)
+            worksheet.write(1, 1, "First Name", header_format)
+            worksheet.write(1, 2, "Last Name", header_format)
+            worksheet.write(1, 3, "Contact", header_format)
+            worksheet.write(1, 4, "Current Year", header_format)
+            worksheet.write(1, 5, "College", header_format)
+            worksheet.write(1, 6, "City", header_format)
+            worksheet.write(1, 7, "Gender", header_format)
             row = 2
             for participant in participants:
-                worksheet.write(row, 0, participant.username)
-                worksheet.write(row, 1, participant.email)
-                worksheet.write(row, 2, participant.first_name)
-                worksheet.write(row, 3, participant.last_name)
-                worksheet.write(row, 4, participant.contact)
-                worksheet.write(row, 5, participant.current_year.replace("_", " ").capitalize())
-                worksheet.write(row, 6, participant.college)
-                worksheet.write(row, 7, participant.city)
-                worksheet.write(row, 8, participant.gender.capitalize())
+                worksheet.write(row, 0, participant.user.email)
+                worksheet.write(row, 1, participant.first_name)
+                worksheet.write(row, 2, participant.last_name)
+                worksheet.write(row, 3, participant.contact)
+                worksheet.write(row, 4, participant.current_year.replace("_", " ").capitalize())
+                worksheet.write(row, 5, participant.college)
+                worksheet.write(row, 6, participant.city)
+                worksheet.write(row, 7, participant.gender.capitalize())
                 if(row%2):
                     worksheet.set_row(row, cell_format=light_format)
                 row = row + 1
@@ -235,7 +234,7 @@ def event_info(request, type, eventid):
         'valign': 'vcenter',
     })
     if (event.participation_type == 'individual'):
-        worksheet.merge_range('A1:B1', event.name + ' - Participants', merge_format)
+        worksheet.merge_range('A1:H1', event.name + ' - Participants', merge_format)
         worksheet.write(1, 0, "Email", header_format)
         worksheet.write(1, 1, "First Name", header_format)
         worksheet.write(1, 2, "Last Name", header_format)
@@ -246,7 +245,7 @@ def event_info(request, type, eventid):
         worksheet.write(1, 7, "Gender", header_format)
         row = 2
         for participant in event.participants.all():
-            worksheet.write(row, 0, participant.email)
+            worksheet.write(row, 0, participant.user.email)
             worksheet.write(row, 1, participant.first_name)
             worksheet.write(row, 2, participant.last_name)
             worksheet.write(row, 3, participant.contact)
@@ -295,26 +294,32 @@ def mass_mail(request):
     if (request.method == 'POST'):
         form = EmailForm(request.POST, request.FILES)
         if(form.is_valid()):
-            recepients = []
+            recepients = ['garg.10@iitj.ac.in'] # add your required mail
+            bcc=[]
             iitj = request.POST.get('iitj')
-            # print(iitj)
-            for event in form.cleaned_data['events']:
-                for participant in event.participants.all():
-                    if(participant.email not in recepients):
-                        if(iitj):
-                            recepients.append(participant.email)
-                        elif ('iitj.ac.in' not in participant.email):
-                            recepients.append(participant.email)
-
-            sender = ''
-            if(form.cleaned_data['sender']):
-                sender = form.cleaned_data['sender']
-            else:
-                sender = 'info.noreply@prometeo.in'
+            # print(iitj)(
             
-            email = EmailMessage(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients)
+            for event in form.cleaned_data['events']:
+                users = ExtendedUser.objects.all()
+                print(event)
+                for participant in users:
+                    print(participant.events.all())
+                    if event in participant.events.all():
+                        
+                        if(participant.user.email not in recepients):
+                            if iitj:
+                                bcc.append(participant.user.email)
+                            else:
+                                if 'iitj.ac.in' not in participant.user.email:
+                                    bcc.append(participant.user.email)
+
+            sender = sendMailID
+           
+            
+            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients,bcc=bcc)
             for file in request.FILES.getlist('attachments'):
                 email.attach(file.name, file.read(), file.content_type)
+            print(recepients)
             email.send()
             messages.success(request, "Mails sent!")
             return redirect('mass_mail')

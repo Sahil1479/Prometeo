@@ -8,7 +8,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-  <a class="navbar-brand mr-1" href="index.html">Admin Dashboard</a>
+  <a class="navbar-brand mr-1" href="#">Admin Dashboard</a>
 
   <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
     <i class="fas fa-bars"></i>
@@ -169,7 +169,7 @@
                         <td>{% if event.host %} {{ event.host }} {% else %} NA {% endif %}</td>
                         <td>{% if event.external_link %} <a href="{{ event.external_link }}">{{ event.external_link }}</a> {% else %} NA {% endif %}</td>
                         <td>
-                            hui
+                          {{ event.participants.all.count }}
                         </td>
                         <td>{% if event.registration_open %} Open {% else %} Closed {% endif %}</td>
                     </tr>
