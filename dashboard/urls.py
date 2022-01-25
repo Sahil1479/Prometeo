@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import user_info, change_registration, update_event_state, event_info, event_type_info, events_info, users_info, mass_mail
 
 urlpatterns = [
     path('users/<int:userid>/', user_info, name='user_info'),

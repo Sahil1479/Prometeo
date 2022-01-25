@@ -1,34 +1,34 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import user_passes_test, login_required
-from users.models import *
-from events.models import *
+from django.contrib.auth.decorators import user_passes_test
+from users.models import ExtendedUser, Team
+from events.models import Event
 import xlsxwriter
 import os
 from django.conf import settings
-from django.core.mail import send_mail, EmailMessage,EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.contrib import messages
-from django.views.generic.edit import FormView
-from .forms import *
+from .forms import EmailForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
 sendMailID = settings.EMAIL_HOST_USER
 
+
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
-def update_event_state(request,type,eventid,redirect_url_name):
+def update_event_state(request, type, eventid, redirect_url_name):
     updated_event = get_object_or_404(Event, pk=eventid)
     updated_event.event_started = not updated_event.event_started
     updated_event.save()
-    
     return HttpResponseRedirect(reverse(redirect_url_name))
+
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def users_info(request):
     users = ExtendedUser.objects.all()
-    wbname = f'Campus Ambassador List.xlsx'
+    wbname = 'Campus Ambassador List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-    ca_list = ExtendedUser.objects.filter(ambassador = True)
+    ca_list = ExtendedUser.objects.filter(ambassador=True)
     worksheet = workbook.add_worksheet('CA List')
     col_center = workbook.add_format({
         'align': 'center',
@@ -41,26 +41,26 @@ def users_info(request):
         'border': 1,
         'align': 'center',
         'valign': 'vcenter',
-        'bg_color' : 'gray',
-        'font_size' : 20
+        'bg_color': 'gray',
+        'font_size': 20
     })
     header_format = workbook.add_format({
-        'bold' : 1,
+        'bold': 1,
         'align': 'center',
         'valign': 'vcenter',
-        'font_color' : 'white',
-        'bg_color' : 'black'
-    }) 
-    invalid_format = workbook.add_format({
-        'bg_color': '#ff7f7f',
-        'align': 'center',
-        'valign': 'vcenter',
+        'font_color': 'white',
+        'bg_color': 'black'
     })
-    light_format = workbook.add_format({
-        'bg_color': '#d3d3d3',
-        'align': 'center',
-        'valign': 'vcenter',
-    })
+    # invalid_format = workbook.add_format({
+    #     'bg_color': '#ff7f7f',
+    #     'align': 'center',
+    #     'valign': 'vcenter',
+    # })
+    # light_format = workbook.add_format({
+    #     'bg_color': '#d3d3d3',
+    #     'align': 'center',
+    #     'valign': 'vcenter',
+    # })
 
     worksheet.merge_range('A1:E1', 'Campus Ambassadors', merge_format)
     worksheet.write(1, 0, "Email", header_format)
@@ -71,14 +71,15 @@ def users_info(request):
     row = 2
 
     for ca in ca_list:
-        worksheet.write(row,0,ca.user.email)
-        worksheet.write(row,1,ca.first_name + ' ' + ca.last_name)
-        worksheet.write(row,2,ca.invite_referral)
-        worksheet.write(row,3,ca.contact)
-        worksheet.write(row,4,ca.college)
-        row+=1
+        worksheet.write(row, 0, ca.user.email)
+        worksheet.write(row, 1, ca.first_name + ' ' + ca.last_name)
+        worksheet.write(row, 2, ca.invite_referral)
+        worksheet.write(row, 3, ca.contact)
+        worksheet.write(row, 4, ca.college)
+        row += 1
     workbook.close()
-    return render(request, 'dashboard/users_info.html', {'users':users , 'wbname':wbname})
+    return render(request, 'dashboard/users_info.html', {'users': users, 'wbname': wbname})
+
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def user_info(request, userid):
@@ -86,12 +87,14 @@ def user_info(request, userid):
     teams = {}
     for team in user.teams.all():
         teams[team.event.pk] = team.name
-    return render(request, 'dashboard/user_info.html', {'cur_user':user, 'teams' : teams})
+    return render(request, 'dashboard/user_info.html', {'cur_user': user, 'teams': teams})
+
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
 def events_info(request):
     events = Event.objects.all()
-    return render(request, 'dashboard/events_info.html', {'events':events})
+    return render(request, 'dashboard/events_info.html', {'events': events})
+
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
 def event_type_info(request, type):
@@ -118,16 +121,16 @@ def event_type_info(request, type):
             'border': 1,
             'align': 'center',
             'valign': 'vcenter',
-            'bg_color' : 'gray',
-            'font_size' : 20
+            'bg_color': 'gray',
+            'font_size': 20
         })
         header_format = workbook.add_format({
-            'bold' : 1,
+            'bold': 1,
             'align': 'center',
             'valign': 'vcenter',
-            'font_color' : 'white',
-            'bg_color' : 'black'
-        }) 
+            'font_color': 'white',
+            'bg_color': 'black'
+        })
         invalid_format = workbook.add_format({
             'bg_color': '#ff7f7f',
             'align': 'center',
@@ -158,7 +161,7 @@ def event_type_info(request, type):
                 worksheet.write(row, 5, participant.college)
                 worksheet.write(row, 6, participant.city)
                 worksheet.write(row, 7, participant.gender.capitalize())
-                if(row%2):
+                if(row % 2):
                     worksheet.set_row(row, cell_format=light_format)
                 row = row + 1
         else:
@@ -171,7 +174,7 @@ def event_type_info(request, type):
             worksheet.write(1, event.max_team_size+3, "Status", header_format)
             row = 2
             for team in participating_teams:
-                if(row%2):
+                if(row % 2):
                     worksheet.set_row(row, cell_format=light_format)
                 worksheet.write(row, 0, team.pk)
                 worksheet.write(row, 1, team.name)
@@ -187,12 +190,12 @@ def event_type_info(request, type):
                     worksheet.write(row, event.max_team_size+3, "ELIGIBLE")
                 row = row + 1
     workbook.close()
-    return render(request, 'dashboard/event_type_info.html', {'events':events, 'type':type, 'wbname' : wbname})
+    return render(request, 'dashboard/event_type_info.html', {'events': events, 'type': type, 'wbname': wbname})
+
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
 def event_info(request, type, eventid):
     event = get_object_or_404(Event, pk=eventid)
-
     wbname = f'{event.name} Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
@@ -213,16 +216,16 @@ def event_info(request, type, eventid):
         'border': 1,
         'align': 'center',
         'valign': 'vcenter',
-        'bg_color' : 'gray',
-        'font_size' : 20
+        'bg_color': 'gray',
+        'font_size': 20
     })
     header_format = workbook.add_format({
-        'bold' : 1,
+        'bold': 1,
         'align': 'center',
         'valign': 'vcenter',
-        'font_color' : 'white',
-        'bg_color' : 'black'
-    }) 
+        'font_color': 'white',
+        'bg_color': 'black'
+    })
     invalid_format = workbook.add_format({
         'bg_color': '#ff7f7f',
         'align': 'center',
@@ -253,7 +256,7 @@ def event_info(request, type, eventid):
             worksheet.write(row, 5, participant.college)
             worksheet.write(row, 6, participant.city)
             worksheet.write(row, 7, participant.gender.capitalize())
-            if(row%2):
+            if(row % 2):
                 worksheet.set_row(row, cell_format=light_format)
             row = row + 1
     else:
@@ -266,7 +269,7 @@ def event_info(request, type, eventid):
         worksheet.write(1, event.max_team_size+3, "Status", header_format)
         row = 2
         for team in event.participating_teams.all():
-            if(row%2):
+            if(row % 2):
                 worksheet.set_row(row, cell_format=light_format)
             worksheet.write(row, 0, team.pk)
             worksheet.write(row, 1, team.name)
@@ -281,9 +284,9 @@ def event_info(request, type, eventid):
             else:
                 worksheet.write(row, event.max_team_size+3, "ELIGIBLE")
             row = row + 1
-    
     workbook.close()
-    return render(request, 'dashboard/event_info.html', {'event':event, 'wbname':wbname})
+    return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname})
+
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/mass_mail/')
 def mass_mail(request):
@@ -294,18 +297,15 @@ def mass_mail(request):
     if (request.method == 'POST'):
         form = EmailForm(request.POST, request.FILES)
         if(form.is_valid()):
-            recepients = ['garg.10@iitj.ac.in'] # add your required mail
-            bcc=[]
+            recepients = ['garg.10@iitj.ac.in']   # add your required mail
+            bcc = []
             iitj = request.POST.get('iitj')
-            # print(iitj)(
-            
             for event in form.cleaned_data['events']:
                 users = ExtendedUser.objects.all()
                 print(event)
                 for participant in users:
                     print(participant.events.all())
                     if event in participant.events.all():
-                        
                         if(participant.user.email not in recepients):
                             if iitj:
                                 bcc.append(participant.user.email)
@@ -314,9 +314,7 @@ def mass_mail(request):
                                     bcc.append(participant.user.email)
 
             sender = sendMailID
-           
-            
-            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients,bcc=bcc)
+            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc)
             for file in request.FILES.getlist('attachments'):
                 email.attach(file.name, file.read(), file.content_type)
             print(recepients)
@@ -343,7 +341,8 @@ def mass_mail(request):
         # return redirect('mass_mail')
     else:
         form = EmailForm()
-    return render(request, 'dashboard/mass_mail.html', {'form':form})
+    return render(request, 'dashboard/mass_mail.html', {'form': form})
+
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
 def change_registration(request, type, eventid, value):
