@@ -122,10 +122,12 @@
 
 <h1>All Users</h1>
 <hr>
+<span> <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname }}" download="{{ wbname }}"> Download Campus Ambassador list</a></span> 
 <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
       Users Table</div>
+    
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

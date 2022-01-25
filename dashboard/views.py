@@ -24,7 +24,60 @@ def update_event_state(request,type,eventid,redirect_url_name):
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def users_info(request):
     users = ExtendedUser.objects.all()
-    return render(request, 'dashboard/users_info.html', {'users':users})
+    wbname = f'Campus Ambassador List.xlsx'
+    wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
+    workbook = xlsxwriter.Workbook(wbpath)
+    ca_list = ExtendedUser.objects.filter(ambassador = True)
+    worksheet = workbook.add_worksheet('CA List')
+    col_center = workbook.add_format({
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    worksheet.set_column(0, 100, 30, col_center)
+    worksheet.set_row(0, 30)
+    merge_format = workbook.add_format({
+        'bold': 1,
+        'border': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color' : 'gray',
+        'font_size' : 20
+    })
+    header_format = workbook.add_format({
+        'bold' : 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'font_color' : 'white',
+        'bg_color' : 'black'
+    }) 
+    invalid_format = workbook.add_format({
+        'bg_color': '#ff7f7f',
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    light_format = workbook.add_format({
+        'bg_color': '#d3d3d3',
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+
+    worksheet.merge_range('A1:E1', 'Campus Ambassadors', merge_format)
+    worksheet.write(1, 0, "Email", header_format)
+    worksheet.write(1, 1, "Name", header_format)
+    worksheet.write(1, 2, "Referral Id", header_format)
+    worksheet.write(1, 3, "Contact", header_format)
+    worksheet.write(1, 4, "College", header_format)
+    row = 2
+
+    for ca in ca_list:
+        worksheet.write(row,0,ca.user.email)
+        worksheet.write(row,1,ca.first_name + ' ' + ca.last_name)
+        worksheet.write(row,2,ca.invite_referral)
+        worksheet.write(row,3,ca.contact)
+        worksheet.write(row,4,ca.college)
+        row+=1
+    workbook.close()
+    return render(request, 'dashboard/users_info.html', {'users':users , 'wbname':wbname})
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def user_info(request, userid):
