@@ -125,14 +125,13 @@
 <hr>
 <h2>Profile</h2>
 <ul>
-    <li><b>Username: </b>{{ cur_user.username }}</li>
-    <li><b>Email: </b>{{ cur_user.email }}</li>
+    <li><b>Email: </b>{{ cur_user.user.email }}</li>
     <li><b>First Name: </b>{{ cur_user.first_name }}</li>
     <li><b>Last Name: </b>{{ cur_user.last_name }}</li>
     <li><b>Contact: </b>{{ cur_user.contact }}</li>
     <li><b>Referred By: </b>
         {% if cur_user.referred_by %}
-        <a href="{% url 'user_info' cur_user.referred_by.pk %}">{{ cur_user.referred_by.username }} ({{ cur_user.referred_by.first_name }} {{ cur_user.referred_by.last_name }})</a>
+        <a href="{% url 'user_info' cur_user.referred_by.pk %}">{{ cur_user.referred_by.user.email }} ({{ cur_user.referred_by.first_name }} {{ cur_user.referred_by.last_name }})</a>
         {% else %}
         NA
         {% endif %}
@@ -163,7 +162,7 @@
 <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
-      Events Registered by {{ cur_user.username }}</div>
+      Events Registered by {{ cur_user.user.email }}</div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

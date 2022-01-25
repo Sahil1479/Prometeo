@@ -18,12 +18,12 @@ def update_event_state(request,type,eventid,redirect_url_name):
     updated_event = get_object_or_404(Event, pk=eventid)
     updated_event.event_started = not updated_event.event_started
     updated_event.save()
-    events = Event.objects.all()
+    
     return HttpResponseRedirect(reverse(redirect_url_name))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def users_info(request):
-    users = CustomUser.objects.all()
+    users = ExtendedUser.objects.all()
     return render(request, 'dashboard/users_info.html', {'users':users})
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
