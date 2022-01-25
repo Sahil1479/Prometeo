@@ -26,11 +26,14 @@ wheels/
 .installed.cfg
 *.egg
 *.sqlite3
-migrations/
 staticfiles/
 ads/
 media/
 .idea/
+
+#migrations
+**/migrations/*
+!**/migrations/__init__.py
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
