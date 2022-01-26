@@ -1,3 +1,18 @@
+html::-webkit-scrollbar {
+  width: 6px;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: #b3b3b3;
+  border-radius: 100px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #001b4be6;
+  border-radius: 100px;
+}
+
+
 body {
   font-family: 'Share Tech', sans-serif;
   font-family: 'Montserrat', sans-serif;
