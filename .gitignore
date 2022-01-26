@@ -28,11 +28,11 @@ wheels/
 *.sqlite3
 staticfiles/
 ads/
-media/carousel_images/
-media/images/
-media/rulebooks/
-media/theme_images/
-media/uploads/
+carousel_images/
+images/
+rulebooks/
+theme_images/
+uploads/
 
 .idea/
 
