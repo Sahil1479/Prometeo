@@ -260,7 +260,7 @@ def event_info(request, type, eventid):
                 worksheet.set_row(row, cell_format=light_format)
             row = row + 1
     else:
-        worksheet.merge_range('A1:I1', event.name + ' - Participanting Teams', merge_format)
+        worksheet.merge_range('A1:'+ str(chr(event.max_team_size+68))+'1', event.name + ' - Participanting Teams', merge_format)
         worksheet.write(1, 0, "Team ID", header_format)
         worksheet.write(1, 1, "Team Name", header_format)
         for i in range(1, event.max_team_size+1):
