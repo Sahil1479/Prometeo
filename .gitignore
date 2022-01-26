@@ -28,11 +28,8 @@ wheels/
 *.sqlite3
 staticfiles/
 ads/
-carousel_images/
-images/
-rulebooks/
-theme_images/
-uploads/
+media/
+!media/workbooks
 
 .idea/
 
