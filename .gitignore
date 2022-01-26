@@ -28,7 +28,12 @@ wheels/
 *.sqlite3
 staticfiles/
 ads/
-media/
+media/carousel_images/
+media/images/
+media/rulebooks/
+media/theme_images/
+media/uploads/
+
 .idea/
 
 #migrations

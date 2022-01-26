@@ -102,7 +102,7 @@
             <a href="#"><span>{{user.first_name}}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               {% if user.is_superuser %}
-              <li><a href="#">Dashboard</a></li>
+              <li><a href="{% url 'users_info' %}">Dashboard</a></li>
               {% endif %}
               {% if user.extendeduser.ambassador %}
               <li><a href="/users/ca_dashboard/">CA Dashboard</a></li>
