@@ -30,6 +30,7 @@ staticfiles/
 ads/
 media/
 !media/workbooks
+media/workbooks/*
 
 .idea/
 

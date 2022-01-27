@@ -102,7 +102,7 @@ def event_type_info(request, type):
     wbname = f'Events ({type}) Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-    print(workbook)
+
     for event in events:
         participants = ExtendedUser.objects.filter(events=event)
         participating_teams = Team.objects.filter(event=event)
@@ -199,8 +199,7 @@ def event_info(request, type, eventid):
     wbname = f'{event.name} Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-    print(workbook)
-    print(wbpath)
+
     if(len(event.name) > 31):
         worksheet = workbook.add_worksheet(event.name[:31])
     else:
@@ -297,14 +296,12 @@ def mass_mail(request):
     if (request.method == 'POST'):
         form = EmailForm(request.POST, request.FILES)
         if(form.is_valid()):
-            recepients = ['garg.10@iitj.ac.in']   # add your required mail
+            recepients = [settings.EVENTS_MAIL_RECEPIENTS]   # add your required mail
             bcc = []
             iitj = request.POST.get('iitj')
             for event in form.cleaned_data['events']:
                 users = ExtendedUser.objects.all()
-                print(event)
                 for participant in users:
-                    print(participant.events.all())
                     if event in participant.events.all():
                         if(participant.user.email not in recepients):
                             if iitj:
@@ -317,7 +314,6 @@ def mass_mail(request):
             email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc)
             for file in request.FILES.getlist('attachments'):
                 email.attach(file.name, file.read(), file.content_type)
-            print(recepients)
             email.send()
             messages.success(request, "Mails sent!")
             return redirect('mass_mail')
