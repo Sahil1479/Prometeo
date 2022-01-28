@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'events',
     'coordinator',
     'users',
+    'dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -175,6 +176,8 @@ EMAIL_HOST_USER = config('SERVER_EMAIL', cast=str)
 EMAIL_HOST_PASSWORD = config('SERVER_EMAIL_PASSWORD', cast=str)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+EVENTS_MAIL_RECEPIENTS = config('EVENTS_MAIL_RECEPIENTS', cast=str)
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # django-allauth registraion settings
@@ -187,7 +190,7 @@ ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_EMAIL_REQUIRED = True
-
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
