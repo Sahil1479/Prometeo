@@ -166,6 +166,9 @@
     }
   }
   @media (max-width: 1000px) {
+    .section-header h2 {
+      font-size: 30px;
+    }
     .img-area img {
       display: inline-block;
     }
@@ -177,6 +180,7 @@
     }
     .team-card {
       width: 90%;
+      max-width: 250px;
     }
     .img-area .social {
       height: 15%;
@@ -195,6 +199,12 @@
     }
   }
   @media (max-width: 450px) {
+    .section-header {
+      margin: 5px;
+    }
+    .section-header h2 {
+      font-size: 25px;
+    }
     .img-area img {
       display: inline-block;
     }
