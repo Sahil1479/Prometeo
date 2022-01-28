@@ -28,9 +28,9 @@ wheels/
 *.sqlite3
 staticfiles/
 ads/
-media/
+media/*
 !media/workbooks
-media/workbooks/*
+
 
 .idea/
 
