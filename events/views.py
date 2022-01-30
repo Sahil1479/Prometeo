@@ -13,6 +13,8 @@ def events(request, type):
         return render(request, 'liveevents.html', {'liveevents': liveevents, 'type': type,
                                                    'present_time': datetime.now(),
                                                    })
+    elif type == 'Talk':
+        return render(request, 'speakers.html', {'events': events, 'type': type})
     else:
         return render(request, 'events.html', {'events': events, 'type': type})
 
