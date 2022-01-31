@@ -81,7 +81,7 @@
       </h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'home:home' %}">Home</a></li>
           <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
           <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
           <li>
@@ -108,6 +108,7 @@
               <li><a href="/users/ca_dashboard/">CA Dashboard</a></li>
               {% endif %}
               <li><a href="/users/profile/">Profile</a></li>
+              <li><a href="/users/my_events/">My Events</a></li>
               <!-- <li><a href="#">My Events</a></li> -->
               <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
             </ul>
