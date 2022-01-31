@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import user_passes_test
-from users.models import ExtendedUser, Team, CustomUser
+from users.models import CustomUser, ExtendedUser, Team
 from events.models import Event
 import xlsxwriter
 import os
@@ -166,7 +166,7 @@ def event_type_info(request, type):
                     worksheet.set_row(row, cell_format=light_format)
                 row = row + 1
         else:
-            worksheet.merge_range('A1:I1', event.name + ' - Participanting Teams', merge_format)
+            worksheet.merge_range('A1:' + str(chr(event.max_team_size+68))+'1', event.name + ' - Participanting Teams', merge_format)
             worksheet.write(1, 0, "Team ID", header_format)
             worksheet.write(1, 1, "Team Name", header_format)
             for i in range(1, event.max_team_size+1):
@@ -181,9 +181,9 @@ def event_type_info(request, type):
                 worksheet.write(row, 1, team.name)
                 i = 2
                 for member in team.members.all():
-                    worksheet.write(row, i, member.first_name + ' ' + member.last_name + f' ({member.user.email}, {member.contact})')
+                    worksheet.write(row, i, member.extendeduser.first_name + ' ' + member.extendeduser.last_name + f' ({member.email}, {member.extendeduser.contact})')
                     i = i + 1
-                worksheet.write(row, event.max_team_size+2, team.leader.first_name + team.leader.last_name + f' ({team.leader.user.email})')
+                worksheet.write(row, event.max_team_size+2, team.leader.first_name + team.leader.last_name + f' ({team.leader.email})')
                 if (team.members.all().count() < event.min_team_size or team.members.all().count() > event.max_team_size):
                     worksheet.write(row, event.max_team_size+3, "INELIGIBLE")
                     worksheet.set_row(row, cell_format=invalid_format)
@@ -275,9 +275,9 @@ def event_info(request, type, eventid):
             worksheet.write(row, 1, team.name)
             i = 2
             for member in team.members.all():
-                worksheet.write(row, i, f' ({member.user.email}, {member.contact})')
+                worksheet.write(row, i, f' ({member.email}, {member.extendeduser.contact})')
                 i = i + 1
-            worksheet.write(row, event.max_team_size+2, f'{team.leader.first_name} {team.leader.last_name}' + f' ({team.leader.user.email})')
+            worksheet.write(row, event.max_team_size+2, f'{team.leader.first_name} {team.leader.last_name}' + f' ({team.leader.email})')
             if (team.members.all().count() < event.min_team_size or team.members.all().count() > event.max_team_size):
                 worksheet.write(row, event.max_team_size+3, "INELIGIBLE")
                 worksheet.set_row(row, cell_format=invalid_format)

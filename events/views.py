@@ -23,7 +23,7 @@ def event(request, type, eventid):
 
 
 def schedule(request):
-    day1 = Event.objects.filter(date="2022-01-20").order_by('time')
+    day1 = Event.objects.filter(date="2022-02-26").order_by('time')
     day2 = Event.objects.filter(date="2022-02-27").order_by('time')
     day3 = Event.objects.filter(date="2022-02-28").order_by('time')
     day4 = Event.objects.filter(date="2022-03-01").order_by('time')

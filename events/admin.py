@@ -13,7 +13,7 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['name']
     inlines = [ContactsAdmin, ]
     fieldsets = (
-        (_('Event Details'), {'fields': ('name', 'type', 'speaker', 'description', 'problem_statement', 'rulebook_text', 'prize', 'external_link', 'venue')}),
+        (_('Event Details'), {'fields': ('name', 'type', 'speaker', 'description', 'problem_statement', 'rulebook_text', 'prize', 'external_link', 'venue', 'featured')}),
         (_('Event Registration Details'), {'fields': ('participation_type', 'min_team_size', 'max_team_size', 'registration_open')}),
         (_('Event Dates'), {'fields': ('date', 'time', 'end_date', 'end_time', 'event_started')}),
         (_('Event Host'), {'fields': ('host', 'sponsor_image1', 'sponsor_website')}),

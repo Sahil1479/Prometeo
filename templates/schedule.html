@@ -10,6 +10,11 @@
     <div class="section-header" data-aos="fade-in">
       <h2>Event Schedule</h2>
     </div>
+    <p style="text-align: center;
+      font-size: 25px;
+      color: white;
+      font-weight: 600; 
+      margin-bottom: 25px;"><i class="far fa-calendar-alt" style="color: #49fcff; margin-right: 5px"></i> 26th Feb - 1st Mar</p>
     <ul
       class="nav nav-tabs"
       role="tablist"
@@ -50,21 +55,23 @@
       >
         {% for event in day1 %}
         <div class="row schedule-item">
-          <div class="col-md-2">
+          <div class="col-md-2 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10">
-            <h4>{{event.name}}</h4>
+          <div class="col-md-10 schedule-data">
+            <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
                 ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
-              >{% endif %}<span
-                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
-              >
+              >{% endif %}
+              {% if event.venue != none %}
+              <span>
+                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}
             </p>
-            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
+            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -77,24 +84,30 @@
       <!-- End Schdule Day 1 -->
 
       <!-- Schdule Day 2 -->
-      <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-2">
+      <div
+        role="tabpanel"
+        class="col-lg-9 tab-pane fade show active"
+        id="day-2"
+      >
         {% for event in day2 %}
         <div class="row schedule-item">
-          <div class="col-md-2">
+          <div class="col-md-2 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10">
-            <h4>{{event.name}}</h4>
+          <div class="col-md-10 schedule-data">
+            <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
                 ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
-              >{% endif %}<span
-                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
-              >
+              >{% endif %}
+              {% if event.venue != none %}
+              <span>
+                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}
             </p>
-            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
+            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -107,24 +120,30 @@
       <!-- End Schdule Day 2 -->
 
       <!-- Schdule Day 3 -->
-      <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-3">
+      <div
+        role="tabpanel"
+        class="col-lg-9 tab-pane fade show active"
+        id="day-3"
+      >
         {% for event in day3 %}
         <div class="row schedule-item">
-          <div class="col-md-2">
+          <div class="col-md-2 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10">
-            <h4>{{event.name}}</h4>
+          <div class="col-md-10 schedule-data">
+            <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
                 ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
-              >{% endif %}<span
-                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
-              >
+              >{% endif %}
+              {% if event.venue != none %}
+              <span>
+                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}
             </p>
-            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
+            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -137,24 +156,30 @@
       <!-- End Schdule Day 3 -->
 
       <!-- Schdule Day 4 -->
-      <div role="tabpanel" class="col-lg-9 tab-pane fade" id="day-4">
+      <div
+        role="tabpanel"
+        class="col-lg-9 tab-pane fade show active"
+        id="day-4"
+      >
         {% for event in day4 %}
         <div class="row schedule-item">
-          <div class="col-md-2">
+          <div class="col-md-2 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10">
-            <h4>{{event.name}}</h4>
+          <div class="col-md-10 schedule-data">
+            <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
                 ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
-              >{% endif %}<span
-                ><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span
-              >
+              >{% endif %}
+              {% if event.venue != none %}
+              <span>
+                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}
             </p>
-            <p><time>{{event.time}} - <time>{{event.end_time}}</time></time></p>
+            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
