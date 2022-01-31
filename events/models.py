@@ -7,7 +7,7 @@ EVENT_CHOICES = (
     ('informal', 'Informal'),
     ('exhibition', 'Exhibition'),
     ('talk', 'Talk'),
-    ('panel_discussion', 'Panel Discussion'),
+    ('panel discussion', 'Panel Discussion'),
     ('initiative', 'Initiative'),
     ('entrepreneurial', 'Entrepreneurial'),
 )

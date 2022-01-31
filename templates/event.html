@@ -27,6 +27,16 @@
 <div class="event-container container p-2 mb-5 shadow"
     style="background-color: transparent; width: fit-content;position: relative;top: 10vh;">
     <div class="row">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+        {% endif %}
         <h2 class="title title-heading">{{ event.name }}</h2>
         {% if event.host %}
         <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> by <a
