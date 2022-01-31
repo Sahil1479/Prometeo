@@ -310,55 +310,35 @@ Home
 
   </section>End Speakers Section -->
 
-  <!-- ======= Competitions Section ======= -->
-  <!-- <section id="competitions">
+  <!-- ======= Highlights Section ======= -->
+  <section id="competitions">
     <div class="container" data-aos="fade-up">
       <div class="section-title" data-aos="fade-up">
-        <h2>Competitions</h2>
+        <h2>Highlights</h2>
       </div>
       <div class="row" style="place-content: space-around;">
-          <div class="member" data-aos="fade-up" data-aos-delay="100">
-            <div class="member-img">
-              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
+          {% for event in featured_events %}
+            <div class="member" data-aos="fade-up">
+              <div class="member-img">
+                <img src="{{event.image.url}}" class="img-fluid" alt="">
+              </div>
+              <div class="member-info">
+                {% if event.type == 'talk' %}
+                  <h4>{{event.speaker}}</h4>
+                  <span>Speakers designation</span>
+                {% else %}
+                  <h4>{{event.name}}</h4>
+                {% endif %}
+              </div>
             </div>
-            <div class="member-info">
-              <h4>Walter White</h4>
-            </div>
-          </div>
-          <div class="member" data-aos="fade-up" data-aos-delay="200">
-            <div class="member-img">
-              <img src="../static/img/test.jpg" class="img-fluid" alt="">
-            </div>
-            <div class="member-info">
-              <h4>Sarah Jhonson</h4>
-            </div>
-          </div>
-
-          <div class="member" data-aos="fade-up" data-aos-delay="300">
-            <div class="member-img">
-              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
-            </div>
-            <div class="member-info">
-              <h4>Amanda Jepson</h4>
-            </div>
-          </div>
-
-          <div class="member" data-aos="fade-up" data-aos-delay="400">
-            <div class="member-img">
-              <img src="../static/img/features_bg.png" class="img-fluid" alt="">
-            </div>
-            <div class="member-info">
-              <h4>Amanda Jepson</h4>
-            </div>
-          </div>
-
+          {% endfor %}
       </div>
     </div>
     <div class="section-title" data-aos="fade-up" style="padding-top: 15px;">
       <a href="{% url 'events:events' 'Technical' %}" class="btn-learn-more">View More</a>
     </div>
 
-  </section>End Competitions Section -->
+  </section>
 
   <!-- ======= Workshops Section ======= -->
   <!-- <section id="competitions">
