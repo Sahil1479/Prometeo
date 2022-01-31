@@ -129,11 +129,11 @@
 {% endblock %}
 
 {% block content %}
-<h1>User Info: {{ cur_user.username }}</h1>
+<h1>User Info: {{ cur_user.email }}</h1>
 <hr>
 <h2>Profile</h2>
 <ul>
-    <li><b>Email: </b>{{ cur_user.user.email }}</li>
+    <li><b>Email: </b>{{ cur_user..email }}</li>
     <li><b>First Name: </b>{{ cur_user.first_name }}</li>
     <li><b>Last Name: </b>{{ cur_user.last_name }}</li>
     <li><b>Contact: </b>{{ cur_user.contact }}</li>
@@ -146,22 +146,22 @@
     </li>
     <li><b>Campus Ambassador: </b>{% if cur_user.ambassador %}Yes{% else %}No{% endif %}</li>
     <li><b>Invite Referral Code: </b>{% if cur_user.ambassador %}{{ cur_user.invite_referral }}{% else %}NA{% endif %}</li>
-    <li style="text-transform: capitalize;"><b>Gender: </b>{{ cur_user.gender }}</li>
-    <li><b>College: </b>{{ cur_user.college }}</li>
+    <li style="text-transform: capitalize;"><b>Gender: </b>{{ cur_user.extendeduser.gender }}</li>
+    <li><b>College: </b>{{ cur_user.extendeduser.college }}</li>
     <li><b>Current Year: </b>
-        {% if cur_user.current_year == 'first_year' %}
+        {% if cur_user.extendeduser.current_year == '1' %}
         First Year
-        {% elif cur_user.current_year == 'second_year' %}
+        {% elif cur_user.extendeduser.current_year == '2' %}
         Second Year
-        {% elif cur_user.current_year == 'third_year' %}
+        {% elif cur_user.extendeduser.current_year == '3' %}
         Third Year
-        {% elif cur_user.current_year == 'fourth_year' %}
+        {% elif cur_user.extendeduser.current_year == '4' %}
         Fourth Year
-        {% elif cur_user.current_year == 'fifth_year' %}
+        {% elif cur_user.extendeduser.current_year == 'fifth_year' %}
         Fifth Year
         {% endif %}
     </li>
-    <li><b>City: </b>{{ cur_user.city }}</li>
+    <li><b>City: </b>{{ cur_user.extendeduser.city.capitalize }}</li>
 
 </ul>
 
@@ -170,7 +170,7 @@
 <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
-      Events Registered by {{ cur_user.user.email }}</div>
+      Events Registered by {{ cur_user.email }}</div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -182,7 +182,7 @@
                     <th>Team Registered</th>
                 </thead>
                 <tbody>
-                    {% for event in cur_user.events.all %}
+                    {% for event in cur_user.extendeduser.events.all %}
                     {% for team in cur_user.teams.all %}
                         {% if team.event == event %}
                             {% if team.members.all.count > event.max_team_size or team.members.all.count < event.min_team_size %}
@@ -227,7 +227,7 @@
 <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
-      Teams Created and Joined by {{ cur_user.username }}</div>
+      Teams Created and Joined by {{ cur_user.email }}</div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -248,7 +248,7 @@
                     {% endif %}
                         <td>{{ team.id }}</td>
                         <td>{{ team.name }}</td>
-                        <td><a href="{% url 'user_info' team.leader.pk %}">{{ team.leader.username }} ({{ team.leader.first_name }} {{ team.leader.last_name }})</a></td>
+                        <td><a href="{% url 'user_info' team.leader.pk %}">{{ team.leader.email }} ({{ team.leader.first_name }} {{ team.leader.last_name }})</a></td>
                         <td><a href="{% url 'event_info' team.event.type team.event.pk %}">{{ team.event.name }} ({{ team.event.type }})</a></td>
                         <td>{{ team.event.min_team_size }} to {{ team.event.max_team_size }} members</td>
                  
@@ -256,7 +256,7 @@
                         <td>
                             <ol>
                                 {% for member in team.members.all %}
-                                <li><a href="{% url 'user_info' member.pk %}">{{ member.username }} ({{ member.first_name }} {{ member.last_name }})</a></li>
+                                <li><a href="{% url 'user_info' member.pk %}">{{ member.email }} ({{ member.first_name }} {{ member.last_name }})</a></li>
                                 {% endfor %}
                             </ol>
                         </td>
@@ -269,13 +269,13 @@
     </div>
 </div>
 
-{% if cur_user.ambassador %}
+{% if cur_user.extendeduser.ambassador %}
 <h2>Users Referred by {{ cur_user.username }}</h2>
 <hr>
 <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
-      Users Referred by {{ cur_user.username }}</div>
+      Users Referred by {{ cur_user.email }}</div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -287,7 +287,7 @@
                     <th>Contact</th>
                 </thead>
                 <tbody>
-                    {% for ref_user in cur_user.referred_users.all %}
+                    {% for ref_user in cur_user.extendeduser.referred_users.all %}
                     <tr>
                         <td><a href="{% url 'user_info' ref_user.pk %}">{{ ref_user.username }}</a></td>
                         <td>{{ ref_user.first_name }}</td>
