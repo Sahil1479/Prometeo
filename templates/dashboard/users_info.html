@@ -185,15 +185,16 @@
                             <td style="text-transform: capitalize;">{{ cur_user.gender }}</td>
                             <td>{{ cur_user.college }}</td>
                             <td>
-                                {% if cur_user.current_year == 'first_year' %}
+                              
+                                {% if cur_user.current_year == '1' %}
                                 First Year
-                                {% elif cur_user.current_year == 'second_year' %}
+                                {% elif cur_user.current_year == '2' %}
                                 Second Year
-                                {% elif cur_user.current_year == 'third_year' %}
+                                {% elif cur_user.current_year == '3' %}
                                 Third Year
-                                {% elif cur_user.current_year == 'fourth_year' %}
+                                {% elif cur_user.current_year == '4' %}
                                 Fourth Year
-                                {% elif cur_user.current_year == 'fifth_year' %}
+                                {% elif cur_user.current_year == '5' %}
                                 Fifth Year
                                 {% endif %}
                             </td>
