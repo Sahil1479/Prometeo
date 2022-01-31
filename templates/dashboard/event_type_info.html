@@ -135,6 +135,8 @@
 <hr>
 <i class="fas fa-external-link-alt"></i> <a href="{% url 'events:events' type %}">Go to actual {{ type }} events page</a><br>
 <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname }}" download="{{ wbname }}"> Download Participants Excel Sheet for {{ type }} events</a>
+<br>
+<i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname2 }}" download="{{ wbname2 }}"> Download Eligible Teams Excel Sheet for {{ type }} events</a>
 <hr>
 <div class="card mb-3">
     <div class="card-header" style="text-transform: capitalize;">
