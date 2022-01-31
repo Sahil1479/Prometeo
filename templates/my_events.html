@@ -16,17 +16,17 @@ My Events
         {% if team.event.type == category %}
           <div class="teamCard" data-aos="fade-down">
             <div class="row">
-              <div class="col-lg-4">
-                <img src="{{ team.event.image.url }}" alt="Sponser" width="100%" height="270px">
+              <div class="col-lg-3">
+                <img style="width: 100%; height: 270px;" src="{{ team.event.image.url }}" alt="Event Image">
               </div>
-              <div style="margin: auto 0px;" class="col-lg-8">
+              <div style="margin: auto 0px;" class="col-lg-9">
                 <h4 style="font-size: 1.8rem; font-weight: 500; color: white;">{{ team.event.name }}</h4>
                   <div class="d-flex">
                     <p style="color: white; padding: 1px 9px; margin-right: 10px; border: 1px solid white; border-radius: 3px; font-size: 0.75rem;">{{team.event.date}} | {{team.event.time}}</p>
                     {% if request.user == team.leader %}
                     <p style="color: white; padding: 1px 9px; margin-right: 10px; border: 1px solid white; border-radius: 3px; font-size: 0.75rem;">Leader</p>
                     {% endif %}
-                    <p style="color: white; padding: 1px 9px; margin-right: 10px; border: 1px solid white; border-radius: 3px; font-size: 0.75rem;">{{team.pk}}</p>
+                    <p style="color: white; padding: 1px 9px; margin-right: 10px; border: 1px solid white; border-radius: 3px; font-size: 0.75rem;">Id: {{team.pk}}</p>
                   </div>
                   <p style="color: white;">{{team.event.description}}</p>
                   <div class="d-flex">
