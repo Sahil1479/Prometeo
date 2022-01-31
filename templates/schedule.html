@@ -64,14 +64,14 @@
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
-                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+                >By - {{event.speaker}} </span
               >{% endif %}
-              {% if event.venue != none %}
-              <span>
-                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}
             </p>
-            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
+            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+            {% if event.venue != none %}
+              <span>
+                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}</p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -100,14 +100,14 @@
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
-                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+                >By - {{event.speaker}} </span
               >{% endif %}
-              {% if event.venue != none %}
-              <span>
-                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}
             </p>
-            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
+            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+            {% if event.venue != none %}
+              <span>
+                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}</p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -136,14 +136,14 @@
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
-                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+                >By - {{event.speaker}} </span
               >{% endif %}
-              {% if event.venue != none %}
-              <span>
-                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}
             </p>
-            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
+            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+            {% if event.venue != none %}
+              <span>
+                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}</p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
@@ -172,14 +172,14 @@
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
-                ><i class="bi bi-person-circle"></i> {{event.speaker}} </span
+                >By - {{event.speaker}} </span
               >{% endif %}
-              {% if event.venue != none %}
-              <span>
-                <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}
             </p>
-            <p><i class="far fa-clock"></i> <time>{{event.time}}</time></p>
+            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+            {% if event.venue != none %}
+              <span>
+                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
+              {% endif %}</p>
             {% if event.description != '' %}
             <p class="description">
               <span> {{event.description}} </span>
