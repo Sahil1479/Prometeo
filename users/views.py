@@ -71,7 +71,6 @@ def user_profile(request):
 
     return render(request, 'profile.html')
 
-<<<<<<< HEAD
 
 @login_required
 def my_events(request):
@@ -84,8 +83,6 @@ def my_events(request):
             categories.append(team.event.type)
     return render(request, 'my_events.html', {"my_teams": my_teams, "categories": categories})
 
-=======
->>>>>>> 0b65987c6e3ad128c3716146dfb6ea75b364c84b
 
 @login_required
 def create_team(request, eventid):
