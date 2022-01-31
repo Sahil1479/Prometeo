@@ -28,7 +28,7 @@
         {% for event in events %}
             {% if event.type|title == 'Talk' %}
             <article class="postcard dark blue">
-                <a class="postcard__img_link" href="#">
+                <a class="postcard__img_link">
                     <img class="postcard__img" src="{{event.image.url}}" alt="Image Title" />
                 </a>
                 <div class="postcard__text">
@@ -60,11 +60,9 @@
                             <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
                         </a>
                         {% endif %}
-                        {% if event.external_link %}
-                        <a href="{{ event.external_link }}">
+                        <a href="#">
                             <li class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
                         </a>
-                        {% endif %}
                     </ul>
                 </div>
             </article>

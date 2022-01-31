@@ -86,9 +86,8 @@
     font-size: 1.75rem;
   }
   .postcard .postcard__img {
-    max-height: 240px;
+    height: 300px;
     width: 100%;
-    object-fit: cover;
     position: relative;
   }
   .postcard .postcard__img_link {
@@ -160,8 +159,10 @@
       justify-content: start;
     }
     .postcard .postcard__img {
+      height: auto;
       max-width: 300px;
       max-height: 100%;
+      object-fit: cover;
       transition: transform 0.3s ease;
     }
     .postcard .postcard__text {
