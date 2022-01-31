@@ -161,11 +161,6 @@ def event_type_info(request, type):
             'font_color': 'white',
             'bg_color': 'black'
         })
-        invalid_format2 = workbook2.add_format({
-            'bg_color': '#ff7f7f',
-            'align': 'center',
-            'valign': 'vcenter',
-        })
         light_format = workbook.add_format({
             'bg_color': '#d3d3d3',
             'align': 'center',
@@ -214,7 +209,7 @@ def event_type_info(request, type):
             worksheet.write(1, event.max_team_size+3, "Status", header_format)
             worksheet2.write(1, event.max_team_size+3, "Status", header_format2)
             row = 2
-            row2=2
+            row2 = 2
             for team in participating_teams:
                 if(row % 2):
                     worksheet.set_row(row, cell_format=light_format)
@@ -222,7 +217,6 @@ def event_type_info(request, type):
                 worksheet.write(row, 0, team.pk)
                 worksheet.write(row, 1, team.name)
                 i = 2
-                
                 for member in team.members.all():
                     worksheet.write(row, i, member.extendeduser.first_name + ' ' + member.extendeduser.last_name + f' ({member.email}, {member.extendeduser.contact})')
                     i = i + 1
@@ -234,7 +228,7 @@ def event_type_info(request, type):
                     worksheet.write(row, event.max_team_size+3, "ELIGIBLE")
                     worksheet2.write(row2, 0, team.pk)
                     worksheet2.write(row2, 1, team.name)
-                    i2=2
+                    i2 = 2
                     for member in team.members.all():
                         worksheet2.write(row2, i2, member.extendeduser.first_name + ' ' + member.extendeduser.last_name + f' ({member.email}, {member.extendeduser.contact})')
                         i2 = i2 + 1
@@ -305,11 +299,6 @@ def event_info(request, type, eventid):
         'bg_color': 'black'
     })
     invalid_format = workbook.add_format({
-        'bg_color': '#ff7f7f',
-        'align': 'center',
-        'valign': 'vcenter',
-    })
-    invalid_format2 = workbook2.add_format({
         'bg_color': '#ff7f7f',
         'align': 'center',
         'valign': 'vcenter',
