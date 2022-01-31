@@ -71,6 +71,17 @@ def user_profile(request):
 
     return render(request, 'profile.html')
 
+@login_required
+def my_events(request):
+    user = request.user
+    # my_events = user.extendeduser.events.all()
+    my_teams = user.teams.all()
+    categories = []
+    for team in my_teams:
+        if team.event.type not in categories:
+            categories.append(team.event.type)
+    return render(request, 'my_events.html', {"my_teams": my_teams, "categories": categories})
+
 
 @login_required
 def create_team(request, eventid):

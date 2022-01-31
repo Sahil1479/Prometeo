@@ -43,7 +43,7 @@ justify-content: center; display:flex">
                             <img class="card-img-top cover-img" src="{{event.image.url}}" alt="Card image">
                             <!-- card header with badge starts -->
                             {% if user.is_authenticated and not user.is_superuser %}
-                                {% if event in user.events.all %}
+                                {% if event in user.extendeduser.events.all %}
                                 <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
                                 {% elif not event.registration_open %}
                                 <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>

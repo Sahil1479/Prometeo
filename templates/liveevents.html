@@ -60,7 +60,7 @@ Events-{{type}}
                                         </div>
                                         {% endif %}
                                         <div class="row event-badge">
-                                        {% if event in user.events %}
+                                        {% if event in user.extendeduser.events.all %}
                                              <p class="card-event-badge"><span class="badge bg">Registered</span></p>
                                         {% endif %}
                                         <p class="card-event-badge"><span class="badge bg">{{event.type.capitalize}}</span></p>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import user_passes_test
-from users.models import ExtendedUser, Team
+from users.models import ExtendedUser, Team, CustomUser
 from events.models import Event
 import xlsxwriter
 import os
@@ -23,6 +23,7 @@ def update_event_state(request, type, eventid, redirect_url_name):
 
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
+# Function used to export CA CSV File.
 def users_info(request):
     users = ExtendedUser.objects.all()
     wbname = 'Campus Ambassador List.xlsx'
@@ -83,7 +84,7 @@ def users_info(request):
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
 def user_info(request, userid):
-    user = get_object_or_404(ExtendedUser, pk=userid)
+    user = get_object_or_404(CustomUser, pk=userid)
     teams = {}
     for team in user.teams.all():
         teams[team.event.pk] = team.name
