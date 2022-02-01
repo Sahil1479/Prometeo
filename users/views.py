@@ -71,6 +71,7 @@ def user_profile(request):
 
     return render(request, 'profile.html')
 
+
 @login_required
 def my_events(request):
     user = request.user

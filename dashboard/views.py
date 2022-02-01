@@ -23,7 +23,6 @@ def update_event_state(request, type, eventid, redirect_url_name):
 
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
-# Function used to export CA CSV File.
 def users_info(request):
     users = ExtendedUser.objects.all()
     wbname = 'Campus Ambassador List.xlsx'
@@ -103,21 +102,39 @@ def event_type_info(request, type):
     wbname = f'Events ({type}) Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-
+    wbname2 = f'Events ({type}) Eligible Participants List.xlsx'
+    wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
+    workbook2 = xlsxwriter.Workbook(wbpath2)
     for event in events:
         participants = ExtendedUser.objects.filter(events=event)
         participating_teams = Team.objects.filter(event=event)
         if(len(event.name) > 31):
             worksheet = workbook.add_worksheet(event.name[:31])
+            worksheet2 = workbook2.add_worksheet(event.name[:31])
         else:
             worksheet = workbook.add_worksheet(event.name)
+            worksheet2 = workbook2.add_worksheet(event.name)
         col_center = workbook.add_format({
+            'align': 'center',
+            'valign': 'vcenter',
+        })
+        col_center2 = workbook2.add_format({
             'align': 'center',
             'valign': 'vcenter',
         })
         worksheet.set_column(0, 100, 30, col_center)
         worksheet.set_row(0, 30)
+        worksheet2.set_column(0, 100, 30, col_center2)
+        worksheet2.set_row(0, 30)
         merge_format = workbook.add_format({
+            'bold': 1,
+            'border': 1,
+            'align': 'center',
+            'valign': 'vcenter',
+            'bg_color': 'gray',
+            'font_size': 20
+        })
+        merge_format2 = workbook2.add_format({
             'bold': 1,
             'border': 1,
             'align': 'center',
@@ -137,7 +154,19 @@ def event_type_info(request, type):
             'align': 'center',
             'valign': 'vcenter',
         })
+        header_format2 = workbook2.add_format({
+            'bold': 1,
+            'align': 'center',
+            'valign': 'vcenter',
+            'font_color': 'white',
+            'bg_color': 'black'
+        })
         light_format = workbook.add_format({
+            'bg_color': '#d3d3d3',
+            'align': 'center',
+            'valign': 'vcenter',
+        })
+        light_format2 = workbook2.add_format({
             'bg_color': '#d3d3d3',
             'align': 'center',
             'valign': 'vcenter',
@@ -167,16 +196,24 @@ def event_type_info(request, type):
                 row = row + 1
         else:
             worksheet.merge_range('A1:' + str(chr(event.max_team_size+68))+'1', event.name + ' - Participanting Teams', merge_format)
+            worksheet2.merge_range('A1:' + str(chr(event.max_team_size+68))+'1', event.name + ' - Participanting Teams', merge_format2)
             worksheet.write(1, 0, "Team ID", header_format)
+            worksheet2.write(1, 0, "Team ID", header_format2)
             worksheet.write(1, 1, "Team Name", header_format)
+            worksheet2.write(1, 1, "Team Name", header_format2)
             for i in range(1, event.max_team_size+1):
                 worksheet.write(1, i+1, "Member " + str(i), header_format)
+                worksheet2.write(1, i+1, "Member " + str(i), header_format2)
             worksheet.write(1, event.max_team_size+2, "Created By", header_format)
+            worksheet2.write(1, event.max_team_size+2, "Created By", header_format2)
             worksheet.write(1, event.max_team_size+3, "Status", header_format)
+            worksheet2.write(1, event.max_team_size+3, "Status", header_format2)
             row = 2
+            row2 = 2
             for team in participating_teams:
                 if(row % 2):
                     worksheet.set_row(row, cell_format=light_format)
+                    worksheet2.set_row(row2, cell_format=light_format2)
                 worksheet.write(row, 0, team.pk)
                 worksheet.write(row, 1, team.name)
                 i = 2
@@ -189,9 +226,19 @@ def event_type_info(request, type):
                     worksheet.set_row(row, cell_format=invalid_format)
                 else:
                     worksheet.write(row, event.max_team_size+3, "ELIGIBLE")
+                    worksheet2.write(row2, 0, team.pk)
+                    worksheet2.write(row2, 1, team.name)
+                    i2 = 2
+                    for member in team.members.all():
+                        worksheet2.write(row2, i2, member.extendeduser.first_name + ' ' + member.extendeduser.last_name + f' ({member.email}, {member.extendeduser.contact})')
+                        i2 = i2 + 1
+                    worksheet2.write(row2, event.max_team_size+2, team.leader.first_name + team.leader.last_name + f' ({team.leader.email})')
+                    worksheet2.write(row2, event.max_team_size+3, "ELIGIBLE")
+                    row2 += 1
                 row = row + 1
     workbook.close()
-    return render(request, 'dashboard/event_type_info.html', {'events': events, 'type': type, 'wbname': wbname})
+    workbook2.close()
+    return render(request, 'dashboard/event_type_info.html', {'events': events, 'type': type, 'wbname': wbname, 'wbname2': wbname2})
 
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
@@ -200,18 +247,36 @@ def event_info(request, type, eventid):
     wbname = f'{event.name} Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-
+    wbname2 = f'{event.name} Eligible Participants List.xlsx'
+    wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
+    workbook2 = xlsxwriter.Workbook(wbpath2)
     if(len(event.name) > 31):
         worksheet = workbook.add_worksheet(event.name[:31])
+        worksheet2 = workbook2.add_worksheet(event.name[:31])
     else:
         worksheet = workbook.add_worksheet(event.name)
+        worksheet2 = workbook2.add_worksheet(event.name)
     col_center = workbook.add_format({
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    col_center2 = workbook2.add_format({
         'align': 'center',
         'valign': 'vcenter',
     })
     worksheet.set_column(0, 100, 30, col_center)
     worksheet.set_row(0, 30)
+    worksheet2.set_column(0, 100, 30, col_center2)
+    worksheet2.set_row(0, 30)
     merge_format = workbook.add_format({
+        'bold': 1,
+        'border': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color': 'gray',
+        'font_size': 20
+    })
+    merge_format2 = workbook2.add_format({
         'bold': 1,
         'border': 1,
         'align': 'center',
@@ -226,12 +291,24 @@ def event_info(request, type, eventid):
         'font_color': 'white',
         'bg_color': 'black'
     })
+    header_format2 = workbook2.add_format({
+        'bold': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'font_color': 'white',
+        'bg_color': 'black'
+    })
     invalid_format = workbook.add_format({
         'bg_color': '#ff7f7f',
         'align': 'center',
         'valign': 'vcenter',
     })
     light_format = workbook.add_format({
+        'bg_color': '#d3d3d3',
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    light_format2 = workbook2.add_format({
         'bg_color': '#d3d3d3',
         'align': 'center',
         'valign': 'vcenter',
@@ -263,14 +340,22 @@ def event_info(request, type, eventid):
         worksheet.merge_range('A1:' + str(chr(event.max_team_size+68))+'1', event.name + ' - Participanting Teams', merge_format)
         worksheet.write(1, 0, "Team ID", header_format)
         worksheet.write(1, 1, "Team Name", header_format)
+        worksheet2.merge_range('A1:' + str(chr(event.max_team_size+68))+'1', event.name + ' - Participanting Teams', merge_format2)
+        worksheet2.write(1, 0, "Team ID", header_format2)
+        worksheet2.write(1, 1, "Team Name", header_format2)
         for i in range(1, event.max_team_size+1):
             worksheet.write(1, i+1, "Member " + str(i), header_format)
+            worksheet2.write(1, i+1, "Member " + str(i), header_format2)
         worksheet.write(1, event.max_team_size+2, "Created By", header_format)
         worksheet.write(1, event.max_team_size+3, "Status", header_format)
+        worksheet2.write(1, event.max_team_size+2, "Created By", header_format2)
+        worksheet2.write(1, event.max_team_size+3, "Status", header_format2)
         row = 2
+        row2 = 2
         for team in event.participating_teams.all():
             if(row % 2):
                 worksheet.set_row(row, cell_format=light_format)
+                worksheet2.set_row(row2, cell_format=light_format2)
             worksheet.write(row, 0, team.pk)
             worksheet.write(row, 1, team.name)
             i = 2
@@ -283,9 +368,19 @@ def event_info(request, type, eventid):
                 worksheet.set_row(row, cell_format=invalid_format)
             else:
                 worksheet.write(row, event.max_team_size+3, "ELIGIBLE")
+                worksheet2.write(row2, event.max_team_size+3, "ELIGIBLE")
+                worksheet2.write(row2, 0, team.pk)
+                worksheet2.write(row2, 1, team.name)
+                i2 = 2
+                for member in team.members.all():
+                    worksheet2.write(row2, i2, f' ({member.email}, {member.extendeduser.contact})')
+                    i2 = i2 + 1
+                worksheet2.write(row2, event.max_team_size+2, f'{team.leader.first_name} {team.leader.last_name}' + f' ({team.leader.email})')
+                row2 = row2 + 1
             row = row + 1
     workbook.close()
-    return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname})
+    workbook2.close()
+    return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2})
 
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/mass_mail/')

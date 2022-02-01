@@ -57,7 +57,7 @@
 }
 #schedule .nav-tabs a {
   border: none;
-  border-radius: 50px;
+  border-radius: 15px;
   font-weight: 600;
   background-color: #244863;
   color: #fff;
@@ -115,7 +115,9 @@
   transition: ease-in-out 0.2s;
 }
 #schedule .schedule-item {
-  border: 2px solid #e1c3e9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #e1c3e9;
   background: #141415ba;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -131,8 +133,8 @@
   color: #fff;
 }
 #schedule .schedule-item .speaker {
-  border: 6px solid #2da2e5;
-  border-radius: 50%;
+  border: 3px solid #2da2e5;
+  border-radius: 5px;
   color: #fff;
   width: 100px;
   height: 100px;

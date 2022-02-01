@@ -7,7 +7,7 @@ EVENT_CHOICES = (
     ('informal', 'Informal'),
     ('exhibition', 'Exhibition'),
     ('talk', 'Talk'),
-    ('panel_discussion', 'Panel Discussion'),
+    ('panel discussion', 'Panel Discussion'),
     ('initiative', 'Initiative'),
     ('entrepreneurial', 'Entrepreneurial'),
 )
@@ -21,8 +21,9 @@ EVENT_PARTICIPATION = (
 
 class Event(models.Model):
     name = models.CharField(max_length=50, verbose_name="Event Name", unique=True, blank=False, null=False)
-    speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty")
-    image = models.ImageField(upload_to="images/", verbose_name="Cover Image(prefer uploading square images)", blank=False, null=False)
+    speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty)")
+    designation = models.CharField(max_length=50, null=True, blank=True, verbose_name="Speaker Designation (only for Talk)")
+    image = models.ImageField(upload_to="images/", verbose_name="Cover Image(prefer uploading square images)(for speakers upload images with more padding, i.e, face in the center)", blank=False, null=False)
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
     sponsor_image1 = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Sponser Image 1(upload rectangular images)")
     sponsor_website = models.URLField(max_length=1000, null=True, blank=True, verbose_name="Link to Sponsors Website")
@@ -30,7 +31,7 @@ class Event(models.Model):
     min_team_size = models.IntegerField(verbose_name="Minimum Team Size (leave unchanged for individual event)", default=3)
     max_team_size = models.IntegerField(verbose_name="Maximum Team Size (leave unchanged for individual event)", default=5)
     prize = models.IntegerField(verbose_name="Prize Money (Rs.)", null=True, blank=True)
-    description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Event Description")
+    description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Event Description (Write more for speaker description)")
     problem_statement = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Problem Statement")
     rulebook_text = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Rulebook Text (HTML Format)")
     host = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Host")

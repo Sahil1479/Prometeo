@@ -412,24 +412,27 @@
   color: #d7e6ff;
 }
 #competitions .member {
-  width: auto;
+  width: 250px;
   padding: 0px;
   margin-inline: 5px;
   margin-bottom: 20px;
   overflow: hidden;
   text-align: center;
   border-radius: 10px;
-  background: #fff;
+  background: #e2e8ff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  border-block: 4px solid #47b2e4 !important;
+  /* border-block: 4px solid #47b2e4 !important; */
 }
 #competitions .member .member-img {
   position: relative;
   overflow: hidden;
-  height: 180px;
+  height: 200px;
   width: 250px;
 }
 @media (max-width: 575px) {
+  #competitions .member {
+    width: 170px;
+  }
   #competitions .member .member-img {
     height: 140px;
     width: 170px;
@@ -476,14 +479,14 @@
 #competitions .member .member-info h4 {
   font-weight: 700;
   margin-bottom: 5px;
-  font-size: 18px;
+  font-size: 16px;
   color: #222222;
 }
 #competitions .member .member-info span {
   display: block;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 400;
-  color: #aaaaaa;
+  color: #0e0d0d;
 }
 #competitions .member .member-info p {
   font-style: italic;
