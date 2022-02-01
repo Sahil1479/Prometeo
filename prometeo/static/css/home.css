@@ -484,9 +484,9 @@
 }
 #competitions .member .member-info span {
   display: block;
-  font-size: 13px;
+  font-size: 14.5px;
   font-weight: 400;
-  color: #aaaaaa;
+  color: #0e0d0d;
 }
 #competitions .member .member-info p {
   font-style: italic;
