@@ -33,7 +33,7 @@ def users_info(request):
     workbook2 = xlsxwriter.Workbook(wbpath2)
     ca_list = ExtendedUser.objects.filter(ambassador=True)
     worksheet = workbook.add_worksheet('CA List')
-    worksheet2 = workbook2.add_worksheet('Users List')    
+    worksheet2 = workbook2.add_worksheet('Users List')
     col_center = workbook.add_format({
         'align': 'center',
         'valign': 'vcenter',
@@ -93,7 +93,6 @@ def users_info(request):
     worksheet.write(1, 2, "Referral Id", header_format)
     worksheet.write(1, 3, "Contact", header_format)
     worksheet.write(1, 4, "College", header_format)
-   
     worksheet2.merge_range('A1:G1', 'User List', merge_format2)
     worksheet2.write(1, 0, "Email", header_format2)
     worksheet2.write(1, 1, "Name", header_format2)
@@ -108,8 +107,8 @@ def users_info(request):
         worksheet2.write(row2, 0, user.user.email)
         worksheet2.write(row2, 1, user.first_name + ' ' + user.last_name)
         worksheet2.write(row2, 2, user.contact)
-        worksheet2.write(row2, 3, user.referred_by) if user.referred_by is not None else worksheet2.write(row2, 3,'NA')
-        worksheet2.write(row2, 4, 'YES') if user.ambassador else worksheet2.write(row2, 4,'NO')
+        worksheet2.write(row2, 3, user.referred_by) if user.referred_by is not None else worksheet2.write(row2, 3, 'NA')
+        worksheet2.write(row2, 4, 'YES') if user.ambassador else worksheet2.write(row2, 4, 'NO')
         worksheet2.write(row2, 5, user.college)
         worksheet2.write(row2, 6, user.current_year)
         row2 += 1
