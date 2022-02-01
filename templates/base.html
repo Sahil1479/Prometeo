@@ -81,7 +81,7 @@
       </h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'home:home' %}">Home</a></li>
           <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
           <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
           <li><a class="nav-link scrollto" href="{% url 'events:events' 'Talk' %}">Speakers</a></li>
@@ -109,7 +109,7 @@
               <li><a href="/users/ca_dashboard/">CA Dashboard</a></li>
               {% endif %}
               <li><a href="/users/profile/">Profile</a></li>
-              <!-- <li><a href="#">My Events</a></li> -->
+              <li><a href="/users/my_events/">My Events</a></li>
               <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
             </ul>
           </li>
@@ -134,14 +134,14 @@
               {% if not user.is_authenticated %}
                 <p style="text-align: center; font-size: 18px; color: white;">You are not logged in. Do it and try again. Follow the below link.</p>
                 <div class="ca_content" style="display: flex; justify-content: center;">
-                  <a href="/accounts/login" class="btn register-btn btn-outline-light px-3">Login</a>
-                  <a href="/accounts/signup" class="btn register-btn btn-outline-light px-3">Register</a>
+                  <a href="/accounts/login" class="btn register-btn btn-primary px-3">Login</a>
+                  <a href="/accounts/signup" class="btn register-btn btn-primary px-3">Register</a>
                 </div>
               {% elif not user.extendeduser.ambassador %}
                 <p style="text-align: center; font-size: 18px; color: white;">Want to become a campus ambassador?</p>
                 <div class="ca_content" style="display: flex; justify-content: center;">
-                  <a href="/users/make_ca" class="btn register-btn btn-outline-light px-3">Yes</a>
-                  <a href="#" class="btn register-btn btn-outline-light px-3">No</a>
+                  <a href="/users/make_ca" class="btn register-btn btn-primary px-3">Yes</a>
+                  <a href="#" class="btn register-btn btn-primary px-3">No</a>
                 </div>
               {% else %}
                 <p style="text-align: center; font-size: 18px; color: white;">Your are already campus ambassador</p>

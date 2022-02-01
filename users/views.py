@@ -113,12 +113,11 @@ def create_team(request, eventid):
                 fail_silently=False,
             )
             messages.info(request, f'Team Successfully Created, your teamId is {team.id}, which is also sent to your respective email address.')
-            return redirect(f'/events/{event.type}/{event.pk}')
+            return redirect('/users/my_events')
     else:
         form = TeamCreationForm()
         return render(request, 'create_team.html', {'form': form, 'event': event})
 
-    return render(request, 'profile.html')
 
 @login_required
 def register_indi_event(request, eventid):
@@ -130,7 +129,7 @@ def register_indi_event(request, eventid):
     if event.registration_open is False:
         messages.info(request, 'Registration for this event is currently closed.')
         return redirect(f'/events/{event.type}/{event.pk}')
-    
+
     if event.participation_type != 'individual':
         messages.info(request, 'Invalid Request.')
         return redirect(f'/events/{event.type}/{event.pk}')
@@ -150,7 +149,7 @@ def register_indi_event(request, eventid):
     )
     messages.info(request, f'You have succesfully registered for this event, your Registration ID is {team.id}, which is also sent to your respective email address.')
     # messages.info(request, f'You have succesfully registered for this event.')
-    return redirect(f'/events/{event.type}/{event.pk}')
+    return redirect('/users/my_events')
 
 
 @login_required
