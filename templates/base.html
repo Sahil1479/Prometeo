@@ -81,7 +81,7 @@
       </h1>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="{% url 'home:home' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'home:home' %}">Home</a></li>
           <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
           <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
           <li><a class="nav-link scrollto" href="{% url 'events:events' 'Talk' %}">Speakers</a></li>
@@ -110,7 +110,7 @@
               <li><a href="/users/ca_dashboard/">CA Dashboard</a></li>
               {% endif %}
               <li><a href="/users/profile/">Profile</a></li>
-              <!-- <li><a href="#">My Events</a></li> -->
+              <li><a href="/users/my_events/">My Events</a></li>
               <li><a class="nav-link scrollto" href="/accounts/logout">Logout</a></li>
             </ul>
           </li>
@@ -122,7 +122,7 @@
             </ul>
           </li>
           {% endif %}
-          {% if not user.is_authenticated %}
+
           <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
           <div id="popup1" class="overlay">
             <div class="popup">
@@ -131,46 +131,25 @@
                 <a style="padding: 0px; padding-bottom: 10px">
                   <img src="{% static 'img/PR_Poster.png' %}" class="img-fluid" alt="PR Poster">
                 </a>
-                <p style="text-align: center; font-size: 18px">You are not logged in. Do it and try again. Follow the
-                  below link.</p>
               </div>
-              <div class="ca_content" style="display: flex; justify-content: center; padding-top: 20px;">
-                <a href="/accounts/login" class="btn register-btn btn-primary">Login</a>
-                <a href="/accounts/signup" class="btn register-btn btn-primary">Register</a>
+              {% if not user.is_authenticated %}
+              <p style="text-align: center; font-size: 18px; color: white;">You are not logged in. Do it and try again.
+                Follow the below link.</p>
+              <div class="ca_content" style="display: flex; justify-content: center;">
+                <a href="/accounts/login" class="btn register-btn btn-primary px-3">Login</a>
+                <a href="/accounts/signup" class="btn register-btn btn-primary px-3">Register</a>
               </div>
+              {% elif not user.extendeduser.ambassador %}
+              <p style="text-align: center; font-size: 18px; color: white;">Want to become a campus ambassador?</p>
+              <div class="ca_content" style="display: flex; justify-content: center;">
+                <a href="/users/make_ca" class="btn register-btn btn-primary px-3">Yes</a>
+                <a href="#" class="btn register-btn btn-primary px-3">No</a>
+              </div>
+              {% else %}
+              <p style="text-align: center; font-size: 18px; color: white;">Your are already campus ambassador</p>
+              {% endif %}
             </div>
           </div>
-          {% elif not user.extendeduser.ambassador %}
-          <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
-          <div id="popup1" class="overlay">
-            <div class="popup">
-              <a class="close" href="#">&times;</a>
-              <div class="ca_content" style="padding-top: 40px;">
-                <a style="padding: 0px; padding-bottom: 10px">
-                  <img src="{% static 'img/PR_Poster.png' %}" class="img-fluid" alt="PR Poster">
-                </a>
-                <p style="text-align: center; font-size: 18px">Want to become a campus ambassador?</p>
-              </div>
-              <div class="ca_content" style="display: flex; justify-content: center; padding-top: 20px;">
-                <a href="/users/make_ca" class="btn register-btn btn-primary">Yes</a>
-                <a href="#" class="btn register-btn btn-primary">No</a>
-              </div>
-            </div>
-          </div>
-          {% else %}
-          <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
-          <div id="popup1" class="overlay">
-            <div class="popup">
-              <a class="close" href="#">&times;</a>
-              <div class="ca_content" style="padding-top: 40px;">
-                <a style="padding: 0px; padding-bottom: 10px">
-                  <img src="{% static 'img/PR_Poster.png' %}" class="img-fluid" alt="PR Poster">
-                </a>
-                <p style="text-align: center; font-size: 18px">Your are already campus ambassador</p>
-              </div>
-            </div>
-          </div>
-          {% endif %}
         </ul>
 
         <i class="bi bi-list mobile-nav-toggle"></i>

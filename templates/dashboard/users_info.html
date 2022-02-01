@@ -50,8 +50,8 @@
         <a class="dropdown-item" href="{% url 'event_type_info' 'technical' %}">Technical Events</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'informal' %}">Informals</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'workshop' %}">Workshops</a>
-        <a class="dropdown-item" href="{% url 'event_type_info' 'talks' %}">Talks</a>
-        <a class="dropdown-item" href="{% url 'event_type_info' 'exhibitions' %}">Exhibitions</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'talk' %}">Talks</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'exhibition' %}">Exhibitions</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
       </div>
@@ -106,8 +106,8 @@
       <a class="dropdown-item" href="{% url 'event_type_info' 'technical' %}">Technical Events</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'informal' %}">Informals</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'workshop' %}">Workshops</a>
-      <a class="dropdown-item" href="{% url 'event_type_info' 'talks' %}">Talks</a>
-      <a class="dropdown-item" href="{% url 'event_type_info' 'exhibitions' %}">Exhibitions</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'talk' %}">Talks</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'exhibition' %}">Exhibitions</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
     </div>
@@ -130,6 +130,8 @@
 
 <h1>All Users</h1>
 <hr>
+<span> <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname2 }}" download="{{ wbname2 }}"> Download All Users list</a></span> 
+<br>
 <span> <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname }}" download="{{ wbname }}"> Download Campus Ambassador list</a></span> 
 <div class="card mb-3">
     <div class="card-header">
