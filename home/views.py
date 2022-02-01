@@ -39,10 +39,11 @@ def home_redirect(request):
         return redirect("/users/profile")
     return redirect(home)
 
+
 def sponsors(request):
     if registrationNotCompleted(request):
         return redirect("/users/profile")
-    
+
     sponsorTypes = SponsorDesignation.objects.all().order_by('rank')
     sponsors = []
     for data in sponsorTypes:
