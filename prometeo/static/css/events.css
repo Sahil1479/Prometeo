@@ -39,7 +39,7 @@ body{
 .post-modules{
   width: 100% !important;
   border-radius: 5px 5px 0px 0px !important;
-  font-family: GothamLight !important;
+  /* font-family: GothamLight !important; */
   margin: 0px auto;
   position: relative;
   overflow: hidden;
@@ -93,8 +93,8 @@ body{
 .title{
   /*font-style: normal;*/
   font-weight: 500;
-  font-size: 16px;
-  line-height: 21px;
+  font-size: 20px;
+  line-height: 35px;
   color: #fff;
   padding-bottom:5px;
 }
@@ -115,7 +115,7 @@ body{
   font-style: normal;
   font-weight: lighter;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 19px;
   letter-spacing: 1px;
   color: #fff;
   display:none;
@@ -136,7 +136,7 @@ body{
   background: rgba(93, 109, 143, 0.1);
   font-style: normal;
   font-weight: normal;
-  font-family: euro;
+  /* font-family: euro; */
   letter-spacing: 1px;
   font-size: 18px;
   line-height: 25px;
