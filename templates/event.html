@@ -73,19 +73,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ event.external_link }}">Register</a>
                         </li>
-                        {% elif event.participation_type == 'team' %}
-                        <li class="nav-item">
-                            <!-- <a class="nav-link" href="javascript:void(0)">Already Registered</a> -->
-                            <a class="nav-link" href="javascript:void(0)"
-                                onclick="openTab(event, 'register')">Register</a>
-                        </li>
                         {% else %}
                         <li class="nav-item">
-                            <!-- <a class="nav-link" href="javascript:void(0)">Already Registered</a> -->
-                            <a href="javascript:void(0)" class="nav-link" data-toggle="modal"
-                                data-target="#confirmModal">
-                                Register
-                            </a>
+                            <a class="nav-link" href="javascript:void(0)"
+                                onclick="openTab(event, 'register')">Register</a>
                         </li>
                         {% endif %}
 
@@ -109,7 +100,7 @@
                         </li>
                         {% endif %}
 
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and event.participation_type == "team" %}
                             {% for team in user.teams.all %}
                                 {% if event == team.event and user == team.leader %}
                                 <li class="nav-item">
@@ -242,10 +233,15 @@
 
                 </div>
                 <div class="card-body" id="register" style="display:none;">
-                    <p class="card-text">This is a team event ({{ event.min_team_size }} to {{ event.max_team_size }}
-                        members). Create or join a team:</p>
-                    <a href="/users/create_team/{{event.id}}" class="btn btn-primary">Create Team</a>
-                    <a href="/users/join_team" class="btn btn-primary">Join a Team</a>
+                    {% if event.participation_type == 'individual' %}
+                        <p class="card-text">This is an individual event</p>
+                        <a href="/users/register_indi_event/{{event.id}}" class="btn btn-outline-light px-3">Register</a>
+                    {% else %}
+                        <p class="card-text">This is a team event ({{ event.min_team_size }} to {{ event.max_team_size }}
+                            members). Create or join a team:</p>
+                        <a href="/users/create_team/{{event.id}}" class="btn btn-outline-light px-3">Create Team</a>
+                        <a href="/users/join_team" class="btn btn-outline-light px-3 mx-2">Join a Team</a>
+                    {% endif %}
                 </div>
                 <div class="card-body tab-content" id="contact" style="display:none; text-align:left">
                     <div class="row">

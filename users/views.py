@@ -119,6 +119,38 @@ def create_team(request, eventid):
 
     return render(request, 'profile.html')
 
+@login_required
+def register_indi_event(request, eventid):
+    user = request.user
+    event = get_object_or_404(Event, pk=eventid)
+    if(request.user.teams.filter(event=event).exists()):
+        messages.info(request, f'You have already registered for this {event.type} Event.')
+        return redirect(f'/events/{event.type}/{event.pk}')
+    if event.registration_open is False:
+        messages.info(request, 'Registration for this event is currently closed.')
+        return redirect(f'/events/{event.type}/{event.pk}')
+    
+    if event.participation_type != 'individual':
+        messages.info(request, 'Invalid Request.')
+        return redirect(f'/events/{event.type}/{event.pk}')
+
+    team = Team.objects.create(leader=user, pk='PRO' + str(uuid.uuid4().int)[:6], event=event)
+    team.name = f"{user.first_name}_{team.pk}"
+    team.members.add(user)
+    team.save()
+    user.extendeduser.events.add(event)
+    message = (f'You have succesfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.')
+    send_mail(
+        'Registration Details',
+        message,
+        sendMailID,
+        [request.user.email],
+        fail_silently=False,
+    )
+    messages.info(request, f'You have succesfully registered for this event, your Registration ID is {team.id}, which is also sent to your respective email address.')
+    # messages.info(request, f'You have succesfully registered for this event.')
+    return redirect(f'/events/{event.type}/{event.pk}')
+
 
 @login_required
 def make_ca(request):
@@ -182,6 +214,9 @@ def join_team(request):
                 if team.event.registration_open is False:
                     messages.info(request, 'Registration for this event is currently closed.')
                     return redirect(f'/events/{team.event.type}/{team.event.pk}')
+                if team.event.participation_type != 'team':
+                    messages.info(request, 'Only single person is allowed in this event.')
+                    return redirect(f'/events/{team.event.type}/{team.event.pk}')
                 if request.user in team.members.all():
                     form.add_error(None, 'You are already a member of this team')
                 elif team.event in request.user.extendeduser.events.all():
@@ -208,6 +243,9 @@ def edit_team(request, teamid):
     if(request.user != team.leader):
         messages.info(request, "Only the team leader (creator) can edit the team details.")
         return redirect(f'/events/{team.event.type}/{team.event.pk}')
+    elif(team.event.participation_type != 'team'):
+        messages.info(request, "Individual Participation event cannot be edited.")
+        return redirect(f'/events/{team.event.type}/{team.event.pk}')
     elif(request.method == 'POST'):
         form = EditTeamForm(team, request.POST, instance=team)
         if(form.is_valid()):
@@ -231,6 +269,9 @@ def delete_team(request, teamid):
     team = get_object_or_404(Team, id=teamid)
     if(request.user != team.leader):
         messages.info(request, "Only the team leader (creator) can delete the team.")
+        return redirect(f'/events/{team.event.type}/{team.event.pk}')
+    if(team.event.participation_type != 'team'):
+        messages.info(request, "Individual Participation cannot be deleted.")
         return redirect(f'/events/{team.event.type}/{team.event.pk}')
     for member in team.members.all():
         member.extendeduser.events.remove(team.event)
