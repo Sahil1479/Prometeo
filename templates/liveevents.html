@@ -59,11 +59,11 @@ Events-{{type}}
                                             <p class="card-event-description"><span><i class="fa fa-user"></i>Speaker:</span> {{event.speaker}}</p>
                                         </div>
                                         {% endif %}
-                                        <div class="row event-badge">
-                                        {% if event in user.events %}
-                                             <p class="card-event-badge"><span class="badge bg">Registered</span></p>
-                                        {% endif %}
-                                        <p class="card-event-badge"><span class="badge bg">{{event.type.capitalize}}</span></p>
+                                        <div class="row event-badge mt-3">
+                                            {% if event in user.extendeduser.events.all %}
+                                                <p class="card-event-badge"><span class="badge bg">Registered</span></p>
+                                            {% endif %}
+                                            <p class="card-event-badge"><span class="badge bg">{{event.type.capitalize}}</span></p>
                                         </div>
                                         
                                     </div>
@@ -73,8 +73,10 @@ Events-{{type}}
                                                 <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more join-link"><span class="fa fa-info-circle"></span> View More</a>
                                             </div>
                                             <div class="row justify-content-center ">
-                                                {% if event.meet_link %}
-                                                  <a class="btn-learn-more join-link" target="_blank" href="{{event.meet_link}}"><span class="fa fa-video-camera"></span> Join Now</a>
+                                                {% if user.is_authenticated and event in user.extendeduser.events.all %}
+                                                    {% if event.meet_link %}
+                                                        <a class="btn-learn-more join-link" target="_blank" href="{{event.meet_link}}"><span class="fa fa-video-camera"></span> Join Now</a>
+                                                    {% endif %}
                                                 {% endif %}
                                             </div>
                                             
