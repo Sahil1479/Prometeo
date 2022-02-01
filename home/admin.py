@@ -1,5 +1,7 @@
+from dataclasses import fields
+from tabnanny import verbose
 from django.contrib import admin
-from .models import Carousel, Themeimgs
+from .models import Carousel, Themeimgs, Sponsors, SponsorDesignation
 
 
 @admin.register(Carousel)
@@ -19,3 +21,22 @@ class ThemeimgsAdmin(admin.ModelAdmin):
     class Meta:
         model = Themeimgs
         fields = '__all__'
+
+class SponsorsAdmin(admin.StackedInline):
+    model = Sponsors
+    list_display = ['name']
+    
+    class Meta:
+        model = Sponsors
+        fields = '__all__'
+
+class SponsorsDesignationAdmin(admin.ModelAdmin):
+    model = SponsorDesignation
+    list_display = ['sponsor_type']
+    inlines = [SponsorsAdmin, ]
+
+    class Meta:
+        model = Sponsors
+        fields = '__all__'
+
+admin.site.register(SponsorDesignation, SponsorsDesignationAdmin)

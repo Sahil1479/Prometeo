@@ -1,0 +1,60 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+{{type}} Events
+{% endblock %}
+
+
+{% block style %}
+<!-- import css files or write css code-->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="{% static 'css/sponsor.css' %}" rel="stylesheet" />
+{% endblock %}
+
+
+
+
+{% block content %}
+<section class="dark mainDiv">
+    <div class="container py-4">
+        <div>
+            <div style="padding-top: 10px;"></div>
+            {% for data in sponsors %}
+            <div class="teamContainer">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>{{data.sponsorTypeName}}</h2>
+                </div>
+                <div class="card-grid">
+                    {% for data in data.sponsorData %}
+                    <div class="team-card" data-aos="fade-up">
+                        <div class="img-area">
+                            {% if data.sponsor_link %}
+                            <a href="{{ data.sponsor_link }}">
+                                <img src="{{data.image.url}}" alt="" />
+                            </a>
+                            {% else %}
+                            <img src="{{data.image.url}}" alt="" />
+                            {% endif%}
+                        </div>
+                        {% if data.name %}
+                        <div class="img-text">
+                            <h4>{{data.name}}</h4>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'js/main.js' %}"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+{% endblock %}

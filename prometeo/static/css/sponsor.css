@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+  }
+  .mainDiv {
+    background-color: #020624;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  }
+  #headingTag {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 700;
+    /* padding-top: 40px; */
+    color: white;
+  }
+  .teamContainer {
+    padding: 0px 100px 0px 100px;
+  }
+
+  .card-grid {
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+  }
+  .team-card {
+    box-shadow: 0px 7px 7px 2px rgba(0, 0, 0, 0.1);
+    background-color: 020624;
+    margin: 15px auto;
+    width: 320px;
+    border-radius: 5px;
+    padding: 10px 10px 0px;
+    /* height: 150px; */
+  }
+  
+  .img-area {
+    overflow: hidden;
+    position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .img-area img {
+    width: 80%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 10%;
+    /* max-height: 100px; */
+    transition: all 0.4s ease 0s;
+  }
+
+  .img-text {
+    padding: 15px;
+    color: white;
+    text-align: center;
+  }
+  .img-text h4 {
+    margin: 0 0 5px;
+    font-size: 24px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .section-header {
+    position: relative;
+    padding-bottom: 10px;
+    margin: 40px;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .section-header::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 5px;
+    background: #f82249;
+    bottom: 0;
+    left: calc(50% - 25px);
+  }
+  .section-header h2 {
+    font-size: 36px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+
+  /* Media Queries */
+  @media (max-width: 1250px) {
+    .teamContainer {
+      padding: 50px;
+    }
+  }
+  @media (max-width: 1000px) {
+    .section-header h2 {
+      font-size: 30px;
+    }
+    .img-area img {
+      display: inline-block;
+    }
+    .card-grid {
+      grid-template-columns: 50% 50%;
+    }
+    .teamContainer {
+      padding: 25px;
+    }
+    .team-card {
+      width: 90%;
+      max-width: 250px;
+    }
+  }
+  @media (max-width: 450px) {
+    .section-header {
+      margin: 5px;
+    }
+    .section-header h2 {
+      font-size: 25px;
+    }
+    .img-area img {
+      display: inline-block;
+    }
+    .card-grid {
+      grid-template-columns: 100%;
+    }
+    .teamContainer {
+      padding: 25px;
+    }
+  }
