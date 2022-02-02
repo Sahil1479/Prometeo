@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{type}} Events
+{{type|capfirst}} Events
 {% endblock %}
 
 
@@ -25,9 +25,12 @@
                 <h2>Speakers</h2>
             </div>
         </div>
+        {% if events.count == 0 %}
+            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
         {% for event in events %}
             {% if event.type|title == 'Talk' %}
-            <article class="postcard dark blue">
+            <article class="postcard dark blue" data-aos="fade-up">
                 <a class="postcard__img_link">
                     <img class="postcard__img" src="{{event.image.url}}" alt="Image Title" />
                 </a>
@@ -44,25 +47,32 @@
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{event.description}}</div>
                     <ul class="postcard__tagbox">
-                        <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }}</li>
-                        {% if event.meet_link %}
-                        <a href="{{ event.meet_link }}">
-                            <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
-                        </a>
+                        <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
+                        {% if event in user.extendeduser.events.all %}
+                            {% if event.meet_link %}
+                            <a href="{{ event.meet_link }}">
+                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
+                            {% if event.webx_link %}
+                            <a href="{{ event.webx_link }}">
+                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
+                            {% if event.youtube_link %}
+                            <a href="{{ event.youtube_link }}">
+                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
                         {% endif %}
-                        {% if event.webx_link %}
-                        <a href="{{ event.webx_link }}">
-                            <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
-                        </a>
+
+                        {% if event in user.extendeduser.events.all %}
+                            <li class="tag__item"><i class="fas fa-edit mr-2"></i> Already Registered</li>
+                        {% else %}
+                            <a href="/users/register_indi_event/{{event.id}}">
+                                <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
+                            </a>
                         {% endif %}
-                        {% if event.youtube_link %}
-                        <a href="{{ event.youtube_link }}">
-                            <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
-                        </a>
-                        {% endif %}
-                        <a href="#">
-                            <li class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
-                        </a>
                     </ul>
                 </div>
             </article>

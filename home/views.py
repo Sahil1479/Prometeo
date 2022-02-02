@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Carousel, Themeimgs
+from .models import Carousel, Themeimgs, Sponsors, SponsorDesignation
 from events.models import Event
 from django.contrib import messages
 
@@ -38,3 +38,18 @@ def home_redirect(request):
     if registrationNotCompleted(request):
         return redirect("/users/profile")
     return redirect(home)
+
+
+def sponsors(request):
+    if registrationNotCompleted(request):
+        return redirect("/users/profile")
+
+    sponsorTypes = SponsorDesignation.objects.all().order_by('rank')
+    sponsors = []
+    for data in sponsorTypes:
+        obj = {}
+        obj["sponsorTypeName"] = data.sponsor_type
+        obj["sponsorData"] = Sponsors.objects.filter(designation=data).all()
+        if obj["sponsorData"]:
+            sponsors.append(obj)
+    return render(request, 'sponsors.html', {"sponsors": sponsors})

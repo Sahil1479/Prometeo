@@ -19,7 +19,7 @@ Events-{{type}}
 
 {% block content %}
 
-    {% if type == 'Live' %}
+    {% if type == 'live' %}
 
         <div class="liveeventwrapper">
             <div style="padding-top: 50px;"></div>
@@ -27,6 +27,9 @@ Events-{{type}}
                 <div class="section-header">
                     <h2>Live Events</h2>
                 </div>
+                {% if liveevents.count == 0 %}
+                    <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Currently no event is Live!</p>
+                {% endif %}
                 <div class="container justify-content-center align-items-center"  style="max-width: 950px;">
                    
                     {% for event in liveevents %}
@@ -59,11 +62,11 @@ Events-{{type}}
                                             <p class="card-event-description"><span><i class="fa fa-user"></i>Speaker:</span> {{event.speaker}}</p>
                                         </div>
                                         {% endif %}
-                                        <div class="row event-badge">
-                                        {% if event in user.events %}
-                                             <p class="card-event-badge"><span class="badge bg">Registered</span></p>
-                                        {% endif %}
-                                        <p class="card-event-badge"><span class="badge bg">{{event.type.capitalize}}</span></p>
+                                        <div class="row event-badge mt-3">
+                                            {% if event in user.extendeduser.events.all %}
+                                                <p class="card-event-badge"><span class="badge bg">Registered</span></p>
+                                            {% endif %}
+                                            <p class="card-event-badge"><span class="badge bg">{{event.type.capitalize}}</span></p>
                                         </div>
                                         
                                     </div>
@@ -73,8 +76,10 @@ Events-{{type}}
                                                 <a href="{% url 'events:event' event.type event.pk %}" class="btn-learn-more join-link"><span class="fa fa-info-circle"></span> View More</a>
                                             </div>
                                             <div class="row justify-content-center ">
-                                                {% if event.meet_link %}
-                                                  <a class="btn-learn-more join-link" target="_blank" href="{{event.meet_link}}"><span class="fa fa-video-camera"></span> Join Now</a>
+                                                {% if user.is_authenticated and event in user.extendeduser.events.all %}
+                                                    {% if event.meet_link %}
+                                                        <a class="btn-learn-more join-link" target="_blank" href="{{event.meet_link}}"><span class="fa fa-video-camera"></span> Join Now</a>
+                                                    {% endif %}
                                                 {% endif %}
                                             </div>
                                             

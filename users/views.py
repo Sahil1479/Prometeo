@@ -18,6 +18,14 @@ User = get_user_model()
 sendMailID = settings.EMAIL_HOST_USER
 
 
+def registrationNotCompleted(request):
+    user = request.user
+    if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
+        messages.info(request, 'Complete your registration first.')
+        return True
+    return False
+
+
 def isRegistrationFormValid(data):
     requiredFields = ['first_name', 'last_name', 'email', 'college_name', 'phone_no', 'gender', 'city', 'current_year']
     for item in requiredFields:
@@ -75,7 +83,8 @@ def user_profile(request):
 @login_required
 def my_events(request):
     user = request.user
-    # my_events = user.extendeduser.events.all()
+    if registrationNotCompleted(request):
+        return redirect("/users/profile")
     my_teams = user.teams.all()
     categories = []
     for team in my_teams:
@@ -87,6 +96,8 @@ def my_events(request):
 @login_required
 def create_team(request, eventid):
     event = get_object_or_404(Event, pk=eventid)
+    if registrationNotCompleted(request):
+        return redirect("/users/profile")
     if(request.user.teams.filter(event=event).exists()):
         messages.info(request, 'You have already created a team for this event.')
         return redirect(f'/events/{event.type}/{event.pk}')
@@ -104,7 +115,7 @@ def create_team(request, eventid):
             team.members.add(request.user)
             team.save()
             request.user.extendeduser.events.add(event)
-            message = (f'You have just created team "{team.name}" for the {event.type} event {event.name}. The team ID is {team.id}. Share this ID with your friends who can join your team using this ID.')
+            message = (f"You have just created team {team.name} for the {event.type} event {event.name}. The team ID is {team.id}. Share this ID with your friends who can join your team using this ID.\n\nRegards\nPrometeo'22 Team")
             send_mail(
                 'Team Details',
                 message,
@@ -113,19 +124,51 @@ def create_team(request, eventid):
                 fail_silently=False,
             )
             messages.info(request, f'Team Successfully Created, your teamId is {team.id}, which is also sent to your respective email address.')
-            return redirect(f'/events/{event.type}/{event.pk}')
+            return redirect('/users/my_events')
     else:
         form = TeamCreationForm()
         return render(request, 'create_team.html', {'form': form, 'event': event})
 
-    return render(request, 'profile.html')
+
+@login_required
+def register_indi_event(request, eventid):
+    user = request.user
+    if registrationNotCompleted(request):
+        return redirect("/users/profile")
+    event = get_object_or_404(Event, pk=eventid)
+    if(request.user.teams.filter(event=event).exists()):
+        messages.info(request, 'You have already registered for this Event.')
+        return redirect(f'/events/{event.type}/{event.pk}')
+    if event.registration_open is False:
+        messages.info(request, 'Registration for this event is currently closed.')
+        return redirect(f'/events/{event.type}/{event.pk}')
+
+    if event.participation_type != 'individual':
+        messages.info(request, 'Invalid Request.')
+        return redirect(f'/events/{event.type}/{event.pk}')
+
+    team = Team.objects.create(leader=user, pk='PRO' + str(uuid.uuid4().int)[:6], event=event)
+    team.name = f"{user.first_name}_{team.pk}"
+    team.members.add(user)
+    team.save()
+    user.extendeduser.events.add(event)
+    message = (f"You have successfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
+    send_mail(
+        'Registration Details',
+        message,
+        sendMailID,
+        [request.user.email],
+        fail_silently=False,
+    )
+    messages.info(request, f'You have successfully registered for this event, your Registration ID is {team.id}, which has been sent to your respective email address.')
+    # messages.info(request, f'You have succesfully registered for this event.')
+    return redirect('/users/my_events')
 
 
 @login_required
 def make_ca(request):
     user = request.user
-    if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
-        messages.success(request, 'Complete your profile first.')
+    if registrationNotCompleted(request):
         return redirect("/users/profile")
 
     extendeduser = ExtendedUser.objects.filter(user=user).first()
@@ -157,8 +200,7 @@ def make_ca(request):
 @login_required
 def ca_dashboard(request):
     user = request.user
-    if user.is_authenticated and user.extendeduser.isProfileCompleted is False:
-        messages.info(request, 'Complete your profile first.')
+    if registrationNotCompleted(request):
         return redirect("/users/profile")
 
     extendeduser = ExtendedUser.objects.filter(user=user).first()
@@ -174,6 +216,8 @@ def ca_dashboard(request):
 
 @login_required
 def join_team(request):
+    if registrationNotCompleted(request):
+        return redirect("/users/profile")
     if request.method == 'POST':
         form = TeamJoiningForm(request.POST)
         if form.is_valid():
@@ -182,6 +226,9 @@ def join_team(request):
                 team = Team.objects.get(pk=teamId)
                 if team.event.registration_open is False:
                     messages.info(request, 'Registration for this event is currently closed.')
+                    return redirect(f'/events/{team.event.type}/{team.event.pk}')
+                if team.event.participation_type != 'team':
+                    messages.info(request, 'Only single person is allowed in this event.')
                     return redirect(f'/events/{team.event.type}/{team.event.pk}')
                 if request.user in team.members.all():
                     form.add_error(None, 'You are already a member of this team')
@@ -205,9 +252,14 @@ def join_team(request):
 
 @login_required
 def edit_team(request, teamid):
+    if registrationNotCompleted(request):
+        return redirect("/users/profile")
     team = get_object_or_404(Team, id=teamid)
     if(request.user != team.leader):
         messages.info(request, "Only the team leader (creator) can edit the team details.")
+        return redirect(f'/events/{team.event.type}/{team.event.pk}')
+    elif(team.event.participation_type != 'team'):
+        messages.info(request, "Individual Participation event cannot be edited.")
         return redirect(f'/events/{team.event.type}/{team.event.pk}')
     elif(request.method == 'POST'):
         form = EditTeamForm(team, request.POST, instance=team)
@@ -229,9 +281,14 @@ def edit_team(request, teamid):
 
 @login_required
 def delete_team(request, teamid):
+    if registrationNotCompleted(request):
+        return redirect("/users/profile")
     team = get_object_or_404(Team, id=teamid)
     if(request.user != team.leader):
         messages.info(request, "Only the team leader (creator) can delete the team.")
+        return redirect(f'/events/{team.event.type}/{team.event.pk}')
+    if(team.event.participation_type != 'team'):
+        messages.info(request, "Individual Participation cannot be deleted.")
         return redirect(f'/events/{team.event.type}/{team.event.pk}')
     for member in team.members.all():
         member.extendeduser.events.remove(team.event)
