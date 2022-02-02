@@ -29,7 +29,7 @@ class Event(models.Model):
     participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='individual', verbose_name="Participation Type")
     min_team_size = models.IntegerField(verbose_name="Minimum Team Size (leave unchanged for individual event)", default=1)
     max_team_size = models.IntegerField(verbose_name="Maximum Team Size (leave unchanged for individual event)", default=1)
-    prize = models.CharField(max_length=100, verbose_name="Prize Money (Rs.)", null=True, blank=True)
+    prize = models.CharField(max_length=100, verbose_name="Prize Money (Rs.)", null=True, blank=True, default="Prizes worth Rs.")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Event Description (Write more for speaker description)")
     problem_statement = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Problem Statement")
     rulebook_text = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Rulebook Text (HTML Format)")

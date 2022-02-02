@@ -6,14 +6,14 @@
 
 {% block style %}
 
-<link rel="stylesheet" href="{% static 'css/account/logout.css' %}" />
+<link rel="stylesheet" href="{% static 'css/account/general.css' %}" />
 
 {% endblock %}
 
 {% block content %}
 
-<div class="mainWrapperLogout">
-  <div style="color: white" class="logoutContainer">
+<div class="mainWrapperGeneral">
+  <div style="color: white" class="generalContainer">
     <h4 style="text-align: center">Join Team</h4>
       <form style="justify-content: center;" action="/users/join_team/", method="post">
         {% csrf_token %}
