@@ -27,22 +27,40 @@
 <div class="event-container container p-2 mb-5 shadow"
     style="background-color: transparent; width: fit-content;position: relative;top: 10vh;">
     <div class="row">
+        <!-- <div class="round-border"> -->
         <h2 class="title title-heading">{{ event.name }}</h2>
-        {% if event.host %}
-        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> by <a
-                href="{{ event.sponsor_website }}"> <img src="{{ event.sponsor_image1.url }}" alt="Sponser"
-                    height="60"></a>
-        </h4>
-        {% else %}
-        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
-        {% endif %}
+        <div>
+            {% if event.host %}
+            <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> by
+                {% if event.sponsor_website %}
+                <a href="{{ event.sponsor_website }}">
+                    <img src="{{ event.sponsor_image1.url }}" alt="Sponser" height="60">
+                </a>
+                {% else %}
+                <img src="{{ event.sponsor_image1.url }}" alt="Sponser" height="60">
+                {% endif %}
+            </h4>
+            {% else %}
+            <div>
+                {% if event.type == 'talk' %}
+                <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> By {{ event.speaker }}
+                    {% if event.designation %}
+                    <span class="designation">{{event.designation}}</span>
+                    {% endif %}
+                </h4>
+                {% else %}
+                <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+
         <!-- <div class="row"></div> -->
         <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mr-auto image" style="padding-bottom: 10%;">
             <img class="card-img-top" src="{{ event.image.url }}" height="360" width="360" alt="">
             {% if event.rulebook %}
             <a href="{{ event.rulebook.url }}" target="_blank"><button class="rulebook btn btn-primary"
                     type="button">Rulebook</button></a>
-
             {% endif %}
         </div>
         <div class="col-lg-6 col-md-8 col-sm-12 ml-auto mr-auto" style="padding-bottom: 5%;">
@@ -96,20 +114,21 @@
                         {% endif %}
                         {% if user.is_superuser %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'events:event' event.type event.pk %}">Registered Users</a>
+                            <a class="nav-link" href="{% url 'events:event' event.type event.pk %}">Registered
+                                Users</a>
                         </li>
                         {% endif %}
 
                         {% if user.is_authenticated and event.participation_type == "team" %}
-                            {% for team in user.teams.all %}
-                                {% if event == team.event and user == team.leader %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/users/edit_team/{{team.id}}">Edit Team</a>
-                                </li>
-                                {% endif %}
-                            {% endfor %}
+                        {% for team in user.teams.all %}
+                        {% if event == team.event and user == team.leader %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/edit_team/{{team.id}}">Edit Team</a>
+                        </li>
                         {% endif %}
-                        
+                        {% endfor %}
+                        {% endif %}
+
                         <li class="nav-item">
                             <a class="nav-link" href="javascript:void(0)" data-toggle="modal"
                                 onclick="openTab(event, 'contact')">Contact
@@ -120,8 +139,9 @@
                 <div class="card-body" id="details" style="display:block; text-align:left">
                     <div class="row" style="margin-left:5%;">
                         <div class="col-lg-6 col-md-6">
-                            {% if event.prize %}
-                            <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
+                            {% if event.prize and event.type != 'talk' %}
+                            <div class="info info-horizontal"
+                                style="padding-top:0px; padding-bottom:0px; margin-bottom: 50px;">
                                 <div class="icon icon-rose">
                                     <i class="material-icons">monetization_on</i>
                                 </div>
@@ -132,25 +152,28 @@
                             </div>
                             {% endif %}
                             <div class="info info-horizontal event-type" style="padding-top:0px; padding-bottom:0px">
-                                <div class="icon icon-rose">
-                                    {% if event.participation_type == 'team' %}
-                                    <i class="material-icons">account_circle</i>
-                                    {% else %}
-                                    <i class="material-icons">group_work</i>
-                                    {% endif %}
-
-                                </div>
-                                {% if not event.participation_type == 'none' %}
-                                <div class="description">
-                                    <h4 class="info-title">Event Type</h4>
-                                    <p>
+                                {% if event.type != 'talk' %}
+                                <div>
+                                    <div class="icon icon-rose">
                                         {% if event.participation_type == 'team' %}
-                                        Team Event (Team Size: {{ event.min_team_size }}-{{ event.max_team_size }})
+                                        <i class="material-icons">account_circle</i>
                                         {% else %}
-                                        Individual Event
+                                        <i class="material-icons">group_work</i>
                                         {% endif %}
-                                    </p>
 
+                                    </div>
+                                    {% if not event.participation_type == 'none' %}
+                                    <div class="description">
+                                        <h4 class="info-title">Event Type</h4>
+                                        <p>
+                                            {% if event.participation_type == 'team' %}
+                                            Team Event (Team Size: {{ event.min_team_size }}-{{ event.max_team_size }})
+                                            {% else %}
+                                            Individual Event
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 {% endif %}
                             </div>
@@ -234,13 +257,13 @@
                 </div>
                 <div class="card-body" id="register" style="display:none;">
                     {% if event.participation_type == 'individual' %}
-                        <p class="card-text">This is an individual event</p>
-                        <a href="/users/register_indi_event/{{event.id}}" class="btn btn-outline-light px-3">Register</a>
+                    <p class="card-text">This is an individual event</p>
+                    <a href="/users/register_indi_event/{{event.id}}" class="btn btn-outline-light px-3">Register</a>
                     {% else %}
-                        <p class="card-text">This is a team event ({{ event.min_team_size }} to {{ event.max_team_size }}
-                            members). Create or join a team:</p>
-                        <a href="/users/create_team/{{event.id}}" class="btn btn-outline-light px-3">Create Team</a>
-                        <a href="/users/join_team" class="btn btn-outline-light px-3 mx-2">Join a Team</a>
+                    <p class="card-text">This is a team event ({{ event.min_team_size }} to {{ event.max_team_size }}
+                        members). Create or join a team:</p>
+                    <a href="/users/create_team/{{event.id}}" class="btn btn-outline-light px-3">Create Team</a>
+                    <a href="/users/join_team" class="btn btn-outline-light px-3 mx-2">Join a Team</a>
                     {% endif %}
                 </div>
                 <div class="card-body tab-content" id="contact" style="display:none; text-align:left">
@@ -260,6 +283,7 @@
 
             </div>
         </div>
+        <!-- </div> -->
     </div>
 </div>
 </div>

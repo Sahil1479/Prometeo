@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 EVENT_CHOICES = (
     ('technical', 'Technical'),
     ('workshop', 'Workshop'),

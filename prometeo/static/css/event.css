@@ -7,6 +7,10 @@ footer{
     position: absolute;
 }
 
+.designation {
+    font-size: 12px;
+}
+
 .event-card{
     width: 140%;
     color: white;
@@ -81,10 +85,6 @@ h4{
     box-shadow: none !important;
 }
 
-.event-type {
-    margin-top: 50px;
-}
-
 .card-img-top{
     width: 90%;
     padding-right: 4%;
@@ -103,7 +103,6 @@ h4{
 
 .info {
     max-width: 360px;
-    margin-bottom: 20px;
     padding: 70px 0 30px;
 }
 
