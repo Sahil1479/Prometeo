@@ -28,14 +28,24 @@ def users_info(request):
     wbname = 'Campus Ambassador List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
+    wbname2 = 'User List.xlsx'
+    wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
+    workbook2 = xlsxwriter.Workbook(wbpath2)
     ca_list = ExtendedUser.objects.filter(ambassador=True)
     worksheet = workbook.add_worksheet('CA List')
+    worksheet2 = workbook2.add_worksheet('Users List')
     col_center = workbook.add_format({
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    col_center2 = workbook2.add_format({
         'align': 'center',
         'valign': 'vcenter',
     })
     worksheet.set_column(0, 100, 30, col_center)
     worksheet.set_row(0, 30)
+    worksheet2.set_column(0, 100, 30, col_center2)
+    worksheet2.set_row(0, 30)
     merge_format = workbook.add_format({
         'bold': 1,
         'border': 1,
@@ -44,7 +54,22 @@ def users_info(request):
         'bg_color': 'gray',
         'font_size': 20
     })
+    merge_format2 = workbook2.add_format({
+        'bold': 1,
+        'border': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color': 'gray',
+        'font_size': 20
+    })
     header_format = workbook.add_format({
+        'bold': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'font_color': 'white',
+        'bg_color': 'black'
+    })
+    header_format2 = workbook2.add_format({
         'bold': 1,
         'align': 'center',
         'valign': 'vcenter',
@@ -68,8 +93,26 @@ def users_info(request):
     worksheet.write(1, 2, "Referral Id", header_format)
     worksheet.write(1, 3, "Contact", header_format)
     worksheet.write(1, 4, "College", header_format)
+    worksheet2.merge_range('A1:G1', 'User List', merge_format2)
+    worksheet2.write(1, 0, "Email", header_format2)
+    worksheet2.write(1, 1, "Name", header_format2)
+    worksheet2.write(1, 2, "Contact", header_format2)
+    worksheet2.write(1, 3, "Referred By", header_format2)
+    worksheet2.write(1, 4, "Campus Ambassador", header_format2)
+    worksheet2.write(1, 5, "College", header_format2)
+    worksheet2.write(1, 6, "Current Year", header_format2)
+    row2 = 2
     row = 2
-
+    for user in users:
+        worksheet2.write(row2, 0, user.user.email)
+        worksheet2.write(row2, 1, user.first_name + ' ' + user.last_name)
+        worksheet2.write(row2, 2, user.contact)
+        worksheet2.write(row2, 3, user.referred_by) if user.referred_by is not None else worksheet2.write(row2, 3, 'NA')
+        worksheet2.write(row2, 4, 'YES') if user.ambassador else worksheet2.write(row2, 4, 'NO')
+        worksheet2.write(row2, 5, user.college)
+        worksheet2.write(row2, 6, user.current_year)
+        row2 += 1
+    workbook2.close()
     for ca in ca_list:
         worksheet.write(row, 0, ca.user.email)
         worksheet.write(row, 1, ca.first_name + ' ' + ca.last_name)
@@ -78,7 +121,7 @@ def users_info(request):
         worksheet.write(row, 4, ca.college)
         row += 1
     workbook.close()
-    return render(request, 'dashboard/users_info.html', {'users': users, 'wbname': wbname})
+    return render(request, 'dashboard/users_info.html', {'users': users, 'wbname': wbname, 'wbname2': wbname2})
 
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')

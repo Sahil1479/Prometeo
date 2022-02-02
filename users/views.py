@@ -160,7 +160,7 @@ def register_indi_event(request, eventid):
         [request.user.email],
         fail_silently=False,
     )
-    messages.info(request, f'You have succesfully registered for this event, your Registration ID is {team.id}, which is also sent to your respective email address.')
+    messages.info(request, f'You have successfully registered for this event, your Registration ID is {team.id}, which has been sent to your respective email address.')
     # messages.info(request, f'You have succesfully registered for this event.')
     return redirect('/users/my_events')
 
