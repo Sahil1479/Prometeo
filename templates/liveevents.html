@@ -19,7 +19,7 @@ Events-{{type}}
 
 {% block content %}
 
-    {% if type == 'Live' %}
+    {% if type == 'live' %}
 
         <div class="liveeventwrapper">
             <div style="padding-top: 50px;"></div>
@@ -27,6 +27,9 @@ Events-{{type}}
                 <div class="section-header">
                     <h2>Live Events</h2>
                 </div>
+                {% if liveevents.count == 0 %}
+                    <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Currently no event is Live!</p>
+                {% endif %}
                 <div class="container justify-content-center align-items-center"  style="max-width: 950px;">
                    
                     {% for event in liveevents %}
