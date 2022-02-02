@@ -6,14 +6,14 @@
 
 {% block style %}
 
-<link rel="stylesheet" href="{% static 'css/account/logout.css' %}" />
+<link rel="stylesheet" href="{% static 'css/account/general.css' %}" />
 
 {% endblock %}
 
 {% block content %}
 
-<div class="mainWrapperLogout">
-  <div style="color: white" class="logoutContainer">
+<div class="mainWrapperGeneral">
+  <div style="color: white" class="generalContainer">
     <h4 style="text-align: center">Edit Your Team</h4>
       <form style="justify-content: center;" action="/users/edit_team/{{team.id}}/", method="post">
         {% csrf_token %}

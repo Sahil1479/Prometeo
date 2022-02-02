@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{type}} Events
+{{type|capfirst}} Events
 {% endblock %}
 
 
@@ -33,7 +33,7 @@ justify-content: center; display:flex">
             
             <!-- event cards -->
         {% if events.count == 0 %}
-            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white;">Coming Soon!!</p>
+            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!!</p>
 
         {% else %}
             {% for event in events %}

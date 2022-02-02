@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{type}} Events
+{{type|capfirst}} Events
 {% endblock %}
 
 
@@ -25,9 +25,12 @@
                 <h2>Speakers</h2>
             </div>
         </div>
+        {% if events.count == 0 %}
+            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
         {% for event in events %}
             {% if event.type|title == 'Talk' %}
-            <article class="postcard dark blue">
+            <article class="postcard dark blue" data-aos="fade-up">
                 <a class="postcard__img_link">
                     <img class="postcard__img" src="{{event.image.url}}" alt="Image Title" />
                 </a>
