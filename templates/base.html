@@ -65,7 +65,7 @@
 
 <body>
 
-  
+
 
 
   <!-- ======= Header ======= -->
@@ -85,6 +85,7 @@
           <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
           <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
           <li><a class="nav-link scrollto" href="{% url 'events:events' 'Talk' %}">Speakers</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'home:sponsors' %}">Sponsors</a></li>
           <li>
             <a class="nav-link scrollto" href="{% url 'events:schedule' %}">Schedule</a>
           </li>
@@ -121,7 +122,7 @@
             </ul>
           </li>
           {% endif %}
-          
+
           <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
           <div id="popup1" class="overlay">
             <div class="popup">
@@ -132,19 +133,20 @@
                 </a>
               </div>
               {% if not user.is_authenticated %}
-                <p style="text-align: center; font-size: 18px; color: white;">You are not logged in. Do it and try again. Follow the below link.</p>
-                <div class="ca_content" style="display: flex; justify-content: center;">
-                  <a href="/accounts/login" class="btn register-btn btn-primary px-3">Login</a>
-                  <a href="/accounts/signup" class="btn register-btn btn-primary px-3">Register</a>
-                </div>
+              <p style="text-align: center; font-size: 18px; color: white;">You are not logged in. Do it and try again.
+                Follow the below link.</p>
+              <div class="ca_content" style="display: flex; justify-content: center;">
+                <a href="/accounts/login" class="btn register-btn btn-primary px-3">Login</a>
+                <a href="/accounts/signup" class="btn register-btn btn-primary px-3">Register</a>
+              </div>
               {% elif not user.extendeduser.ambassador %}
-                <p style="text-align: center; font-size: 18px; color: white;">Want to become a campus ambassador?</p>
-                <div class="ca_content" style="display: flex; justify-content: center;">
-                  <a href="/users/make_ca" class="btn register-btn btn-primary px-3">Yes</a>
-                  <a href="#" class="btn register-btn btn-primary px-3">No</a>
-                </div>
+              <p style="text-align: center; font-size: 18px; color: white;">Want to become a campus ambassador?</p>
+              <div class="ca_content" style="display: flex; justify-content: center;">
+                <a href="/users/make_ca" class="btn register-btn btn-primary px-3">Yes</a>
+                <a href="#" class="btn register-btn btn-primary px-3">No</a>
+              </div>
               {% else %}
-                <p style="text-align: center; font-size: 18px; color: white;">Your are already campus ambassador</p>
+              <p style="text-align: center; font-size: 18px; color: white;">Your are already campus ambassador</p>
               {% endif %}
             </div>
           </div>
@@ -156,16 +158,19 @@
     </div>
   </header>
   {% if messages %}
-    {% for message in messages %}
-    <div id="alert" style="position: absolute; top: 10%; width: 70%; left: 50%; transform: translateX(-50%); opacity: 1; z-index: 10;" class="alert alert-info alert-dismissible" role="alert">
-        {{message}}
-        <p style="color: #055160; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 1rem; cursor: pointer;" onclick="document.getElementById('alert').style.display = 'none'"><i class="fas fa-times"></i></p>
-      </div>
-    {% endfor %}
+  {% for message in messages %}
+  <div id="alert"
+    style="position: absolute; top: 10%; width: 70%; left: 50%; transform: translateX(-50%); opacity: 1; z-index: 10;"
+    class="alert alert-info alert-dismissible" role="alert">
+    {{message}}
+    <p style="color: #055160; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 1rem; cursor: pointer;"
+      onclick="document.getElementById('alert').style.display = 'none'"><i class="fas fa-times"></i></p>
+  </div>
+  {% endfor %}
   {% endif %}
   <!-- End Header -->
-  {% block content %} 
-  
+  {% block content %}
+
   {% endblock %}
 
   <!-- ======= Footer ======= -->
@@ -228,7 +233,8 @@
             <div class="social-links mt-3">
               <a href="https://www.facebook.com/SnT.iitj" class="facebook"><i class="bx bxl-facebook"></i></a>
               <a href="https://www.instagram.com/prometeo.iitj/" class="instagram"><i class="bx bxl-instagram"></i></a>
-              <a href="https://www.linkedin.com/company/prometeo2022/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              <a href="https://www.linkedin.com/company/prometeo2022/" class="linkedin"><i
+                  class="bx bxl-linkedin"></i></a>
               <!-- <a href="https://github.com/Sahil1479/Prometeo" class="github"><i class="bx bxl-github"></i></a> -->
             </div>
           </div>
@@ -264,7 +270,7 @@
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/tabs.js' %}"></script>
 
-  
+
 
   <script>
     AOS.init({
