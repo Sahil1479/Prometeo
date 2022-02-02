@@ -56,6 +56,7 @@
         <a class="dropdown-item" href="{% url 'event_type_info' 'exhibition' %}">Exhibitions</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'panel_discussion' %}">Panel Discussion</a>
       </div>
     </li>
     <!-- <li>
@@ -112,6 +113,7 @@
       <a class="dropdown-item" href="{% url 'event_type_info' 'exhibition' %}">Exhibitions</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'panel_discussion' %}">Panel Discussion</a>
     </div>
   </li>
   <li class="nav-item">
@@ -133,7 +135,7 @@
 <hr>
 <h2>Profile</h2>
 <ul>
-    <li><b>Email: </b>{{ cur_user..email }}</li>
+    <li><b>Email: </b>{{ cur_user.email }}</li>
     <li><b>First Name: </b>{{ cur_user.first_name }}</li>
     <li><b>Last Name: </b>{{ cur_user.last_name }}</li>
     <li><b>Contact: </b>{{ cur_user.contact }}</li>

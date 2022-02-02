@@ -1,3 +1,4 @@
+from os import name
 from django.db import models
 
 # Create your models here.
@@ -7,7 +8,7 @@ EVENT_CHOICES = (
     ('informal', 'Informal'),
     ('exhibition', 'Exhibition'),
     ('talk', 'Talk'),
-    ('panel discussion', 'Panel Discussion'),
+    ('panel_discussion', 'Panel Discussion'),
     ('initiative', 'Initiative'),
     ('entrepreneurial', 'Entrepreneurial'),
 )
@@ -61,3 +62,10 @@ class Contacts(models.Model):
 
     class Meta:
         verbose_name_plural = "Contacts"
+
+class Panel_members(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    designation = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="images/panelist/", verbose_name="Panelist image", blank=True, null=True)
+    
