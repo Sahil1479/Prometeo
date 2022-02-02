@@ -175,7 +175,7 @@
                 </tfoot>
                 <tbody>
                     {% for cur_user in users %}
-                    {% if not cur_user.is_superuser %}
+                    {% if not cur_user.is_staff %}
                         <tr>
                             <td><a href="{% url 'user_info' cur_user.pk %}">{{ cur_user.user.email }}</a></td>
                             <td>{{ cur_user.first_name }}</td>

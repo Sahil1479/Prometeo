@@ -14,7 +14,7 @@ from django.urls import reverse
 sendMailID = settings.EMAIL_HOST_USER
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def update_event_state(request, type, eventid, redirect_url_name):
     updated_event = get_object_or_404(Event, pk=eventid)
     updated_event.event_started = not updated_event.event_started
@@ -22,7 +22,7 @@ def update_event_state(request, type, eventid, redirect_url_name):
     return HttpResponseRedirect(reverse(redirect_url_name))
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/users/')
 def users_info(request):
     users = ExtendedUser.objects.all()
     wbname = 'Campus Ambassador List.xlsx'
@@ -124,7 +124,7 @@ def users_info(request):
     return render(request, 'dashboard/users_info.html', {'users': users, 'wbname': wbname, 'wbname2': wbname2})
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/users/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/users/')
 def user_info(request, userid):
     user = get_object_or_404(CustomUser, pk=userid)
     teams = {}
@@ -133,13 +133,13 @@ def user_info(request, userid):
     return render(request, 'dashboard/user_info.html', {'cur_user': user, 'teams': teams})
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def events_info(request):
     events = Event.objects.all()
     return render(request, 'dashboard/events_info.html', {'events': events})
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def event_type_info(request, type):
     events = Event.objects.filter(type=type).all()
     wbname = f'Events ({type}) Participation List.xlsx'
@@ -284,7 +284,7 @@ def event_type_info(request, type):
     return render(request, 'dashboard/event_type_info.html', {'events': events, 'type': type, 'wbname': wbname, 'wbname2': wbname2})
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def event_info(request, type, eventid):
     event = get_object_or_404(Event, pk=eventid)
     wbname = f'{event.name} Participation List.xlsx'
@@ -426,7 +426,7 @@ def event_info(request, type, eventid):
     return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2})
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/mass_mail/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/mass_mail/')
 def mass_mail(request):
     # technical = Event.objects.filter(type='technical')
     # informal = Event.objects.filter(type='informal')
@@ -479,7 +479,7 @@ def mass_mail(request):
     return render(request, 'dashboard/mass_mail.html', {'form': form})
 
 
-@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/?next=/dashboard/events/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def change_registration(request, type, eventid, value):
     event = get_object_or_404(Event, pk=eventid)
     if(value == 'open'):
