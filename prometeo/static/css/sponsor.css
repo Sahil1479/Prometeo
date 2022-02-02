@@ -42,7 +42,7 @@
   }
   .img-area img {
     width: 80%;
-    height: auto;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,6 +113,18 @@
     .team-card {
       width: 90%;
       max-width: 250px;
+    }
+
+    .img-area img {
+      width: 80%;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      left: 10%;
+      /* max-height: 100px; */
+      transition: all 0.4s ease 0s;
     }
   }
   @media (max-width: 450px) {

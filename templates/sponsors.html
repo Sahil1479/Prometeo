@@ -12,14 +12,12 @@
 <link href="{% static 'css/sponsor.css' %}" rel="stylesheet" />
 {% endblock %}
 
-
-
-
 {% block content %}
 <section class="dark mainDiv">
     <div class="container py-4">
         <div>
             <div style="padding-top: 10px;"></div>
+            {% if sponsors %}
             {% for data in sponsors %}
             <div class="teamContainer">
                 <div class="section-header" data-aos="fade-up">
@@ -47,7 +45,14 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div style="padding-top: 10px;"></div>
+            <div class="section-header" data-aos="fade-up">
+                <h2>Coming Soon ...</h2>
+            </div>
         </div>
+        {% endif %}
+    </div>
     </div>
 </section>
 
