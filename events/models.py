@@ -62,7 +62,7 @@ class Contacts(models.Model):
     class Meta:
         verbose_name_plural = "Contacts"
 
-class Panel_members(models.Model):
+class Panel(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     designation = models.CharField(max_length=50)

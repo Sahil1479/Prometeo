@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Contacts, Panel_members
+from .models import Event, Contacts, Panel
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -7,7 +7,7 @@ class ContactsAdmin(admin.StackedInline):
     model = Contacts
 
 class PanelAdmin(admin.StackedInline):
-    model = Panel_members
+    model = Panel
 
 
 class EventAdmin(admin.ModelAdmin):

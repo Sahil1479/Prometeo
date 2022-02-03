@@ -30,6 +30,9 @@ def events(request, type):
     elif type == 'talk':
         events = Event.objects.filter(type=type)
         return render(request, 'speakers.html', {'events': events, 'type': type})
+    elif type == 'panel_discussion':
+        events = Event.objects.filter(type=type)
+        return render(request, 'panel.html', {'events': events, 'type': type})
     else:
         typeFound = False
         for item in EVENT_CHOICES:
