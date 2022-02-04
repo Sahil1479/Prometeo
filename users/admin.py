@@ -8,7 +8,7 @@ from .models import ExtendedUser, CustomUser, Team
 class ExtendedUserAdmin(admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name', 'college', 'ambassador')
     list_filter = ('ambassador',)
-    search_fields = ['user', 'first_name', 'last_name', 'college', 'contact', 'city']
+    search_fields = ['user__email', 'user__first_name', 'user__last_name', 'college', 'contact', 'city']
 
     class Meta:
         model = ExtendedUser
@@ -40,7 +40,7 @@ class UserAdmin(DjangoUserAdmin):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'leader', 'event')
     list_filter = ('event',)
-    search_fields = ['name', 'leader', ]
+    search_fields = ['name', 'leader__email', ]
 
 
 admin.site.register(Team, TeamAdmin)
