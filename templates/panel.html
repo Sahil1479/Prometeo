@@ -1,0 +1,101 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+{{type|capfirst}} Events
+{% endblock %}
+
+
+{% block style %}
+<!-- import css files or write css code-->
+<link href="{% static 'css/panel.css' %}" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<section class="dark">
+	<div class="container py-4">
+        <div style="margin-top: 20px; margin-bottom: 30px; width:100%; background-attachment: fixed;align-items: center; 
+        justify-content: center; display:flex">
+            <div class="section-header">
+                <h2>Panel Discussions</h2>
+            </div>
+        </div>
+        {% if events.count == 0 %}
+            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
+        {% for event in events %}
+            {% if event.type == 'panel_discussion' %}
+            <article class="postcard dark blue" data-aos="fade-up">
+                <!-- <a class="postcard__img_link">
+                    <img class="postcard__img" src="{{event.image.url}}" alt="Image Title" />
+                </a> -->
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue">{{event.name}}</h1>
+                    {% if event.description %}
+                    <div class="postcard__subtitle small">
+                        <time datetime="2020-05-25 12:00:00">
+                            <!-- <i class="fas fa-calendar-alt mr-2"></i> -->
+                            <!-- {{ event.designation }} -->
+                        </time>
+                    </div>
+                    {% endif %}
+                    <div class="postcard__bar"></div>
+                    <div class="postcard__preview-txt">{{event.description}}</div>
+                    <div class="row ">
+                      {% for panelist in panelists %}
+                      {% if panelist.event == event %}
+                        <div class="col-3 center-block align-items-center panelist-details">
+                           <div class="row justify-content-center panelist-img" style="background-image: url({{panelist.image.url}}); background-size: cover;background-repeat: no-repeat;">
+                           </div>
+                           <div class="row  panelist-info">{{panelist.name}}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
+                        {% if event in user.extendeduser.events.all %}
+                            {% if event.meet_link %}
+                            <a href="{{ event.meet_link }}">
+                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
+                            {% if event.webx_link %}
+                            <a href="{{ event.webx_link }}">
+                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
+                            {% if event.youtube_link %}
+                            <a href="{{ event.youtube_link }}">
+                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if event in user.extendeduser.events.all %}
+                            <li class="tag__item"><i class="fas fa-edit mr-2"></i> Already Registered</li>
+                        {% else %}
+                            <a href="/users/register_indi_event/{{event.id}}">
+                                <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
+                            </a>
+                        {% endif %}
+                    </ul>
+                </div>
+            </article>
+            {% endif %}
+        {% endfor %}
+	</div>
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'js/main.js' %}"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+{% endblock %}

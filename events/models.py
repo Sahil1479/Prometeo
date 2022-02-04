@@ -69,3 +69,13 @@ class Contacts(models.Model):
 
     class Meta:
         verbose_name_plural = "Contacts"
+
+
+class Panel(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='panel')
+    name = models.CharField(max_length=50)
+    designation = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="images/panelist/", verbose_name="Panelist image", blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = "Panel"

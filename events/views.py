@@ -3,7 +3,7 @@ from .models import Brochure, Event
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from datetime import date, datetime
-from .models import EVENT_CHOICES
+from .models import EVENT_CHOICES, Panel
 
 
 def registrationNotCompleted(request):
@@ -31,6 +31,10 @@ def events(request, type):
     elif type == 'talk':
         events = Event.objects.filter(type=type)
         return render(request, 'speakers.html', {'events': events, 'type': type, 'brochure': brochure, })
+    elif type == 'panel_discussion':
+        events = Event.objects.filter(type=type)
+        panelist = Panel.objects.all()
+        return render(request, 'panel.html', {'events': events, 'panelists': panelist, 'type': type})
     else:
         typeFound = False
         for item in EVENT_CHOICES:

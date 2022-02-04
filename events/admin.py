@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Contacts, Brochure
+from .models import Event, Contacts, Brochure, Panel
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -7,11 +7,15 @@ class ContactsAdmin(admin.StackedInline):
     model = Contacts
 
 
+class PanelAdmin(admin.StackedInline):
+    model = Panel
+
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'time', 'venue', 'registration_open', 'type')
     list_filter = ('type', 'registration_open')
     search_fields = ['name']
-    inlines = [ContactsAdmin, ]
+    inlines = [ContactsAdmin, PanelAdmin]
     fieldsets = (
         (_('Event Details'), {'fields': ('name', 'type', 'speaker', 'designation', 'description', 'problem_statement', 'rulebook_text', 'prize', 'external_link', 'venue', 'featured')}),
         (_('Event Registration Details'), {'fields': ('participation_type', 'min_team_size', 'max_team_size', 'registration_open')}),
