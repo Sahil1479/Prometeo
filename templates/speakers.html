@@ -25,6 +25,14 @@
                 <h2>Speakers</h2>
             </div>
         </div>
+        {% if brochure %}
+            <p data-aos="fade-in" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px"><a href="{{brochure.file.url}}" style="color: #2b2d2e;
+                font-size: medium;
+                background: #ffffff;
+                padding: 10px;
+                border-radius: 5px;
+                border: 3px solid #47b2e4;"><i class="fas fa-download"></i> {{brochure.name}}</a></p>
+        {% endif %}
         {% if events.count == 0 %}
             <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
         {% endif %}

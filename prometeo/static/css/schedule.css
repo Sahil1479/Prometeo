@@ -64,6 +64,11 @@
   padding: 10px 100px;
   margin: 10px;
 }
+#schedule .schedule-img {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+}
 @media (max-width: 991px) {
   #schedule .nav-tabs a {
     padding: 8px 60px;
@@ -96,6 +101,7 @@
     width: 75%;
   }
 }
+
 @media (max-width: 767px) {
   #schedule .tab-pane {
     text-align: -webkit-center;
@@ -136,8 +142,8 @@
   border: 3px solid #2da2e5;
   border-radius: 5px;
   color: #fff;
-  width: 100px;
-  height: 100px;
+  width: 170px;
+  height: 170px;
   overflow: hidden;
   float: left;
   margin: 0 10px 10px 0;

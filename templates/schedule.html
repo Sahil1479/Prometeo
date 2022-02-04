@@ -15,6 +15,20 @@
       color: white;
       font-weight: 600; 
       margin-bottom: 25px;"><i class="far fa-calendar-alt" style="color: #49fcff; margin-right: 5px"></i> 26th Feb - 1st Mar</p>
+      {% if schedule_file %}
+        <p data-aos="fade-in" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px">
+          <a 
+            href="{{schedule_file.file.url}}" 
+            style="color: #2b2d2e;
+            font-size: medium;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            border: 3px solid #47b2e4;">
+              <i class="fas fa-download"></i> {{schedule_file.name}}
+          </a>
+        </p>
+      {% endif %}
     <ul
       class="nav nav-tabs"
       role="tablist"
@@ -53,14 +67,17 @@
         class="col-lg-9 tab-pane fade show active"
         id="day-1"
       >
+        {% if day1.count == 0 %}
+          <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
         {% for event in day1 %}
         <div class="row schedule-item">
-          <div class="col-md-2 schedule-img">
+          <div class="col-md-3 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10 schedule-data">
+          <div class="col-md-9 schedule-data">
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
@@ -89,14 +106,17 @@
         class="col-lg-9 tab-pane fade"
         id="day-2"
       >
+        {% if day2.count == 0 %}
+          <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
         {% for event in day2 %}
         <div class="row schedule-item">
-          <div class="col-md-2 schedule-img">
+          <div class="col-md-3 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10 schedule-data">
+          <div class="col-md-9 schedule-data">
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
@@ -125,14 +145,17 @@
         class="col-lg-9 tab-pane fade"
         id="day-3"
       >
+        {% if day3.count == 0 %}
+          <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
         {% for event in day3 %}
         <div class="row schedule-item">
-          <div class="col-md-2 schedule-img">
+          <div class="col-md-3 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10 schedule-data">
+          <div class="col-md-9 schedule-data">
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span
@@ -161,14 +184,17 @@
         class="col-lg-9 tab-pane fade"
         id="day-4"
       >
+        {% if day4.count == 0 %}
+          <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
         {% for event in day4 %}
         <div class="row schedule-item">
-          <div class="col-md-2 schedule-img">
+          <div class="col-md-3 schedule-img">
             <div class="speaker">
               <img src="{{ event.image.url }}" alt="Brenden Legros" />
             </div>
         </div>
-          <div class="col-md-10 schedule-data">
+          <div class="col-md-9 schedule-data">
             <h4 style="color: #49fcff;">{{event.name}}</h4>
             <p>
               {% if event.type == 'talk' %}<span

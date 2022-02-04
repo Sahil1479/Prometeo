@@ -18,6 +18,15 @@ EVENT_PARTICIPATION = (
 )
 
 
+class Brochure(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Document name', null=False, blank=False)
+    type = models.CharField(max_length=30, choices=EVENT_CHOICES+(('schedule_file', 'schedule_file'),), default='technical', verbose_name='Event Type')
+    file = models.FileField(upload_to='brochures/', null=False, blank=False, verbose_name='File')
+
+    def __str__(self):
+        return self.name
+
+
 class Event(models.Model):
     name = models.CharField(max_length=50, verbose_name="Event Name", unique=True, blank=False, null=False)
     speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty)")

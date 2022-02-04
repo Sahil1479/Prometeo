@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Event, Panel
+from .models import Brochure, Event
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from datetime import date, datetime
-from .models import EVENT_CHOICES
+from .models import EVENT_CHOICES, Panel
 
 
 def registrationNotCompleted(request):
@@ -22,6 +22,7 @@ def events(request, type):
 
     events = Event.objects.all()
     today = date.today()
+    brochure = Brochure.objects.filter(type=type).first()
     if type == 'live':
         liveevents = Event.objects.filter(end_date__gte=today).filter(date__lte=today).filter(event_started=True).order_by('time')
         return render(request, 'liveevents.html', {'liveevents': liveevents, 'type': type,
@@ -29,7 +30,7 @@ def events(request, type):
                                                    })
     elif type == 'talk':
         events = Event.objects.filter(type=type)
-        return render(request, 'speakers.html', {'events': events, 'type': type})
+        return render(request, 'speakers.html', {'events': events, 'type': type, 'brochure': brochure, })
     elif type == 'panel_discussion':
         events = Event.objects.filter(type=type)
         panelist = Panel.objects.all()
@@ -43,7 +44,7 @@ def events(request, type):
             messages.info(request, 'No event type exists with the given name.')
             return redirect("/")
         events = Event.objects.filter(type=type)
-        return render(request, 'events.html', {'events': events, 'type': type})
+        return render(request, 'events.html', {'events': events, 'type': type, 'brochure': brochure, })
 
 
 def event(request, type, eventid):
@@ -56,8 +57,9 @@ def event(request, type, eventid):
 def schedule(request):
     if registrationNotCompleted(request):
         return redirect("/users/profile")
+    schedule_file = Brochure.objects.filter(type='schedule_file').first()
     day1 = Event.objects.filter(date="2022-02-26").order_by('time')
     day2 = Event.objects.filter(date="2022-02-27").order_by('time')
     day3 = Event.objects.filter(date="2022-02-28").order_by('time')
     day4 = Event.objects.filter(date="2022-03-01").order_by('time')
-    return render(request, 'schedule.html', {'day1': day1, 'day2': day2, 'day3': day3, 'day4': day4})
+    return render(request, 'schedule.html', {'day1': day1, 'day2': day2, 'day3': day3, 'day4': day4, 'schedule_file': schedule_file, })

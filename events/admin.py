@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Contacts, Panel
+from .models import Event, Contacts, Brochure, Panel
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -27,3 +27,13 @@ class EventAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, EventAdmin)
+
+
+@admin.register(Brochure)
+class BrochureAdmin(admin.ModelAdmin):
+    list_display = ['name', 'type', ]
+    search_fields = ['name', ]
+
+    class Meta:
+        model = Brochure
+        fields = '__all__'

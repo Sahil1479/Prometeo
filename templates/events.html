@@ -27,13 +27,20 @@ justify-content: center; display:flex">
   
    
 
-<div class="container p-5 shadow" style="margin-top: 70px; position: relative;top: -60px; width: min-width;border-radius: 5px;">
+<div class="container p-5 shadow" style="margin-top: 40px; position: relative;top: -60px; width: min-width;border-radius: 5px;">
+    {% if brochure %}
+        <p data-aos="fade-in" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px"><a href="{{brochure.file.url}}" style="color: #2b2d2e;
+            font-size: medium;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 5px; border: 3px solid #47b2e4;"><i class="fas fa-download"></i> {{brochure.name}}</a></p>
+    {% endif %}
     <div class="row">
        
             
             <!-- event cards -->
         {% if events.count == 0 %}
-            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!!</p>
+            <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!!</p>
 
         {% else %}
             {% for event in events %}
@@ -42,7 +49,7 @@ justify-content: center; display:flex">
                         <div class="card card-{{event.id}} pb-0 shadow post-modules" onmouseover="bgblur24(this)"  onmouseout="bgrestore24(this)" style="width:fit-content; background-color: rgb(0, 0, 0); border-color: rgba(255, 255, 255, 0.5) !important;">
                             <img class="card-img-top cover-img" src="{{event.image.url}}" alt="Card image">
                             <!-- card header with badge starts -->
-                            {% if user.is_authenticated and not user.is_superuser %}
+                            {% if user.is_authenticated and not user.is_staff %}
                                 {% if event in user.events.all %}
                                 <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
                                 {% elif not event.registration_open %}
@@ -66,25 +73,11 @@ justify-content: center; display:flex">
                                 <p class="card-text description description-{{event.id}}" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">{{event.description|truncatechars:145}}</p>
                             </div>
                         </div>
-                        {% if user.is_superuser %}
-                        <div class="row no-gutters" style=" border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);">
-                            <div class="col-md-12">
-                                <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
-                            </div>
-                        </div>
-                        {% elif user.is_authenticated %}
                         <div class="row no-gutters">
                             <div class="col-md-12">
                                 <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
                             </div>
                         </div>
-                        {% else %}
-                        <div class="row no-gutters">
-                            <div class="col-md-12">
-                                <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
-                            </div>
-                        </div>
-                        {% endif %}
                     </div>
                     <!-- end card -->
                 {% endif %}
