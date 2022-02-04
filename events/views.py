@@ -33,7 +33,7 @@ def events(request, type):
     elif type == 'panel_discussion':
         events = Event.objects.filter(type=type)
         panelist = Panel.objects.all()
-        return render(request, 'panel.html', {'events': events, 'panelists':panelist, 'type': type})
+        return render(request, 'panel.html', {'events': events, 'panelists': panelist, 'type': type})
     else:
         typeFound = False
         for item in EVENT_CHOICES:
