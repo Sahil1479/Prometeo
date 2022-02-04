@@ -135,7 +135,10 @@
 <hr>
 <h2>Details</h2>
 <ul>
-    <li><b>Name: </b>{{ event.name }}</li>
+    <li><b>Event Name: </b>{{ event.name }}</li>
+    {% if event.speaker %} 
+    <li><b>Speaker Name: </b>{{ event.speaker }}</li>
+    {% endif %}
     <li><b>Type: </b>{{ event.type }}</li>
     <li><b>Participation Type: </b>
         {{ event.participation_type }}

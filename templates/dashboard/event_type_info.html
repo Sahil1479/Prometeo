@@ -148,7 +148,11 @@
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                    <th>Event Name</th>
+                  {% if type == 'talk' %} 
+                  <th>Speaker Name</th>
+                  {% else %} 
+                  <th>Event Name</th>
+                  {% endif %}
                     <th>Participation Type</th>
                     <th>Date</th>
                     <th>Time</th>
@@ -161,7 +165,11 @@
                 <tbody>
                     {% for event in events %}
                     <tr>
+                       {% if not event.speaker %}
                         <td><a href="{% url 'event_info' event.type event.id %}">{{ event.name }}</a></td>
+                      {% else %} 
+                       <td><a href="{% url 'event_info' event.type event.id %}">{{ event.speaker }}</a></td>
+                       {% endif %}
                         <td style="text-transform: capitalize;">{{ event.participation_type }}
                             {% if event.participation_type == 'team' %}
                             ({{ event.min_team_size }} to {{ event.max_team_size }} Members)
