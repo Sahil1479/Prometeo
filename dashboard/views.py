@@ -107,7 +107,7 @@ def users_info(request):
         worksheet2.write(row2, 0, user.user.email)
         worksheet2.write(row2, 1, user.first_name + ' ' + user.last_name)
         worksheet2.write(row2, 2, user.contact)
-        worksheet2.write(row2, 3, user.referred_by) if user.referred_by is not None else worksheet2.write(row2, 3, 'NA')
+        worksheet2.write(row2, 3, str(user.referred_by)) if user.referred_by is not None else worksheet2.write(row2, 3, 'NA')
         worksheet2.write(row2, 4, 'YES') if user.ambassador else worksheet2.write(row2, 4, 'NO')
         worksheet2.write(row2, 5, user.college)
         worksheet2.write(row2, 6, user.current_year)
