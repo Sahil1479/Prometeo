@@ -107,6 +107,10 @@ def create_team(request, eventid):
     if request.method == 'POST':
         form = TeamCreationForm(request.POST)
         if form.is_valid():
+            # if(Team.objects.filter(name = form.cleaned_data['name']).exists()):
+            #     # form.add_error('name', 'Team with this given name is already created.')
+            #     pass
+            # else:
             team = form.save(commit=False)
             team.id = 'PRO' + str(uuid.uuid4().int)[:6]
             team.leader = request.user
@@ -127,7 +131,7 @@ def create_team(request, eventid):
             return redirect('/users/my_events')
     else:
         form = TeamCreationForm()
-        return render(request, 'create_team.html', {'form': form, 'event': event})
+    return render(request, 'create_team.html', {'form': form, 'event': event})
 
 
 @login_required
@@ -267,10 +271,10 @@ def edit_team(request, teamid):
             if(team.leader not in form.cleaned_data['members']):
                 form.add_error('members', 'You cannot remove the leader (creator) of the team from the team.')
             else:
-                form.save()
                 for member in team.members.all():
                     if member not in form.cleaned_data['members']:
                         member.extendeduser.events.remove(team.event)
+                form.save()
 
                 messages.success(request, "The team details have been updated.")
                 return redirect((f'/events/{team.event.type}/{team.event.pk}'))

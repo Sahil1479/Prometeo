@@ -53,7 +53,7 @@ justify-content: center; display:flex">
                                 {% if event in user.events.all %}
                                 <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
                                 {% elif not event.registration_open %}
-                                <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                                <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Not Opened</span>
                                 {% endif %}
                             {% elif not event.registration_open %}
                             <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
