@@ -30,7 +30,7 @@ staticfiles/
 ads/
 media/
 !media/workbooks
-
+datadump.json
 
 
 .idea/

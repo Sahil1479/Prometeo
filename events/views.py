@@ -30,7 +30,7 @@ def events(request, type):
                                                    })
     elif type == 'talk':
         events = Event.objects.filter(type=type)
-        return render(request, 'speakers.html', {'events': events, 'type': type, 'brochure': brochure,})
+        return render(request, 'speakers.html', {'events': events, 'type': type, 'brochure': brochure, })
     else:
         typeFound = False
         for item in EVENT_CHOICES:
@@ -40,7 +40,7 @@ def events(request, type):
             messages.info(request, 'No event type exists with the given name.')
             return redirect("/")
         events = Event.objects.filter(type=type)
-        return render(request, 'events.html', {'events': events, 'type': type, 'brochure': brochure,})
+        return render(request, 'events.html', {'events': events, 'type': type, 'brochure': brochure, })
 
 
 def event(request, type, eventid):
@@ -58,4 +58,4 @@ def schedule(request):
     day2 = Event.objects.filter(date="2022-02-27").order_by('time')
     day3 = Event.objects.filter(date="2022-02-28").order_by('time')
     day4 = Event.objects.filter(date="2022-03-01").order_by('time')
-    return render(request, 'schedule.html', {'day1': day1, 'day2': day2, 'day3': day3, 'day4': day4, 'schedule_file': schedule_file,})
+    return render(request, 'schedule.html', {'day1': day1, 'day2': day2, 'day3': day3, 'day4': day4, 'schedule_file': schedule_file, })

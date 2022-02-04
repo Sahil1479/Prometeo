@@ -275,7 +275,6 @@ def edit_team(request, teamid):
                     if member not in form.cleaned_data['members']:
                         member.extendeduser.events.remove(team.event)
                 form.save()
-
                 messages.success(request, "The team details have been updated.")
                 return redirect((f'/events/{team.event.type}/{team.event.pk}'))
     else:

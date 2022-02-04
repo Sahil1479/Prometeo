@@ -27,8 +27,8 @@ admin.site.register(Event, EventAdmin)
 
 @admin.register(Brochure)
 class BrochureAdmin(admin.ModelAdmin):
-    list_display = ['name', 'type',]
-    search_fields = ['name',]
+    list_display = ['name', 'type', ]
+    search_fields = ['name', ]
 
     class Meta:
         model = Brochure
