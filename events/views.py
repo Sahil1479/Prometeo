@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Event
+from .models import Event, Panel
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from datetime import date, datetime
@@ -32,7 +32,8 @@ def events(request, type):
         return render(request, 'speakers.html', {'events': events, 'type': type})
     elif type == 'panel_discussion':
         events = Event.objects.filter(type=type)
-        return render(request, 'panel.html', {'events': events, 'type': type})
+        panelist = Panel.objects.all()
+        return render(request, 'panel.html', {'events': events, 'panelists':panelist, 'type': type})
     else:
         typeFound = False
         for item in EVENT_CHOICES:

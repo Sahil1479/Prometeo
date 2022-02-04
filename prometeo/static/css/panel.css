@@ -71,6 +71,26 @@
   .postcard .t-dark {
     color: #18151f;
   }
+  .panelist-details{
+    background-color: transparent !important ;
+   
+  }
+  .panelist-img{
+    max-width: 10em;
+    max-height: 10em;
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    left: 50%;
+   }
+   .panelist-info{
+     text-align: center;
+   }
+   img{
+     size: 50%;
+   }
   .postcard a {
     color: inherit;
   }

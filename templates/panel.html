@@ -46,18 +46,16 @@
                     {% endif %}
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{event.description}}</div>
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <img src="{{event.panel.image.url}}">
-                                </div>
-                                <p class="card-text">
-                                    {{event.panel.name}}
-                                </p>
-                            </div>
+                    <div class="row ">
+                      {% for panelist in panelists %}
+                      {% if panelist.event == event %}
+                        <div class="col-3 center-block align-items-center panelist-details">
+                           <div class="row justify-content-center panelist-img" style="background-image: url({{panelist.image.url}}); background-size: cover;background-repeat: no-repeat;">
+                           </div>
+                           <div class="row  panelist-info">{{panelist.name}}</div>
                         </div>
-                      
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <ul class="postcard__tagbox">
                         <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
