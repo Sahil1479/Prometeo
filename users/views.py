@@ -156,7 +156,10 @@ def register_indi_event(request, eventid):
     team.members.add(user)
     team.save()
     user.extendeduser.events.add(event)
-    message = (f"You have successfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
+    if event.type == "talk":
+        message = (f"You have successfully registered for this talk by {event.speaker}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
+    else:
+        message = (f"You have successfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
     send_mail(
         'Registration Details',
         message,

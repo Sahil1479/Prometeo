@@ -66,18 +66,20 @@ Registered Events
         {% if team.event.type == category %}
           <div class="teamCard" data-aos="fade-down">
             <div class="row">
-              <div class="col-lg-3">
-                <img style="width: 100%; height: 270px;" src="{{ team.event.image.url }}" alt="Event Image">
+              <div class="col-lg-3" style="display: flex; justify-content: center; align-items: center;">
+                <img style="width: 100%; height: 270px; border-radius: 4px;" src="{{ team.event.image.url }}" alt="Event Image">
               </div>
               <div style="margin: auto 0px;" class="col-lg-9">
-                <h4 class="eventName">{{ team.event.name }}</h4>
                 {% if team.event.type == 'talk' %}
                   {% if team.event.speaker and team.event.designation %}
-                  <p style="color: white; font-size: 1rem;">By- {{team.event.speaker}} | {{team.event.designation}}</p>
+                  <h4>{{team.event.speaker}}</h4>
+                  <p style="color: #e1e1e1; font-size: 0.95rem; margin-top: -5px;">{{team.event.designation}}</p>
                   {% endif %}
+                {% else %}
+                  <h4 class="eventName">{{ team.event.name }}</h4>
                 {% endif %}
                   <div class="d-flex">
-                    <p style="color: white; padding: 1px 9px; margin-right: 10px; border: 1px solid white; border-radius: 3px; font-size: 0.75rem;">{{team.event.date}} | {{team.event.time}}</p>
+                    <p style="color: white; padding: 1px 9px; margin-right: 10px; border: 1px solid white; border-radius: 3px; font-size: 0.75rem;"><i class="fas fa-calendar-alt mr-2"></i> {% if team.event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{team.event.date}} | {{team.event.time}} {% endif %}</p>
                     {% if request.user == team.leader and team.event.participation_type == "team" %}
                     <p style="color: white; padding: 1px 9px; margin-right: 10px; border: 1px solid white; border-radius: 3px; font-size: 0.75rem;">Leader</p>
                     {% endif %}
@@ -94,7 +96,7 @@ Registered Events
                     {% endif %}
                   </div>
                   <div class="d-flex">
-                    <a class="btn btn-sm btn-outline-light mx-1" href="/events/{{team.event.type}}/{{team.event.pk}}"><i class="fas fa-info-circle"></i> More Info</a>
+                    <a class="btn btn-sm btn-outline-light" style="margin-right: 3px;" href="/events/{{team.event.type}}/{{team.event.pk}}"><i class="fas fa-info-circle"></i> More Info</a>
                     {% if request.user == team.leader and team.event.participation_type == "team" %}
                       <a class="btn btn-sm btn-outline-light mx-1" href="/users/edit_team/{{team.pk}}"><i class="fas fa-edit"></i> Edit Team</a>
                     {% endif %}

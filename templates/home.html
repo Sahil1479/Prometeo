@@ -318,24 +318,40 @@ Home
       </div>
       <div class="row" style="place-content: space-around;">
           {% for event in featured_events %}
+            {% if event.type == 'talk' or event.type == 'panel_discussion' %}
             <div class="member" data-aos="fade-up">
-              <div class="member-img">
-                <img src="{{event.image.url}}" class="img-fluid" alt="">
-              </div>
-              <div class="member-info">
-                {% if event.type == 'talk' %}
-                  <h4>{{event.speaker}}</h4>
-                  <span>{{event.designation}}</span>
-                {% else %}
-                  <h4>{{event.name}}</h4>
-                {% endif %}
-              </div>
-            </div>
+                  <a href="/events/{{event.type}}">
+                  <div class="member-img">
+                    <img src="{{event.image.url}}" class="img-fluid" alt="">
+                  </div>
+                  <div class="member-info">
+                    {% if event.type == 'talk' %}
+                      <h4>{{event.speaker}}</h4>
+                      <span>{{event.designation}}</span>
+                    {% else %}
+                      <h4>{{event.name}}</h4>
+                    {% endif %}
+                  </div>
+                </a>
+                </div>
+            {% else %}
+            <div class="member" data-aos="fade-up">
+                  <a href="/events/{{event.type}}/{{event.id}}">
+                  <div class="member-img">
+                    <img src="{{event.image.url}}" class="img-fluid" alt="">
+                  </div>
+                  <div class="member-info">
+                      <h4>{{event.name}}</h4>
+                      <span>{{event.type|capfirst}} Event</span>
+                  </div>
+                </a>
+                </div>
+            {% endif %}
           {% endfor %}
       </div>
     </div>
     <div class="section-title" data-aos="fade-up" style="padding-top: 15px;">
-      <a href="{% url 'events:events' 'Technical' %}" class="btn-learn-more">View More</a>
+      <a href="{% url 'events:events' 'schedule' %}" class="btn-learn-more">View More</a>
     </div>
 
   </section>

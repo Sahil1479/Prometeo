@@ -14,7 +14,6 @@ EVENT_CHOICES = (
 EVENT_PARTICIPATION = (
     ('individual', 'Individual Event'),
     ('team', 'Team Event'),
-    ('none', 'None')
 )
 
 
@@ -44,9 +43,9 @@ class Event(models.Model):
     rulebook_text = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Rulebook Text (HTML Format)")
     host = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Host")
     external_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="External Link for Registration")
-    date = models.DateField(verbose_name="Event Date", null=False, blank=False)
+    date = models.DateField(verbose_name="Event Date (Leave unchanged if the date is not decided)", null=False, blank=False, default="2023-01-01")
     time = models.TimeField(null=False, blank=False, verbose_name="Event Time")
-    end_date = models.DateField(verbose_name="Event end Date", null=False, blank=False)
+    end_date = models.DateField(verbose_name="Event end Date", null=False, blank=False, default="2023-01-01")
     end_time = models.TimeField(null=False, blank=False, verbose_name="Event end Time")
     venue = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Venue")
     registration_open = models.BooleanField(verbose_name="Registrations Open", default=True, blank=True)
