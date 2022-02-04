@@ -211,5 +211,6 @@ RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY', cast=str)
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY', cast=str)
 RECAPTCHA_USE_SSL = config('RECAPTCHA_USE_SSL', cast=str, default=True)
 
+
 ADMINS = [('Aryan', 'garg.10@iitj.ac.in'), ('Sahil', 'santosh.2@iitj.ac.in'), ('Rahul', 'gopathi.1@iitj.ac.in'), ('Sainath', 'reddy.17@iitj.ac.in'), ('Shrutayu', 'aggarwal.4@iitj.ac.in'), ('Joel', 'thomas.2@iitj.ac.in'), ]
 MANAGERS = ADMINS

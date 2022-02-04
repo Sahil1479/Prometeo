@@ -188,7 +188,7 @@
                                     <h4 class="info-title">Date</h4>
                                     <p>
                                         {% if event.date %}
-                                        {{ event.date }}
+                                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{event.date}} {% endif %}
                                         {% else %}
                                         COMING SOON
                                         {% endif %}
@@ -198,8 +198,6 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <!-- <h4 class="card-title">Date</h4>
-                    <p class="card-text">{{ event.date }}</p> -->
                             {% if event.time %}
                             <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
                                 <div class="icon icon-rose">
@@ -207,7 +205,7 @@
                                 </div>
                                 <div class="description">
                                     <h4 class="info-title">Time</h4>
-                                    <p>{{ event.time }}</p>
+                                    <p>{% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %} {{event.time}} {% endif %}</p>
 
                                 </div>
                             </div>
