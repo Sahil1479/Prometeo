@@ -20,9 +20,15 @@
 <!-- <div class="overlay" ></div> -->
 <div style="margin-top: 70px; width:100%; background-attachment: fixed;align-items: center; 
 justify-content: center; display:flex">
-    <div class="section-header">
-        <h2>{{ type }} events</h2>
-    </div>
+    {% if type == "workshop" %}
+        <div class="section-header">
+            <h2>{{ type }}s</h2>
+        </div>
+    {% else %}
+        <div class="section-header">
+            <h2>{{ type }} events</h2>
+        </div>
+    {% endif %}
 </div>
   
    

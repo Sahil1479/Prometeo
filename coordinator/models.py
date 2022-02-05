@@ -30,6 +30,7 @@ class Designation(models.Model):
 class Coordinator(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
     team = models.ForeignKey(Designation, on_delete=models.CASCADE)
+    designation = models.CharField(max_length=1000, blank=True, null=True)
     # category = models.CharField(max_length=100, choices=CHOICE_CATEGORY)
     image = models.ImageField(upload_to="uploads/team/")
     github_link = models.URLField(max_length=1000, blank=True, null=True)
