@@ -445,6 +445,7 @@ Home
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/particle.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/orbit.js' %}"></script>
@@ -509,5 +510,13 @@ Home
       window.onload = function() {
         setTimeout(function() { showPopUp(); }, 5000);
 	    };
+
+      $(document).ready(function () {
+        window.setTimeout(function () {
+          $("#alert").fadeTo(1000, 0).slideUp(1000, function () {
+            $("#alert").remove();
+      });
+    }, 5000);
+});
     </script>
 {% endblock %}

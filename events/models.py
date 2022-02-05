@@ -39,8 +39,6 @@ class Event(models.Model):
     max_team_size = models.IntegerField(verbose_name="Maximum Team Size (leave unchanged for individual event)", default=1)
     prize = models.CharField(max_length=100, verbose_name="Prize Money (Rs.)", null=True, blank=True, default="Prizes worth Rs.")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Event Description (Write more for speaker description)")
-    problem_statement = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Problem Statement")
-    rulebook_text = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Rulebook Text (HTML Format)")
     host = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Host")
     external_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="External Link for Registration")
     date = models.DateField(verbose_name="Event Date (Leave unchanged if the date is not decided)", null=False, blank=False, default="2023-01-01")
