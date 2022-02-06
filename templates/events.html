@@ -77,11 +77,8 @@ justify-content: center; display:flex">
                     <p class="card-text medium text-body"
                         style="color: white !important; margin-bottom: 0px !important;">
 
-                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
-                        Coming Soon
-                        {% else %}
-                        {{event.date}}
-                        {%endif %}
+                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %} {{event.date}} {%
+                        endif %}
 
                     </p>
                     {% endif %}
@@ -101,9 +98,41 @@ justify-content: center; display:flex">
         </div>
         <!-- end card -->
         {% endif %}
-        {% endfor %}
+        {% elif not event.registration_open %}
+        <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
         {% endif %}
+        <!-- card header with badge ends -->
+        <div class="card-body post-content">
+            {% if event.date %}
+            <p class="card-text medium text-body" style="color: white !important; margin-bottom: 0px !important;">
+
+                {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
+                Coming Soon
+                {% else %}
+                {{event.date}}
+                {%endif %}
+
+            </p>
+            {% endif %}
+            <a class="title" style="text-decoration: none;">
+                <h3>{{event.name}}</h3>
+            </a>
+            <p class="card-text description description-{{event.id}}" data-aos="fade-up" data-aos-delay="1000"
+                data-aos-duration="500" data-aos-once="true">{{event.description|truncatechars:145}}</p>
+        </div>
     </div>
+    <div class="row no-gutters">
+        <div class="col-md-12">
+            <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);"
+                class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
+        </div>
+    </div>
+</div>
+<!-- end card -->
+{% endif %}
+{% endfor %}
+{% endif %}
+</div>
 </div>
 
 
