@@ -69,7 +69,7 @@ justify-content: center; display:flex">
                                 {% if event.date %} 
                                 <p class="card-text medium text-body" style="color: white !important; margin-bottom: 0px !important;">
                                 
-                                    {{event.date}}
+                                    {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{event.date}} {% endif %}
                                 
                                 </p>
                                 {% endif %}
