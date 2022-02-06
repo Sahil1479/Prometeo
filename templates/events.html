@@ -21,118 +21,75 @@
 <div style="margin-top: 70px; width:100%; background-attachment: fixed;align-items: center; 
 justify-content: center; display:flex">
     {% if type == "workshop" %}
-    <div class="section-header">
-        <h2>{{ type }}s</h2>
-    </div>
+        <div class="section-header">
+            <h2>{{ type }}s</h2>
+        </div>
     {% else %}
-    <div class="section-header">
-        <h2>{{ type }} events</h2>
-    </div>
+        <div class="section-header">
+            <h2>{{ type }} events</h2>
+        </div>
     {% endif %}
 </div>
+  
+   
 
-
-
-<div class="container p-5 shadow"
-    style="margin-top: 40px; position: relative;top: -60px; width: min-width;border-radius: 5px;">
+<div class="container p-5 shadow" style="margin-top: 40px; position: relative;top: -60px; width: min-width;border-radius: 5px;">
     {% if brochure %}
-    <p data-aos="fade-in" data-aos-delay="500" data-aos-duration="500" data-aos-once="true"
-        style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px"><a
-            href="{{brochure.file.url}}" style="color: #2b2d2e;
+        <p data-aos="fade-in" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px"><a href="{{brochure.file.url}}" style="color: #2b2d2e;
             font-size: medium;
             background: #ffffff;
             padding: 10px;
             border-radius: 5px; border: 3px solid #47b2e4;"><i class="fas fa-download"></i> {{brochure.name}}</a></p>
     {% endif %}
     <div class="row">
-
-
-        <!-- event cards -->
+       
+            
+            <!-- event cards -->
         {% if events.count == 0 %}
-        <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once="true"
-            style="font-size: xx-large; color: white; text-align: center;">Coming Soon!!</p>
+            <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!!</p>
 
         {% else %}
-        {% for event in events %}
-        {% if event.type.capitalize|title == type.capitalize %}
-        <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto mb-4 justify-content-center" id="card" data-aos="fade-up"
-            data-aos-duration="1000" data-aos-once="true" style="border: 0.5px !important;">
-            <div class="card card-{{event.id}} pb-0 shadow post-modules" onmouseover="bgblur24(this)"
-                onmouseout="bgrestore24(this)"
-                style="width:fit-content; background-color: rgb(0, 0, 0); border-color: rgba(255, 255, 255, 0.5) !important;">
-                <img class="card-img-top cover-img" src="{{event.image.url}}" alt="Card image">
-                <!-- card header with badge starts -->
-                {% if user.is_authenticated and not user.is_staff %}
-                {% if event in user.events.all %}
-                <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
-                {% elif not event.registration_open %}
-                <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Not Opened</span>
+            {% for event in events %}
+                {% if event.type.capitalize|title == type.capitalize %}
+                    <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto mb-4 justify-content-center" id="card" data-aos="fade-up" data-aos-duration="1000" data-aos-once = "true" style="border: 0.5px !important;">
+                        <div class="card card-{{event.id}} pb-0 shadow post-modules" onmouseover="bgblur24(this)"  onmouseout="bgrestore24(this)" style="width:fit-content; background-color: rgb(0, 0, 0); border-color: rgba(255, 255, 255, 0.5) !important;">
+                            <img class="card-img-top cover-img" src="{{event.image.url}}" alt="Card image">
+                            <!-- card header with badge starts -->
+                            {% if user.is_authenticated and not user.is_staff %}
+                                {% if event in user.events.all %}
+                                <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
+                                {% elif not event.registration_open %}
+                                <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Not Opened</span>
+                                {% endif %}
+                            {% elif not event.registration_open %}
+                            <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
+                            {% endif %}
+                            <!-- card header with badge ends -->
+                            <div class="card-body post-content">
+                                {% if event.date %} 
+                                <p class="card-text medium text-body" style="color: white !important; margin-bottom: 0px !important;">
+                                
+                                    {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{event.date}} {% endif %}
+                                
+                                </p>
+                                {% endif %}
+                                <a class="title" style="text-decoration: none;">
+                                    <h3>{{event.name}}</h3>
+                                </a>
+                                <p class="card-text description description-{{event.id}}" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">{{event.description|truncatechars:145}}</p>
+                            </div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
                 {% endif %}
-                {% elif not event.registration_open %}
-                <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
-                {% endif %}
-                <!-- card header with badge ends -->
-                <div class="card-body post-content">
-                    {% if event.date %}
-                    <p class="card-text medium text-body"
-                        style="color: white !important; margin-bottom: 0px !important;">
-
-                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %} {{event.date}} {%
-                        endif %}
-
-                    </p>
-                    {% endif %}
-                    <a class="title" style="text-decoration: none;">
-                        <h3>{{event.name}}</h3>
-                    </a>
-                    <p class="card-text description description-{{event.id}}" data-aos="fade-up" data-aos-delay="1000"
-                        data-aos-duration="500" data-aos-once="true">{{event.description|truncatechars:145}}</p>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-md-12">
-                    <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);"
-                        class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
-                </div>
-            </div>
-        </div>
-        <!-- end card -->
+            {% endfor %}
         {% endif %}
-        {% elif not event.registration_open %}
-        <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Closed</span>
-        {% endif %}
-        <!-- card header with badge ends -->
-        <div class="card-body post-content">
-            {% if event.date %}
-            <p class="card-text medium text-body" style="color: white !important; margin-bottom: 0px !important;">
-
-                {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
-                Coming Soon
-                {% else %}
-                {{event.date}}
-                {%endif %}
-
-            </p>
-            {% endif %}
-            <a class="title" style="text-decoration: none;">
-                <h3>{{event.name}}</h3>
-            </a>
-            <p class="card-text description description-{{event.id}}" data-aos="fade-up" data-aos-delay="1000"
-                data-aos-duration="500" data-aos-once="true">{{event.description|truncatechars:145}}</p>
-        </div>
     </div>
-    <div class="row no-gutters">
-        <div class="col-md-12">
-            <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);"
-                class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
-        </div>
-    </div>
-</div>
-<!-- end card -->
-{% endif %}
-{% endfor %}
-{% endif %}
-</div>
 </div>
 
 
@@ -147,27 +104,27 @@ justify-content: center; display:flex">
 </script> -->
 <script type="text/javascript">
     var eventIDs = [];
-
+    
     "{% for event in events %}"
-    var eventID = "{{ event.id }}";
-    eventIDs.push(eventID.toString());
+        var eventID = "{{ event.id }}";
+        eventIDs.push(eventID.toString());
     "{% endfor %}"
 
-    eventIDs.forEach(function (eventID) {
-        $(".card-" + eventID).hover(function () {
+    eventIDs.forEach(function (eventID){
+        $(".card-"+eventID).hover(function(){
             //400 below is time in ms
-            $(".description-" + eventID).animate({ 'height': 'toggle' }, 400);
+            $(".description-"+ eventID).animate({'height':'toggle'},400);
         });
     });
 
     function bgrestore24(x) {
-        x.getElementsByClassName("cover-img")[0].style.background = "linear-gradient(180deg, rgba(18, 25, 33, 0) 41.15%, rgba(18, 25, 33, 0.37) 54.8%, rgba(18, 25, 33, 0.63) 71.51%, rgba(18, 25, 33, 0.86) 85.37%, #121921 100%)";
-        x.getElementsByClassName("cover-img")[0].style.backgroundSize = "cover";
-        x.getElementsByClassName("cover-img")[0].style.opacity = "0.6";
-        x.getElementsByClassName("cover-img")[0].style.filter = "blur(0px)";
-        x.getElementsByClassName("cover-img")[0].style.transition = "all 0.3s";
+      x.getElementsByClassName("cover-img")[0].style.background = "linear-gradient(180deg, rgba(18, 25, 33, 0) 41.15%, rgba(18, 25, 33, 0.37) 54.8%, rgba(18, 25, 33, 0.63) 71.51%, rgba(18, 25, 33, 0.86) 85.37%, #121921 100%)";
+      x.getElementsByClassName("cover-img")[0].style.backgroundSize = "cover";
+      x.getElementsByClassName("cover-img")[0].style.opacity = "0.6";
+      x.getElementsByClassName("cover-img")[0].style.filter = "blur(0px)";
+      x.getElementsByClassName("cover-img")[0].style.transition = "all 0.3s";
     }
-
+    
     function bgblur24(x) {
         x.getElementsByClassName("cover-img")[0].style.background = "linear-gradient(180deg, rgba(20, 30, 44, 0) 0%, rgba(19, 31, 44, 0.28) 17.19%, rgba(19, 31, 43, 0.61) 35.94%, rgba(19, 31, 44, 0.88) 85.37%, #141F2C 100%)";
         x.getElementsByClassName("cover-img")[0].style.backgroundSize = "cover";
