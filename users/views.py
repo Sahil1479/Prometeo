@@ -120,16 +120,15 @@ def create_team(request, eventid):
             team.members.add(request.user)
             team.save()
             request.user.extendeduser.events.add(event)
-            message = (f"Your team {team.name} have just registered for the {event.type} event {event.name}.")
+            message = (f"You have successfully created a team {team.name} for the {event.type} event {event.name}. ")
             isTeamEvent = True
             with get_connection(
                 username=sendMailID,
                 password=settings.EMAIL_HOST_PASSWORD
             ) as connection:
-                print(event.image)
                 html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': event.image, 'message': message, 'isTeamEvent': isTeamEvent})
                 text_content = strip_tags(html_content)
-                message = EmailMultiAlternatives(subject='Event Registration Details', body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
+                message = EmailMultiAlternatives(subject=f'{event.name} Registration Details', body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
                 message.attach_alternative(html_content, "text/html")
                 message.mixed_subtype = 'related'
                 message.send()
@@ -170,12 +169,12 @@ def register_indi_event(request, eventid):
     team.save()
     user.extendeduser.events.add(event)
     if event.type == "talk":
-        message = (f"You have successfully registered for this seminar by {event.speaker}.")
+        message = (f"You have successfully registered for the seminar of {event.speaker}.")
         isTeamEvent = False
         # message = (f"You have successfully registered for this talk by {event.speaker}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
     else:
         if event.type == "workshop":
-            message = (f"You have successfully registered for the {event.type} {event.name}.")
+            message = (f"You have successfully registered for the {event.name} workshop.")
         else:
             message = (f"You have successfully registered for the {event.type} event {event.name}.")
         isTeamEvent = False
@@ -248,6 +247,7 @@ def join_team(request):
     if registrationNotCompleted(request):
         return redirect("/users/profile")
     if request.method == 'POST':
+        user = request.user
         form = TeamJoiningForm(request.POST)
         if form.is_valid():
             teamId = form.cleaned_data['teamId']
@@ -269,6 +269,18 @@ def join_team(request):
                     team.members.add(request.user)
                     team.save()
                     request.user.extendeduser.events.add(team.event)
+                    message = (f"You have successfully joined the team {team.name} for the {team.event.type} event {team.event.name}. ")
+                    isTeamEvent = True
+                    with get_connection(
+                        username=sendMailID,
+                        password=settings.EMAIL_HOST_PASSWORD
+                    ) as connection:
+                        html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': team.event.image, 'message': message, 'isTeamEvent': isTeamEvent})
+                        text_content = strip_tags(html_content)
+                        message = EmailMultiAlternatives(subject=f'{team.event.name} Registration Details', body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
+                        message.attach_alternative(html_content, "text/html")
+                        message.mixed_subtype = 'related'
+                        message.send()
                     messages.success(request, f"Successfully joined team '{team.name}'.")
                     return redirect(f'/events/{team.event.type}/{team.event.pk}')
 

@@ -55,8 +55,8 @@ justify-content: center; display:flex">
                         <div class="card card-{{event.id}} pb-0 shadow post-modules" onmouseover="bgblur24(this)"  onmouseout="bgrestore24(this)" style="width:fit-content; background-color: rgb(0, 0, 0); border-color: rgba(255, 255, 255, 0.5) !important;">
                             <img class="card-img-top cover-img" src="{{event.image.url}}" alt="Card image">
                             <!-- card header with badge starts -->
-                            {% if user.is_authenticated and not user.is_staff %}
-                                {% if event in user.events.all %}
+                            {% if user.is_authenticated %}
+                                {% if event in user.extendeduser.events.all %}
                                 <span class="badge badge-pill badge-success" style="vertical-align:middle">Registered</span>
                                 {% elif not event.registration_open %}
                                 <span class="badge badge-pill badge-danger" style="vertical-align:middle">Reg. Not Opened</span>
@@ -88,6 +88,9 @@ justify-content: center; display:flex">
                     <!-- end card -->
                 {% endif %}
             {% endfor %}
+        {% endif %}
+        {% if events.count < 5 %}
+            <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center; margin-top: 30px; margin-bottom: 10px;">More to Come Soon...</p>
         {% endif %}
     </div>
 </div>
