@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mobile-first email demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <style media="screen">
+      body {
+        background-color: #fbfaf4;
+        line-height: 20px;
+        font-size: 12px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: antialiased;
+        font-family: "Montserrat", sans-serif;
+        padding: 0;
+      }
+      .container {
+        max-width: 280px;
+        margin: 0 auto;
+        padding: 0;
+      }
+      .logo {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        margin: 20px auto;
+      }
+      .content-body {
+        background-color: #030e5e;
+        padding: 10px 20px 0 20px;
+      }
+      h1 {
+        font-weight: 500;
+        font-size: 25px;
+        color: white;
+        line-height: 25px;
+        margin-bottom: 15px;
+        margin-top: 0;
+        text-align: center;
+        font-family: "Futura", Helvetica, Arial, sans-serif;
+      }
+      p {
+        margin-bottom: 20px;
+        font-size: 17px;
+        line-height: initial;
+        text-align: center;
+        color: white;
+      }
+      .button {
+        margin: auto;
+        width: 140px;
+      }
+      .content-body-image {
+        display: block;
+        min-height: 180px;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .content-body-image-footer {
+        display: block;
+        height: 150px;
+        width: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .flex-container {
+        display: flex;
+      }
+
+      @media (max-width: 800px) {
+        .flex-container {
+          flex-direction: column;
+        }
+      }
+
+      @media only screen and (min-width: 480px) {
+        body {
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+        .container {
+          max-width: 600px;
+        }
+        .content-body {
+          padding-top: 60px;
+        }
+        .content-body-text {
+          max-width: 400px;
+          margin: 0 auto;
+        }
+        .content-body-image {
+          height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        class="content-body-image"
+        style="
+          background-image: url(https://raw.githubusercontent.com/Sahil1479/images/main/ca_mail_top.png);
+        "
+      ></div>
+      <div class="content-body">
+        <div class="content-body-text" style="padding-bottom: 30px">
+          <h1>Hello, {{first_name}}</h1>
+          <p>
+            <!-- Your team <b>{{team_name}}</b> have just registered for the {{event_type}} event
+            <b>{{event_name}}</b>. -->
+            {{message}}
+          </p>
+          <p
+            style="
+              font-size: 15px;
+              margin-bottom: 5px;
+              color: #fff;
+              font-weight: 600;
+            "
+          >
+          {% if isTeamEvent %}  
+          Team Id
+          {% else %}
+          Registration Id
+          {% endif %}
+          </p>
+          <div
+            class="button"
+            class="button-link"
+            style="
+              background: none;
+              border: 2px solid #fff;
+              border-radius: 4px;
+              padding: 10px 5px;
+              /* align-items: center; */
+              text-align: center;
+            "
+          >
+            <a
+              href="#"
+              style="text-decoration: none; color: #fff; font-size: 15px"
+              >{{team_id}}</a
+            >
+          </div>
+          <p
+            style="font-size: 15px; margin: 10px; color: #fff; font-weight: 500"
+          >
+          {% if isTeamEvent %}  
+          Share this ID with your other team members.
+          {% else %}
+          Do not share this ID with others.
+          {% endif %}
+            
+          </p>
+          <p
+            style="font-size: 14px; margin-top: 40px; color: #fff; font-weight: 400"
+          >
+            Regards,<br>
+            Team Prometeo'22
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

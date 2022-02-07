@@ -95,6 +95,7 @@ def my_events(request):
 
 @login_required
 def create_team(request, eventid):
+    user = request.user
     event = get_object_or_404(Event, pk=eventid)
     if registrationNotCompleted(request):
         return redirect("/users/profile")
@@ -119,14 +120,26 @@ def create_team(request, eventid):
             team.members.add(request.user)
             team.save()
             request.user.extendeduser.events.add(event)
-            message = (f"You have just created team {team.name} for the {event.type} event {event.name}. The team ID is {team.id}. Share this ID with your friends who can join your team using this ID.\n\nRegards\nPrometeo'22 Team")
-            send_mail(
-                'Team Details',
-                message,
-                sendMailID,
-                [request.user.email],
-                fail_silently=False,
-            )
+            message = (f"Your team {team.name} have just registered for the {event.type} event {event.name}.")
+            isTeamEvent = True
+            with get_connection(
+                username=sendMailID,
+                password=settings.EMAIL_HOST_PASSWORD
+            ) as connection:
+                print(event.image)
+                html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': event.image, 'message': message, 'isTeamEvent': isTeamEvent})
+                text_content = strip_tags(html_content)
+                message = EmailMultiAlternatives(subject='Event Registration Details', body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
+                message.attach_alternative(html_content, "text/html")
+                message.mixed_subtype = 'related'
+                message.send()
+            # send_mail(
+            #     'Team Details',
+            #     message,
+            #     sendMailID,
+            #     [request.user.email],
+            #     fail_silently=False,
+            # )
             messages.info(request, f'Team Successfully Created, your teamId is {team.id}, which is also sent to your respective email address.')
             return redirect('/users/my_events')
     else:
@@ -157,18 +170,27 @@ def register_indi_event(request, eventid):
     team.save()
     user.extendeduser.events.add(event)
     if event.type == "talk":
-        message = (f"You have successfully registered for this talk by {event.speaker}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
+        message = (f"You have successfully registered for this seminar by {event.speaker}.")
+        isTeamEvent = False
+        # message = (f"You have successfully registered for this talk by {event.speaker}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
     else:
-        message = (f"You have successfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
-    send_mail(
-        'Registration Details',
-        message,
-        sendMailID,
-        [request.user.email],
-        fail_silently=False,
-    )
+        if event.type == "workshop":
+            message = (f"You have successfully registered for the {event.type} {event.name}.")
+        else:
+            message = (f"You have successfully registered for the {event.type} event {event.name}.")
+        isTeamEvent = False
+        # message = (f"You have successfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
+    with get_connection(
+        username=sendMailID,
+        password=settings.EMAIL_HOST_PASSWORD
+    ) as connection:
+        html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': event.image, 'message': message, 'isTeamEvent': isTeamEvent})
+        text_content = strip_tags(html_content)
+        message = EmailMultiAlternatives(subject='Registration Details', body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
+        message.attach_alternative(html_content, "text/html")
+        message.mixed_subtype = 'related'
+        message.send()
     messages.info(request, f'You have successfully registered for this event, your Registration ID is {team.id}, which has been sent to your respective email address.')
-    # messages.info(request, f'You have succesfully registered for this event.')
     return redirect('/users/my_events')
 
 
