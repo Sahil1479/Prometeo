@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import ExtendedUser, Team
 from events.models import Event
 from django.contrib.auth import get_user_model
-from django.core.mail import send_mail, get_connection, EmailMultiAlternatives
+from django.core.mail import get_connection, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import uuid
