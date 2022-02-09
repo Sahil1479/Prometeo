@@ -53,6 +53,7 @@ class Event(models.Model):
     youtube_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="youtube Link for streaming")
     webx_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="webX Link for streaming")
     featured = models.BooleanField(verbose_name="Display on home page", default=False, blank=True)
+    rank = models.IntegerField(blank=False, null=False, default=1)
 
     def __str__(self):
         return self.name
