@@ -58,7 +58,7 @@ class Event(models.Model):
     hidden = models.BooleanField(verbose_name='Hide Event', default=False, blank=True)
     presentation_template = models.URLField(verbose_name='presentation template download link for poster presentations', blank=True, null=True)
     sample_poster = models.URLField(verbose_name='sample poster download link for poster presentations', blank=True, null=True)
-    
+
     def __str__(self):
         return self.name
 
