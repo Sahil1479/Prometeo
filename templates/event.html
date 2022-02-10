@@ -37,7 +37,11 @@
         </h4>
         {% else %}
         <h2 class="title title-heading">{{ event.name }}</h2>
-        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
+            {% if event.event_sponsors %}
+            <h4 class="title" style="text-transform: capitalize; font-size: 1.2rem; margin-bottom:7px">Sponsored by</h4>
+            {% else %}
+            <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
+            {% endif %}
         {% endif %}
         <div>
             <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">
