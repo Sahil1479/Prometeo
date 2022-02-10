@@ -49,6 +49,7 @@ body{
   background: black;
   overflow: hidden;
   height: 260px;
+  /* min-width: 30vw; */
 }
 
 .badge-pill{

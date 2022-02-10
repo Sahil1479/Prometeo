@@ -422,7 +422,13 @@
   background: #e2e8ff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   /* border-block: 4px solid #47b2e4 !important; */
+  transition: 0.2s;
 }
+#competitions .member:hover {
+  transform: translateY(-7px);
+  transition: 0.2s;
+}
+
 #competitions .member .member-img {
   position: relative;
   overflow: hidden;
