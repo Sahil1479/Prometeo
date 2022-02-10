@@ -23,6 +23,7 @@ class EventAdmin(admin.ModelAdmin):
         (_('Event Host'), {'fields': ('host', 'sponsor_image1', 'sponsor_website')}),
         (_('Event Links'), {'fields': ('meet_link', 'youtube_link', 'webx_link')}),
         (_('Event Uploads'), {'fields': ('image', 'rulebook')}),
+        (_('Poster Presentations'), {'fields': ('sample_poster', 'presentation_template')}),
     )
 
 

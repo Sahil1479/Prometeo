@@ -24,15 +24,15 @@ def events(request, type):
     today = date.today()
     brochure = Brochure.objects.filter(type=type).first()
     if type == 'live':
-        liveevents = Event.objects.filter(end_date__gte=today).filter(date__lte=today).filter(event_started=True).order_by('time')
+        liveevents = Event.objects.filter(end_date__gte=today).filter(date__lte=today).filter(event_started=True).filter(hidden=False).order_by('time')
         return render(request, 'liveevents.html', {'liveevents': liveevents, 'type': type,
                                                    'present_time': datetime.now(),
                                                    })
     elif type == 'talk':
-        events = Event.objects.filter(type=type).order_by('rank')
+        events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
         return render(request, 'speakers.html', {'events': events, 'type': type, 'brochure': brochure, })
     elif type == 'panel_discussion':
-        events = Event.objects.filter(type=type).order_by('rank')
+        events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
         panelist = Panel.objects.all()
         return render(request, 'panel.html', {'events': events, 'panelists': panelist, 'type': type})
     else:
@@ -43,7 +43,7 @@ def events(request, type):
         if typeFound is False:
             messages.info(request, 'No event type exists with the given name.')
             return redirect("/")
-        events = Event.objects.filter(type=type).order_by('rank')
+        events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
         return render(request, 'events.html', {'events': events, 'type': type, 'brochure': brochure, })
 
 
