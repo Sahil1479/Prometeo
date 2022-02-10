@@ -36,26 +36,20 @@
                 </a> -->
                 <div class="postcard__text">
                     <h1 class="postcard__title blue">{{event.name}}</h1>
-                    {% if event.description %}
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            <!-- <i class="fas fa-calendar-alt mr-2"></i> -->
-                            <!-- {{ event.designation }} -->
-                        </time>
-                    </div>
-                    {% endif %}
                     <div class="postcard__bar"></div>
                     <div class="postcard__preview-txt">{{event.description}}</div>
                     <div class="row ">
                       {% for panelist in panelists %}
-                      {% if panelist.event == event %}
-                        <div class="col-3 center-block align-items-center panelist-details">
-                           <div class="row justify-content-center panelist-img" style="background-image: url({{panelist.image.url}}); background-size: cover;background-repeat: no-repeat;">
-                           </div>
-                           <div class="row  panelist-info">{{panelist.name}}</div>
+                        {% if panelist.event == event %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 panelist-details">
+                           <div class="row justify-content-center panelist-img" style="background-image: url({{panelist.image.url}}); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+                           <div class="row  panelist-info">
+                               <span style="font-size: larger;">{{panelist.name}}</span>
+                               <span style="font-size: smaller;">{{panelist.designation}}</span>
+                            </div>
                         </div>
                         {% endif %}
-                        {% endfor %}
+                      {% endfor %}
                     </div>
                     <ul class="postcard__tagbox">
                         <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
