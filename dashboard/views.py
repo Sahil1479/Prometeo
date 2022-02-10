@@ -114,12 +114,13 @@ def users_info(request):
         row2 += 1
     workbook2.close()
     for ca in ca_list:
-        worksheet.write(row, 0, ca.user.email)
-        worksheet.write(row, 1, ca.first_name + ' ' + ca.last_name)
-        worksheet.write(row, 2, ca.invite_referral)
-        worksheet.write(row, 3, ca.contact)
-        worksheet.write(row, 4, ca.college)
-        row += 1
+        if 'iitj' not in ca.college.lower() and 'iit jodhpur' not in ca.college.lower():
+            worksheet.write(row, 0, ca.user.email)
+            worksheet.write(row, 1, ca.first_name + ' ' + ca.last_name)
+            worksheet.write(row, 2, ca.invite_referral)
+            worksheet.write(row, 3, ca.contact)
+            worksheet.write(row, 4, ca.college)
+            row += 1
     workbook.close()
     return render(request, 'dashboard/users_info.html', {'users': users, 'wbname': wbname, 'wbname2': wbname2})
 
