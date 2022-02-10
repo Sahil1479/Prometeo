@@ -57,7 +57,7 @@ def get_ca_export(filename):
     worksheet.write(1, 3, "Contact", header_format)
     worksheet.write(1, 4, "College", header_format)
     for ca in ca_list:
-        if 'iitj' not in ca.college.lower() and 'iit jodhpur' not in ca.college.lower() and 'Indian Institute of Technology Jodhpur' not in ca.college.lower() and 'Indian Institute of Technology, Jodhpur' not in ca.college.lower():
+        if 'iitj' not in ca.college.lower() and 'iit jodhpur' not in ca.college.lower() and 'indian institute of technology jodhpur' not in ca.college.lower() and 'indian institute of technology, jodhpur' not in ca.college.lower():
             worksheet.write(row, 0, ca.user.email)
             worksheet.write(row, 1, ca.first_name + ' ' + ca.last_name)
             worksheet.write(row, 2, ca.invite_referral)
@@ -133,13 +133,11 @@ def downloadfile(request, filename):
         get_all_user_export(filename + '.xlsx')
     elif filename == "Campus_Ambassador_List":
         get_ca_export(filename + '.xlsx')
-    print(file_path)
     file_path += '.xlsx'
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            print(response)
             return response
     raise Http404
 
