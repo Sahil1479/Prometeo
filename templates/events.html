@@ -50,7 +50,7 @@ justify-content: center; display:flex">
 
         {% else %}
             {% for event in events %}
-                {% if event.type.capitalize|title == type.capitalize %}
+                {% if event.type.capitalize|title == type.capitalize and not event.hidden %}
                     <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto mb-4 justify-content-center" id="card" data-aos="fade-up" data-aos-duration="1000" data-aos-once = "true" style="border: 0.5px !important;">
                         <div class="card card-{{event.id}} pb-0 shadow post-modules" onmouseover="bgblur24(this)"  onmouseout="bgrestore24(this)" style="width:fit-content; background-color: rgb(0, 0, 0); border-color: rgba(255, 255, 255, 0.5) !important;">
                             <img class="card-img-top cover-img" src="{{event.image.url}}" alt="Card image">

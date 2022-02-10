@@ -9,6 +9,7 @@ EVENT_CHOICES = (
     ('panel_discussion', 'Panel Discussion'),
     ('initiative', 'Initiative'),
     ('entrepreneurial', 'Entrepreneurial'),
+    ('poster_presentation', 'Poster Presentation')
 )
 
 EVENT_PARTICIPATION = (
@@ -54,6 +55,7 @@ class Event(models.Model):
     webx_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="webX Link for streaming")
     featured = models.BooleanField(verbose_name="Display on home page", default=False, blank=True)
     rank = models.IntegerField(blank=False, null=False, default=1)
+    hidden = models.BooleanField(verbose_name='Hide Event', default=False, blank=True)
 
     def __str__(self):
         return self.name

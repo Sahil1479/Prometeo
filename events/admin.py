@@ -17,7 +17,7 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['name']
     inlines = [ContactsAdmin, PanelAdmin]
     fieldsets = (
-        (_('Event Details'), {'fields': ('name', 'type', 'speaker', 'designation', 'description', 'prize', 'external_link', 'venue', 'featured', 'rank')}),
+        (_('Event Details'), {'fields': ('name', 'type', 'speaker', 'designation', 'description', 'prize', 'external_link', 'venue', 'featured', 'rank', 'hidden')}),
         (_('Event Registration Details'), {'fields': ('participation_type', 'min_team_size', 'max_team_size', 'registration_open')}),
         (_('Event Dates'), {'fields': ('date', 'time', 'end_date', 'end_time', 'event_started')}),
         (_('Event Host'), {'fields': ('host', 'sponsor_image1', 'sponsor_website')}),
