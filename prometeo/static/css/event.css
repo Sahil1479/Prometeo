@@ -2,6 +2,8 @@ body {
   background-image: url("/static/img/technicaleventsbg.png");
   background-attachment: fixed;
   overflow-x: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 footer {
   position: absolute;

@@ -34,7 +34,7 @@
                 border: 3px solid #47b2e4;"><i class="fas fa-download"></i> {{brochure.name}}</a></p>
         {% endif %}
         {% if events.count == 0 %}
-            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="1000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
         {% endif %}
         {% for event in events %}
             {% if event.type|title == 'Talk' %}
@@ -90,6 +90,9 @@
             </article>
             {% endif %}
         {% endfor %}
+        {% if events.count < 5 %}
+            <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center; margin-top: 30px; margin-bottom: 10px;">More Speakers Coming Soon...</p>
+        {% endif %}
 	</div>
 </section>
 
