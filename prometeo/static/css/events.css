@@ -94,7 +94,7 @@ body{
 .title{
   /*font-style: normal;*/
   font-weight: 500;
-  font-size: 20px;
+  font-size: 25px;
   line-height: 35px;
   color: #fff;
   padding-bottom:5px;
@@ -134,10 +134,11 @@ body{
 
 .buttonfntr{
   backdrop-filter: blur(5px);
-  background: rgba(93, 109, 143, 0.1);
+  background: rgba(64, 76, 100, 0.1);
   font-style: normal;
   font-weight: normal;
   /* font-family: euro; */
+  padding: 6px !important;
   letter-spacing: 1px;
   font-size: 18px;
   line-height: 25px;
@@ -146,7 +147,25 @@ body{
 
 .buttonfntr:hover{
   color: #FFFFFF;
-  background: rgba(93, 109, 143, 0.4);
+  background: rgba(64, 76, 100, 0.4);
+
+}
+.buttonfntr1{
+  backdrop-filter: blur(5px);
+  background: rgba(64, 76, 100, 0.5);
+  font-style: normal;
+  font-weight: normal;
+  /* font-family: euro; */
+  padding: 6px !important;
+  letter-spacing: 1px;
+  font-size: 18px;
+  line-height: 25px;
+  color: #FFFFFF;
+}
+
+.buttonfntr1:hover{
+  color: #FFFFFF;
+  background: rgba(64, 76, 100, 0.8);
 
 }
 

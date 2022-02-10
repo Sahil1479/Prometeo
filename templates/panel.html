@@ -52,7 +52,11 @@
                       {% endfor %}
                     </div>
                     <ul class="postcard__tagbox">
+                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
+                        <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>
+                        {% else %}
                         <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
+                        {% endif %}
                         {% if event in user.extendeduser.events.all %}
                             {% if event.meet_link %}
                             <a href="{{ event.meet_link }}">
