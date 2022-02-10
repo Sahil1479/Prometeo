@@ -28,32 +28,29 @@
     style="background-color: transparent; width: fit-content;position: relative;top: 10vh;">
     <div class="row">
         <!-- <div class="round-border"> -->
-        <h2 class="title title-heading">{{ event.name }}</h2>
-        <div>
-            {% if event.host %}
-            <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> by
-                {% if event.sponsor_website %}
-                <a href="{{ event.sponsor_website }}">
-                    <img src="{{ event.sponsor_image1.url }}" alt="Sponser" height="60">
-                </a>
-                {% else %}
-                <img src="{{ event.sponsor_image1.url }}" alt="Sponser" height="60">
-                {% endif %}
-            </h4>
-            {% else %}
-            <div>
-                {% if event.type == 'talk' %}
-                <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> By {{ event.speaker }}
-                    {% if event.designation %}
-                    <br/>
-                    <span class="designation">{{event.designation}}</span>
-                    {% endif %}
-                </h4>
-                {% else %}
-                <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
-                {% endif %}
-            </div>
+        {% if event.type == 'talk' %}
+        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> By {{ event.speaker }}
+            {% if event.designation %}
+            <br/>
+            <span class="designation">{{event.designation}}</span>
             {% endif %}
+        </h4>
+        {% else %}
+        <h2 class="title title-heading">{{ event.name }}</h2>
+        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
+        {% endif %}
+        <div>
+            <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">
+                {% for sponsor in event.event_sponsors.all %}
+                    {% if sponsor.website %}
+                    <a href="{{ sponsor.website }}" target="_blank">
+                        <img src="{{ sponsor.image.url }}" style="margin: 2px 0px; height: 60px; width: 110px;" alt="Sponser">
+                    </a>
+                    {% else %}
+                    <img src="{{ sponsor.image.url }}" alt="Sponser" height="60" width="110">
+                    {% endif %}
+                {% endfor %}
+            </h4>
         </div>
 
         <!-- <div class="row"></div> -->
@@ -62,6 +59,10 @@
             {% if event.rulebook %}
             <a href="{{ event.rulebook.url }}" target="_blank"><button class="rulebook btn btn-primary"
                     type="button">Rulebook</button></a>
+            {% endif %}
+            {% if event.material %}
+            <a href="{{ event.material.url }}" target="_blank"><button class="rulebook btn btn-primary"
+                    type="button">{{event.material_name}}</button></a>
             {% endif %}
         </div>
         <div class="col-lg-6 col-md-8 col-sm-12 ml-auto mr-auto" style="padding-bottom: 5%;">
@@ -172,14 +173,6 @@
                                 </div>
                                 {% endif %}
                             </div>
-                            <!-- <h4 class="card-title">Event Type</h4>
-                    <p class="card-text">
-                        {% if event.participation_type == 'team' %}
-                        Team Event (Team Size: {{ event.min_team_size }}-{{ event.max_team_size }})
-                        {% else %}
-                        Individual Event 
-                        {% endif %} 
-                    </p> -->
 
                             <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
                                 <div class="icon icon-rose">
@@ -219,6 +212,18 @@
                                 <div class="description">
                                     <h4 class="info-title">Venue</h4>
                                     <p>{{ event.venue }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if event.submission_link %}
+                            <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
+                                <div class="icon icon-rose">
+                                    <i class="material-icons">my_location</i>
+                                </div>
+                                <div class="description">
+                                    <a href="{{event.submission_link}}" target="_blank">
+                                    <h4 class="info-title">Submit Here</h4></a>
+                                    <!-- <p>{{ event.venue }}</p> -->
                                 </div>
                             </div>
                             {% endif %}
