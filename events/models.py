@@ -37,6 +37,7 @@ class Event(models.Model):
     external_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="External Link for Registration")
     venue = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Venue")
     featured = models.BooleanField(verbose_name="Display on home page", default=False, blank=True)
+    rank = models.IntegerField(blank=False, null=False, default=1)
 
     # Event Registration Details
     participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='individual', verbose_name="Participation Type")
@@ -81,7 +82,7 @@ class Panel(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='panel')
     name = models.CharField(max_length=50)
     designation = models.CharField(max_length=50)
-    image = models.ImageField(upload_to="images/panelist/", verbose_name="Panelist image", blank=True, null=True)
+    image = models.ImageField(upload_to="images/panelist/", verbose_name="Panelist image")
 
     class Meta:
         verbose_name_plural = "Panel"
