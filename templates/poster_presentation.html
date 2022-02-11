@@ -46,7 +46,7 @@
                     </div>
                 {% endif %}
                 <div class="postcard__bar"></div>
-                <div class="postcard__preview-txt">{{event.description}}</div>
+                <div class="postcard__preview-txt">{{event.description|safe}}</div>
                 <ul class="postcard__tagbox">
                     {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
                     <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>
@@ -64,7 +64,30 @@
                     </a>
                     {% endif %}
                     {% if event in user.extendeduser.events.all %}
-                    <li class="tag__item play blue"> Already Registered</li>
+                    <li class="tag__item play blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fas fa-upload mr-2"></i> Upload</li>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Your Submission</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <label for="username">Your Name</label>
+                            <input class="input" type="text" id="username" name="username">
+                            <label for="fileUpload">File </label>
+                            <div>
+                                <input type="file" id="fileUpload">
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                     {% else %}
                         <a href="/users/register_indi_event/{{event.id}}">
                             <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>

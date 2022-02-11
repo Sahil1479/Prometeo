@@ -196,6 +196,23 @@
       transform: rotate(-4deg);
     }
   }
+  
+  .modal-backdrop{
+    z-index: -1000;
+  }
+
+  .modal-content{
+    background-color: #110F16;
+  }
+
+  .btn-close{
+    background-color: white;
+  }
+
+  .input{
+    width: 100%;
+  }
+
   @media screen and (min-width: 1024px) {
     .postcard__text {
       padding: 2rem 3.5rem;

@@ -236,7 +236,7 @@
                             {{ event.rulebook_text|safe }}
                         </div>
                     </div>
-                    {% elif event.description %}
+                    {% elif event.description|safe %}
                     <div class="row" style="margin-bottom: 10px">
                         <div class="description col-lg-11 ml-auto mr-auto">
                             <h4 class="card-title">
