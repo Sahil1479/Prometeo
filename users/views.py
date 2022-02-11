@@ -181,8 +181,8 @@ def register_indi_event(request, eventid):
             message = (f"You have successfully registered for the {event.name} panel discussion.")
             subject = (f"{event.name} panel discussion registration details")
         elif event.type == "poster_presentation":
-            message = (f"You have successfully registered for the poster presentation.")
-            subject = (f"Poster presentation registration details")
+            message = "You have successfully registered for the poster presentation."
+            subject = "Poster presentation registration details"
         else:
             message = (f"You have successfully registered for the {event.type} event {event.name}.")
             subject = (f"{event.name} registration details")
