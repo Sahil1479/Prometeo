@@ -30,7 +30,7 @@ class Brochure(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=50, verbose_name="Event Name", unique=True, blank=False, null=False)
     speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty)")
-    designation = models.CharField(max_length=50, null=True, blank=True, verbose_name="Speaker Designation (only for Talk)")
+    designation = models.CharField(max_length=200, null=True, blank=True, verbose_name="Speaker Designation (only for Talk)")
     image = models.ImageField(upload_to="images/", verbose_name="Cover Image(prefer uploading square images)(for speakers upload images with more padding, i.e, face in the center)", blank=False, null=False)
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
     sponsor_image1 = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Sponser Image 1(upload rectangular images)")
@@ -38,7 +38,7 @@ class Event(models.Model):
     participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='individual', verbose_name="Participation Type")
     min_team_size = models.IntegerField(verbose_name="Minimum Team Size (leave unchanged for individual event)", default=1)
     max_team_size = models.IntegerField(verbose_name="Maximum Team Size (leave unchanged for individual event)", default=1)
-    prize = models.CharField(max_length=100, verbose_name="Prize Money (Rs.)", null=True, blank=True, default="Prizes worth Rs.")
+    prize = models.CharField(max_length=200, verbose_name="Prize Money (Rs.)", null=True, blank=True, default="Prize <Enter prize money here> INR")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Event Description (Write more for speaker description)")
     host = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Host")
     external_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="External Link for Registration")
@@ -77,7 +77,7 @@ class Panel(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='panel')
     name = models.CharField(max_length=50)
     designation = models.CharField(max_length=50)
-    image = models.ImageField(upload_to="images/panelist/", verbose_name="Panelist image", blank=True, null=True)
+    image = models.ImageField(upload_to="images/panelist/", verbose_name="Panelist image")
 
     class Meta:
         verbose_name_plural = "Panel"
