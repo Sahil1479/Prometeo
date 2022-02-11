@@ -40,7 +40,10 @@
             {% if event.event_sponsors.all %}
             <h4 class="title" style="text-transform: capitalize; font-size: 0.9rem; margin-bottom:7px">In association with</h4>
             {% else %}
+            {% if event.type != "panel_discussion" and event.type != "poster_presentation" %}
+            <!-- <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"></h4> -->
             <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
+            {% endif %}
             {% endif %}
         {% endif %}
         <div>
