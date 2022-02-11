@@ -132,9 +132,9 @@
 
 <h1>All Users</h1>
 <hr>
-<span> <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname2 }}" download="{{ wbname2 }}"> Download All Users list</a></span> 
+<span> <i class="fas fa-download"></i> <a href="{% url 'downloadfile' wbname %}"> Download All Users list</a></span> 
 <br>
-<span> <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname }}" download="{{ wbname }}"> Download Campus Ambassador list</a></span> 
+<span> <i class="fas fa-download"></i> <a href="{% url 'downloadfile' wbname2 %}"> Download Campus Ambassador list</a></span> 
 <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
