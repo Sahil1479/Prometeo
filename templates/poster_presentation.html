@@ -37,6 +37,14 @@
         <article class="postcard dark blue" data-aos="fade-up">
             <div class="postcard__text">
                 <h1 class="postcard__title blue">{{event.name}}</h1>
+                {% if event.prize %}
+                    <div class="postcard__subtitle small">
+                        <time datetime="2020-05-25 12:00:00">
+                            <!-- <i class="fas fa-calendar-alt mr-2"></i> -->
+                            {{ event.prize }}
+                        </time>
+                    </div>
+                {% endif %}
                 <div class="postcard__bar"></div>
                 <div class="postcard__preview-txt">{{event.description}}</div>
                 <ul class="postcard__tagbox">
