@@ -51,7 +51,6 @@ def event(request, type, eventid):
     if registrationNotCompleted(request):
         return redirect("/users/profile")
     event = get_object_or_404(Event, pk=eventid)
-    print(event.event_sponsors.all())
     return render(request, 'event.html', {'event': event})
 
 

@@ -37,8 +37,8 @@
         </h4>
         {% else %}
         <h2 class="title title-heading">{{ event.name }}</h2>
-            {% if event.event_sponsors %}
-            <h4 class="title" style="text-transform: capitalize; font-size: 1.2rem; margin-bottom:7px">Sponsored by</h4>
+            {% if event.event_sponsors.all %}
+            <h4 class="title" style="text-transform: capitalize; font-size: 0.9rem; margin-bottom:7px">In association with</h4>
             {% else %}
             <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
             {% endif %}
@@ -47,7 +47,7 @@
             <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">
                 {% for sponsor in event.event_sponsors.all %}
                     {% if sponsor.website %}
-                    <a href="{{ sponsor.website }}" target="_blank">
+                    <a title="{{sponsor.name}}" href="{{ sponsor.website }}" target="_blank">
                         <img src="{{ sponsor.image.url }}" style="margin: 2px 0px; height: 60px; width: 110px;" alt="Sponser">
                     </a>
                     {% else %}
@@ -186,7 +186,7 @@
                                     <h4 class="info-title">Date</h4>
                                     <p>
                                         {% if event.date %}
-                                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{event.date}} {% endif %}
+                                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} TBA {% else %}  {{event.date}} {% endif %}
                                         {% else %}
                                         COMING SOON
                                         {% endif %}
@@ -226,7 +226,7 @@
                                 </div>
                                 <div class="description">
                                     <a href="{{event.submission_link}}" target="_blank">
-                                    <h4 class="info-title">Submit Here</h4></a>
+                                    <h4 class="info-title">Submit</h4></a>
                                     <!-- <p>{{ event.venue }}</p> -->
                                 </div>
                             </div>

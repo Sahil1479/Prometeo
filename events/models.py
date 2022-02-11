@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from django.db import models
 
 EVENT_CHOICES = (
@@ -52,7 +51,7 @@ class Event(models.Model):
     end_date = models.DateField(verbose_name="Event end Date", null=False, blank=False, default="2023-01-01")
     end_time = models.TimeField(null=False, blank=False, verbose_name="Event end Time")
     event_started = models.BooleanField(verbose_name="Event started", default=False, blank=True)
-    
+
     # Streaming Links
     meet_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="meet Link for streaming")
     youtube_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="youtube Link for streaming")
@@ -87,10 +86,12 @@ class Panel(models.Model):
     class Meta:
         verbose_name_plural = "Panel"
 
+
 class EventSponsors(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_sponsors")
     name = models.CharField(max_length=100, null=True, blank=True, verbose_name="Name")
     image = models.ImageField(upload_to="images/sponsors/", null=True, blank=True, verbose_name="Sponser Image (upload rectangular images)")
     website = models.URLField(max_length=1000, null=True, blank=True, verbose_name="Link to Sponsors Website")
+
     class Meta:
         verbose_name_plural = "Sponsors"
