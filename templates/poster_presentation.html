@@ -55,13 +55,20 @@
                     {% endif %}
                     {% if event.sample_poster %}
                     <a href="{{ event.sample_poster }}">
-                        <li class="tag__item play blue"><i class="fas fa-download mr-2"></i> Sample Poster</li>
+                        <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-download mr-2"></i> Sample Poster</li>
                     </a>
                     {% endif %}
                     {% if event.presentation_template %}
                     <a href="{{ event.presentation_template }}">
-                        <li class="tag__item play blue"><i class="fas fa-download mr-2"></i> Presentation Template</li>
+                        <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-download mr-2"></i> Presentation Template</li>
                     </a>
+                    {% endif %}
+                    {% if event in user.extendeduser.events.all %}
+                    <li class="tag__item play blue"> Already Registered</li>
+                    {% else %}
+                        <a href="/users/register_indi_event/{{event.id}}">
+                            <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
+                        </a>
                     {% endif %}
 
                 </ul>

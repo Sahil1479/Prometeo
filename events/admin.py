@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Contacts, Brochure, Panel
+from .models import Event, Contacts, Brochure, Panel, EventSponsors
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -11,18 +11,21 @@ class PanelAdmin(admin.StackedInline):
     model = Panel
 
 
+class EventSponsorsAdmin(admin.StackedInline):
+    model = EventSponsors
+
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'time', 'venue', 'registration_open', 'type')
     list_filter = ('type', 'registration_open')
     search_fields = ['name']
-    inlines = [ContactsAdmin, PanelAdmin]
+    inlines = [ContactsAdmin, PanelAdmin, EventSponsorsAdmin]
     fieldsets = (
         (_('Event Details'), {'fields': ('name', 'type', 'speaker', 'designation', 'description', 'prize', 'external_link', 'venue', 'featured', 'rank', 'hidden')}),
-        (_('Event Registration Details'), {'fields': ('participation_type', 'min_team_size', 'max_team_size', 'registration_open')}),
+        (_('Event Registration Details'), {'fields': ('participation_type', 'min_team_size', 'max_team_size', 'registration_open', 'submission_link')}),
         (_('Event Dates'), {'fields': ('date', 'time', 'end_date', 'end_time', 'event_started')}),
-        (_('Event Host'), {'fields': ('host', 'sponsor_image1', 'sponsor_website')}),
         (_('Event Links'), {'fields': ('meet_link', 'youtube_link', 'webx_link')}),
-        (_('Event Uploads'), {'fields': ('image', 'rulebook')}),
+        (_('Event Uploads'), {'fields': ('image', 'rulebook', 'material_name', 'material')}),
         (_('Poster Presentations'), {'fields': ('sample_poster', 'presentation_template')}),
     )
 

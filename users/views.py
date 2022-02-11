@@ -170,13 +170,22 @@ def register_indi_event(request, eventid):
     user.extendeduser.events.add(event)
     if event.type == "talk":
         message = (f"You have successfully registered for the seminar of {event.speaker}.")
+        subject = (f"{event.speaker} seminar registration details")
         isTeamEvent = False
         # message = (f"You have successfully registered for this talk by {event.speaker}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
     else:
         if event.type == "workshop":
             message = (f"You have successfully registered for the {event.name} workshop.")
+            subject = (f"{event.name} workshop registration details")
+        elif event.type == "panel_discussion":
+            message = (f"You have successfully registered for the {event.name} panel discussion.")
+            subject = (f"{event.name} panel discussion registration details")
+        elif event.type == "poster_presentation":
+            message = "You have successfully registered for the poster presentation."
+            subject = "Poster presentation registration details"
         else:
             message = (f"You have successfully registered for the {event.type} event {event.name}.")
+            subject = (f"{event.name} registration details")
         isTeamEvent = False
         # message = (f"You have successfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
     with get_connection(
@@ -185,7 +194,7 @@ def register_indi_event(request, eventid):
     ) as connection:
         html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': event.image, 'message': message, 'isTeamEvent': isTeamEvent})
         text_content = strip_tags(html_content)
-        message = EmailMultiAlternatives(subject='Registration Details', body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
+        message = EmailMultiAlternatives(subject=subject, body=text_content, from_email=sendMailID, to=[user.email], connection=connection)
         message.attach_alternative(html_content, "text/html")
         message.mixed_subtype = 'related'
         message.send()
