@@ -1,0 +1,71 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+{{type|capfirst}} Events
+{% endblock %}
+
+
+{% block style %}
+<!-- import css files or write css code-->
+<link href="{% static 'css/poster_presentation.css' %}" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<section class="dark">
+	<div class="container py-4">
+        <div style="margin-top: 20px; margin-bottom: 30px; width:100%; background-attachment: fixed;align-items: center; 
+        justify-content: center; display:flex">
+            <div class="section-header">
+                <h2>Poster Presentations</h2>
+            </div>
+        </div>
+        {% if brochure %}
+            <p data-aos="fade-in" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px"><a href="{{brochure.file.url}}" style="color: #2b2d2e;
+                font-size: medium;
+                background: #ffffff;
+                padding: 10px;
+                border-radius: 5px;
+                border: 3px solid #47b2e4;"><i class="fas fa-download"></i> {{brochure.name}}</a></p>
+        {% endif %}
+        {% if events.count == 0 %}
+            <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="1000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% endif %}
+        {% for event in events %}
+        <article class="postcard dark blue" data-aos="fade-up">
+            <div class="postcard__text">
+                <h1 class="postcard__title blue">{{event.name}}</h1>
+                <div class="postcard__bar"></div>
+                <div class="postcard__preview-txt">{{event.description}}</div>
+                <ul class="postcard__tagbox">
+                    {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
+                    <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>
+                    {% else %}
+                    <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
+                    {% endif %}
+                    {% if event.sample_poster %}
+                    <a href="{{ event.sample_poster }}">
+                        <li class="tag__item play blue"><i class="fas fa-download mr-2"></i> Sample Poster</li>
+                    </a>
+                    {% endif %}
+                    {% if event.presentation_template %}
+                    <a href="{{ event.presentation_template }}">
+                        <li class="tag__item play blue"><i class="fas fa-download mr-2"></i> Presentation Template</li>
+                    </a>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </article>
+        {% endfor %}
+</section>
+
+{% endblock %}
+
+
+{% block scripts %}
+<!-- <script src="{% static 'js/main.js' %}"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+{% endblock %}

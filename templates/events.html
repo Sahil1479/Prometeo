@@ -9,7 +9,6 @@
 {% block style %}
 <!-- import css files or write css code-->
 <link href="{% static 'css/events.css' %}" rel="stylesheet">
-<link href="{% static 'css/speakers.css' %}" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 {% endblock %}
@@ -25,11 +24,6 @@ justify-content: center; display:flex">
         <div class="section-header">
             <h2>{{ type }}s</h2>
         </div>
-    {% elif type == "poster_presentation" %}
-        <div class="section-header">
-            <h2>Poster Presentations</h2>
-        </div>
-    {% else %}
         <div class="section-header">
             <h2>{{ type }} events</h2>
         </div>
@@ -92,41 +86,6 @@ justify-content: center; display:flex">
                     </div>
                     <!-- end card -->
                 
-                {% elif event.type == "poster_presentation" %}
-                <article class="postcard dark blue" data-aos="fade-up">
-                    <div class="postcard__text">
-                        <h1 class="postcard__title blue">{{event.speaker}}</h1>
-                        {% if event.designation %}
-                        <div class="postcard__subtitle small">
-                            <time datetime="2020-05-25 12:00:00">
-                                <!-- <i class="fas fa-calendar-alt mr-2"></i> -->
-                                {{ event.designation }}
-                            </time>
-                        </div>
-                        {% endif %}
-                        <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt">{{event.description}}</div>
-                        <ul class="postcard__tagbox">
-                            {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
-                            <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>
-                            {% else %}
-                            <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
-                            {% endif %}
-                            {% if event.sample_poster %}
-                            <a href="{{ event.sample_poster }}">
-                                <li class="tag__item play blue"><i class="fas fa-download mr-2"></i> Sample Poster</li>
-                            </a>
-                            {% endif %}
-                            {% if event.presentation_template %}
-                            <a href="{{ event.presentation_template }}">
-                                <li class="tag__item play blue"><i class="fas fa-download mr-2"></i> Presentation Template</li>
-                            </a>
-                            {% endif %}
-    
-                        </ul>
-                    </div>
-                </article>
-                {% endif %}
             {% endfor %}
         {% endif %}
         {% if events.count < 5 %}
