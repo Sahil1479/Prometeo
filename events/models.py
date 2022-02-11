@@ -59,6 +59,10 @@ class Event(models.Model):
     presentation_template = models.URLField(verbose_name='presentation template download link for poster presentations', blank=True, null=True)
     sample_poster = models.URLField(verbose_name='sample poster download link for poster presentations', blank=True, null=True)
 
+    submission_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="Event submission link")
+    material_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="Material Name")
+    material = models.FileField(upload_to="supplementaryMaterials/", null=True, blank=True, verbose_name="Supplementary Material")
+
     def __str__(self):
         return self.name
 
@@ -81,3 +85,13 @@ class Panel(models.Model):
 
     class Meta:
         verbose_name_plural = "Panel"
+
+
+class EventSponsors(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_sponsors")
+    name = models.CharField(max_length=100, null=True, blank=True, verbose_name="Name")
+    image = models.ImageField(upload_to="images/sponsors/", null=True, blank=True, verbose_name="Sponser Image (upload rectangular images)")
+    website = models.URLField(max_length=1000, null=True, blank=True, verbose_name="Link to Sponsors Website")
+
+    class Meta:
+        verbose_name_plural = "Sponsors"

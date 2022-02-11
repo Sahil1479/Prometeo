@@ -55,6 +55,13 @@
                         <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-download mr-2"></i> Presentation Template</li>
                     </a>
                     {% endif %}
+                    {% if event in user.extendeduser.events.all %}
+                    <li class="tag__item play blue"> Already Registered</li>
+                    {% else %}
+                        <a href="/users/register_indi_event/{{event.id}}">
+                            <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
+                        </a>
+                    {% endif %}
 
                 </ul>
             </div>
