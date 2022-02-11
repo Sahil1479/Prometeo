@@ -68,6 +68,10 @@
             <a href="{{ event.material.url }}" target="_blank"><button class="rulebook btn btn-primary"
                     type="button">{{event.material_name}}</button></a>
             {% endif %}
+            {% if event.submission_link %}
+            <a href="{{event.submission_link}}" target="_blank"><button class="rulebook btn btn-primary"
+                type="button">Submit Here</button></a>
+            {% endif %}
         </div>
         <div class="col-lg-6 col-md-8 col-sm-12 ml-auto mr-auto" style="padding-bottom: 5%;">
             <div class="event-card card text-center" style="background-color: transparent">
@@ -216,18 +220,6 @@
                                 <div class="description">
                                     <h4 class="info-title">Venue</h4>
                                     <p>{{ event.venue }}</p>
-                                </div>
-                            </div>
-                            {% endif %}
-                            {% if event.submission_link %}
-                            <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
-                                <div class="icon icon-rose">
-                                    <i class="material-icons">my_location</i>
-                                </div>
-                                <div class="description">
-                                    <a href="{{event.submission_link}}" target="_blank">
-                                    <h4 class="info-title">Submit</h4></a>
-                                    <!-- <p>{{ event.venue }}</p> -->
                                 </div>
                             </div>
                             {% endif %}
