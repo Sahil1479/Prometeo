@@ -140,14 +140,14 @@ body{
   /* font-family: euro; */
   padding: 6px !important;
   letter-spacing: 1px;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 25px;
   color: #FFFFFF;
 }
 
 .buttonfntr:hover{
   color: #FFFFFF;
-  background: rgba(64, 76, 100, 0.4);
+  background: rgba(104, 123, 161, 0.486);
 
 }
 .buttonfntr1{
@@ -158,7 +158,7 @@ body{
   /* font-family: euro; */
   padding: 6px !important;
   letter-spacing: 1px;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 25px;
   color: #FFFFFF;
 }
@@ -168,7 +168,14 @@ body{
   background: rgba(64, 76, 100, 0.8);
 
 }
-
+@media(max-width:770px){
+  .buttonfntr {
+    font-size: 12px;
+  }
+  .buttonfntr1 {
+    font-size: 12px;
+  }
+}
 .btn-learn-more {
   width: fit-content;
   font-weight: 500;

@@ -85,7 +85,7 @@ justify-content: center; display:flex">
                         </div>
                         <div class="row no-gutters">
                             <div class="col-6" style="padding-right: 0px; height: 100%;">
-                                <a style="width:100%; border-width: 0px 0px 1px 1px; border-radius: 0px 0px 0px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr1">{% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{event.date}} {% endif %}</a>
+                                <a style="width:100%; border-width: 0px 0px 1px 1px; border-radius: 0px 0px 0px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr1">{% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}<i class="far fa-calendar-alt"></i> TBA {% else %}  {{event.date}} {% endif %}</a>
                             </div>
                             <div class="col-6" style="padding-left: 0px; height: 100%;">
                                 <a style="width:100%; border-width: 0px 1px 1px 0px; border-radius: 0px 0px 5px 0px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
