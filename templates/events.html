@@ -24,9 +24,11 @@ justify-content: center; display:flex">
         <div class="section-header">
             <h2>{{ type }}s</h2>
         </div>
+    {% else %}
         <div class="section-header">
             <h2>{{ type }} events</h2>
         </div>
+    
     {% endif %}
 </div>
   
@@ -92,7 +94,7 @@ justify-content: center; display:flex">
                         </div>
                     </div>
                     <!-- end card -->
-                
+                {% endif %}
             {% endfor %}
         {% endif %}
         {% if events.count < 5 and events.count != 0 %}
