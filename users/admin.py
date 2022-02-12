@@ -7,7 +7,7 @@ from .models import ExtendedUser, CustomUser, Team
 @admin.register(ExtendedUser)
 class ExtendedUserAdmin(admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name', 'college', 'ambassador')
-    list_filter = ('ambassador',)
+    list_filter = ('ambassador', 'college')
     search_fields = ['user__email', 'user__first_name', 'user__last_name', 'college', 'contact', 'city']
 
     class Meta:
