@@ -38,7 +38,10 @@ def events(request, type):
         return render(request, 'panel.html', {'events': events, 'panelists': panelist, 'type': type})
     elif type == 'poster_presentation':
         events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
-        submissions = Submissions.objects.filter(event=events.first().id)
+        if events:
+            submissions = Submissions.objects.filter(event=events.first().id)
+        else:
+            submissions = Submissions.objects.all()
         submitted_users = []
         for submission in submissions:
             submitted_users.append(submission.user)
@@ -94,7 +97,7 @@ def uploadSubmission(request):
 
         Submissions.objects.create(user=submitted_user, event = submitted_to_event, file_url=file_url)
 
-        messages.info(request, 'File Uploaded Succesfully ✅')
+        messages.info(request, 'File Uploaded Succesfully!')
     
     except Exception as e:
         print(e)
