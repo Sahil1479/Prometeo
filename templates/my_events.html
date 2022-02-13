@@ -22,17 +22,34 @@ Registered Events
     >
       {% for category in categories %}
         {% if forloop.first %}
-          <li class="nav-item">
-            <a class="nav-link active" href="#{{category}}" role="tab" data-bs-toggle="tab"
-              >{{category|capfirst}}</a
-            >
-          </li>
+        {% if category == "poster_presentation" %}
+        <li class="nav-item">
+          <a class="nav-link active" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >Poster Presentation</a
+          >
+        </li>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="#{{category}}" role="tab" data-bs-toggle="tab"
-              >{{category|capfirst}}</a
-            >
-          </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >{{category|capfirst}}</a
+          >
+        </li>
+        {% endif %}
+          
+        {% else %}
+        {% if category == "poster_presentation" %}
+        <li class="nav-item">
+          <a class="nav-link" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >Poster Presentation</a
+          >
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >{{category|capfirst}}</a
+          >
+        </li>
+        {% endif %}
         {% endif %}
       {% endfor %}
     </ul>
@@ -96,7 +113,12 @@ Registered Events
                     {% endif %}
                   </div>
                   <div class="d-flex">
+                    {% if team.event.type == "poster_presentation" %}
+                    <a class="btn btn-sm btn-outline-light" style="margin-right: 3px;" href="/events/{{team.event.type}}"><i class="fas fa-info-circle"></i> More Info</a>
+                    {% else %}
                     <a class="btn btn-sm btn-outline-light" style="margin-right: 3px;" href="/events/{{team.event.type}}/{{team.event.pk}}"><i class="fas fa-info-circle"></i> More Info</a>
+                    {% endif %}
+                    
                     {% if request.user == team.leader and team.event.participation_type == "team" %}
                       <a class="btn btn-sm btn-outline-light mx-1" href="/users/edit_team/{{team.pk}}"><i class="fas fa-edit"></i> Edit Team</a>
                     {% endif %}
