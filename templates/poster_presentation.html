@@ -46,7 +46,7 @@
                     </div>
                 {% endif %}
                 <div class="postcard__bar"></div>
-                <div class="postcard__preview-txt">{{event.description|safe}}</div>
+                <div class="postcard__preview-txt">{{event.poster_description|safe}}</div>
                 <ul class="postcard__tagbox">
                     {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
                     <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>

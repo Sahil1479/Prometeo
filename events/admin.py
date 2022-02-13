@@ -26,7 +26,7 @@ class EventAdmin(admin.ModelAdmin):
         (_('Event Dates'), {'fields': ('date', 'time', 'end_date', 'end_time', 'event_started')}),
         (_('Event Links'), {'fields': ('meet_link', 'youtube_link', 'webx_link')}),
         (_('Event Uploads'), {'fields': ('image', 'rulebook', 'material_name', 'material')}),
-        (_('Poster Presentations'), {'fields': ('sample_poster', 'presentation_template')}),
+        (_('Poster Presentations'), {'fields': ('sample_poster', 'presentation_template', 'poster_description')}),
     )
 
 
