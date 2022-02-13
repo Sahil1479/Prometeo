@@ -83,7 +83,6 @@ def uploadSubmission(request):
         user_email = request.user
         event_name = request.POST.get('event')
         fileUploaded = request.FILES.get('fileUploaded')
-        print(fileUploaded)
         cloudFilename = str(event_name) + '/' + str(user_email) + '-' + fileUploaded.name 
 
         session = boto3.session.Session(aws_access_key_id=settings.AWS_ACCESS_KEY, aws_secret_access_key=settings.AWS_SECRET_KEY)
