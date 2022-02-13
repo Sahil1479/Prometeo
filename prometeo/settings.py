@@ -214,3 +214,8 @@ RECAPTCHA_USE_SSL = config('RECAPTCHA_USE_SSL', cast=str, default=True)
 
 ADMINS = [('Aryan', 'garg.10@iitj.ac.in'), ('Sahil', 'santosh.2@iitj.ac.in'), ('Rahul', 'gopathi.1@iitj.ac.in'), ('Sainath', 'reddy.17@iitj.ac.in'), ('Shrutayu', 'aggarwal.4@iitj.ac.in'), ('Joel', 'thomas.2@iitj.ac.in'), ]
 MANAGERS = ADMINS
+
+# AWS Conigs
+AWS_ACCESS_KEY=config('AWS_ACCESS_KEY', cast=str)
+AWS_SECRET_KEY=config('AWS_SECRET_KEY', cast=str)
+AWS_BUCKET=config('AWS_BUCKET', cast=str)

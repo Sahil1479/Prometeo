@@ -73,3 +73,11 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
+
+class Submissions(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    file_url = models.URLField(max_length=1000, blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Submissions'

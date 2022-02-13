@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField 
+from ckeditor.fields import RichTextField
 
 EVENT_CHOICES = (
     ('technical', 'Technical'),
@@ -59,7 +59,7 @@ class Event(models.Model):
     hidden = models.BooleanField(verbose_name='Hide Event', default=False, blank=True)
     presentation_template = models.URLField(verbose_name='presentation template download link for poster presentations', blank=True, null=True)
     sample_poster = models.URLField(verbose_name='sample poster download link for poster presentations', blank=True, null=True)
-
+    submissions_started = models.BooleanField(verbose_name="User can upload their submissions", default=False, blank=True)
     submission_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="Event submission link")
     material_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="Material Name")
     material = models.FileField(upload_to="supplementaryMaterials/", null=True, blank=True, verbose_name="Supplementary Material")
