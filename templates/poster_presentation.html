@@ -81,20 +81,27 @@
                             <li class="tag__item play blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fas fa-upload mr-2"></i> Upload</li>
                             <!-- Modal -->
                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Upload Your Submission</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-header" style="border-bottom: 0px; padding-bottom: 0px;">
+                                        <h5 class="modal-title" id="exampleModalLabel">Upload Your Submission</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form method="post" action="{% url 'events:uploadSubmission' %}"  enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="modal-body">
-                                            <label for="fileUploaded">File </label>
-                                            <input type="file" name="fileUploaded">
-                                            <input type="hidden" name="event" value="{{event.name}}">
+                                            <div class="drag-area">
+                                                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                <header>Drag & Drop to Upload File</header>
+                                                <span>OR</span>
+                                                <div class="browseButton">
+                                                    <button type="button" class="tag__item play blue">Browse File</button>
+                                                </div>
+                                                <input type="file" name="fileUploaded" hidden>
+                                                <input type="hidden" name="event" value="{{event.name}}">
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" style="border-top: 0px; padding-top: 0px;">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             <button type=submit value="Upload" class="btn btn-primary">Submit</button>
                                         </div>
@@ -123,4 +130,86 @@
 {% block scripts %}
 <!-- <script src="{% static 'js/main.js' %}"></script> -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script>
+    //selecting all required elements
+    const dropArea = document.querySelector(".drag-area"),
+    uploadIcon = dropArea.getElementsByClassName("icon")[0];
+    dragText = dropArea.querySelector("header"),
+    helperText = dropArea.querySelector("span"),
+    button = dropArea.querySelector("button"),
+    browseButton = dropArea.getElementsByClassName("browseButton")[0];
+    input = dropArea.querySelector("input");
+    let file; //this is a global variable and we'll use it inside multiple functions
+
+    button.onclick = ()=>{
+    input.click(); //if user click on the button then the input also clicked
+    }
+
+    input.addEventListener("change", function(){
+    //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+    file = this.files[0];
+    dropArea.classList.add("active");
+    showFile(); //calling function
+    });
+
+
+    //If user Drag File Over DropArea
+    dropArea.addEventListener("dragover", (event)=>{
+    event.preventDefault(); //preventing from default behaviour
+    dropArea.classList.add("active");
+    dragText.textContent = "Release to Upload File";
+    });
+
+    //If user leave dragged File from DropArea
+    dropArea.addEventListener("dragleave", ()=>{
+    if(button.textContent == 'Browse File'){
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }
+    else{
+        dragText.textContent = file.name + " uploaded!";
+    }
+    });
+
+    //If user drop File on DropArea
+    dropArea.addEventListener("drop", (event)=>{
+    event.preventDefault(); //preventing from default behaviour
+    //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+    file = event.dataTransfer.files[0];
+    showFile(); //calling function
+    });
+
+    function showFile(){
+        let fileReader = new FileReader(); //creating new FileReader object
+        fileReader.onload = ()=>{
+        let fileURL = fileReader.result; //passing user file source in fileURL variable
+        uploadIcon.innerHTML = '<i class="fas fa-file-check"></i>';
+        dragText.textContent = file.name + " uploaded!";
+        helperText.innerHTML = '<p class="resubmitText">Drag & Drop another file to change the uploaded file <br/>or</p>';
+        button.textContent = 'Change File';
+        button.classList = ['changeButton'];
+        }
+        fileReader.readAsDataURL(file);
+    // let fileType = file.type; //getting selected file type
+    // let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
+    // if(validExtensions.includes(fileType)){ //if user selected file is an image file
+    //     let fileReader = new FileReader(); //creating new FileReader object
+    //     fileReader.onload = ()=>{
+    //     let fileURL = fileReader.result; //passing user file source in fileURL variable
+    //     dragText.textContent = file.name;
+    //     helperText.textContent = "Uploaded!";
+    //     // button.classList.add("hideButton");
+    //     browseButton.innerHTML = '<p class="resubmitText">Drag & Drop another file to change the uploaded file</p>';
+    //     uploadIcon.innerHTML = '<i class="fas fa-file-check" style="color: rgb(50 195 50);"></i>';
+    //     // let imgTag = `<img src="${fileURL}" alt="">`; //creating an img tag and passing user selected file source inside src attribute
+    //     // dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+    //     }
+    //     fileReader.readAsDataURL(file);
+    // }else{
+    //     alert("This is not an Image File!");
+    //     dropArea.classList.remove("active");
+    //     dragText.textContent = "Drag & Drop to Upload File";
+    // }
+    }
+</script>
 {% endblock %}

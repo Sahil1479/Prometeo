@@ -196,22 +196,193 @@
       transform: rotate(-4deg);
     }
   }
-  
+
   .modal-backdrop{
     z-index: -1000;
+    background-color: #f3f5f7;
   }
 
   .modal-content{
-    background-color: #110F16;
+    background-color: #18151f;
   }
+
+  /* .modal:before {
+    vertical-align: middle;
+  }
+  
+  .modal-dialog {
+    vertical-align: middle;
+  } */
+
+  /* @media(max-width: 380px), (min-width:370px), (min-height:662px), (max-height:672px) {
+    .modal{
+      top: 200px;
+    }
+  } */
 
   .btn-close{
     background-color: white;
   }
 
+  .btn-primary{
+    background-color: #0076bd;
+  }
+
+  .btn-primary:hover{
+    background-color: #00578d;
+  }
+
   .input{
     width: 100%;
   }
+
+  /* .files input {
+    background-color: #18151f;
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out;
+    transition: outline-offset .15s ease-in-out;
+    padding: 120px 0px 85px 35%;
+    text-align: center !important;
+    margin: 0 auto;
+    width: 100% !important;
+}
+.files input:focus{     
+  outline: 2px dashed #92b0b3;  
+  outline-offset: -10px;
+  -webkit-transition: outline-offset .15s ease-in-out;
+  transition: outline-offset .15s ease-in-out;
+ }
+.files{ 
+  position:relative
+}
+.files:after {  
+  pointer-events: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 50px;
+  right: 0;
+  height: 50px;
+  content: "";
+  background-image: url('../img/cloud-computing.png');
+  display: block;
+  margin: 0 auto;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.files:before {
+  position: absolute;
+  bottom: 10px;
+  left: 0;  pointer-events: none;
+  width: 100%;
+  right: 0;
+  height: 57px;
+  content: " or drag it here. ";
+  display: block;
+  margin: 0 auto;
+  color: #2ea591;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+} */
+
+.drag-area{
+  border: 1.5px dashed #fff;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.drag-area.active{
+  border: 1px solid #fff;
+}
+.drag-area .icon{
+  font-size: 50px;
+  color: #fff;
+  margin-top: 10px;
+}
+.drag-area header{
+  text-align: center;
+  padding: 0 5px;
+  font-size: 20px;
+  font-weight: 300;
+  color: #fff;
+}
+.drag-area span{
+  font-size: 15px;
+  font-weight: 300;
+  color: #fff;
+  margin: 10px 0 10px 0;
+}
+.drag-area button{
+  padding: 6px 15px;
+  font-size: 15px;
+  font-weight: 300;
+  border: none;
+  outline: none;
+  margin-bottom: 20px !important;
+  background: #fff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.drag-area img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+/* .hideButton{
+  display: none;
+} */
+
+.browseButton{
+  text-align: center;
+  padding: 0 5px;
+}
+
+.resubmitText{
+  background-color: #18151f;
+  color: rgb(158, 158, 158);
+  text-align: center;
+  margin-bottom: 5px !important;
+}
+
+.changeButton {
+  display: inline-block;
+  background: rgba(83, 83, 83, 0.4) !important;
+  border-radius: 3px;
+  padding: 7px 20px;
+  margin: 0 5px 5px 0;
+  cursor: default;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+.changeButton:hover {
+  background: rgba(83, 83, 83, 0.8) !important;
+}
+
+/* 
+.modal-dialog {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: auto;
+}
+@media(max-width: 768px) {
+.modal-dialog {
+  min-height: calc(100vh - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: auto;
+}
+} */
 
   @media screen and (min-width: 1024px) {
     .postcard__text {
