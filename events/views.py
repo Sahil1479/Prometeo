@@ -45,7 +45,7 @@ def events(request, type):
         submitted_users = []
         for submission in submissions:
             submitted_users.append(submission.user)
-        return render(request, 'poster_presentation.html', {'events': events,  'type': type, 'brochure': brochure, 'submittedUsers':submitted_users})
+        return render(request, 'poster_presentation.html', {'events': events,  'type': type, 'brochure': brochure, 'submittedUsers': submitted_users})
     else:
         typeFound = False
         for item in EVENT_CHOICES:
@@ -75,6 +75,7 @@ def schedule(request):
     day4 = Event.objects.filter(date="2022-03-01").order_by('time')
     return render(request, 'schedule.html', {'day1': day1, 'day2': day2, 'day3': day3, 'day4': day4, 'schedule_file': schedule_file, })
 
+
 def uploadSubmission(request):
     if request.method == 'GET':
         return redirect('/events/poster_presentation')
@@ -83,24 +84,24 @@ def uploadSubmission(request):
         user_email = request.user
         event_name = request.POST.get('event')
         fileUploaded = request.FILES.get('fileUploaded')
-        cloudFilename = str(event_name) + '/' + str(user_email) + '-' + fileUploaded.name 
+        cloudFilename = str(event_name) + '/' + str(user_email) + '-' + fileUploaded.name
 
         session = boto3.session.Session(aws_access_key_id=settings.AWS_ACCESS_KEY, aws_secret_access_key=settings.AWS_SECRET_KEY)
         s3 = session.resource('s3')
         s3.Bucket(settings.AWS_BUCKET).put_object(Key=cloudFilename, Body=fileUploaded)
 
         # saving in db
-        submitted_user = CustomUser.objects.get(email__exact = user_email)
-        submitted_to_event = Event.objects.get(name = event_name)
- 
+        submitted_user = CustomUser.objects.get(email__exact=user_email)
+        submitted_to_event = Event.objects.get(name=event_name)
+
         file_url = "https://prometeo-bucket.s3.ap-south-1.amazonaws.com/" + cloudFilename
 
-        Submissions.objects.create(user=submitted_user, event = submitted_to_event, file_url=file_url)
+        Submissions.objects.create(user=submitted_user, event=submitted_to_event, file_url=file_url)
 
         messages.info(request, 'File Uploaded Succesfully!')
-    
+
     except Exception as e:
         print(e)
         messages.info(request, 'There was an error submitting your file, Please try again')
-    
+
     return redirect('/events/poster_presentation')

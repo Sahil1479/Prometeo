@@ -42,9 +42,11 @@ class TeamAdmin(admin.ModelAdmin):
     list_filter = ('event',)
     search_fields = ['name', 'leader__email', ]
 
+
 class SubmissionsAdmin(admin.ModelAdmin):
     list_display = ('user', 'event', 'file_url')
     list_filter = ('event',)
 
+
 admin.site.register(Team, TeamAdmin)
-admin.site.register(Submissions ,SubmissionsAdmin)
+admin.site.register(Submissions, SubmissionsAdmin)

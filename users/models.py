@@ -74,6 +74,7 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+
 class Submissions(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)

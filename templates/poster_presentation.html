@@ -48,11 +48,6 @@
                 <div class="postcard__bar"></div>
                 <div class="postcard__preview-txt">{{event.poster_description|safe}}</div>
                 <ul class="postcard__tagbox">
-                    {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
-                    <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>
-                    {% else %}
-                    <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
-                    {% endif %}
                     {% if event.sample_poster %}
                     <a href="{{ event.sample_poster }}">
                         <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-download mr-2"></i> Sample Poster</li>
@@ -63,61 +58,60 @@
                         <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-download mr-2"></i> Presentation Template</li>
                     </a>
                     {% endif %}
-                    <div>
-                        {% if not event.submissions_started%}
-                        <li class="tag__item"> Already Registered</li> 
-                        {% if user.is_authenticated %}
-                            {% for team in user.teams.all %}
-                                {% if event == team.event and user == team.leader %}
-                                <a href="/users/edit_team/{{team.id}}">
-                                    <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Edit Team</li>
-                                </a>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        {% elif user in submittedUsers %}
-                            <li class="tag__item"><i class="fas fa-check-circle mr-2"></i> Submitted</li>
-                        {% elif event in user.extendeduser.events.all %}
-                            <li class="tag__item play blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fas fa-upload mr-2"></i> Upload</li>
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header" style="border-bottom: 0px; padding-bottom: 0px;">
-                                        <h5 class="modal-title" id="exampleModalLabel">Upload Your Submission</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form method="post" action="{% url 'events:uploadSubmission' %}"  enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        <div class="modal-body">
-                                            <div class="drag-area">
-                                                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                                                <header>Drag & Drop to Upload File</header>
-                                                <span>OR</span>
-                                                <div class="browseButton">
-                                                    <button type="button" class="tag__item play blue">Browse File</button>
-                                                </div>
-                                                <input type="file" name="fileUploaded" hidden>
-                                                <input type="hidden" name="event" value="{{event.name}}">
+                    {% if not event.submissions_started %}
+                    <li class="tag__item"> Already Registered</li> 
+                    {% if user.is_authenticated %}
+                        {% for team in user.teams.all %}
+                            {% if event == team.event and user == team.leader %}
+                            <a href="/users/edit_team/{{team.id}}">
+                                <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Edit Team</li>
+                            </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% elif user in submittedUsers %}
+                        <li class="tag__item"><i class="fas fa-check-circle mr-2"></i> Submitted</li>
+                    {% elif event in user.extendeduser.events.all %}
+                        <li class="tag__item play blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fas fa-upload mr-2"></i> Upload</li>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header" style="border-bottom: 0px; padding-bottom: 0px;">
+                                    <h5 class="modal-title" id="exampleModalLabel">Upload Your Submission</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="post" action="{% url 'events:uploadSubmission' %}"  enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+                                        <div class="drag-area">
+                                            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                            <header>Drag & Drop to Upload File</header>
+                                            <span>OR</span>
+                                            <div class="browseButton">
+                                                <button type="button" class="tag__item play blue">Browse File</button>
                                             </div>
+                                            <input type="file" name="fileUploaded" hidden>
+                                            <input type="hidden" name="event" value="{{event.name}}">
                                         </div>
-                                        <div class="modal-footer" style="border-top: 0px; padding-top: 0px;">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type=submit value="Upload" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                </div>
+                                    </div>
+                                    <div class="modal-footer" style="border-top: 0px; padding-top: 0px;">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type=submit value="Upload" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-                        {% else %}
-                            <a href="/users/create_team/{{event.id}}">
-                                <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Create Team</li>
-                            </a>
-                            <a href="/users/join_team">
-                                <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Join Team</li>
-                            </a>
-                        {% endif %}
-                    </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="/users/create_team/{{event.id}}">
+                            <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Create Team</li>
+                        </a>
+                        <a href="/users/join_team">
+                            <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Join Team</li>
+                        </a>
+                    {% endif %}
+                    
                 </ul>
             </div>
         </article>

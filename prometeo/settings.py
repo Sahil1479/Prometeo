@@ -216,9 +216,9 @@ ADMINS = [('Aryan', 'garg.10@iitj.ac.in'), ('Sahil', 'santosh.2@iitj.ac.in'), ('
 MANAGERS = ADMINS
 
 # AWS Conigs
-AWS_ACCESS_KEY=config('AWS_ACCESS_KEY', cast=str)
-AWS_SECRET_KEY=config('AWS_SECRET_KEY', cast=str)
-AWS_BUCKET=config('AWS_BUCKET', cast=str)
+AWS_ACCESS_KEY = config('AWS_ACCESS_KEY', cast=str)
+AWS_SECRET_KEY = config('AWS_SECRET_KEY', cast=str)
+AWS_BUCKET = config('AWS_BUCKET', cast=str)
 
 # ckeditor configs
 CKEDITOR_CONFIGS = {
@@ -243,3 +243,6 @@ CKEDITOR_CONFIGS = {
         ],
     },
 }
+
+# sendgrid configs
+SENDGRID_API_KEY = config('SENDGRID_API_KEY', cast=str)
