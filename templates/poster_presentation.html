@@ -72,6 +72,15 @@
                     {% elif user in submittedUsers %}
                         <li class="tag__item"><i class="fas fa-check-circle mr-2"></i> Submitted</li>
                     {% elif event in user.extendeduser.events.all %}
+                        {% if user.is_authenticated %}
+                        {% for team in user.teams.all %}
+                            {% if event == team.event and user == team.leader %}
+                            <a href="/users/edit_team/{{team.id}}">
+                                <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Edit Team</li>
+                            </a>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
                         <li class="tag__item play blue" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fas fa-upload mr-2"></i> Upload</li>
                         <!-- Modal -->
                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
