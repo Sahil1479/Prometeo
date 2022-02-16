@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Brochure, Event
+from .models import Brochure, Event, ExhibitionGallery
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from datetime import date, datetime
@@ -46,6 +46,10 @@ def events(request, type):
         for submission in submissions:
             submitted_users.append(submission.user)
         return render(request, 'poster_presentation.html', {'events': events,  'type': type, 'brochure': brochure, 'submittedUsers': submitted_users})
+    elif type == 'exhibition':
+        events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
+        exhibitgallery = ExhibitionGallery.objects.all()
+        return render(request, 'exhibitions.html', {'events': events,  'type': type, 'exhibitgallery': exhibitgallery})
     else:
         typeFound = False
         for item in EVENT_CHOICES:

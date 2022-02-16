@@ -69,6 +69,12 @@ class Event(models.Model):
         return self.name
 
 
+class ExhibitionGallery(models.Model):
+    name = models.CharField(max_length=30)
+    image = models.ImageField(upload_to="exhibitions/images/", null=True, blank=True, verbose_name="Exhibit Image file")
+    video = models.FileField(upload_to="exhibitions/video/", null=True, blank=True, verbose_name="Exhibit Video file")
+
+
 class Contacts(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
