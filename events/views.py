@@ -38,6 +38,9 @@ def events(request, type):
     elif type == 'poster_presentation':
         events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
         return render(request, 'poster_presentation.html', {'events': events,  'type': type, 'brochure': brochure})
+    elif type == 'exhibition':
+        events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
+        return render(request, 'exhibition.html', {'events': events,  'type': type, 'brochure': brochure})
     else:
         typeFound = False
         for item in EVENT_CHOICES:
