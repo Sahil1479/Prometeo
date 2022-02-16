@@ -68,6 +68,7 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
+
 class ExhibitionGallery(models.Model):
     name = models.CharField(max_length=30)
     image = models.ImageField(upload_to="exhibitions/images/", null=True, blank=True, verbose_name="Exhibit Image file")

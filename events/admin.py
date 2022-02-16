@@ -42,4 +42,5 @@ class BrochureAdmin(admin.ModelAdmin):
         model = Brochure
         fields = '__all__'
 
+
 admin.site.register(ExhibitionGallery)
