@@ -7,6 +7,11 @@
 
 
 {% block style %}
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+/>
+
 <link href="{% static 'css/exhibitions.css' %}" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock %}
@@ -69,14 +74,39 @@
                     {% else %}
                     <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
                     {% endif %}
-                   
-                             
-                    
-
                 </ul>
             </div>
         </article>
         {% endfor %}
 </section>
+<section id="gallery">
+
+    <div class="container" data-aos="fade-up">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Gallery</h2>
+      </div>
+    </div>
+
+    <div class="gallery-slider swiper">
+      <div class="swiper-wrapper align-items-center">
+        {% for slide in exhibitgallery %}
+          <div class="swiper-slide">
+            <a href="{{ slide.file.url }}" class="gallery-lightbox">
+                
+                <img src="{{ slide.file.url}}" >                
+            </a>
+            <!-- <div class="swiper-slide-overlay"></div> -->
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+   
+    </div>
+
+  </section>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
 {% endblock %}
