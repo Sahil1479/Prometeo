@@ -193,7 +193,15 @@
                                     <h4 class="info-title">Date</h4>
                                     <p>
                                         {% if event.date %}
-                                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} TBA {% else %}  {{event.date}} {% endif %}
+                                            {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} 
+                                                TBA 
+                                            {% else %}
+                                                {% if event.date == event.end_date %}
+                                                    {{event.date}}
+                                                {% else %}
+                                                    {{event.date}}  to  {{event.end_date}}
+                                                {% endif %}
+                                            {% endif %}
                                         {% else %}
                                         COMING SOON
                                         {% endif %}
@@ -210,7 +218,17 @@
                                 </div>
                                 <div class="description">
                                     <h4 class="info-title">Time</h4>
-                                    <p>{% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %} {{event.time}} {% endif %}</p>
+                                    <p>
+                                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} 
+                                            Coming Soon
+                                        {% else %}
+                                            {% if event.time == event.end_time %}
+                                                {{ event.time }}
+                                            {% else %}
+                                                {{ event.time }} to {{ event.end_time }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </p>
 
                                 </div>
                             </div>
@@ -236,15 +254,21 @@
                             {{ event.rulebook_text|safe }}
                         </div>
                     </div>
-                    {% elif event.description %}
+                    {% elif event.description|safe or event.poster_description|safe %}
                     <div class="row" style="margin-bottom: 10px">
                         <div class="description col-lg-11 ml-auto mr-auto">
                             <h4 class="card-title">
                                 Description
                             </h4>
+                            {% if event.type == 'poster_presentation' %}
+                            <p class="card-text">
+                                {{ event.poster_description|safe }}
+                            </p>
+                            {% else %}
                             <p class="card-text">
                                 {{ event.description }}
                             </p>
+                            {% endif %}
                         </div>
                     </div>
 

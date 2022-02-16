@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'django_inlinecss',
-
+    'ckeditor',
     'captcha'
 ]
 
@@ -214,3 +214,35 @@ RECAPTCHA_USE_SSL = config('RECAPTCHA_USE_SSL', cast=str, default=True)
 
 ADMINS = [('Aryan', 'garg.10@iitj.ac.in'), ('Sahil', 'santosh.2@iitj.ac.in'), ('Rahul', 'gopathi.1@iitj.ac.in'), ('Sainath', 'reddy.17@iitj.ac.in'), ('Shrutayu', 'aggarwal.4@iitj.ac.in'), ('Joel', 'thomas.2@iitj.ac.in'), ]
 MANAGERS = ADMINS
+
+# AWS Conigs
+AWS_ACCESS_KEY = config('AWS_ACCESS_KEY', cast=str)
+AWS_SECRET_KEY = config('AWS_SECRET_KEY', cast=str)
+AWS_BUCKET = config('AWS_BUCKET', cast=str)
+
+# ckeditor configs
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Basic',
+        'width': '100%',
+        'tabSpaces': 4,
+        'mathJaxLib': 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML',
+        'toolbar_Basic': [
+            {'name': 'clipboard', 'items': ['Source', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', ]},
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'formulae', 'items': ['Mathjax']},
+            {'name': 'insert',
+             'items': ['Link', 'Image', 'Table', 'HorizontalRule', 'Smiley', ]},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', ]},
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+        ],
+    },
+}
+
+# sendgrid configs
+SENDGRID_API_KEY = config('SENDGRID_API_KEY', cast=str)
