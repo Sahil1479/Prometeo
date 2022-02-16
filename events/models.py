@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 EVENT_CHOICES = (
     ('technical', 'Technical'),
@@ -39,7 +40,8 @@ class Event(models.Model):
     min_team_size = models.IntegerField(verbose_name="Minimum Team Size (leave unchanged for individual event)", default=1)
     max_team_size = models.IntegerField(verbose_name="Maximum Team Size (leave unchanged for individual event)", default=1)
     prize = models.CharField(max_length=200, verbose_name="Prize Money (Rs.)", null=True, blank=True, default="Prize <Enter prize money here> INR")
-    description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Event Description (Write more for speaker description)")
+    description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Event Description (not for Poster Presentation)")
+    poster_description = RichTextField(max_length=5000, null=True, blank=True, verbose_name="Poster Presentation Description")
     host = models.CharField(max_length=50, null=True, blank=True, verbose_name="Event Host")
     external_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="External Link for Registration")
     date = models.DateField(verbose_name="Event Date (Leave unchanged if the date is not decided)", null=False, blank=False, default="2023-01-01")
@@ -58,7 +60,7 @@ class Event(models.Model):
     hidden = models.BooleanField(verbose_name='Hide Event', default=False, blank=True)
     presentation_template = models.URLField(verbose_name='presentation template download link for poster presentations', blank=True, null=True)
     sample_poster = models.URLField(verbose_name='sample poster download link for poster presentations', blank=True, null=True)
-
+    submissions_started = models.BooleanField(verbose_name="User can upload their submissions", default=False, blank=True)
     submission_link = models.URLField(max_length=500, null=True, blank=True, verbose_name="Event submission link")
     material_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="Material Name")
     material = models.FileField(upload_to="supplementaryMaterials/", null=True, blank=True, verbose_name="Supplementary Material")
