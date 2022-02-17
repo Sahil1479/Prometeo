@@ -43,4 +43,12 @@ class BrochureAdmin(admin.ModelAdmin):
         fields = '__all__'
 
 
-admin.site.register(ExhibitionGallery)
+@admin.register(ExhibitionGallery)
+class ExhibitionGalleryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'hidden', ]
+    list_filter = ('type', )
+    search_fields = ['name', ]
+
+    class Meta:
+        model = ExhibitionGallery
+        fields = '__all__'

@@ -14,10 +14,12 @@
 
 <link href="{% static 'css/exhibitions.css' %}" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/dimsemenov/Magnific-Popup/master/dist/magnific-popup.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Overpass:100,300,700" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<section class="dark">
+<section class="dark content">
 	<div class="container py-4">
         <div style="margin-top: 20px; margin-bottom: 30px; width:100%; background-attachment: fixed;align-items: center; 
         justify-content: center; display:flex">
@@ -39,46 +41,36 @@
         {% for event in events %}
         <article class="postcard dark blue" data-aos="fade-up">
             <div class="postcard__text">
-                <!-- {% if event.prize %}
-                    <div class="postcard__subtitle small">
-                        <time datetime="2020-05-25 12:00:00">
-                            {{ event.prize }}
-                        </time>
-                    </div>
-                {% endif %} -->
-                <!-- <div class="postcard__bar"></div> -->
-                <div class="postcard__preview-txt">Exhibitions provide us with amazing learning experiences.
-                    The ideas in the exhibition help us to understand not only
-                    the existng innovations and art but also leave us with an
-                    impression of what lies ahead of us. The Exhibitions at
-                    PROMETEO '22 is here to bring forth a similar experience
-                    for you. The face-to-face approach and physical presence
-                    are the essences of any exhibition. However, due to the
-                    current Covid scenario, keeping everyone's safety in mind;
-                    We'll be hosting a Virtual Exhibition. We hope to bring you
-                    the best experience and learnings.</div>
-                    <br>
-                    <h1 class="postcard__title blue">What are we exhibiting?</h1>
-                    <ul>
-                        <li>INNOVATIVE PRODUCTS</li>
-                        <li>TECH BY DRDO</li>
-                        <li>TECH BY IIT JODHPUR</li>
-                        <li>INDIAN ART & CULTURE</li>
-                        <li>IIT FRATERNITY</li>
-                        <li>SUSTAINABILITY</li>
-                    </ul>
-
+                <div class="postcard__preview-txt">{{event.poster_description|safe}}</div>
                 <ul class="postcard__tagbox">
                     {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
                     <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>
                     {% else %}
                     <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
                     {% endif %}
+                    {% if event.meet_link %}
+                            <a href="{{ event.meet_link }}">
+                                <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
+                            {% if event.webx_link %}
+                            <a href="{{ event.webx_link }}">
+                                <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
+                            {% if event.youtube_link %}
+                            <a href="{{ event.youtube_link }}">
+                                <li class="tag__item play blue" style="cursor: pointer;"><i class="fas fa-video mr-2"></i> Join</li>
+                            </a>
+                            {% endif %}
                 </ul>
             </div>
         </article>
         {% endfor %}
 </section>
+{% if exhibitgallery.count == 0 %}
+
+{% else %}
 <section id="gallery">
 
     <div class="container" data-aos="fade-up">
@@ -87,26 +79,62 @@
       </div>
     </div>
 
-    <div class="gallery-slider swiper">
-      <div class="swiper-wrapper align-items-center">
-        {% for slide in exhibitgallery %}
-          <div class="swiper-slide">
-            <a href="{{ slide.file.url }}" class="gallery-lightbox">
-                
-                <img src="{{ slide.file.url}}" >                
-            </a>
-            <!-- <div class="swiper-slide-overlay"></div> -->
+    <div class="video-gallery">
+      {% for item in exhibitgallery %}
+        {% if item.type == 'video' %}
+          <div class="gallery-item " data-aos="fade-up">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{item.name}}"/>
+            {% else %}
+            <img src="https://raw.githubusercontent.com/Sahil1479/images/main/ca_mail_top.png" alt="{{item.name}}"/>
+            {% endif %}
+            <div class="gallery-item-caption">
+              <!--<div>-->
+                <h2>{{item.name}}</h2>
+                <p>{{item.description}}</p>
+              <!--</div>-->
+              <a class="vimeo-popup" href="{{ item.video }}">
+              </a>
+            </div>
           </div>
-        {% endfor %}
-      </div>
-      <div class="swiper-pagination"></div>
-   
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="image-gallery video-gallery">
+      {% for item in exhibitgallery %}
+        {% if item.type == 'image' %}
+          <div class="gallery-item " data-aos="fade-up">
+            <img src="{{ item.image.url }}" alt="{{item.name}}"/>
+            <div class="gallery-item-caption">
+              <!--<div>-->
+                <h2>{{item.name}}</h2>
+                <p>{{item.description}}</p>
+              <!--</div>-->
+              <a class="vimeo-popup" href="{{ item.image.url }}"></a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
 
   </section>
-
+{% endif %}
 {% endblock %}
 {% block scripts %}
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/dimsemenov/Magnific-Popup/master/dist/jquery.magnific-popup.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".video-gallery").magnificPopup({
+      delegate: "a",
+      type: "iframe",
+    });
+    $(".image-gallery").magnificPopup({
+      delegate: "a",
+      type: "image",
+    });
+  });
+ 
+  
+</script>
 {% endblock %}

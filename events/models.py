@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -18,6 +19,10 @@ EVENT_PARTICIPATION = (
     ('team', 'Team Event'),
 )
 
+GALLERY_ITEM_TYPE = (
+    ('image', 'image'),
+    ('video', 'video'),
+)
 
 class Brochure(models.Model):
     name = models.CharField(max_length=100, verbose_name='Document name', null=False, blank=False)
@@ -70,9 +75,16 @@ class Event(models.Model):
 
 
 class ExhibitionGallery(models.Model):
-    name = models.CharField(max_length=30)
-    image = models.ImageField(upload_to="exhibitions/images/", null=True, blank=True, verbose_name="Exhibit Image file")
-    video = models.FileField(upload_to="exhibitions/video/", null=True, blank=True, verbose_name="Exhibit Video file")
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=100, null=True, blank=True)
+    type = models.CharField(max_length=10, choices=GALLERY_ITEM_TYPE, default='image')
+    image = models.ImageField(upload_to="exhibitions/images/", null=True, blank=True, verbose_name="Image file")
+    video = models.URLField(null=True, blank=True, verbose_name="Upload video on Youtube and paste link here (NOTE: If video, then also upload image for thumbnail)")
+    rank = models.IntegerField(blank=False, null=False, default=1)
+    hidden = models.BooleanField(verbose_name='Hide', default=False, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Contacts(models.Model):
