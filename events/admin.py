@@ -25,7 +25,7 @@ class EventAdmin(admin.ModelAdmin):
         (_('Event Registration Details'), {'fields': ('participation_type', 'min_team_size', 'max_team_size', 'registration_open', 'submission_link')}),
         (_('Event Dates'), {'fields': ('date', 'time', 'end_date', 'end_time', 'event_started')}),
         (_('Event Links'), {'fields': ('meet_link', 'youtube_link', 'webx_link')}),
-        (_('Event Uploads'), {'fields': ('image', 'rulebook', 'material_name', 'material')}),
+        (_('Event Uploads'), {'fields': ('image', 'rulebook', 'material_name', 'material', 'problem_statement')}),
         (_('Poster Presentations'), {'fields': ('sample_poster', 'presentation_template', 'poster_description')}),
     )
 

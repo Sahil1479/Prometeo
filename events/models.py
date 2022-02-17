@@ -34,6 +34,7 @@ class Event(models.Model):
     designation = models.CharField(max_length=200, null=True, blank=True, verbose_name="Speaker Designation (only for Talk)")
     image = models.ImageField(upload_to="images/", verbose_name="Cover Image(prefer uploading square images)(for speakers upload images with more padding, i.e, face in the center)", blank=False, null=False)
     rulebook = models.FileField(upload_to="rulebooks/", null=True, blank=True, verbose_name="Rulebook File")
+    problem_statement = RichTextField(max_length=5000000, null=True, blank=True, verbose_name="Problem Statement")
     sponsor_image1 = models.ImageField(upload_to="images/", null=True, blank=True, verbose_name="Sponser Image 1(upload rectangular images)")
     sponsor_website = models.URLField(max_length=1000, null=True, blank=True, verbose_name="Link to Sponsors Website")
     participation_type = models.CharField(max_length=25, choices=EVENT_PARTICIPATION, default='individual', verbose_name="Participation Type")
