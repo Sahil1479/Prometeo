@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -23,6 +22,7 @@ GALLERY_ITEM_TYPE = (
     ('image', 'image'),
     ('video', 'video'),
 )
+
 
 class Brochure(models.Model):
     name = models.CharField(max_length=100, verbose_name='Document name', null=False, blank=False)
