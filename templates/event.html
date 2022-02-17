@@ -141,6 +141,12 @@
                                 onclick="openTab(event, 'contact')">Contact
                                 Us</a>
                         </li>
+                        {% if event.problem_statement %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" data-toggle="modal"
+                                onclick="openTab(event, 'problem_statement')">Problem Statement</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="card-body" id="details" style="display:block; text-align:left">
@@ -300,6 +306,11 @@
                         </div>
                         {% endfor %}
                     </div>
+                </div>
+                <div class="card-body tab-content" id="problem_statement" style="display:none; text-align:left">
+                    {% if event.problem_statement|safe %}
+                        {{ event.problem_statement|safe }}
+                    {% endif %}
                 </div>
 
             </div>

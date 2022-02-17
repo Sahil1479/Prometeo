@@ -51,6 +51,18 @@
                         {% endif %}
                       {% endfor %}
                     </div>
+                    {% if event.contacts_set.all %}
+                        <p style="margin-bottom: 4px; margin-top: 16px;">For any queries, please contact</p>
+                        <div class="row" style="text-align: start; margin-top: 8px; margin-bottom: 8px;">
+                            {% for contact in event.contacts_set.all %}
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                <p style="font-weight: 600; margin-bottom: 4px;">{{ contact.name }}</p>
+                                <p style="margin-bottom: 4px;"> +91 {{ contact.phone }}</p>
+                                <p style="margin-bottom: 8px;">{{ contact.email }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <ul class="postcard__tagbox">
                         {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
                         <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i> Coming Soon</li>
