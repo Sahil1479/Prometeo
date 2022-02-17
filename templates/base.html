@@ -113,6 +113,7 @@
               <li><a href="{% url 'events:events' 'workshop' %}">Workshops</a></li>
               <li><a href="{% url 'events:events' 'poster_presentation' %}">Poster Presentations</a></li>
               <li><a href="{% url 'events:events' 'panel_discussion' %}">Panel Discussion</a></li>
+              <li><a href="{% url 'events:events' 'exhibition' %}">Exhibition</a></li>
             </ul>
           </li>
           {% if user.is_authenticated %}
@@ -219,10 +220,10 @@
                 <i class="bx bx-chevron-right"></i>
                 <a href="{% url 'home:theme' %}">Theme</a>
               </li>
-              <!-- <li>
+              <li>
                 <i class="bx bx-chevron-right"></i>
                 <a href="{% url 'events:schedule' %}">Schedule</a>
-              </li> -->
+              </li>
               <li>
                 <i class="bx bx-chevron-right"></i>
                 <a href="{% url 'coordinator' %}">Meet our team</a>
