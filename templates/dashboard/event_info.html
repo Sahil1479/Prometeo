@@ -220,6 +220,12 @@
                                 Fourth Year
                                 {% elif participant.current_year == '5' %}
                                 Fifth Year
+                                {% elif participant.current_year == '6' %}
+                                Graduated
+                                {% elif participant.current_year == '7' %}
+                                Faculty/Staff
+                                {% elif participant.current_year == '8' %}
+                                NA
                                 {% endif %}
                             </td>
                             <td>{{ participant.college }}</td>
