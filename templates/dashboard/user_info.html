@@ -163,6 +163,12 @@
         Fourth Year
         {% elif cur_user.extendeduser.current_year == 'fifth_year' %}
         Fifth Year
+        {% elif cur_user.current_year == '6' %}
+        Graduated
+        {% elif cur_user.current_year == '7' %}
+        Faculty/Staff
+        {% elif cur_user.current_year == '8' %}
+        NA
         {% endif %}
     </li>
     <li><b>City: </b>{{ cur_user.extendeduser.city.capitalize }}</li>

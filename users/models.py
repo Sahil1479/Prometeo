@@ -18,7 +18,10 @@ YEAR_CHOICES = (
     ('2', '2nd Year'),
     ('3', '3rd Year'),
     ('4', '4th Year'),
-    ('5', '5th Year')
+    ('5', '5th Year'),
+    ('6', 'Graduated'),
+    ('7', 'Faculty/Staff'),
+    ('8', 'NA'),
 )
 
 
