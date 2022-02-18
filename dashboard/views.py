@@ -13,6 +13,9 @@ from django.urls import reverse
 # Create your views here.
 sendMailID = settings.EMAIL_HOST_USER
 
+current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4th Year', '5': '5th Year',
+                     '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
+
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def update_event_state(request, type, eventid, redirect_url_name):
@@ -121,7 +124,7 @@ def get_all_user_export(filename):
         worksheet2.write(row2, 3, str(user.referred_by)) if user.referred_by is not None else worksheet2.write(row2, 3, 'NA')
         worksheet2.write(row2, 4, 'YES') if user.ambassador else worksheet2.write(row2, 4, 'NO')
         worksheet2.write(row2, 5, user.college)
-        worksheet2.write(row2, 6, user.current_year)
+        worksheet2.write(row2, 6, current_year_dict[user.current_year])
         row2 += 1
     workbook2.close()
 
@@ -256,7 +259,7 @@ def event_type_info(request, type):
                 worksheet.write(row, 1, participant.first_name)
                 worksheet.write(row, 2, participant.last_name)
                 worksheet.write(row, 3, participant.contact)
-                worksheet.write(row, 4, participant.current_year.replace("_", " ").capitalize())
+                worksheet.write(row, 4, current_year_dict[participant.current_year].capitalize())
                 worksheet.write(row, 5, participant.college)
                 worksheet.write(row, 6, participant.city)
                 worksheet.write(row, 7, participant.gender.capitalize())
@@ -398,7 +401,7 @@ def event_info(request, type, eventid):
             worksheet.write(row, 1, participant.first_name)
             worksheet.write(row, 2, participant.last_name)
             worksheet.write(row, 3, participant.contact)
-            worksheet.write(row, 4, participant.current_year.replace("_", " ").capitalize())
+            worksheet.write(row, 4, current_year_dict[participant.current_year].capitalize())
             worksheet.write(row, 5, participant.college)
             worksheet.write(row, 6, participant.city)
             worksheet.write(row, 7, participant.gender.capitalize())
