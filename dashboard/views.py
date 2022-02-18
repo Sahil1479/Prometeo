@@ -13,8 +13,9 @@ from django.urls import reverse
 # Create your views here.
 sendMailID = settings.EMAIL_HOST_USER
 
-current_year_dict={'1':'1st Year', '2':'2nd Year', '3':'3rd Year', '4':'4th Year', '5':'5th Year',
-                   '6':'Graduated', '7':'Faculty/Staff', '8':'NA'}
+current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4th Year', '5': '5th Year',
+                     '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
+
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def update_event_state(request, type, eventid, redirect_url_name):
