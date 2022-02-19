@@ -38,8 +38,6 @@ def events(request, type):
         return render(request, 'panel.html', {'events': events, 'panelists': panelist, 'type': type})
     elif type == 'poster_presentation':
         events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
-        return render(request, 'poster_presentation.html', {'events': events,  'type': type, 'brochure': brochure})
-
         if events:
             submissions = Submissions.objects.filter(event=events.first().id)
         else:
@@ -68,7 +66,14 @@ def event(request, type, eventid):
     if registrationNotCompleted(request):
         return redirect("/users/profile")
     event = get_object_or_404(Event, pk=eventid)
-    return render(request, 'event.html', {'event': event})
+    if events:
+        submissions = Submissions.objects.filter(event=eventid)
+    else:
+        submissions = Submissions.objects.all()
+    submitted_users = []
+    for submission in submissions:
+        submitted_users.append(submission.user)
+    return render(request, 'event.html', {'event': event, 'submittedUsers': submitted_users})
 
 
 def schedule(request):
@@ -84,7 +89,7 @@ def schedule(request):
 
 def uploadSubmission(request):
     if request.method == 'GET':
-        return redirect('/events/poster_presentation')
+        return redirect('/users/my_events')
     # POST
     try:
         user_email = request.user
@@ -110,4 +115,4 @@ def uploadSubmission(request):
         print(e)
         messages.info(request, 'There was an error submitting your file, Please try again')
 
-    return redirect('/events/poster_presentation')
+    return redirect('/users/my_events')
