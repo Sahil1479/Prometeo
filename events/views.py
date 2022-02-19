@@ -73,7 +73,6 @@ def event(request, type, eventid):
     submitted_users = []
     for submission in submissions:
         submitted_users.append(submission.user)
-    print(submitted_users)
     return render(request, 'event.html', {'event': event, 'submittedUsers': submitted_users})
 
 
