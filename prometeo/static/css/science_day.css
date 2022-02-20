@@ -1,0 +1,90 @@
+/*--------------------------------------------------------------
+# Team
+--------------------------------------------------------------*/
+.team .member {
+    position: relative;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 5px;
+    background-image: linear-gradient(to top right, #1c1924, #2c2835f3);
+    border: 2px solid #47b2e4;
+    box-shadow: 0px 5px 8px #888888;
+    transition: 0.5s;
+  }
+  @media (max-width: 480px)  {
+      .team .member {
+        padding: 15px;
+      }
+  }
+  .team .member .pic {
+    overflow: hidden;
+    width: 180px;
+    border-radius: 5px;
+    align-self: center;
+  }
+  .team .member .pic img {
+    transition: ease-in-out 0.3s;
+  }
+  .team .member:hover {
+    transform: translateY(-10px);
+  }
+  .team .member .member-info {
+    padding-left: 30px;
+  }
+  .team .member h4 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #33f0f0;
+  }
+  .team .member span {
+    display: block;
+    font-size: 15px;
+    padding-bottom: 10px;
+    position: relative;
+    font-weight: 500;
+  }
+  .team .member span::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 1px;
+    background: #cbd6e9;
+    bottom: 0;
+    left: 0;
+  }
+  .team .member p {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+  }
+  .team .member .social {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .team .member .social a {
+    transition: ease-in-out 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    width: 32px;
+    height: 32px;
+    background: #eff2f8;
+  }
+  .team .member .social a i {
+    color: #37517e;
+    font-size: 16px;
+    margin: 0 2px;
+  }
+  .team .member .social a:hover {
+    background: #47b2e4;
+  }
+  .team .member .social a:hover i {
+    color: #fff;
+  }
+  .team .member .social a + a {
+    margin-left: 8px;
+  }
