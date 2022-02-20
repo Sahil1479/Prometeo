@@ -39,6 +39,9 @@ def home_redirect(request):
         return redirect("/users/profile")
     return redirect(home)
 
+def nsd(request):
+    return render(request,'nsd.html')
+
 
 def sponsors(request):
     if registrationNotCompleted(request):
