@@ -53,3 +53,7 @@ def sponsors(request):
         if obj["sponsorData"]:
             sponsors.append(obj)
     return render(request, 'sponsors.html', {"sponsors": sponsors})
+
+
+def privacyPolicy(request):
+    return render(request, 'privacy_policy.html')
