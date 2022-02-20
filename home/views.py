@@ -39,8 +39,9 @@ def home_redirect(request):
         return redirect("/users/profile")
     return redirect(home)
 
+
 def nsd(request):
-    return render(request,'national_science_day.html')
+    return render(request, 'national_science_day.html')
 
 
 def sponsors(request):
