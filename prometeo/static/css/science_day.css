@@ -1,0 +1,116 @@
+/*--------------------------------------------------------------
+# Team
+--------------------------------------------------------------*/
+#heading{
+  background-image: url(../img/nsd.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:center;
+
+}
+.team .member {
+    position: relative;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 5px;
+    background-image: linear-gradient(to top right, #1c1924, #2c2835f3);
+    border: 2px solid #47b2e4;
+    box-shadow: 0px 5px 8px #888888;
+    transition: 0.2s !important;
+  }
+  @media (max-width: 480px)  {
+    .team .member {
+      display: block !important;
+    }
+    .team .member .pic{
+ 
+      left: 50%;
+      transform: translateX(-50%) !important;
+    }
+   
+    .team .member{
+      text-align: center;
+      padding-top:20px;
+    }
+    .team .member span::after {
+      left: 50% !important;
+      position: relative;
+      transform: translateX(-50%) !important;
+    }
+  }
+  .team .member .pic {
+    overflow: hidden;
+    width: 280px;
+    padding:10px;
+    border-radius: 5px;
+    align-self: center;
+   
+  }
+ 
+  .team .member:hover {
+    transform: translateY(-5px) !important;
+  }
+  .team .member .member-info {
+    padding: 30px;
+  }
+  .team .member h4 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #33f0f0;
+  }
+  .team .member span {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+    position: relative;
+    font-weight: 500;
+  }
+  .team .member span::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 1px;
+    background: #cbd6e9;
+    bottom: -5px;
+    left: 0;
+    transition: 0.2s ease-out;
+  }
+  .team .member:hover span::after {
+    width: 100px;
+  }
+  .team .member p {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+  }
+  .team .member .social {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .team .member .social a {
+    transition: ease-in-out 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    width: 32px;
+    height: 32px;
+    background: #eff2f8;
+  }
+  .team .member .social a i {
+    color: #37517e;
+    font-size: 16px;
+    margin: 0 2px;
+  }
+  .team .member .social a:hover {
+    background: #47b2e4;
+  }
+  .team .member .social a:hover i {
+    color: #fff;
+  }
+  .team .member .social a + a {
+    margin-left: 8px;
+  }

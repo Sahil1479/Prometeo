@@ -9,72 +9,91 @@
 {% endblock %}
 
 {% block content %}
-<section class="dark">
-	<div class="container py-4">
-        <div style="margin-top: 20px; margin-bottom: 30px; width:100%; background-attachment: fixed;align-items: center; 
-        justify-content: center; display:flex">
-            <div class="section-header">
-                <h2>NSD</h2>
+<section id="team" class="team section-bg dark">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <h2>National Science Day</h2>
+       
+      </div>
+      <p class="content">Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+      <div class="row">
+
+        <div class="col-6 mt-4">
+          <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+              <div class="col-4">
+                <div class="pic"><img src="https://vinusimages.co/wp-content/uploads/2018/10/EG7A2390.jpgA_.jpg" class="img-fluid" alt=""></div>
+              </div>
+              <div class="col-8">
+                <div class="member-info">
+                    <h4>Walter White</h4>
+                    <span>Chief Executive Officer</span>
+                    <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                    <div class="social">
+                      <a href=""><i class="ri-twitter-fill"></i></a>
+                      <a href=""><i class="ri-facebook-fill"></i></a>
+                      <a href=""><i class="ri-instagram-fill"></i></a>
+                      <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                    </div>
+                  </div>
+              </div>
+            
+          </div>
+        </div>
+
+        <div class="col-6 mt-4">
+          <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
+            <div class="pic"><img src="https://vinusimages.co/wp-content/uploads/2018/10/EG7A2390.jpgA_.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+              <h4>Sarah Jhonson</h4>
+              <span>Product Manager</span>
+              <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="row">
-            <article class="postcard dark blue col" data-aos="fade-up">
-                <a class="postcard__img_link">
-                    <img class="postcard__img" src="https://vinusimages.co/wp-content/uploads/2018/10/EG7A2390.jpgA_.jpg" alt="Image Title" />
-                </a>
-                <div class="postcard__text">
-                    <h1 class="postcard__title blue">TEST Speaker</h1>
-                    
-                    <div class="postcard__subtitle small">
-                        
-                            <!-- <i class="fas fa-calendar-alt mr-2"></i> -->
-                           test designation
-                        
-                    </div>
-                  
-                    <div class="postcard__bar"></div>
-                    <div class="postcard__preview-txt">lorem ipsum dolor sit amet</div>
-              
-                </div>
-            </article>
-               <article class="postcard dark blue col" data-aos="fade-up">
-                    <a class="postcard__img_link">
-                        <img class="postcard__img" src="https://vinusimages.co/wp-content/uploads/2018/10/EG7A2390.jpgA_.jpg" alt="Image Title" />
-                    </a>
-                    <div class="postcard__text">
-                        <h1 class="postcard__title blue " >Test Speaker 2</h1>
-                        {% if event.designation %}
-                        <div class="postcard__subtitle small">
-                            <time datetime="2020-05-25 12:00:00">
-                                <!-- <i class="fas fa-calendar-alt mr-2"></i> -->
-                                Designation
-                            </time>
-                        </div>
-                        {% endif %}
-                        <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt">{{event.description}}</div>
-                        <ul class="postcard__tagbox">
-                          
-                            <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
-                       
-                                            
-                              
-                                <a href="{{ event.youtube_link }}">
-                                    <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
-                                </a>
-                                <a href="/users/register_indi_event/{{event.id}}">
-                                    <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
-                                </a>
-                      
-                        </ul>
-                    </div>
-                </article>
+
+        <div class="col-6 mt-4">
+          <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="300">
+            <div class="pic"><img src="https://vinusimages.co/wp-content/uploads/2018/10/EG7A2390.jpgA_.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+              <h4>William Anderson</h4>
+              <span>CTO</span>
+              <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        
-        {% if events.count < 5 %}
-            <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center; margin-top: 30px; margin-bottom: 10px;">More Speakers Coming Soon...</p>
-        {% endif %}
-	</div>
-</section>
+
+        <div class="col-6 mt-4">
+          <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
+            <div class="pic"><img src="https://vinusimages.co/wp-content/uploads/2018/10/EG7A2390.jpgA_.jpg" class="img-fluid" alt=""></div>
+            <div class="member-info">
+              <h4>Amanda Jepson</h4>
+              <span>Accountant</span>
+              <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+              <div class="social">
+                <a href=""><i class="ri-twitter-fill"></i></a>
+                <a href=""><i class="ri-facebook-fill"></i></a>
+                <a href=""><i class="ri-instagram-fill"></i></a>
+                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 {% endblock %}
