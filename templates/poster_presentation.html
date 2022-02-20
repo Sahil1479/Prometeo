@@ -142,6 +142,7 @@
     button = dropArea.querySelector("button"),
     browseButton = dropArea.getElementsByClassName("browseButton")[0];
     input = dropArea.querySelector("input");
+    const maximumSize = 10 * 1024 * 1024;
     let file; //this is a global variable and we'll use it inside multiple functions
 
     button.onclick = ()=>{
@@ -151,8 +152,15 @@
     input.addEventListener("change", function(){
     //getting user select file and [0] this means if user select multiple files then we'll select only the first one
     file = this.files[0];
-    dropArea.classList.add("active");
-    showFile(); //calling function
+    if (file.size > maximumSize) {
+        alert("Oops! maximum file size is 10MB");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }
+    else{
+        dropArea.classList.add("active");
+        showFile(); //calling function
+    }
     });
 
 
@@ -179,7 +187,15 @@
     event.preventDefault(); //preventing from default behaviour
     //getting user select file and [0] this means if user select multiple files then we'll select only the first one
     file = event.dataTransfer.files[0];
-    showFile(); //calling function
+    if (file.size > maximumSize) {
+        alert("Oops! maximum file size is 10MB");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }
+    else{
+        dropArea.classList.add("active");
+        showFile(); //calling function
+    }
     });
 
     function showFile(){
