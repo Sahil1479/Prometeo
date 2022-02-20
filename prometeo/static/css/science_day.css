@@ -243,7 +243,7 @@ body{
 }
 #team .schedule-item p {
   color: #fff;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 #team .schedule-item .description {
   font-size: 14px;
@@ -258,7 +258,7 @@ body{
   width: 50px;
   height: 2px;
   background: #82cdf8;
-  bottom: 0px;
+  bottom: -5px;
   left: 0px;
 
   position: relative;
