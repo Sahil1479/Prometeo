@@ -42,7 +42,8 @@
   }
   .img-area img {
     width: 80%;
-    height: 200px;
+    height: auto;
+    max-height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,7 +118,7 @@
 
     .img-area img {
       width: 80%;
-      height: 150px;
+      height: auto;
       display: flex;
       align-items: center;
       justify-content: center;

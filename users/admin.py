@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import ugettext_lazy as _
-from .models import ExtendedUser, CustomUser, Team
+from .models import ExtendedUser, CustomUser, Team, Submissions
 
 
 @admin.register(ExtendedUser)
 class ExtendedUserAdmin(admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name', 'college', 'ambassador')
-    list_filter = ('ambassador',)
+    list_filter = ('ambassador', 'college')
     search_fields = ['user__email', 'user__first_name', 'user__last_name', 'college', 'contact', 'city']
 
     class Meta:
@@ -43,4 +43,10 @@ class TeamAdmin(admin.ModelAdmin):
     search_fields = ['name', 'leader__email', ]
 
 
+class SubmissionsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'event', 'file_url')
+    list_filter = ('event',)
+
+
 admin.site.register(Team, TeamAdmin)
+admin.site.register(Submissions, SubmissionsAdmin)

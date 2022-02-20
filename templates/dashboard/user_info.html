@@ -57,6 +57,7 @@
         <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
         <a class="dropdown-item" href="{% url 'event_type_info' 'panel_discussion' %}">Panel Discussion</a>
+        <a class="dropdown-item" href="{% url 'event_type_info' 'poster_presentation' %}">Poster Presentation</a>
       </div>
     </li>
     <!-- <li>
@@ -114,6 +115,7 @@
       <a class="dropdown-item" href="{% url 'event_type_info' 'entrepreneurial' %}">Entrepreneurial</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'initiative' %}">Initiative</a>
       <a class="dropdown-item" href="{% url 'event_type_info' 'panel_discussion' %}">Panel Discussion</a>
+      <a class="dropdown-item" href="{% url 'event_type_info' 'poster_presentation' %}">Poster Presentation</a>
     </div>
   </li>
   <li class="nav-item">
@@ -159,8 +161,14 @@
         Third Year
         {% elif cur_user.extendeduser.current_year == '4' %}
         Fourth Year
-        {% elif cur_user.extendeduser.current_year == 'fifth_year' %}
+        {% elif cur_user.extendeduser.current_year == '5' %}
         Fifth Year
+        {% elif cur_user.extendeduser.current_year == '6' %}
+        Graduated
+        {% elif cur_user.extendeduser.current_year == '7' %}
+        Faculty/Staff
+        {% elif cur_user.extendeduser.current_year == '8' %}
+        NA
         {% endif %}
     </li>
     <li><b>City: </b>{{ cur_user.extendeduser.city.capitalize }}</li>

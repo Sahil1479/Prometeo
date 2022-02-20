@@ -28,6 +28,7 @@ justify-content: center; display:flex">
         <div class="section-header">
             <h2>{{ type }} events</h2>
         </div>
+    
     {% endif %}
 </div>
   
@@ -66,22 +67,29 @@ justify-content: center; display:flex">
                             {% endif %}
                             <!-- card header with badge ends -->
                             <div class="card-body post-content">
-                                {% if event.date %} 
-                                <p class="card-text medium text-body" style="color: white !important; margin-bottom: 0px !important;">
+                                {% if event.prize %} 
+                                <p class="card-text large text-body" style="font-size: larger; color: white !important; margin-bottom: 0px !important;">
                                 
-                                    {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{event.date}} {% endif %}
+                                    {{event.name}}
                                 
                                 </p>
-                                {% endif %}
+                                <a class="title" style="text-decoration: none;">
+                                    {{event.prize}}
+                                </a>
+                                {% else %}
                                 <a class="title" style="text-decoration: none;">
                                     <h3>{{event.name}}</h3>
                                 </a>
+                                {% endif %}
                                 <p class="card-text description description-{{event.id}}" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500" data-aos-once = "true">{{event.description|truncatechars:145}}</p>
                             </div>
                         </div>
                         <div class="row no-gutters">
-                            <div class="col-md-12">
-                                <a style="width:100%; border-width: 0px 1px 1px 1px; border-radius: 0px 0px 5px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
+                            <div class="col-6" style="padding-right: 0px; height: 100%;">
+                                <a style="width:100%; border-width: 0px 0px 1px 1px; border-radius: 0px 0px 0px 5px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr1">{% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}<i class="far fa-calendar-alt"></i> TBA {% else %}  {{event.date}} {% endif %}</a>
+                            </div>
+                            <div class="col-6" style="padding-left: 0px; height: 100%;">
+                                <a style="width:100%; border-width: 0px 1px 1px 0px; border-radius: 0px 0px 5px 0px; border-color: rgba(255, 255, 255, 0.5);" class="btn  buttonfntr" href="{% url 'events:event' event.type event.pk %}">View more</a>
                             </div>
                         </div>
                     </div>
@@ -89,7 +97,7 @@ justify-content: center; display:flex">
                 {% endif %}
             {% endfor %}
         {% endif %}
-        {% if events.count < 5 %}
+        {% if events.count < 5 and events.count != 0 %}
             <p data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center; margin-top: 30px; margin-bottom: 10px;">More to Come Soon...</p>
         {% endif %}
     </div>

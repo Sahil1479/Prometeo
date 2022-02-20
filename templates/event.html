@@ -28,32 +28,36 @@
     style="background-color: transparent; width: fit-content;position: relative;top: 10vh;">
     <div class="row">
         <!-- <div class="round-border"> -->
-        <h2 class="title title-heading">{{ event.name }}</h2>
-        <div>
-            {% if event.host %}
-            <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> by
-                {% if event.sponsor_website %}
-                <a href="{{ event.sponsor_website }}">
-                    <img src="{{ event.sponsor_image1.url }}" alt="Sponser" height="60">
-                </a>
-                {% else %}
-                <img src="{{ event.sponsor_image1.url }}" alt="Sponser" height="60">
-                {% endif %}
-            </h4>
-            {% else %}
-            <div>
-                {% if event.type == 'talk' %}
-                <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> By {{ event.speaker }}
-                    {% if event.designation %}
-                    <br/>
-                    <span class="designation">{{event.designation}}</span>
-                    {% endif %}
-                </h4>
-                {% else %}
-                <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
-                {% endif %}
-            </div>
+        {% if event.type == 'talk' %}
+        <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"> By {{ event.speaker }}
+            {% if event.designation %}
+            <br/>
+            <span class="designation">{{event.designation}}</span>
             {% endif %}
+        </h4>
+        {% else %}
+        <h2 class="title title-heading">{{ event.name }}</h2>
+            {% if event.event_sponsors.all %}
+            <h4 class="title" style="text-transform: capitalize; font-size: 0.9rem; margin-bottom:7px">In association with</h4>
+            {% else %}
+            {% if event.type != "panel_discussion" and event.type != "poster_presentation" %}
+            <!-- <h4 class="title" style="text-transform: capitalize; margin-bottom:15px"></h4> -->
+            <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">{{ event.type }}</h4>
+            {% endif %}
+            {% endif %}
+        {% endif %}
+        <div>
+            <h4 class="title" style="text-transform: capitalize; margin-bottom:15px">
+                {% for sponsor in event.event_sponsors.all %}
+                    {% if sponsor.website %}
+                    <a title="{{sponsor.name}}" href="{{ sponsor.website }}" target="_blank">
+                        <img src="{{ sponsor.image.url }}" style="margin: 2px 0px; height: 60px; width: 110px;" alt="Sponser">
+                    </a>
+                    {% else %}
+                    <img src="{{ sponsor.image.url }}" alt="Sponser" height="60" width="110">
+                    {% endif %}
+                {% endfor %}
+            </h4>
         </div>
 
         <!-- <div class="row"></div> -->
@@ -62,6 +66,50 @@
             {% if event.rulebook %}
             <a href="{{ event.rulebook.url }}" target="_blank"><button class="rulebook btn btn-primary"
                     type="button">Rulebook</button></a>
+            {% endif %}
+            {% if event.material %}
+            <a href="{{ event.material.url }}" target="_blank"><button class="rulebook btn btn-primary"
+                    type="button">{{event.material_name}}</button></a>
+            {% endif %}
+            {% if event.submission_link %}
+            <a href="{{event.submission_link}}" target="_blank"><button class="rulebook btn btn-primary"
+                type="button">Submit Here</button></a>
+            {% endif %}
+            {% if event.submissions_started and not user in submittedUsers %}
+            <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><button class="rulebook btn btn-primary"
+                type="button">Submit Here</button></a>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header" style="border-bottom: 0px; padding-bottom: 0px;">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Your Submission</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" action="{% url 'events:uploadSubmission' %}"  enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="drag-area">
+                                    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                    <header>Drag & Drop to Upload File</header>
+                                    <span>OR</span>
+                                    <div class="browseButton">
+                                        <button type="button" class="tag__item">Browse File</button>
+                                    </div>
+                                    <input type="file" name="fileUploaded" hidden>
+                                    <input type="hidden" name="event" value="{{event.name}}">
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top: 0px; padding-top: 0px;">
+                                <button type="button" class=" close btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type=submit value="Upload" class="submit btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if user in submittedUsers %}
+                <button type="button" class="submitted btn btn-primary" disabled><i class="fas fa-check-circle mr-2"></i> Submitted</button>
             {% endif %}
         </div>
         <div class="col-lg-6 col-md-8 col-sm-12 ml-auto mr-auto" style="padding-bottom: 5%;">
@@ -129,6 +177,12 @@
                                 onclick="openTab(event, 'contact')">Contact
                                 Us</a>
                         </li>
+                        {% if event.problem_statement %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" data-toggle="modal"
+                                onclick="openTab(event, 'problem_statement')">Problem Statement</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="card-body" id="details" style="display:block; text-align:left">
@@ -172,14 +226,6 @@
                                 </div>
                                 {% endif %}
                             </div>
-                            <!-- <h4 class="card-title">Event Type</h4>
-                    <p class="card-text">
-                        {% if event.participation_type == 'team' %}
-                        Team Event (Team Size: {{ event.min_team_size }}-{{ event.max_team_size }})
-                        {% else %}
-                        Individual Event 
-                        {% endif %} 
-                    </p> -->
 
                             <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
                                 <div class="icon icon-rose">
@@ -189,7 +235,15 @@
                                     <h4 class="info-title">Date</h4>
                                     <p>
                                         {% if event.date %}
-                                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %}  {{event.date}} {% endif %}
+                                            {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} 
+                                                TBA 
+                                            {% else %}
+                                                {% if event.date == event.end_date %}
+                                                    {{event.date}}
+                                                {% else %}
+                                                    {{event.date}}  to  {{event.end_date}}
+                                                {% endif %}
+                                            {% endif %}
                                         {% else %}
                                         COMING SOON
                                         {% endif %}
@@ -206,7 +260,17 @@
                                 </div>
                                 <div class="description">
                                     <h4 class="info-title">Time</h4>
-                                    <p>{% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} Coming Soon {% else %} {{event.time}} {% endif %}</p>
+                                    <p>
+                                        {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} 
+                                            Coming Soon
+                                        {% else %}
+                                            {% if event.time == event.end_time %}
+                                                {{ event.time }}
+                                            {% else %}
+                                                {{ event.time }} to {{ event.end_time }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </p>
 
                                 </div>
                             </div>
@@ -232,15 +296,21 @@
                             {{ event.rulebook_text|safe }}
                         </div>
                     </div>
-                    {% elif event.description %}
+                    {% elif event.description|safe or event.poster_description|safe %}
                     <div class="row" style="margin-bottom: 10px">
                         <div class="description col-lg-11 ml-auto mr-auto">
                             <h4 class="card-title">
                                 Description
                             </h4>
+                            {% if event.type == 'poster_presentation' %}
+                            <p class="card-text">
+                                {{ event.poster_description|safe }}
+                            </p>
+                            {% else %}
                             <p class="card-text">
                                 {{ event.description }}
                             </p>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -273,6 +343,11 @@
                         {% endfor %}
                     </div>
                 </div>
+                <div class="card-body tab-content" id="problem_statement" style="display:none; text-align:left">
+                    {% if event.problem_statement|safe %}
+                        {{ event.problem_statement|safe }}
+                    {% endif %}
+                </div>
 
             </div>
         </div>
@@ -285,3 +360,106 @@
 </div>
 
 {% endblock %}
+
+{% block scripts %}
+
+<script>
+    //selecting all required elements
+    const dropArea = document.querySelector(".drag-area"),
+    uploadIcon = dropArea.getElementsByClassName("icon")[0];
+    dragText = dropArea.querySelector("header"),
+    helperText = dropArea.querySelector("span"),
+    button = dropArea.querySelector("button"),
+    browseButton = dropArea.getElementsByClassName("browseButton")[0];
+    input = dropArea.querySelector("input");
+    const maximumSize = 10 * 1024 * 1024;
+    let file; //this is a global variable and we'll use it inside multiple functions
+
+    button.onclick = ()=>{
+    input.click(); //if user click on the button then the input also clicked
+    }
+
+    input.addEventListener("change", function(){
+    //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+    file = this.files[0];
+    if (file.size > maximumSize) {
+        alert("Oops! maximum file size is 10MB");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }
+    else{
+        dropArea.classList.add("active");
+        showFile(); //calling function
+    }
+    });
+
+
+    //If user Drag File Over DropArea
+    dropArea.addEventListener("dragover", (event)=>{
+    event.preventDefault(); //preventing from default behaviour
+    dropArea.classList.add("active");
+    dragText.textContent = "Release to Upload File";
+    });
+
+    //If user leave dragged File from DropArea
+    dropArea.addEventListener("dragleave", ()=>{
+    if(button.textContent == 'Browse File'){
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }
+    else{
+        dragText.textContent = file.name + " uploaded!";
+    }
+    });
+
+    //If user drop File on DropArea
+    dropArea.addEventListener("drop", (event)=>{
+    event.preventDefault(); //preventing from default behaviour
+    //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+    file = event.dataTransfer.files[0];
+    if (file.size > maximumSize) {
+        alert("Oops! maximum file size is 10MB");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+    }
+    else{
+        dropArea.classList.add("active");
+        showFile(); //calling function
+    }
+    });
+
+    function showFile(){
+        let fileReader = new FileReader(); //creating new FileReader object
+        fileReader.onload = ()=>{
+        let fileURL = fileReader.result; //passing user file source in fileURL variable
+        uploadIcon.innerHTML = '<i class="fas fa-file-check"></i>';
+        dragText.textContent = file.name + " uploaded!";
+        helperText.innerHTML = '<p class="resubmitText">Drag & Drop another file to change the uploaded file <br/>or</p>';
+        button.textContent = 'Change File';
+        button.classList = ['changeButton'];
+        }
+        fileReader.readAsDataURL(file);
+    // let fileType = file.type; //getting selected file type
+    // let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
+    // if(validExtensions.includes(fileType)){ //if user selected file is an image file
+    //     let fileReader = new FileReader(); //creating new FileReader object
+    //     fileReader.onload = ()=>{
+    //     let fileURL = fileReader.result; //passing user file source in fileURL variable
+    //     dragText.textContent = file.name;
+    //     helperText.textContent = "Uploaded!";
+    //     // button.classList.add("hideButton");
+    //     browseButton.innerHTML = '<p class="resubmitText">Drag & Drop another file to change the uploaded file</p>';
+    //     uploadIcon.innerHTML = '<i class="fas fa-file-check" style="color: rgb(50 195 50);"></i>';
+    //     // let imgTag = `<img src="${fileURL}" alt="">`; //creating an img tag and passing user selected file source inside src attribute
+    //     // dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+    //     }
+    //     fileReader.readAsDataURL(file);
+    // }else{
+    //     alert("This is not an Image File!");
+    //     dropArea.classList.remove("active");
+    //     dragText.textContent = "Drag & Drop to Upload File";
+    // }
+    }
+</script>
+
+{% endblock%}
