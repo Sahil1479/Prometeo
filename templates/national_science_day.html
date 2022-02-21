@@ -22,6 +22,18 @@ National Science Day
 <section id="heading">
   <img class='img-fluid nsdlogo'  src="../static/img/nsd_final.png">
 </section>
+
+{% if event in user.extendeduser.events.all %}
+  <a href="#" class="tag__item_alrdyregistered"><i class="fas fa-edit mr-2"></i> Already Registered</a>
+{% else %}
+  <a href="/users/register_indi_event/{{event.id}}" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</a>
+{% endif %}
+<div style="margin-top: 60px; margin-bottom: 10px; width:100%; background-attachment: fixed;align-items: center; 
+        justify-content: center; display:flex">
+            <div class="section-header">
+                <h2>INDIA's Journey in Science and Technology</h2>
+            </div>
+</div>
 <section id="team" class="team section-bg" style="background: #110f16;">
     <!-- <div class="container" data-aos="fade-up">
 
