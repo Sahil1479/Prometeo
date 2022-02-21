@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, theme, sponsors, nsd
+from .views import home, theme, sponsors, nsd, privacyPolicy
 
 app_name = 'home'
 
@@ -8,4 +8,5 @@ urlpatterns = [
     path('theme/', theme, name='theme'),
     path('sponsors/', sponsors, name='sponsors'),
     path('nsd/', nsd, name='nsd'),
+    path('privacy-policy/', privacyPolicy, name='privacy-policy')
 ]
