@@ -41,7 +41,8 @@ def home_redirect(request):
 
 
 def nsd(request):
-    return render(request, 'national_science_day.html')
+    event = Event.objects.get(name='National Science Day')
+    return render(request, 'national_science_day.html', {'event': event})
 
 
 def sponsors(request):
