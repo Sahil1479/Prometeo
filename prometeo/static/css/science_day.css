@@ -29,6 +29,21 @@
   left: calc(50% - 25px);
 }
 
+.section-topic {
+  font-size: 24px;
+  text-align: center !important;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 10px;
+  margin: 10px;
+  background: -webkit-linear-gradient(#f8f6f6, #3a90e4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
 body{
   background-color:#110f16;
 }
