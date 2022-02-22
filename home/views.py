@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Carousel, Themeimgs, Sponsors, SponsorDesignation
 from events.models import Event
+from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
 
@@ -41,7 +42,7 @@ def home_redirect(request):
 
 
 def nsd(request):
-    event = Event.objects.get(name='National Science Day')
+    event = Event.objects.filter(name='National Science Day')
     return render(request, 'national_science_day.html', {'event': event})
 
 
