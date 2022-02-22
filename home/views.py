@@ -42,7 +42,7 @@ def home_redirect(request):
 
 
 def nsd(request):
-    event = Event.objects.filter(name='National Science Day')
+    event = Event.objects.filter(name='National Science Day').first()
     return render(request, 'national_science_day.html', {'event': event})
 
 

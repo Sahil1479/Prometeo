@@ -22,13 +22,24 @@ National Science Day
 <section id="heading">
   <img class='img-fluid nsdlogo'  src="../static/img/nsd_final.png">
 </section>
-{% if event %}
-  {% if event in user.extendeduser.events.all %}
-    <a href="#" class="tag__item_alrdyregistered"><i class="fas fa-edit mr-2"></i> Already Registered</a>
-  {% else %}
-    <a href="/users/register_indi_event/{{event.id}}" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</a>
+<div>
+  {% if event %}
+    {% if event in user.extendeduser.events.all %}
+      <a href="#" class="tag__item_alrdyregistered"><i class="fas fa-edit mr-2" style="text-align: center; width: fit-content; cursor: pointer"></i> Already Registered</a>
+    {% else %}
+      <a href="/users/register_indi_event/{{event.id}}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer"><i class="fas fa-edit mr-2"></i> Register</a>
+    {% endif %}
+    {% if event.meet_link %}
+      <a href="{{ event.meet_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
+    {% endif %}
+    {% if event.webx_link %}
+      <a href="{{ event.webx_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
+    {% endif %}
+    {% if event.youtube_link %}
+      <a href="{{ event.youtube_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
+    {% endif %}
   {% endif %}
-{% endif %}
+</div>
 <div style="margin-top: 60px; margin-bottom: 10px; width:100%; background-attachment: fixed;align-items: center; 
         justify-content: center; display:flex">
             <div class="section-header">
