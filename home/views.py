@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Carousel, Themeimgs, Sponsors, SponsorDesignation
 from events.models import Event
-from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
 
