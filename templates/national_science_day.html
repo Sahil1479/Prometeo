@@ -22,6 +22,18 @@ National Science Day
 <section id="heading">
   <img class='img-fluid nsdlogo'  src="../static/img/nsd_final.png">
 </section>
+
+{% if event in user.extendeduser.events.all %}
+  <a href="#" class="tag__item_alrdyregistered"><i class="fas fa-edit mr-2"></i> Already Registered</a>
+{% else %}
+  <a href="/users/register_indi_event/{{event.id}}" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</a>
+{% endif %}
+<div style="margin-top: 60px; margin-bottom: 10px; width:100%; background-attachment: fixed;align-items: center; 
+        justify-content: center; display:flex">
+            <div class="section-header">
+                <h2>INDIA's Journey in Science and Technology</h2>
+            </div>
+</div>
 <section id="team" class="team section-bg" style="background: #110f16;">
     <!-- <div class="container" data-aos="fade-up">
 
@@ -112,7 +124,7 @@ National Science Day
             
             
             <p class="description">
-                Indian biophysicist and Former Director General of the Council of Scientific & Industrial Research(CSIR) and Former Secretary, Department of Scientific and Industrial Research (DSIR), Government of India. He is the Founder Director of Institute of Genomics and Integrative Biology (IGIB), New Delhi and the Chief Mentor of Open Source for Drug Discovery (OSDD) Project. He is the recipient of J.C Bose Fellowship Award, DST (2012).
+                Indian biophysicist and Former Director General of the Council of Scientific & Industrial Research(CSIR) and Former Secretary, Department of Scientific and Industrial Research (DSIR), Government of India. He is the Founder Director of CSIR - Institute of Genomics and Integrative Biology (IGIB), New Delhi and the Chief Mentor of Open Source for Drug Discovery (OSDD) Project. He is the recipient of J.C Bose Fellowship Award, DST (2012).
             </p>
          
           </div>
@@ -156,7 +168,7 @@ National Science Day
             
             
             <p class="description">
-                Ashutosh Sharma is an Institute Chair Professor and C V Seshadri Chair Professor at the Department of chemical engineering of Indian Institute of Technology Kanpur.He is best known for his pioneering research work in the areas of colloids, thin film, interfaces, adhesion, patterning and in the fabrication and application of self-assembled nano-structures.
+                Prof. Ashutosh Sharma is an Institute Chair Professor and C V Seshadri Chair Professor at the Department of chemical engineering of Indian Institute of Technology Kanpur.He is best known for his pioneering research work in the areas of colloids, thin film, interfaces, adhesion, patterning and in the fabrication and application of self-assembled nano-structures.
             </p>
          
           </div>
@@ -179,34 +191,42 @@ National Science Day
                 </a> -->
                 <div class="postcard__text">
                     <div class="row ">
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 panelist-details">
+                      <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 panelist-details">
+                        <div class="row justify-content-center panelist-img" style="background-image: url('../static/img/iitj.png'); background-size: cover; background-position: center; background-repeat: no-repeat; "></div>
+                        <div class="row  panelist-info">
+                            <!-- <span style="font-size: larger;">{{panelist.name}}</span> -->
+                            <!-- <span style="font-size: smaller;">{{panelist.designation}}</span> -->
+                         </div>
+                     </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 panelist-details">
                            <div class="row justify-content-center panelist-img" style="background-image: url('../static/img/logo.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
                            <div class="row  panelist-info">
                                <!-- <span style="font-size: larger;">{{panelist.name}}</span> -->
                                <!-- <span style="font-size: smaller;">{{panelist.designation}}</span> -->
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 panelist-details">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 panelist-details">
                             <div class="row justify-content-center panelist-img" style="background-image: url('../static/img/jckic.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
                             <div class="row  panelist-info">
                                 <!-- <span style="font-size: larger;">{{panelist.name}}</span> -->
                                 <!-- <span style="font-size: smaller;">{{panelist.designation}}</span> -->
                              </div>
                          </div>
-                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 panelist-details">
+                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 panelist-details">
                             <div class="row justify-content-center panelist-img" style="background-image: url('../static/img/jnvu.jfif'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
                             <div class="row  panelist-info">
                                 <!-- <span style="font-size: larger;">{{panelist.name}}</span> -->
                                 <!-- <span style="font-size: smaller;">{{panelist.designation}}</span> -->
                              </div>
                          </div>
-                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 panelist-details">
+                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6 panelist-details">
                             <div class="row justify-content-center panelist-img" style="background-image: url('../static/img/mbm.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
                             <div class="row  panelist-info">
                                 <!-- <span style="font-size: larger;">{{panelist.name}}</span> -->
                                 <!-- <span style="font-size: smaller;">{{panelist.designation}}</span> -->
                              </div>
                          </div>
+                        
                     </div>
                     <ul class="postcard__tagbox">
                         <!-- {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %}
