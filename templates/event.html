@@ -286,7 +286,7 @@
                             </p>
                             {% else %}
                             <p class="card-text">
-                                {{ event.description }}
+                                {{ event.description|linebreaks  }}
                             </p>
                             {% endif %}
                         </div>
