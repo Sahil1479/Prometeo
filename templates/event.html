@@ -75,7 +75,11 @@
             <a href="{{event.submission_link}}" target="_blank"><button class="rulebook btn btn-primary"
                 type="button">Submit Here</button></a>
             {% endif %}
-            {% if event.submissions_started and not user in submittedUsers %}
+            {% if not user.is_authenticated %}
+            <a href="/accounts/login"><button class="rulebook btn btn-primary"
+                type="button">Submit Here</button></a>
+            {% endif %}
+            {% if event.submissions_started and not user in submittedUsers and user.is_authenticated %}
             <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><button class="rulebook btn btn-primary"
                 type="button">Submit Here</button></a>
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
