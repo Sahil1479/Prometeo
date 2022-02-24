@@ -185,7 +185,7 @@
                             <td>{{ cur_user.first_name }}</td>
                             <td>{{ cur_user.last_name }}</td>
                             <td>{{ cur_user.contact }}</td>
-                            <td>{% if cur_user.referred_by %}{{ cur_user.username }}{% else %}NA{% endif %}</td>
+                            <td>{% if cur_user.referred_by %}{{ cur_user.referred_by }}{% else %}NA{% endif %}</td>
                             <td>{% if cur_user.ambassador %}Yes{% else %}No{% endif %}</td>
                             <td>{% if cur_user.ambassador %}{{ cur_user.invite_referral }}{% else %}NA{% endif %}</td>
                             <td style="text-transform: capitalize;">{{ cur_user.gender }}</td>
