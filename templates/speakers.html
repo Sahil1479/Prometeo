@@ -64,22 +64,20 @@
                         {% else %}
                         <li class="tag__item"><i class="fas fa-calendar-alt mr-2"></i>  {{ event.date }} <b>|</b> {{event.time}}</li>
                         {% endif %}
-                        {% if event in user.extendeduser.events.all %}
-                            {% if event.meet_link %}
-                            <a href="{{ event.meet_link }}">
-                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
-                            </a>
-                            {% endif %}
-                            {% if event.webx_link %}
-                            <a href="{{ event.webx_link }}">
-                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
-                            </a>
-                            {% endif %}
-                            {% if event.youtube_link %}
-                            <a href="{{ event.youtube_link }}">
-                                <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
-                            </a>
-                            {% endif %}
+                        {% if event.meet_link %}
+                        <a href="{{ event.meet_link }}">
+                            <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                        </a>
+                        {% endif %}
+                        {% if event.webx_link %}
+                        <a href="{{ event.webx_link }}">
+                            <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                        </a>
+                        {% endif %}
+                        {% if event.youtube_link %}
+                        <a href="{{ event.youtube_link }}">
+                            <li class="tag__item play blue"><i class="fas fa-video mr-2"></i> Join</li>
+                        </a>
                         {% endif %}
 
                         {% if event in user.extendeduser.events.all %}
