@@ -140,10 +140,10 @@
     <li><b>Email: </b>{{ cur_user.email }}</li>
     <li><b>First Name: </b>{{ cur_user.first_name }}</li>
     <li><b>Last Name: </b>{{ cur_user.last_name }}</li>
-    <li><b>Contact: </b>{{ cur_user.contact }}</li>
+    <li><b>Contact: </b>{{ cur_user.extendeduser.contact }}</li>
     <li><b>Referred By: </b>
-        {% if cur_user.referred_by %}
-        <a href="{% url 'user_info' cur_user.referred_by.pk %}">{{ cur_user.referred_by.user.email }} ({{ cur_user.referred_by.first_name }} {{ cur_user.referred_by.last_name }})</a>
+        {% if cur_user.extendeduser.referred_by %}
+        <a href="{% url 'user_info' cur_user.extendeduser.referred_by.pk %}">{{ cur_user.extendeduser.referred_by.user.email }} ({{ cur_user.extendeduser.referred_by.first_name }} {{ cur_user.extendeduser.referred_by.last_name }})</a>
         {% else %}
         NA
         {% endif %}

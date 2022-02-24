@@ -17,6 +17,18 @@ current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4t
                      '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
 
 
+def get_referred(email):
+    users = ExtendedUser.objects.all()
+    count = 0
+    for user in users:
+        print(user.referred_by)
+        if user.referred_by is None:
+            pass
+        elif user.referred_by.email == email:
+            count += 1
+    return count
+
+
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def update_event_state(request, type, eventid, redirect_url_name):
     updated_event = get_object_or_404(Event, pk=eventid)
@@ -53,12 +65,13 @@ def get_ca_export(filename):
         'bg_color': 'black'
     })
     row = 2
-    worksheet.merge_range('A1:E1', 'Campus Ambassadors', merge_format)
+    worksheet.merge_range('A1:F1', 'Campus Ambassadors', merge_format)
     worksheet.write(1, 0, "Email", header_format)
     worksheet.write(1, 1, "Name", header_format)
     worksheet.write(1, 2, "Referral Id", header_format)
     worksheet.write(1, 3, "Contact", header_format)
     worksheet.write(1, 4, "College", header_format)
+    worksheet.write(1, 5, "No of referred users", header_format)
     for ca in ca_list:
         if 'iitj' not in ca.college.lower() and 'iit jodhpur' not in ca.college.lower() and 'indian institute of technology jodhpur' not in ca.college.lower() and 'indian institute of technology, jodhpur' not in ca.college.lower():
             worksheet.write(row, 0, ca.user.email)
@@ -66,6 +79,8 @@ def get_ca_export(filename):
             worksheet.write(row, 2, ca.invite_referral)
             worksheet.write(row, 3, ca.contact)
             worksheet.write(row, 4, ca.college)
+            worksheet.write(row, 5, get_referred(ca.user.email))
+            print(get_referred(ca.user.email))
             row += 1
     workbook.close()
 
