@@ -25,8 +25,8 @@ def get_referred(email):
         if user.referred_by is None:
             pass
         elif user.referred_by.email == email:
-            count += 1 
-    return count 
+            count += 1
+    return count
 
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
