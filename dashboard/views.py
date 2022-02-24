@@ -46,7 +46,7 @@ def get_submissions(event, filename):
         'valign': 'vcenter',
         'font_color': 'white',
         'bg_color': 'black'
-    })  
+    })
     if event.participation_type == 'individual':
         worksheet2.merge_range('A1:D1', f'{event.name.capitalize()}_Submissions', merge_format2)
         worksheet2.write(1, 0, "Email", header_format2)
