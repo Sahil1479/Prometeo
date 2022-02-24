@@ -23,6 +23,13 @@ National Science Day
   <img class='img-fluid nsdlogo'  src="../static/img/nsd_final.png">
 </section>
 <div>
+  {% if brochure %}
+        <p style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px"><a href="{{brochure.file.url}}" style="color: #2b2d2e;
+            font-size: medium;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 5px; border: 3px solid #47b2e4;"><i class="fas fa-download"></i> {{brochure.name}}</a></p>
+  {% endif %}
   {% if event %}
     {% if event in user.extendeduser.events.all %}
       <a href="#" class="tag__item_alrdyregistered"><i class="fas fa-edit mr-2" style="text-align: center; width: fit-content; cursor: pointer"></i> Already Registered</a>
