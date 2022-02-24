@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import user_passes_test
-from users.models import CustomUser, ExtendedUser, Team
+from users.models import CustomUser, ExtendedUser, Team, Submissions
 from events.models import Event
 import xlsxwriter
 import os
@@ -14,6 +14,50 @@ from django.urls import reverse
 sendMailID = settings.EMAIL_HOST_USER
 current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4th Year', '5': '5th Year',
                      '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
+
+
+def get_submissions(event, filename):
+    event = Event.objects.get(name=event)
+    submissions = Submissions.objects.filter(event=event)
+    wbname2 = filename + '.xlsx'
+    wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
+    workbook2 = xlsxwriter.Workbook(wbpath2)
+    worksheet2 = workbook2.add_worksheet(f'{event.name.capitalize()}_Submissions')
+    col_center2 = workbook2.add_format({
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    worksheet2.set_column(0, 100, 30, col_center2)
+    worksheet2.set_row(0, 30)
+    merge_format2 = workbook2.add_format({
+        'bold': 1,
+        'border': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color': 'gray',
+        'font_size': 20
+    })
+    header_format2 = workbook2.add_format({
+        'bold': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'font_color': 'white',
+        'bg_color': 'black'
+    })
+    worksheet2.merge_range('A1:D1', f'{event.name.capitalize()}_Submissions', merge_format2)
+    if event.participation_type == 'individual':
+        worksheet2.write(1, 0, "Email", header_format2)
+        worksheet2.write(1, 1, "Name", header_format2)
+        worksheet2.write(1, 2, "College", header_format2)
+        worksheet2.write(1, 3, "Submitted File Link", header_format2)
+        row2 = 2
+        for submission in submissions:
+            worksheet2.write(row2, 0, submission.user.email)
+            worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
+            worksheet2.write(row2, 2, submission.user.extendeduser.college)
+            worksheet2.write(row2, 3, submission.file_url)
+            row2 += 1
+    workbook2.close()
 
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
@@ -109,16 +153,6 @@ def get_all_user_export(filename):
         'font_color': 'white',
         'bg_color': 'black'
     })
-    # invalid_format = workbook.add_format({
-    #     'bg_color': '#ff7f7f',
-    #     'align': 'center',
-    #     'valign': 'vcenter',
-    # })
-    # light_format = workbook.add_format({
-    #     'bg_color': '#d3d3d3',
-    #     'align': 'center',
-    #     'valign': 'vcenter',
-    # })
     worksheet2.merge_range('A1:G1', 'User List', merge_format2)
     worksheet2.write(1, 0, "Email", header_format2)
     worksheet2.write(1, 1, "Name", header_format2)
@@ -141,13 +175,16 @@ def get_all_user_export(filename):
     workbook2.close()
 
 
-@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/users/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/')
 def downloadfile(request, filename):
     file_path = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', filename))
     if filename == "User_List":
         get_all_user_export(filename + '.xlsx')
     elif filename == "Campus_Ambassador_List":
         get_ca_export(filename + '.xlsx')
+    elif 'Submissions' in filename:
+        event = list(filename.split('_'))[0]
+        get_submissions(event, filename)
     file_path += '.xlsx'
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
@@ -464,7 +501,8 @@ def event_info(request, type, eventid):
             row = row + 1
     workbook.close()
     workbook2.close()
-    return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2})
+    wbname3 = f'{event.name}_Submissions'
+    return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2, 'wbname3': wbname3})
 
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/mass_mail/')
