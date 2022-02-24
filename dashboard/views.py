@@ -12,21 +12,8 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
 # Create your views here.
 sendMailID = settings.EMAIL_HOST_USER
-
 current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4th Year', '5': '5th Year',
                      '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
-
-
-def get_referred(email):
-    users = ExtendedUser.objects.all()
-    count = 0
-    for user in users:
-        print(user.referred_by)
-        if user.referred_by is None:
-            pass
-        elif user.referred_by.email == email:
-            count += 1
-    return count
 
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
@@ -38,6 +25,17 @@ def update_event_state(request, type, eventid, redirect_url_name):
 
 
 def get_ca_export(filename):
+    users = ExtendedUser.objects.all()
+    ca_referred_count = dict()
+    for user in users:
+        if user.ambassador:
+            ca_referred_count[user.user.email] = 0
+    for user in users:
+        if user.referred_by:
+            try:
+                ca_referred_count[user.referred_by.email] += 1
+            except KeyError:
+                ca_referred_count[user.referred_by.email] = 0
     wbname = filename
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
@@ -69,18 +67,17 @@ def get_ca_export(filename):
     worksheet.write(1, 0, "Email", header_format)
     worksheet.write(1, 1, "Name", header_format)
     worksheet.write(1, 2, "Referral Id", header_format)
-    worksheet.write(1, 3, "Contact", header_format)
-    worksheet.write(1, 4, "College", header_format)
-    worksheet.write(1, 5, "No of referred users", header_format)
+    worksheet.write(1, 3, "No of referred users", header_format)
+    worksheet.write(1, 4, "Contact", header_format)
+    worksheet.write(1, 5, "College", header_format)
     for ca in ca_list:
         if 'iitj' not in ca.college.lower() and 'iit jodhpur' not in ca.college.lower() and 'indian institute of technology jodhpur' not in ca.college.lower() and 'indian institute of technology, jodhpur' not in ca.college.lower():
             worksheet.write(row, 0, ca.user.email)
             worksheet.write(row, 1, ca.first_name + ' ' + ca.last_name)
             worksheet.write(row, 2, ca.invite_referral)
-            worksheet.write(row, 3, ca.contact)
-            worksheet.write(row, 4, ca.college)
-            worksheet.write(row, 5, get_referred(ca.user.email))
-            print(get_referred(ca.user.email))
+            worksheet.write(row, 3, ca_referred_count[ca.user.email])
+            worksheet.write(row, 4, ca.contact)
+            worksheet.write(row, 5, ca.college)
             row += 1
     workbook.close()
 
