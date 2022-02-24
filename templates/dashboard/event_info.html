@@ -162,10 +162,14 @@
 <a href="{% url 'change_registration' event.type event.pk 'open' %}" class="btn btn-primary" style="margin-bottom: 20px;">Reopen Registration</a><br>
 {% endif %}
 <i class="fas fa-external-link-alt"></i> <a href="{% url 'events:event' event.type event.pk %}">Go to actual page</a><br>
-<i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname }}" download="{{ wbname }}"> Download Participants Excel Sheet</a>
 {% if event.participation_type == 'team' %}
 <br>
 <i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname2 }}" download="{{ wbname2 }}"> Download Eligible Teams Excel Sheet</a>
+<hr>
+{% else %}
+<i class="fas fa-download"></i> <a href="{% url 'downloadfile' wbname3 %}"> Download Submissions</a>
+<br>
+<i class="fas fa-download"></i> <a href="{% get_media_prefix %}workbooks/{{ wbname }}" download="{{ wbname }}"> Download Participants Excel Sheet</a>
 <hr>
 {% endif %}
 <h2 style="text-transform: capitalize;">
