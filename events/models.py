@@ -34,7 +34,7 @@ class Brochure(models.Model):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=50, verbose_name="Event Name", unique=True, blank=False, null=False)
+    name = models.CharField(max_length=300, verbose_name="Event Name", unique=True, blank=False, null=False)
     speaker = models.CharField(max_length=50, null=True, blank=True, verbose_name="If Talk mention speaker's name (Else leave empty)")
     designation = models.CharField(max_length=200, null=True, blank=True, verbose_name="Speaker Designation (only for Talk)")
     image = models.ImageField(upload_to="images/", verbose_name="Cover Image(prefer uploading square images)(for speakers upload images with more padding, i.e, face in the center)", blank=False, null=False)
