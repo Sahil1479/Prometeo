@@ -181,7 +181,7 @@
                     {% for cur_user in users %}
                     {% if not cur_user.is_staff %}
                         <tr>
-                            <td><a href="{% url 'user_info' cur_user.pk %}">{{ cur_user.user.email }}</a></td>
+                            <td><a href="{% url 'user_info' cur_user.user.pk %}">{{ cur_user.user.email }}</a></td>
                             <td>{{ cur_user.first_name }}</td>
                             <td>{{ cur_user.last_name }}</td>
                             <td>{{ cur_user.contact }}</td>

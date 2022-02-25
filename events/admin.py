@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Contacts, Brochure, Panel, EventSponsors, ExhibitionGallery
+from .models import Event, Contacts, Brochure, Panel, EventSponsors, ExhibitionGallery, StreamLinks
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -30,7 +30,13 @@ class EventAdmin(admin.ModelAdmin):
     )
 
 
+class StreamLinksAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url')
+    list_filter = ('name', )
+
+
 admin.site.register(Event, EventAdmin)
+admin.site.register(StreamLinks, StreamLinksAdmin)
 
 
 @admin.register(Brochure)

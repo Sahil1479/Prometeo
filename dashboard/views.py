@@ -22,7 +22,10 @@ def get_submissions(event, filename):
     wbname2 = filename + '.xlsx'
     wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
     workbook2 = xlsxwriter.Workbook(wbpath2)
-    worksheet2 = workbook2.add_worksheet(f'{event.name.capitalize()}_Submissions')
+    if(len(event.name) > 18):
+        worksheet2 = workbook2.add_worksheet(f'{event.name.capitalize()[:18]}_Submissions')
+    else:
+        worksheet2 = workbook2.add_worksheet(f'{event.name.capitalize()}_Submissions')
     col_center2 = workbook2.add_format({
         'align': 'center',
         'valign': 'vcenter',
@@ -44,8 +47,8 @@ def get_submissions(event, filename):
         'font_color': 'white',
         'bg_color': 'black'
     })
-    worksheet2.merge_range('A1:D1', f'{event.name.capitalize()}_Submissions', merge_format2)
     if event.participation_type == 'individual':
+        worksheet2.merge_range('A1:D1', f'{event.name.capitalize()}_Submissions', merge_format2)
         worksheet2.write(1, 0, "Email", header_format2)
         worksheet2.write(1, 1, "Name", header_format2)
         worksheet2.write(1, 2, "College", header_format2)
@@ -56,6 +59,24 @@ def get_submissions(event, filename):
             worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
             worksheet2.write(row2, 2, submission.user.extendeduser.college)
             worksheet2.write(row2, 3, submission.file_url)
+            row2 += 1
+    else:
+        worksheet2.merge_range('A1:E1', f'{event.name.capitalize()}_Submissions', merge_format2)
+        worksheet2.write(1, 0, "Team Name", header_format2)
+        worksheet2.write(1, 1, "Leader", header_format2)
+        worksheet2.write(1, 2, "Leader Email", header_format2)
+        worksheet2.write(1, 3, "College", header_format2)
+        worksheet2.write(1, 4, "Submitted File Link", header_format2)
+        row2 = 2
+        for submission in submissions:
+            for team in submission.event.participating_teams.all():
+                if submission.user in team.members.all():
+                    worksheet2.write(row2, 0, team.name)
+                    break
+            worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
+            worksheet2.write(row2, 2, submission.user.email)
+            worksheet2.write(row2, 3, submission.user.extendeduser.college)
+            worksheet2.write(row2, 4, submission.file_url)
             row2 += 1
     workbook2.close()
 
@@ -183,7 +204,9 @@ def downloadfile(request, filename):
     elif filename == "Campus_Ambassador_List":
         get_ca_export(filename + '.xlsx')
     elif 'Submissions' in filename:
-        event = list(filename.split('_'))[0]
+        event_name_list = list(filename.split('_'))[:-1]
+        event = " ".join(event_name_list)
+        print('Name:', event)
         get_submissions(event, filename)
     file_path += '.xlsx'
     if os.path.exists(file_path):
@@ -501,7 +524,8 @@ def event_info(request, type, eventid):
             row = row + 1
     workbook.close()
     workbook2.close()
-    wbname3 = f'{event.name}_Submissions'
+    event_name = event.name.replace(' ', '_')
+    wbname3 = f'{event_name}_Submissions'
     return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2, 'wbname3': wbname3})
 
 

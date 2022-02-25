@@ -44,7 +44,7 @@ def events(request, type):
             submissions = Submissions.objects.all()
         submitted_users = []
         for submission in submissions:
-            submitted_users.append(submission.user)
+            submitted_users += [submitted_user for submitted_user in submission.user.teams.get(event=events.first().id).members.all()]
         return render(request, 'poster_presentation.html', {'events': events,  'type': type, 'brochure': brochure, 'submittedUsers': submitted_users})
     elif type == 'exhibition':
         events = Event.objects.filter(type=type).filter(hidden=False).order_by('rank')
@@ -66,13 +66,13 @@ def event(request, type, eventid):
     if registrationNotCompleted(request):
         return redirect("/users/profile")
     event = get_object_or_404(Event, pk=eventid)
-    if events:
-        submissions = Submissions.objects.filter(event=eventid)
+    if event:
+        submissions = Submissions.objects.filter(event=event)
     else:
         submissions = Submissions.objects.all()
     submitted_users = []
     for submission in submissions:
-        submitted_users.append(submission.user)
+        submitted_users += [submitted_user for submitted_user in submission.user.teams.get(event=event).members.all()]
     return render(request, 'event.html', {'event': event, 'submittedUsers': submitted_users})
 
 
