@@ -319,7 +319,7 @@ Home
       <div class="row" style="place-content: space-around;">
           {% for event in featured_events %}
             {% if event.type == 'talk' or event.type == 'panel_discussion' %}
-            <div class="member" data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" data-aos-once="true">
+            <div class="member" data-aos="fade-up" data-aos-delay="500" data-aos-duration="700" data-aos-once="true">
                   <a href="/events/{{event.type}}">
                   <div class="member-img">
                     <img src="{{event.image.url}}" class="img-fluid" alt="">
@@ -335,7 +335,7 @@ Home
                 </a>
                 </div>
             {% else %}
-            <div class="member" data-aos="fade-up">
+            <div class="member" data-aos="fade-up" data-aos-delay="500" data-aos-duration="700" data-aos-once="true">
                   <a href="/events/{{event.type}}/{{event.id}}">
                   <div class="member-img">
                     <img src="{{event.image.url}}" class="img-fluid" alt="">
