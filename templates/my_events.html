@@ -28,6 +28,18 @@ Registered Events
             >Poster Presentation</a
           >
         </li>
+        {% elif category == "panel_discussion" %}
+        <li class="nav-item">
+          <a class="nav-link active" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >Panel Discussion</a
+          >
+        </li>
+        {% elif category == "national_science_day" %}
+        <li class="nav-item">
+          <a class="nav-link active" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >National Science Day</a
+          >
+        </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link active" href="#{{category}}" role="tab" data-bs-toggle="tab"
@@ -41,6 +53,18 @@ Registered Events
         <li class="nav-item">
           <a class="nav-link" href="#{{category}}" role="tab" data-bs-toggle="tab"
             >Poster Presentation</a
+          >
+        </li>
+        {% elif category == "panel_discussion" %}
+        <li class="nav-item">
+          <a class="nav-link" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >Panel Discussion</a
+          >
+        </li>
+        {% elif category == "national_science_day" %}
+        <li class="nav-item">
+          <a class="nav-link" href="#{{category}}" role="tab" data-bs-toggle="tab"
+            >National Science Day</a
           >
         </li>
         {% else %}
@@ -115,6 +139,8 @@ Registered Events
                   <div class="d-flex">
                     {% if team.event.type == "poster_presentation" %}
                     <a class="btn btn-sm btn-outline-light" style="margin-right: 3px;" href="/events/{{team.event.type}}"><i class="fas fa-info-circle"></i> More Info</a>
+                    {% elif team.event.type == "national_science_day" %}
+                    <a class="btn btn-sm btn-outline-light" style="margin-right: 3px;" href="/national-science-day"><i class="fas fa-info-circle"></i> More Info</a>
                     {% else %}
                     <a class="btn btn-sm btn-outline-light" style="margin-right: 3px;" href="/events/{{team.event.type}}/{{team.event.pk}}"><i class="fas fa-info-circle"></i> More Info</a>
                     {% endif %}
