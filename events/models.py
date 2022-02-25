@@ -116,3 +116,11 @@ class EventSponsors(models.Model):
 
     class Meta:
         verbose_name_plural = "Sponsors"
+
+
+class StreamLinks(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.URLField(null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Stream Links'

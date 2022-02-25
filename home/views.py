@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Carousel, Themeimgs, Sponsors, SponsorDesignation
-from events.models import Event
+from events.models import Event, StreamLinks
 from django.contrib import messages
 
 
@@ -62,3 +62,12 @@ def sponsors(request):
 
 def privacyPolicy(request):
     return render(request, 'privacy_policy.html')
+
+
+def streamLinks(request, type):
+    try:
+        auditorium = StreamLinks.objects.get(name=type)
+        return redirect(auditorium.url)
+    except Exception as e:
+        print(e)
+        return redirect('/events/schedule/')
