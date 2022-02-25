@@ -9,7 +9,7 @@
   margin-bottom: -80px;
 }
 #hero .container {
-  padding-top: 72px;
+  padding-top: 65px;
   margin-top: auto;
 }
 #hero h1 {
@@ -32,6 +32,7 @@
 #hero .hero-video {
   display: inline-flex;
   align-items: center;
+  padding-top: 10px;
 }
 #hero .hero-video h3 {
   font-size: 18px;
@@ -80,11 +81,20 @@
     padding-left: 60px;
   }
   #hero .countdown {
+    padding-left: 50px;
+    padding-top: 30px;
+  }
+  #hero .samaaroButton {
     padding-left: 60px;
+    text-align: left;
     padding-top: 30px;
   }
 }
 @media (max-width: 991px) {
+  #hero .samaaroButton {
+    text-align: center;
+    padding-top: 5px;
+  }
   #hero {
     height: auto;
     text-align: center;
