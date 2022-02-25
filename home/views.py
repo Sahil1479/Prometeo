@@ -45,6 +45,7 @@ def nsd(request):
     event = Event.objects.filter(name='National Science Day').first()
     return render(request, 'national_science_day.html', {'event': event, 'brochure': brochure})
 
+
 def initiatives(request):
     event = Event.objects.filter(type='initiative')
     return render(request, 'initiative.html', {'events': event})
