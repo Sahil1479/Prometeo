@@ -15,7 +15,7 @@ from django.conf import settings
 User = get_user_model()
 
 
-sendMailID = settings.EMAIL_HOST_USER
+sendMailID = settings.FROM_EMAIL_USER
 
 
 def registrationNotCompleted(request):
@@ -188,7 +188,7 @@ def register_indi_event(request, eventid):
         isTeamEvent = False
         # message = (f"You have successfully registered for the {event.type} event {event.name}. Your registration ID is {team.id}.\n\nRegards\nPrometeo'22 Team")
     with get_connection(
-        username=sendMailID,
+        username=settings.EMAIL_HOST_USER,
         password=settings.EMAIL_HOST_PASSWORD
     ) as connection:
         html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': event.image, 'message': message, 'isTeamEvent': isTeamEvent})
