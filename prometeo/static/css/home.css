@@ -9,7 +9,7 @@
   margin-bottom: -80px;
 }
 #hero .container {
-  padding-top: 72px;
+  padding-top: 65px;
   margin-top: auto;
 }
 #hero h1 {
@@ -31,8 +31,8 @@
 }
 #hero .hero-video {
   display: inline-flex;
-  margin-top: 20px;
   align-items: center;
+  padding-top: 10px;
 }
 #hero .hero-video h3 {
   font-size: 18px;
@@ -73,7 +73,28 @@
 #hero .animated {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
+#hero .countdown {
+  padding-top: 30px;
+}
+@media (min-width: 991px) {
+  #hero .homesuboptions {
+    padding-left: 60px;
+  }
+  #hero .countdown {
+    padding-left: 50px;
+    padding-top: 30px;
+  }
+  #hero .samaaroButton {
+    padding-left: 60px;
+    text-align: left;
+    padding-top: 30px;
+  }
+}
 @media (max-width: 991px) {
+  #hero .samaaroButton {
+    text-align: center;
+    padding-top: 5px;
+  }
   #hero {
     height: auto;
     text-align: center;
@@ -83,10 +104,7 @@
     animation: none;
   }
   #hero .hero-img {
-    text-align: center;
-  }
-  #hero .hero-img img {
-    width: 50%;
+    display: none;
   }
 }
 @media (max-width: 768px) {
@@ -98,9 +116,6 @@
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 20px;
-  }
-  #hero .hero-img img {
-    width: 70%;
   }
   #hero .hero-video {
     margin-top: 5px;
