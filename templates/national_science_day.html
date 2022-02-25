@@ -26,7 +26,7 @@ National Science Day
   <p style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px">
     {% if brochure %}
     <span class="span_buttons">
-      <a href="{{brochure.file.url}}" class="hover-button-blue" style="color: #ffffff;
+      <a href="{{brochure.file.url}}" target="_blank" class="hover-button-blue" style="color: #ffffff;
         font-size: medium;
         background: rgba(83, 83, 83, 0.4);
         padding: 12px 25px;
@@ -58,8 +58,9 @@ National Science Day
       </span>
       {% endif %}
     {% endif %}
+    {% if event.webx_link %}
     <span class="span_buttons">
-      <a href="#" class="hover-button-blue" style="color: #ffffff;
+      <a href="{{ event.webx_link }}" class="hover-button-blue" style="color: #ffffff;
         font-size: medium;
         background: rgba(83, 83, 83, 0.4);
         padding: 12px 25px;
@@ -67,13 +68,17 @@ National Science Day
         View Event
       </a>
     </span>
+    {% endif %}
   </p>
 </div>
 <div style="margin-top: 60px; margin-bottom: 10px; width:100%; background-attachment: fixed;align-items: center; 
         justify-content: center; display:flex">
             <div class="section-header">
-                <h2>INDIA's Journey in Science and Technology</h2>
+                <h2>INDIA's Journey in Science and Technology <br/> Aspirations to Achievements</h2>
             </div>
+</div>
+<div class="col-9" style="width: 100%; display:flex; justify-content: center !important" data-aos="fade-up">
+  <p style="font-size: 16px; margin: 10px auto !important; width: 80%; text-align: center; color: rgb(199, 199, 199);">India being the cradle of one of the oldest civilisations withinside the world, has a subculture this is embedded in technological know-how and technology. Ancient Indian land nicely balanced the wisdomand information of sages and seers, of rishis and researchers, of students and scientists whose medical information is preserved withinside the Vedas, Ayurveda and our different historical granthas. Today many centuries later, and seventy five years after attaining independence, India has come an extended manner as she gears as much as offer and installation high-tech answers in numerous key regions which include education, healthcare, transport, etc. to all citizens, accomplishing even the marginalised communities</p>
 </div>
 <section id="team" class="team section-bg" style="background: #110f16;">
     <!-- <div class="container" data-aos="fade-up">
