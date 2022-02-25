@@ -60,7 +60,6 @@ body{
   background-image: linear-gradient(-30deg, rgba(0, 118, 189, 0.1), transparent 50%);
 }
 .tag__item {
-  display: block;
   background: rgba(83, 83, 83, 0.4);
   border-radius: 3px;
   padding: 10px 30px;
@@ -69,8 +68,38 @@ body{
   user-select: none;
   width: 10em;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
+  transition: background-color 0.3s;
+}
+
+.span_buttons{
+  margin-right: 15px;
+}
+
+@media (max-width: 480px) {
+  .span_buttons{
+    display: block;
+    margin-bottom: 20px;
+    margin-right: 0px;
+  } 
+}
+
+.hover-button{
+  transition: background-color 0.3s;
+}
+
+.hover-button-blue{
+  transition: background-color 0.3s;
+}
+
+.hover-button:hover{
+  background: rgba(83, 83, 83, 0.8) !important;
+  transition: background-color 0.3s;
+}
+
+.hover-button-blue:hover{
+  background: #0076BD !important;
   transition: background-color 0.3s;
 }
 
@@ -78,7 +107,6 @@ body{
   background: rgba(83, 83, 83, 0.8);
 }
 .tag__item_alrdyregistered {
-  display: block;
   background: rgba(83, 83, 83, 0.4);
   border-radius: 3px;
   padding: 10px 30px;
@@ -87,8 +115,8 @@ body{
   user-select: none;
   width: 15em;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   transition: background-color 0.3s;
 }
 
