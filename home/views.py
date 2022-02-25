@@ -43,7 +43,7 @@ def home_redirect(request):
 def nsd(request):
     brochure = Brochure.objects.filter(type='nsd').first()
     event = Event.objects.filter(name='National Science Day').first()
-    return render(request, 'national_science_day.html', {'event': event, 'brochure':brochure})
+    return render(request, 'national_science_day.html', {'event': event, 'brochure': brochure})
 
 
 def sponsors(request):
