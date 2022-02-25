@@ -244,5 +244,3 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-# sendgrid configs
-SENDGRID_API_KEY = config('SENDGRID_API_KEY', cast=str)
