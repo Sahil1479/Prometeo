@@ -130,10 +130,9 @@
   transition: background-color ease-in-out 0.3s;
 }
 #schedule .schedule-item:hover {
-  background-color: #002050;
+  background-color: #2b2b2cba;
 }
 #schedule .schedule-item time {
-  padding-bottom: 5px;
   text-transform: uppercase;
   display: inline-block;
   color: #fff;
@@ -157,7 +156,6 @@
   color: #fff;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 5px;
 }
 #schedule .schedule-item p {
   color: #fff;

@@ -69,30 +69,38 @@
       >
         {% if day1.count == 0 %}
           <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% else %}
+          <div class="row schedule-item" style="background: #002050;">
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Time</h4>
+            </div>
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Event Name</h4>
+            </div>
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Venue</h4>
+            </div>
+          </div>
         {% endif %}
         {% for event in day1 %}
         <div class="row schedule-item">
-          <div class="col-md-3 schedule-img">
-            <div class="speaker">
-              <img src="{{ event.image.url }}" alt="Brenden Legros" />
-            </div>
-        </div>
-          <div class="col-md-9 schedule-data">
-            <h4 style="color: #49fcff;">{{event.name}}</h4>
-            <p>
-              {% if event.type == 'talk' %}<span
-                >By - {{event.speaker}} | {{event.designation}}</span
-              >{% endif %}
-            </p>
-            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+          <div class="col-md-4 schedule-data">
+            <p style="text-align: center;">
+                {% if event.date == event.end_date %}
+                  <time>{{ event.time }} - {{ event.end_time }}</time>
+                {% else %}
+                  {{event.date|date:"N j"}} | <time>{{ event.time }}</time> <br> to <br> {{event.end_date|date:"N j"}} | <time>{{ event.end_time }}
+                {% endif %}
+              </p>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
+            <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
             {% if event.venue != none %}
-              <span>
-                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}</p>
-            {% if event.description != '' %}
-            <p class="description">
-              <span> {{event.description}} </span>
-            </p>
+              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            {% else %}
+              <span><p style="text-align: center;"> - </p></span>
             {% endif %}
           </div>
         </div>
@@ -108,30 +116,38 @@
       >
         {% if day2.count == 0 %}
           <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% else %}
+          <div class="row schedule-item" style="background: #002050;">
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Time</h4>
+            </div>
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Event Name</h4>
+            </div>
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Venue</h4>
+            </div>
+          </div>
         {% endif %}
         {% for event in day2 %}
         <div class="row schedule-item">
-          <div class="col-md-3 schedule-img">
-            <div class="speaker">
-              <img src="{{ event.image.url }}" alt="Brenden Legros" />
-            </div>
-        </div>
-          <div class="col-md-9 schedule-data">
-            <h4 style="color: #49fcff;">{{event.name}}</h4>
-            <p>
-              {% if event.type == 'talk' %}<span
-                >By - {{event.speaker}} | {{event.designation}}</span
-              >{% endif %}
-            </p>
-            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+          <div class="col-md-4 schedule-data">
+            <p style="text-align: center;">
+                {% if event.date == event.end_date %}
+                  <time>{{ event.time }} - {{ event.end_time }}</time>
+                {% else %}
+                  {{event.date|date:"N j"}} | <time>{{ event.time }}</time> <br> to <br> {{event.end_date|date:"N j"}} | <time>{{ event.end_time }}
+                {% endif %}
+              </p>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
+            <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
             {% if event.venue != none %}
-              <span>
-                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}</p>
-            {% if event.description != '' %}
-            <p class="description">
-              <span> {{event.description}} </span>
-            </p>
+              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            {% else %}
+              <span><p style="text-align: center;"> - </p></span>
             {% endif %}
           </div>
         </div>
@@ -147,30 +163,38 @@
       >
         {% if day3.count == 0 %}
           <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% else %}
+          <div class="row schedule-item" style="background: #002050;">
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Time</h4>
+            </div>
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Event Name</h4>
+            </div>
+            <div class="col-md-4 schedule-data">
+              <h4 style="color: #49fcff; text-align: center;">Venue</h4>
+            </div>
+          </div>
         {% endif %}
         {% for event in day3 %}
         <div class="row schedule-item">
-          <div class="col-md-3 schedule-img">
-            <div class="speaker">
-              <img src="{{ event.image.url }}" alt="Brenden Legros" />
-            </div>
-        </div>
-          <div class="col-md-9 schedule-data">
-            <h4 style="color: #49fcff;">{{event.name}}</h4>
-            <p>
-              {% if event.type == 'talk' %}<span
-                >By - {{event.speaker}} | {{event.designation}}</span
-              >{% endif %}
-            </p>
-            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+          <div class="col-md-4 schedule-data">
+            <p style="text-align: center;">
+                {% if event.date == event.end_date %}
+                  <time>{{ event.time }} - {{ event.end_time }}</time>
+                {% else %}
+                  {{event.date|date:"N j"}} | <time>{{ event.time }}</time> <br> to <br> {{event.end_date|date:"N j"}} | <time>{{ event.end_time }}
+                {% endif %}
+              </p>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
+            <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
             {% if event.venue != none %}
-              <span>
-                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}</p>
-            {% if event.description != '' %}
-            <p class="description">
-              <span> {{event.description}} </span>
-            </p>
+              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            {% else %}
+              <span><p style="text-align: center;"> - </p></span>
             {% endif %}
           </div>
         </div>
@@ -186,30 +210,38 @@
       >
         {% if day4.count == 0 %}
           <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
+        {% else %}
+        <div class="row schedule-item" style="background: #002050;">
+          <div class="col-md-4 schedule-data">
+            <h4 style="color: #49fcff; text-align: center;">Time</h4>
+          </div>
+          <div class="col-md-4 schedule-data">
+            <h4 style="color: #49fcff; text-align: center;">Event Name</h4>
+          </div>
+          <div class="col-md-4 schedule-data">
+            <h4 style="color: #49fcff; text-align: center;">Venue</h4>
+          </div>
+        </div>
         {% endif %}
         {% for event in day4 %}
         <div class="row schedule-item">
-          <div class="col-md-3 schedule-img">
-            <div class="speaker">
-              <img src="{{ event.image.url }}" alt="Brenden Legros" />
-            </div>
-        </div>
-          <div class="col-md-9 schedule-data">
-            <h4 style="color: #49fcff;">{{event.name}}</h4>
-            <p>
-              {% if event.type == 'talk' %}<span
-                >By - {{event.speaker}} | {{event.designation}}</span
-              >{% endif %}
-            </p>
-            <p><i class="far fa-clock"></i> <time> {{event.time}} </time>
+          <div class="col-md-4 schedule-data">
+            <p style="text-align: center;">
+                {% if event.date == event.end_date %}
+                  <time>{{ event.time }} - {{ event.end_time }}</time>
+                {% else %}
+                  {{event.date|date:"N j"}} | <time>{{ event.time }}</time> <br> to <br> {{event.end_date|date:"N j"}} | <time>{{ event.end_time }}
+                {% endif %}
+              </p>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
+            <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
+          </div>
+          <div class="col-md-4 schedule-data" style="margin: auto !important;">
             {% if event.venue != none %}
-              <span>
-                  |  <i class="bi bi-geo-alt-fill"></i> {{event.venue}}</span>
-              {% endif %}</p>
-            {% if event.description != '' %}
-            <p class="description">
-              <span> {{event.description}} </span>
-            </p>
+              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            {% else %}
+              <span><p style="text-align: center;"> - </p></span>
             {% endif %}
           </div>
         </div>

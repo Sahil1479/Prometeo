@@ -10,7 +10,8 @@ EVENT_CHOICES = (
     ('panel_discussion', 'Panel Discussion'),
     ('initiative', 'Initiative'),
     ('entrepreneurial', 'Entrepreneurial'),
-    ('poster_presentation', 'Poster Presentation')
+    ('poster_presentation', 'Poster Presentation'),
+    ('national_science_day', 'National Science Day')
 )
 
 EVENT_PARTICIPATION = (
@@ -26,7 +27,7 @@ GALLERY_ITEM_TYPE = (
 
 class Brochure(models.Model):
     name = models.CharField(max_length=100, verbose_name='Document name', null=False, blank=False)
-    type = models.CharField(max_length=30, choices=EVENT_CHOICES+(('schedule_file', 'schedule_file'),), default='technical', verbose_name='Event Type')
+    type = models.CharField(max_length=30, choices=EVENT_CHOICES+(('schedule_file', 'schedule_file'), ('nsd', 'nsd'),), default='technical', verbose_name='Event Type')
     file = models.FileField(upload_to='brochures/', null=False, blank=False, verbose_name='File')
 
     def __str__(self):
@@ -77,7 +78,7 @@ class Event(models.Model):
 
 class ExhibitionGallery(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=100, null=True, blank=True)
+    description = models.CharField(max_length=1000, null=True, blank=True)
     type = models.CharField(max_length=10, choices=GALLERY_ITEM_TYPE, default='image')
     image = models.ImageField(upload_to="exhibitions/images/", null=True, blank=True, verbose_name="Image file")
     video = models.URLField(null=True, blank=True, verbose_name="Upload video on Youtube and paste link here (NOTE: If video, then also upload image for thumbnail)")

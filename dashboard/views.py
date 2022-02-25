@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import user_passes_test
-from users.models import CustomUser, ExtendedUser, Team
+from users.models import CustomUser, ExtendedUser, Team, Submissions
 from events.models import Event
 import xlsxwriter
 import os
@@ -12,9 +12,73 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
 # Create your views here.
 sendMailID = settings.EMAIL_HOST_USER
-
 current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4th Year', '5': '5th Year',
                      '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
+
+
+def get_submissions(event, filename):
+    event = Event.objects.get(name=event)
+    submissions = Submissions.objects.filter(event=event)
+    wbname2 = filename + '.xlsx'
+    wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
+    workbook2 = xlsxwriter.Workbook(wbpath2)
+    if(len(event.name) > 18):
+        worksheet2 = workbook2.add_worksheet(f'{event.name.capitalize()[:18]}_Submissions')
+    else:
+        worksheet2 = workbook2.add_worksheet(f'{event.name.capitalize()}_Submissions')
+    col_center2 = workbook2.add_format({
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    worksheet2.set_column(0, 100, 30, col_center2)
+    worksheet2.set_row(0, 30)
+    merge_format2 = workbook2.add_format({
+        'bold': 1,
+        'border': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color': 'gray',
+        'font_size': 20
+    })
+    header_format2 = workbook2.add_format({
+        'bold': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'font_color': 'white',
+        'bg_color': 'black'
+    })
+    if event.participation_type == 'individual':
+        worksheet2.merge_range('A1:D1', f'{event.name.capitalize()}_Submissions', merge_format2)
+        worksheet2.write(1, 0, "Email", header_format2)
+        worksheet2.write(1, 1, "Name", header_format2)
+        worksheet2.write(1, 2, "College", header_format2)
+        worksheet2.write(1, 3, "Submitted File Link", header_format2)
+        row2 = 2
+        for submission in submissions:
+            worksheet2.write(row2, 0, submission.user.email)
+            worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
+            worksheet2.write(row2, 2, submission.user.extendeduser.college)
+            worksheet2.write(row2, 3, submission.file_url)
+            row2 += 1
+    else:
+        worksheet2.merge_range('A1:E1', f'{event.name.capitalize()}_Submissions', merge_format2)
+        worksheet2.write(1, 0, "Team Name", header_format2)
+        worksheet2.write(1, 1, "Leader", header_format2)
+        worksheet2.write(1, 2, "Leader Email", header_format2)
+        worksheet2.write(1, 3, "College", header_format2)
+        worksheet2.write(1, 4, "Submitted File Link", header_format2)
+        row2 = 2
+        for submission in submissions:
+            for team in submission.event.participating_teams.all():
+                if submission.user in team.members.all():
+                    worksheet2.write(row2, 0, team.name)
+                    break
+            worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
+            worksheet2.write(row2, 2, submission.user.email)
+            worksheet2.write(row2, 3, submission.user.extendeduser.college)
+            worksheet2.write(row2, 4, submission.file_url)
+            row2 += 1
+    workbook2.close()
 
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
@@ -26,6 +90,17 @@ def update_event_state(request, type, eventid, redirect_url_name):
 
 
 def get_ca_export(filename):
+    users = ExtendedUser.objects.all()
+    ca_referred_count = dict()
+    for user in users:
+        if user.ambassador:
+            ca_referred_count[user.user.email] = 0
+    for user in users:
+        if user.referred_by:
+            try:
+                ca_referred_count[user.referred_by.email] += 1
+            except KeyError:
+                ca_referred_count[user.referred_by.email] = 0
     wbname = filename
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
@@ -53,19 +128,21 @@ def get_ca_export(filename):
         'bg_color': 'black'
     })
     row = 2
-    worksheet.merge_range('A1:E1', 'Campus Ambassadors', merge_format)
+    worksheet.merge_range('A1:F1', 'Campus Ambassadors', merge_format)
     worksheet.write(1, 0, "Email", header_format)
     worksheet.write(1, 1, "Name", header_format)
     worksheet.write(1, 2, "Referral Id", header_format)
-    worksheet.write(1, 3, "Contact", header_format)
-    worksheet.write(1, 4, "College", header_format)
+    worksheet.write(1, 3, "No of referred users", header_format)
+    worksheet.write(1, 4, "Contact", header_format)
+    worksheet.write(1, 5, "College", header_format)
     for ca in ca_list:
         if 'iitj' not in ca.college.lower() and 'iit jodhpur' not in ca.college.lower() and 'indian institute of technology jodhpur' not in ca.college.lower() and 'indian institute of technology, jodhpur' not in ca.college.lower():
             worksheet.write(row, 0, ca.user.email)
             worksheet.write(row, 1, ca.first_name + ' ' + ca.last_name)
             worksheet.write(row, 2, ca.invite_referral)
-            worksheet.write(row, 3, ca.contact)
-            worksheet.write(row, 4, ca.college)
+            worksheet.write(row, 3, ca_referred_count[ca.user.email])
+            worksheet.write(row, 4, ca.contact)
+            worksheet.write(row, 5, ca.college)
             row += 1
     workbook.close()
 
@@ -97,16 +174,6 @@ def get_all_user_export(filename):
         'font_color': 'white',
         'bg_color': 'black'
     })
-    # invalid_format = workbook.add_format({
-    #     'bg_color': '#ff7f7f',
-    #     'align': 'center',
-    #     'valign': 'vcenter',
-    # })
-    # light_format = workbook.add_format({
-    #     'bg_color': '#d3d3d3',
-    #     'align': 'center',
-    #     'valign': 'vcenter',
-    # })
     worksheet2.merge_range('A1:G1', 'User List', merge_format2)
     worksheet2.write(1, 0, "Email", header_format2)
     worksheet2.write(1, 1, "Name", header_format2)
@@ -129,13 +196,18 @@ def get_all_user_export(filename):
     workbook2.close()
 
 
-@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/users/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/')
 def downloadfile(request, filename):
     file_path = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', filename))
     if filename == "User_List":
         get_all_user_export(filename + '.xlsx')
     elif filename == "Campus_Ambassador_List":
         get_ca_export(filename + '.xlsx')
+    elif 'Submissions' in filename:
+        event_name_list = list(filename.split('_'))[:-1]
+        event = " ".join(event_name_list)
+        print('Name:', event)
+        get_submissions(event, filename)
     file_path += '.xlsx'
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
@@ -452,7 +524,9 @@ def event_info(request, type, eventid):
             row = row + 1
     workbook.close()
     workbook2.close()
-    return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2})
+    event_name = event.name.replace(' ', '_')
+    wbname3 = f'{event_name}_Submissions'
+    return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2, 'wbname3': wbname3})
 
 
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/mass_mail/')

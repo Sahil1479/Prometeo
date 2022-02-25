@@ -23,28 +23,62 @@ National Science Day
   <img class='img-fluid nsdlogo'  src="../static/img/nsd_final.png">
 </section>
 <div>
-  {% if event %}
-    {% if event in user.extendeduser.events.all %}
-      <a href="#" class="tag__item_alrdyregistered"><i class="fas fa-edit mr-2" style="text-align: center; width: fit-content; cursor: pointer"></i> Already Registered</a>
-    {% else %}
-      <a href="/users/register_indi_event/{{event.id}}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer"><i class="fas fa-edit mr-2"></i> Register</a>
+  <p style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px">
+    {% if brochure %}
+    <span class="span_buttons">
+      <a href="{{brochure.file.url}}" target="_blank" class="hover-button-blue" style="color: #ffffff;
+        font-size: medium;
+        background: rgba(83, 83, 83, 0.4);
+        padding: 12px 25px;
+        border-radius: 2px;"><i class="fas fa-download"></i>
+        {{brochure.name}}
+      </a>
+    </span>
     {% endif %}
-    {% if event.meet_link %}
-      <a href="{{ event.meet_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
+    {% if event %}
+      {% if event in user.extendeduser.events.all %}
+      <span class="span_buttons">
+        <a class="hover-button" style="color: #ffffff;
+          font-size: medium;
+          background: rgba(83, 83, 83, 0.4);
+          padding: 12px 25px;
+          border-radius: 2px;">
+          <i class="fas fa-edit mr-2"></i> Already Registered
+        </a>
+      </span>
+      {% else %}
+      <span class="span_buttons">
+        <a href="/users/register_indi_event/{{event.id}}" class="hover-button-blue" style="color: #ffffff;
+          font-size: medium;
+          background: rgba(83, 83, 83, 0.4);
+          padding: 12px 25px;
+          border-radius: 2px;">
+          <i class="fas fa-edit mr-2"></i> Register
+        </a>
+      </span>
+      {% endif %}
     {% endif %}
     {% if event.webx_link %}
-      <a href="{{ event.webx_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
+    <span class="span_buttons">
+      <a href="{{ event.webx_link }}" class="hover-button-blue" style="color: #ffffff;
+        font-size: medium;
+        background: rgba(83, 83, 83, 0.4);
+        padding: 12px 25px;
+        border-radius: 2px;"><i class="fas fa-video mr-2"></i>
+        View Event
+      </a>
+    </span>
     {% endif %}
-    {% if event.youtube_link %}
-      <a href="{{ event.youtube_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
-    {% endif %}
-  {% endif %}
+  </p>
 </div>
 <div style="margin-top: 60px; margin-bottom: 10px; width:100%; background-attachment: fixed;align-items: center; 
         justify-content: center; display:flex">
             <div class="section-header">
-                <h2>INDIA's Journey in Science and Technology</h2>
+                <h2>INDIA's Journey in Science and Technology <br/> Aspirations to Achievements</h2>
             </div>
+</div>
+<div class="col-9" style="width: 100%; display:flex; justify-content: center !important" data-aos="fade-up">
+  <p style="font-size: 16px; margin: 10px auto !important; width: 80%; text-align: center; color: rgb(199, 199, 199);">India being the cradle of one of the oldest civilisations withinside the world, has a subculture this is embedded in technological know-how and technology. Ancient Indian land nicely balanced the wisdomand information of sages and seers, of rishis and researchers, of students and scientists whose medical information is preserved withinside the Vedas, Ayurveda and our different historical granthas. Today many centuries later, and seventy five years after attaining independence, India has come an extended manner as she gears as much as offer and installation high-tech answers in numerous key regions which include education, healthcare, transport, etc. to all citizens, accomplishing even the marginalised communities</p>
 </div>
 <section id="team" class="team section-bg" style="background: #110f16;">
     <!-- <div class="container" data-aos="fade-up">
@@ -127,7 +161,7 @@ National Science Day
         </div>
         
       </div>
-      <div class="col-9" style="margin:5px; display:flex; justify-content: center" data-aos="fade-up">
+      <div class="col-9" style="margin:5px; margin-left: 30px !important; display:flex; justify-content: center" data-aos="fade-up">
         <div class="row">
           <div class="row schedule-item">
             <div class="row"><div class="section-topic">Proud to be a player and spectator of post- independent India’s scientific journey</div></div>

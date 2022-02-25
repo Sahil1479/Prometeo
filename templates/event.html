@@ -230,13 +230,25 @@
                                 </div>
                                 {% endif %}
                             </div>
-
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            {% if event.venue %}
+                            <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
+                                <div class="icon icon-rose">
+                                    <i class="material-icons">my_location</i>
+                                </div>
+                                <div class="description">
+                                    <h4 class="info-title">Venue</h4>
+                                    <p>{{ event.venue }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
                             <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
                                 <div class="icon icon-rose">
                                     <i class="material-icons">date_range</i>
                                 </div>
                                 <div class="description">
-                                    <h4 class="info-title" style="margin-bottom: 25px;">Date</h4>
+                                    <h4 class="info-title" style="margin-bottom: 8px;">Date</h4>
                                     <p style="padding-left:43px;">
                                         {% if event.date %}
                                             {% if event.date|date:"N j, Y" == "Jan. 1, 2023" %} 
@@ -255,19 +267,6 @@
 
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            {% if event.venue %}
-                            <div class="info info-horizontal" style="padding-top:0px; padding-bottom:0px">
-                                <div class="icon icon-rose">
-                                    <i class="material-icons">my_location</i>
-                                </div>
-                                <div class="description">
-                                    <h4 class="info-title">Venue</h4>
-                                    <p>{{ event.venue }}</p>
-                                </div>
-                            </div>
-                            {% endif %}
                         </div>
                     </div>
 
