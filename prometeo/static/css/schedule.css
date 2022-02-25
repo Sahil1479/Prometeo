@@ -130,7 +130,7 @@
   transition: background-color ease-in-out 0.3s;
 }
 #schedule .schedule-item:hover {
-  background-color: #002050;
+  background-color: #2b2b2cba;
 }
 #schedule .schedule-item time {
   text-transform: uppercase;
