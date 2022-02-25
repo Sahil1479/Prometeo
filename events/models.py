@@ -26,7 +26,7 @@ GALLERY_ITEM_TYPE = (
 
 class Brochure(models.Model):
     name = models.CharField(max_length=100, verbose_name='Document name', null=False, blank=False)
-    type = models.CharField(max_length=30, choices=EVENT_CHOICES+(('schedule_file', 'schedule_file'),('nsd','nsd'),), default='technical', verbose_name='Event Type')
+    type = models.CharField(max_length=30, choices=EVENT_CHOICES+(('schedule_file', 'schedule_file'), ('nsd', 'nsd'),), default='technical', verbose_name='Event Type')
     file = models.FileField(upload_to='brochures/', null=False, blank=False, verbose_name='File')
 
     def __str__(self):

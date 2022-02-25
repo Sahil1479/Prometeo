@@ -23,29 +23,51 @@ National Science Day
   <img class='img-fluid nsdlogo'  src="../static/img/nsd_final.png">
 </section>
 <div>
-  {% if brochure %}
-        <p style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px"><a href="{{brochure.file.url}}" style="color: #2b2d2e;
-            font-size: medium;
-            background: #ffffff;
-            padding: 10px;
-            border-radius: 5px; border: 3px solid #47b2e4;"><i class="fas fa-download"></i> {{brochure.name}}</a></p>
-  {% endif %}
-  {% if event %}
-    {% if event in user.extendeduser.events.all %}
-      <a href="#" class="tag__item_alrdyregistered"><i class="fas fa-edit mr-2" style="text-align: center; width: fit-content; cursor: pointer"></i> Already Registered</a>
-    {% else %}
-      <a href="/users/register_indi_event/{{event.id}}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer"><i class="fas fa-edit mr-2"></i> Register</a>
+  <p style="font-size: x-large; color: white; text-align: center; margin-bottom: 40px">
+    {% if brochure %}
+    <span class="span_buttons">
+      <a href="{{brochure.file.url}}" class="hover-button-blue" style="color: #ffffff;
+        font-size: medium;
+        background: rgba(83, 83, 83, 0.4);
+        padding: 12px 25px;
+        border-radius: 2px;"><i class="fas fa-download"></i>
+        {{brochure.name}}
+      </a>
+    </span>
     {% endif %}
-    {% if event.meet_link %}
-      <a href="{{ event.meet_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
+    {% if event %}
+      {% if event in user.extendeduser.events.all %}
+      <span class="span_buttons">
+        <a class="hover-button" style="color: #ffffff;
+          font-size: medium;
+          background: rgba(83, 83, 83, 0.4);
+          padding: 12px 25px;
+          border-radius: 2px;">
+          <i class="fas fa-edit mr-2"></i> Already Registered
+        </a>
+      </span>
+      {% else %}
+      <span class="span_buttons">
+        <a href="/users/register_indi_event/{{event.id}}" class="hover-button-blue" style="color: #ffffff;
+          font-size: medium;
+          background: rgba(83, 83, 83, 0.4);
+          padding: 12px 25px;
+          border-radius: 2px;">
+          <i class="fas fa-edit mr-2"></i> Register
+        </a>
+      </span>
+      {% endif %}
     {% endif %}
-    {% if event.webx_link %}
-      <a href="{{ event.webx_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
-    {% endif %}
-    {% if event.youtube_link %}
-      <a href="{{ event.youtube_link }}" class="tag__item play blue" style="text-align: center; width: fit-content; cursor: pointer; margin-top: 15px"><i class="fas fa-video mr-2"></i> View Event</a>
-    {% endif %}
-  {% endif %}
+    <span class="span_buttons">
+      <a href="#" class="hover-button-blue" style="color: #ffffff;
+        font-size: medium;
+        background: rgba(83, 83, 83, 0.4);
+        padding: 12px 25px;
+        border-radius: 2px;"><i class="fas fa-video mr-2"></i>
+        View Event
+      </a>
+    </span>
+  </p>
 </div>
 <div style="margin-top: 60px; margin-bottom: 10px; width:100%; background-attachment: fixed;align-items: center; 
         justify-content: center; display:flex">
@@ -134,7 +156,7 @@ National Science Day
         </div>
         
       </div>
-      <div class="col-9" style="margin:5px; display:flex; justify-content: center" data-aos="fade-up">
+      <div class="col-9" style="margin:5px; margin-left: 30px !important; display:flex; justify-content: center" data-aos="fade-up">
         <div class="row">
           <div class="row schedule-item">
             <div class="row"><div class="section-topic">Proud to be a player and spectator of post- independent India’s scientific journey</div></div>
