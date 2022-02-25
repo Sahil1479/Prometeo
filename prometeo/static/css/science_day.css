@@ -29,6 +29,12 @@
   left: calc(50% - 25px);
 }
 
+@media (max-width: 740px){
+  .section-header h2 {
+    font-size: 25px;
+  }
+}
+
 .section-topic {
   font-size: 24px;
   text-align: center !important;
