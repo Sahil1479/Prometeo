@@ -497,10 +497,15 @@ Home
 <style>
   
 </style>
+<!-- POP UP -->
 <div id='popUpOverlay' class='popUpOverlay'></div>
 <div id="campusAmbassadorPopUp">
   <p style="color: white; position: absolute; right: 7px; top: 3px; font-size: 1.2rem; cursor: pointer;" onclick="closePopUp()"><i class="fas fa-times"></i></p>
-  <img src="{% static 'img/PR_Poster.png' %}" alt="PopUp Img">
+
+  <div style="display: flex; align-items: center; justify-content: center;">
+    <h1 style="text-align: center;">Hurry Up,<br>Registrations will be closed by tonight</h1>
+  </div>
+  <!-- <img src="{% static 'img/PR_Poster.png' %}" alt="PopUp Img"> -->
 </div>
 
 </main><!-- End #main -->
@@ -553,12 +558,19 @@ Home
         $(".production").addClass("active").siblings().removeClass("active");
       });
       
+      const showPopUP = false
+
       function showPopUp() {
-        var isPopUpShown = window.localStorage.getItem('isPopUpShown');
-        if(isPopUpShown == null && isPopUpShown!=true) {
+        var registration_pop_up_count = window.localStorage.getItem('registration_pop_up_count');
+        if(registration_pop_up_count == null && showPopUP) {
+          window.localStorage.setItem('registration_pop_up_count', 1);
           $('#campusAmbassadorPopUp').fadeIn(600);
-          $("#popUpOverlay").css('display', 'block')
-          window.localStorage.setItem('isPopUpShown', true);
+          $("#popUpOverlay").css('display', 'block');
+        } 
+        else if(registration_pop_up_count<3 && showPopUP) {
+            window.localStorage.setItem('registration_pop_up_count', parseInt(registration_pop_up_count)+1);
+            $('#campusAmbassadorPopUp').fadeIn(600);
+            $("#popUpOverlay").css('display', 'block');
         }
       }
 
