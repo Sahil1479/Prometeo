@@ -554,7 +554,7 @@ def mass_mail(request):
                                     bcc.append(participant.user.email)
 
             sender = sendMailID
-            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc, reply_to='prometeo@iitj.ac.in')
+            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc, reply_to=('prometeo@iitj.ac.in', ))
             for file in request.FILES.getlist('attachments'):
                 email.attach(file.name, file.read(), file.content_type)
             email.send()
