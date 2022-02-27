@@ -1,0 +1,48 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}
+Smart Supply Grid for Water Sustainability
+{% endblock %}
+
+{% block style %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="{% static 'css/poster_presentation.css' %}" rel="stylesheet">
+<link href="{% static 'css/smart-water.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<section class="dark">
+    <div class="container py-4">
+        <div style="margin-top: 20px; margin-bottom: 30px; width:100%; background-attachment: fixed;align-items: center; 
+        justify-content: center; display:flex">
+            <div class="section-header">
+                <h2>Initiatives</h2>
+            </div>
+        </div>
+    {% for event in events %}
+        <article class="postcard dark blue" data-aos="fade-up">
+            <div class="postcard__text">
+                <h1 class="postcard__title blue" style="text-align:center;">{{event.name.capitalize}}</h1>
+                {% if event.prize %}
+                <h5 style="text-align:center">Prize: {{event.prize}}</h5>
+                {% endif %}
+                <div class="postcard__bar bar"></div>
+                <div class="postcard__preview-txt">
+                    {{event.poster_description|safe}}
+                </div>
+                <ul class="postcard__tagbox">
+                {% if event in user.extendeduser.events.all %}
+                    <li class="tag__item"><i class="fas fa-edit mr-2"></i> Already Registered</li>
+                {% else %}
+                    <a href="/users/register_indi_event/{{event.id}}">
+                        <li style="cursor: pointer;" class="tag__item play blue"><i class="fas fa-edit mr-2"></i> Register</li>
+                    </a>
+                {% endif %}
+                </ul>
+            </div>
+        </article>
+{% endfor %}
+</section>
+{% endblock %}
