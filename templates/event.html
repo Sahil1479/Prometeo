@@ -80,7 +80,7 @@
                 type="button">Submit Here</button></a>
             {% elif event not in user.extendeduser.events.all %}
             <a href="javascript:void(0)"><button class="rulebook btn btn-primary"
-                type="button" onclick="openTab(event, 'register')">Submit Here</button></a>
+                type="button" onclick="alert('You have not registered for this event here. Even if you have registered on some external platform for this event, you also need to register on the website to upload your submission.')">Submit Here</button></a>
             {% endif %}
             {% if event.submissions_started and not event.submission_link and event in user.extendeduser.events.all and not user in submittedUsers and user.is_authenticated %}
             <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><button class="rulebook btn btn-primary"
