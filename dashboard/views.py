@@ -252,12 +252,13 @@ def event_type_info(request, type):
     for event in events:
         participants = ExtendedUser.objects.filter(events=event)
         participating_teams = Team.objects.filter(event=event)
-        if(len(event.name) > 31):
-            worksheet = workbook.add_worksheet(event.name[:31])
-            worksheet2 = workbook2.add_worksheet(event.name[:31])
+        e_name = ''.join(e for e in event.name if e.isalnum())
+        if(len(e_name) > 31):
+            worksheet = workbook.add_worksheet(e_name[:31])
+            worksheet2 = workbook2.add_worksheet(e_name[:31])
         else:
-            worksheet = workbook.add_worksheet(event.name)
-            worksheet2 = workbook2.add_worksheet(event.name)
+            worksheet = workbook.add_worksheet(e_name)
+            worksheet2 = workbook2.add_worksheet(e_name)
         col_center = workbook.add_format({
             'align': 'center',
             'valign': 'vcenter',
@@ -388,18 +389,19 @@ def event_type_info(request, type):
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/?next=/dashboard/events/')
 def event_info(request, type, eventid):
     event = get_object_or_404(Event, pk=eventid)
-    wbname = f'{event.name} Participation List.xlsx'
+    e_name = ''.join(e for e in event.name if e.isalnum())
+    wbname = f'{e_name} Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-    wbname2 = f'{event.name} Eligible Participants List.xlsx'
+    wbname2 = f'{e_name} Eligible Participants List.xlsx'
     wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
     workbook2 = xlsxwriter.Workbook(wbpath2)
-    if(len(event.name) > 31):
-        worksheet = workbook.add_worksheet(event.name[:31])
-        worksheet2 = workbook2.add_worksheet(event.name[:31])
+    if(len(e_name) > 31):
+        worksheet = workbook.add_worksheet(e_name[:31])
+        worksheet2 = workbook2.add_worksheet(e_name[:31])
     else:
-        worksheet = workbook.add_worksheet(event.name)
-        worksheet2 = workbook2.add_worksheet(event.name)
+        worksheet = workbook.add_worksheet(e_name)
+        worksheet2 = workbook2.add_worksheet(e_name)
     col_center = workbook.add_format({
         'align': 'center',
         'valign': 'vcenter',
@@ -524,7 +526,7 @@ def event_info(request, type, eventid):
             row = row + 1
     workbook.close()
     workbook2.close()
-    event_name = event.name.replace(' ', '_')
+    event_name = e_name.replace(' ', '_')
     wbname3 = f'{event_name}_Submissions'
     return render(request, 'dashboard/event_info.html', {'event': event, 'wbname': wbname, 'wbname2': wbname2, 'wbname3': wbname3})
 
