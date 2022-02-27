@@ -75,7 +75,7 @@ Home
               </span>
             </p>
           </div>
-          <div class="countdown d-flex" id="countdown" data-count="2022/2/26">
+          <div class="countdown d-flex" id="countdown" data-count="2022/3/1">
             <!-- <div>
               <h3>%d</h3>
               <h4>Days</h4>
@@ -103,7 +103,7 @@ Home
                 </a>
               </span>
             </p> -->
-          <!-- </div>  -->
+          </div>
         </div>
         <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
           <img src="{% static 'img/hero-img.png' %}" class="img-fluid animated" style="margin-top: 10px;" alt="">
@@ -389,10 +389,10 @@ Home
       <div class="section-title" data-aos="fade-up">
         <h2>Highlights</h2>
       </div>
-      <div class="row" style="place-content: space-around;">
+      <div class="row" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000" data-aos-once="true" style="place-content: space-around;">
           {% for event in featured_events %}
             {% if event.type == 'talk' or event.type == 'panel_discussion' %}
-            <div class="member" data-aos="fade-up" data-aos-delay="500" data-aos-duration="700" data-aos-once="true">
+            <div class="member">
                   <a href="/events/{{event.type}}">
                   <div class="member-img">
                     <img src="{{event.image.url}}" class="img-fluid" alt="">
@@ -408,7 +408,7 @@ Home
                 </a>
                 </div>
             {% else %}
-            <div class="member" data-aos="fade-up" data-aos-delay="500" data-aos-duration="700" data-aos-once="true">
+            <div class="member">
                   <a href="/events/{{event.type}}/{{event.id}}">
                   <div class="member-img">
                     <img src="{{event.image.url}}" class="img-fluid" alt="">
@@ -491,7 +491,7 @@ Home
     <div class="gallery-slider swiper">
       <div class="swiper-wrapper align-items-center">
         {% for slide in carousel %}
-          <div class="swiper-slide" data-aos-delay="500" data-aos-duration="500" data-aos-once="true">
+          <div class="swiper-slide">
             <a href="{{ slide.image.url }}" class="gallery-lightbox">
               <img src="{{ slide.image.url }}" class="img-fluid" alt="">
             </a>

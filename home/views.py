@@ -46,6 +46,11 @@ def nsd(request):
     return render(request, 'national_science_day.html', {'event': event, 'brochure': brochure})
 
 
+def initiatives(request):
+    event = Event.objects.filter(type='initiative')
+    return render(request, 'initiative.html', {'events': event})
+
+
 def sponsors(request):
     if registrationNotCompleted(request):
         return redirect("/users/profile")

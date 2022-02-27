@@ -56,7 +56,7 @@
   <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
   <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
 
-  <!--Start of Tawk.to Script-->
+  <!-- Start of Tawk.to Script-->
   <!-- <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -68,7 +68,7 @@
     s0.parentNode.insertBefore(s1,s0);
     })();
   </script> -->
-  <!--End of Tawk.to Script-->
+  <!--End of Tawk.to Script -->
 
   {% block head_links %} {% endblock %}
 
@@ -98,6 +98,7 @@
           <li><a class="nav-link scrollto" href="{% url 'home:home' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'home:nsd' %}">NSD</a></li>
           <li><a class="nav-link scrollto" href="{% url 'home:theme' %}">Theme</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'home:initiatives' %}">Initiative</a></li>
           <li><a class="nav-link scrollto" href="{% url 'events:events' 'talk' %}">Speakers</a></li>
           <li><a class="nav-link scrollto" href="{% url 'home:sponsors' %}">Sponsors</a></li>
           <li>
@@ -122,6 +123,7 @@
             <ul>
               {% if user.is_staff %}
               <li><a href="{% url 'events_info' %}">Dashboard</a></li>
+              <li><a href="/admin">Admin Panel</a></li>
               {% endif %}
               {% if user.extendeduser.ambassador %}
               <li><a href="/users/ca_dashboard/">CA Dashboard</a></li>
@@ -140,8 +142,8 @@
           </li>
           {% endif %}
 
-          <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
-          <div id="popup1" class="overlay">
+          <!-- <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li> -->
+          <!-- <div id="popup1" class="overlay">
             <div class="popup">
               <a class="close" href="#">&times;</a>
               <div class="ca_content" style="padding-top: 40px;">
@@ -166,7 +168,7 @@
               <p style="text-align: center; font-size: 18px; color: white;">Your are already campus ambassador</p>
               {% endif %}
             </div>
-          </div>
+          </div> -->
         </ul>
 
         <i class="bi bi-list mobile-nav-toggle"></i>

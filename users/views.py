@@ -129,7 +129,7 @@ def create_team(request, eventid):
                 message = (f"You have successfully created a team {team.name} for the {event.type} event {event.name}. ")
                 subject = f'{event.name} Registration Details'
             with get_connection(
-                username=sendMailID,
+                username=settings.EMAIL_HOST_USER,
                 password=settings.EMAIL_HOST_PASSWORD
             ) as connection:
                 html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': event.image, 'message': message, 'isTeamEvent': isTeamEvent})
@@ -215,7 +215,7 @@ def make_ca(request):
         extendeduser.save()
 
         with get_connection(
-                username=sendMailID,
+                username=settings.EMAIL_HOST_USER,
                 password=settings.EMAIL_HOST_PASSWORD
         ) as connection:
             html_content = render_to_string("ca_confirmation.html", {'first_name': user.first_name, 'invite_referral': invite_referral})
@@ -285,7 +285,7 @@ def join_team(request):
                         message = (f"You have successfully joined the team {team.name} for the {team.event.type} event {team.event.name}. ")
                         subject = f'{team.event.name} Registration Details'
                     with get_connection(
-                        username=sendMailID,
+                        username=settings.EMAIL_HOST_USER,
                         password=settings.EMAIL_HOST_PASSWORD
                     ) as connection:
                         html_content = render_to_string("eventRegister_confirmation.html", {'first_name': user.first_name, 'team_id': team.id, 'imgURL': team.event.image, 'message': message, 'isTeamEvent': isTeamEvent})
