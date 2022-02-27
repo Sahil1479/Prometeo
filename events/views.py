@@ -72,7 +72,11 @@ def event(request, type, eventid):
         submissions = Submissions.objects.all()
     submitted_users = []
     for submission in submissions:
-        submitted_users += [submitted_user for submitted_user in submission.user.teams.get(event=event).members.all()]
+        print(submission.user.teams)
+        try:
+            submitted_users += [submitted_user for submitted_user in submission.user.teams.get(event=event).members.all()]
+        except Exception:
+            pass
     return render(request, 'event.html', {'event': event, 'submittedUsers': submitted_users})
 
 

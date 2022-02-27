@@ -75,11 +75,14 @@
             <a href="{{event.submission_link}}" target="_blank"><button class="rulebook btn btn-primary"
                 type="button">Submit Here</button></a>
             {% endif %}
-            {% if not user.is_authenticated %}
+            {% if not user.is_authenticated and not event.submission_link %}
             <a href="/accounts/login"><button class="rulebook btn btn-primary"
                 type="button">Submit Here</button></a>
+            {% elif event not in user.extendeduser.events.all %}
+            <a href="javascript:void(0)"><button class="rulebook btn btn-primary"
+                type="button" onclick="openTab(event, 'register')">Submit Here</button></a>
             {% endif %}
-            {% if event.submissions_started and not user in submittedUsers and user.is_authenticated %}
+            {% if event.submissions_started and not event.submission_link and event in user.extendeduser.events.all and not user in submittedUsers and user.is_authenticated %}
             <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><button class="rulebook btn btn-primary"
                 type="button">Submit Here</button></a>
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
