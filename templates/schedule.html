@@ -97,7 +97,9 @@
             <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
           </div>
           <div class="col-md-4 schedule-data" style="margin: auto !important;">
-            {% if event.venue != none %}
+            {% if 'https' in event.venue %}
+              <a href='{{event.venue}}'><span><p style="text-align: center;">{{event.venue}}</p></span></a>
+            {% elif event.venue != None %}
               <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
             {% else %}
               <span><p style="text-align: center;"> - </p></span>

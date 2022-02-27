@@ -161,7 +161,7 @@
                         </td>
                         <td>{% if event.date %} {{ event.date }} {% else %} NA {% endif %}</td>
                         <td>{% if event.time %} {{ event.time }} {% else %} NA {% endif %}</td>
-                        <td>{% if event.submissions_started %} <a href="{% url 'downloadfile' event.name.split|join:'_'|add:'_Submissions'  %}"><button class="btn btn-primary">Download</button></a> {% else %} NA {% endif %}</td>
+                        <td>{% if event.submissions_started %} <a href="{% url 'downloadfile' event.id|stringformat:'s'|add:'_Submissions'  %}"><button class="btn btn-primary">Download</button></a> {% else %} NA {% endif %}</td>
                         <td>{% if event.host %} {{ event.host }} {% else %} NA {% endif %}</td>
                         <td>{% if event.external_link %} <a href="{{ event.external_link }}">{{ event.external_link }}</a> {% else %} NA {% endif %}</td>
                         <td>

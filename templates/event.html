@@ -71,7 +71,65 @@
             <a href="{{ event.material.url }}" target="_blank"><button class="rulebook btn btn-primary"
                     type="button">{{event.material_name}}</button></a>
             {% endif %}
-            {% if event.submission_link %}
+            {% if not user.is_authenticated %}
+                {% if event.submission_link %}
+                    <a href="{{event.submission_link}}" target="_blank"><button class="rulebook btn btn-primary"
+                        type="button">Submit Here</button></a>
+                {% elif event.submissions_started %}
+                    <a href="/accounts/login?next={% url 'events:event' event.type event.pk %}"><button class="rulebook btn btn-primary"
+                        type="button">Submit Here</button></a>
+                {% endif %}
+            {% else %}
+                {% if event.submission_link %}
+                    <a href="{{event.submission_link}}" target="_blank"><button class="rulebook btn btn-primary"
+                        type="button">Submit Here</button></a>
+                {% else %}
+                    {% if event.submissions_started %}
+                        {% if event not in user.extendeduser.events.all %}
+                            <a href="javascript:void(0)"><button class="rulebook btn btn-primary"
+                                type="button" onclick="alert('You have not registered for this event here. Even if you have registered on some external platform for this event, you also need to register on the website to upload your submission.')">Submit Here</button></a>
+                        {% else %}
+                            {% if user in submittedUsers %}
+                                <button type="button" class="submitted btn btn-primary" disabled><i class="fas fa-check-circle mr-2"></i> Submitted</button>
+                            {% else %}
+                                <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"><button class="rulebook btn btn-primary"
+                                    type="button">Submit Here</button>
+                                </a>
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="border-bottom: 0px; padding-bottom: 0px;">
+                                                <h5 class="modal-title" id="exampleModalLabel">Upload Your Submission</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form method="post" action="{% url 'events:uploadSubmission' %}"  enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+                                                    <div class="drag-area">
+                                                        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                                        <header>Drag & Drop to Upload File</header>
+                                                        <span>OR</span>
+                                                        <div class="browseButton">
+                                                            <button type="button" class="tag__item">Browse File</button>
+                                                        </div>
+                                                        <input type="file" name="fileUploaded" hidden>
+                                                        <input type="hidden" name="event" value="{{event.name}}">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer" style="border-top: 0px; padding-top: 0px;">
+                                                    <button type="button" class=" close btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type=submit value="Upload" class="submit btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            <!-- {% if event.submission_link %}
             <a href="{{event.submission_link}}" target="_blank"><button class="rulebook btn btn-primary"
                 type="button">Submit Here</button></a>
             {% endif %}
@@ -80,7 +138,7 @@
                 type="button">Submit Here</button></a>
             {% elif event not in user.extendeduser.events.all %}
             <a href="javascript:void(0)"><button class="rulebook btn btn-primary"
-                type="button" onclick="openTab(event, 'register')">Submit Here</button></a>
+                type="button" onclick="alert('You have not registered for this event here. Even if you have registered on some external platform for this event, you also need to register on the website to upload your submission.')">Submit Here</button></a>
             {% endif %}
             {% if event.submissions_started and not event.submission_link and event in user.extendeduser.events.all and not user in submittedUsers and user.is_authenticated %}
             <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop"><button class="rulebook btn btn-primary"
@@ -114,10 +172,7 @@
                     </div>
                     </div>
                 </div>
-            {% endif %}
-            {% if user in submittedUsers %}
-                <button type="button" class="submitted btn btn-primary" disabled><i class="fas fa-check-circle mr-2"></i> Submitted</button>
-            {% endif %}
+            {% endif %} -->
         </div>
         <div class="col-lg-6 col-md-8 col-sm-12 ml-auto mr-auto" style="padding-bottom: 5%;">
             <div class="event-card card text-center" style="background-color: transparent">
