@@ -52,20 +52,31 @@ Home
             </div>
           </div>
           <div class="samaaroButton">
-            <p style="font-size: x-large; color: black; margin-bottom: 0px">
+            <p style="font-size: x-large; color: black; margin-inline: 10px;">
               <span class="span_buttons">
                 <a href="https://prometeo.samaaro.com/" target="_blank" class="hover-button-blue" style="color: black;
                   font-size: medium;
                   background: rgb(181 248 255);
                   padding: 12px 25px;
-                  border-radius: 2px; box-shadow: 0px 0px 10px #41aec6; cursor:pointer"><i class="fa fa-external-link"></i>
-                  Enter Platform
+                  border-radius: 2px; box-shadow: 0px 0px 10px #41aec6; cursor:pointer; width:20px"><i class="fa fa-external-link"></i>
+                   Enter Platform
+                </a>
+              </span>
+            </p>
+            <p style="font-size: x-large; color: black; margin-inline: 10px;">
+              <span class="span_buttons">
+                <a href="{% url 'events:events' 'panel_discussion' %}" target="_blank" class="hover-button-blue" style="color: black;
+                  font-size: medium;
+                  background: rgb(181 248 255);
+                  padding: 12px 25px;
+                  border-radius: 2px; box-shadow: 0px 0px 10px #41aec6; cursor:pointer; width:20px"><i class="fa fa-users"></i>
+                   Panel Discussions
                 </a>
               </span>
             </p>
           </div>
           <div class="countdown d-flex" id="countdown" data-count="2022/2/26">
-            <div>
+            <!-- <div>
               <h3>%d</h3>
               <h4>Days</h4>
             </div>
@@ -81,7 +92,7 @@ Home
               <h3>%s</h3>
               <h4>Seconds</h4>
             </div>
-            <!-- <p style="font-size: x-large; color: black; text-align: center; margin-bottom: 40px">
+            <p style="font-size: x-large; color: black; text-align: center; margin-bottom: 40px">
               <span class="span_buttons">
                 <a href="https://prometeo.samaaro.com/" target="_blank" class="hover-button-blue" style="color: black;
                   font-size: medium;
@@ -92,7 +103,7 @@ Home
                 </a>
               </span>
             </p> -->
-          </div>
+          <!-- </div>  -->
         </div>
         <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
           <img src="{% static 'img/hero-img.png' %}" class="img-fluid animated" style="margin-top: 10px;" alt="">
