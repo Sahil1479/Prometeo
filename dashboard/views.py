@@ -10,8 +10,8 @@ from django.contrib import messages
 from .forms import EmailForm
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
-# Create your views here.
-sendMailID = settings.EMAIL_HOST_USER
+
+sendMailID = settings.FROM_EMAIL_USER
 current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4th Year', '5': '5th Year',
                      '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
 
@@ -554,7 +554,7 @@ def mass_mail(request):
                                     bcc.append(participant.user.email)
 
             sender = sendMailID
-            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc)
+            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc, reply_to='prometeo@iitj.ac.in')
             for file in request.FILES.getlist('attachments'):
                 email.attach(file.name, file.read(), file.content_type)
             email.send()
