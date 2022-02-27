@@ -109,6 +109,9 @@
   #schedule .schedule-item {
     width: 90%;
   }
+  #schedule .schedule-item-head {
+    display: none;
+  }
   #schedule .schedule-img {
     display: flex;
     justify-content: center;
