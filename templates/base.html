@@ -123,6 +123,7 @@
             <ul>
               {% if user.is_staff %}
               <li><a href="{% url 'events_info' %}">Dashboard</a></li>
+              <li><a href="/admin">Admin Panel</a></li>
               {% endif %}
               {% if user.extendeduser.ambassador %}
               <li><a href="/users/ca_dashboard/">CA Dashboard</a></li>
@@ -141,8 +142,8 @@
           </li>
           {% endif %}
 
-          <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li>
-          <div id="popup1" class="overlay">
+          <!-- <li><a class="getstarted" href="#popup1">Campus Ambassador</a></li> -->
+          <!-- <div id="popup1" class="overlay">
             <div class="popup">
               <a class="close" href="#">&times;</a>
               <div class="ca_content" style="padding-top: 40px;">
@@ -167,7 +168,7 @@
               <p style="text-align: center; font-size: 18px; color: white;">Your are already campus ambassador</p>
               {% endif %}
             </div>
-          </div>
+          </div> -->
         </ul>
 
         <i class="bi bi-list mobile-nav-toggle"></i>
