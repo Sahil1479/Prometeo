@@ -97,10 +97,12 @@
             <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
           </div>
           <div class="col-md-4 schedule-data" style="margin: auto !important;">
-            {% if 'https' in event.venue %}
-              <a href='{{event.venue}}'><span><p style="text-align: center;">{{event.venue}}</p></span></a>
+            {% if 'Audi 1' in event.venue %}
+              <a href='https://prometeo.samaaro.com/lobby/auditorium' ><span><p style="text-align: center; color: #29bbff;">{{event.venue}} <i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Audi 2' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/auditorium2'><span><p style="text-align: center;">{{event.venue}}<i class="fa fa-external-link"></i></p></span></a>
             {% elif event.venue != None %}
-              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            <span><p style="text-align: center;">{{event.venue}}</p></span>
             {% else %}
               <span><p style="text-align: center;"> - </p></span>
             {% endif %}
