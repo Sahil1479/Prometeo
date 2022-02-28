@@ -109,7 +109,7 @@
   #schedule .schedule-item {
     width: 90%;
   }
-  #schedule .schedule-item-head {
+ .schedule-item-head {
     display: none;
   }
   #schedule .schedule-img {
