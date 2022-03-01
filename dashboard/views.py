@@ -17,7 +17,7 @@ current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4t
 
 
 def get_all_event_participation():
-    submissions = Submissions.objects.all()
+    submissions = Submissions.objects.all().order_by('event')
     wbname2 = 'Event_Participants.xlsx'
     wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
     workbook2 = xlsxwriter.Workbook(wbpath2)
