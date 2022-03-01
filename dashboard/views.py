@@ -58,7 +58,7 @@ def get_all_event_participation():
             worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
             worksheet2.write(row2, 2, 'NA')
             worksheet2.write(row2, 3, submission.user.extendeduser.contact)
-            worksheet2.write(row2, 4, submission.event)
+            worksheet2.write(row2, 4, submission.event.name)
             worksheet2.write(row2, 5, submission.user.extendeduser.college)
             worksheet2.write(row2, 6, submission.file_url)
             row2 += 1
