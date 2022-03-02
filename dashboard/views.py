@@ -10,10 +10,69 @@ from django.contrib import messages
 from .forms import EmailForm
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
-# Create your views here.
-sendMailID = settings.EMAIL_HOST_USER
+
+sendMailID = settings.FROM_EMAIL_USER
 current_year_dict = {'1': '1st Year', '2': '2nd Year', '3': '3rd Year', '4': '4th Year', '5': '5th Year',
                      '6': 'Graduated', '7': 'Faculty/Staff', '8': 'NA'}
+
+
+def get_all_event_participation():
+    submissions = Submissions.objects.all().order_by('event')
+    wbname2 = 'Event_Participants.xlsx'
+    wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
+    workbook2 = xlsxwriter.Workbook(wbpath2)
+    worksheet2 = workbook2.add_worksheet('Event_participants')
+    col_center2 = workbook2.add_format({
+        'align': 'center',
+        'valign': 'vcenter',
+    })
+    worksheet2.set_column(0, 100, 30, col_center2)
+    worksheet2.set_row(0, 30)
+    merge_format2 = workbook2.add_format({
+        'bold': 1,
+        'border': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'bg_color': 'gray',
+        'font_size': 20
+    })
+    header_format2 = workbook2.add_format({
+        'bold': 1,
+        'align': 'center',
+        'valign': 'vcenter',
+        'font_color': 'white',
+        'bg_color': 'black'
+    })
+    worksheet2.merge_range('A1:D1', 'Event Participants', merge_format2)
+    worksheet2.write(1, 0, "Email", header_format2)
+    worksheet2.write(1, 1, "Name", header_format2)
+    worksheet2.write(1, 2, "Team Name", header_format2)
+    worksheet2.write(1, 3, "Contact", header_format2)
+    worksheet2.write(1, 4, "Event", header_format2)
+    worksheet2.write(1, 5, "College", header_format2)
+    worksheet2.write(1, 6, "Submitted File Link", header_format2)
+    row2 = 2
+    for submission in submissions:
+        if submission.event.participation_type == 'individual':
+            worksheet2.write(row2, 0, submission.user.email)
+            worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
+            worksheet2.write(row2, 2, 'NA')
+            worksheet2.write(row2, 3, submission.user.extendeduser.contact)
+            worksheet2.write(row2, 4, submission.event.name)
+            worksheet2.write(row2, 5, submission.user.extendeduser.college)
+            worksheet2.write(row2, 6, submission.file_url)
+            row2 += 1
+        else:
+            for submitted_user in submission.user.teams.get(event=submission.event).members.all():
+                worksheet2.write(row2, 0, submitted_user.email)
+                worksheet2.write(row2, 1, submitted_user.extendeduser.first_name + ' ' + submitted_user.extendeduser.last_name)
+                worksheet2.write(row2, 2, submission.user.teams.get(event=submission.event).name)
+                worksheet2.write(row2, 3, submitted_user.extendeduser.contact)
+                worksheet2.write(row2, 4, submission.event.name)
+                worksheet2.write(row2, 5, submitted_user.extendeduser.college)
+                worksheet2.write(row2, 6, submission.file_url)
+                row2 += 1
+    workbook2.close()
 
 
 def get_submissions(event, filename):
@@ -51,22 +110,25 @@ def get_submissions(event, filename):
         worksheet2.merge_range('A1:D1', f'{event.name.capitalize()}_Submissions', merge_format2)
         worksheet2.write(1, 0, "Email", header_format2)
         worksheet2.write(1, 1, "Name", header_format2)
-        worksheet2.write(1, 2, "College", header_format2)
-        worksheet2.write(1, 3, "Submitted File Link", header_format2)
+        worksheet2.write(1, 2, "Contact", header_format2)
+        worksheet2.write(1, 3, "College", header_format2)
+        worksheet2.write(1, 4, "Submitted File Link", header_format2)
         row2 = 2
         for submission in submissions:
             worksheet2.write(row2, 0, submission.user.email)
             worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
-            worksheet2.write(row2, 2, submission.user.extendeduser.college)
-            worksheet2.write(row2, 3, submission.file_url)
+            worksheet2.write(row2, 2, submission.user.extendeduser.contact)
+            worksheet2.write(row2, 3, submission.user.extendeduser.college)
+            worksheet2.write(row2, 4, submission.file_url)
             row2 += 1
     else:
         worksheet2.merge_range('A1:E1', f'{event.name.capitalize()}_Submissions', merge_format2)
         worksheet2.write(1, 0, "Team Name", header_format2)
         worksheet2.write(1, 1, "Leader", header_format2)
         worksheet2.write(1, 2, "Leader Email", header_format2)
-        worksheet2.write(1, 3, "College", header_format2)
-        worksheet2.write(1, 4, "Submitted File Link", header_format2)
+        worksheet2.write(1, 3, "Contact", header_format2)
+        worksheet2.write(1, 4, "College", header_format2)
+        worksheet2.write(1, 5, "Submitted File Link", header_format2)
         row2 = 2
         for submission in submissions:
             for team in submission.event.participating_teams.all():
@@ -75,8 +137,9 @@ def get_submissions(event, filename):
                     break
             worksheet2.write(row2, 1, submission.user.extendeduser.first_name + ' ' + submission.user.extendeduser.last_name)
             worksheet2.write(row2, 2, submission.user.email)
-            worksheet2.write(row2, 3, submission.user.extendeduser.college)
-            worksheet2.write(row2, 4, submission.file_url)
+            worksheet2.write(row2, 3, submission.user.extendeduser.contact)
+            worksheet2.write(row2, 4, submission.user.extendeduser.college)
+            worksheet2.write(row2, 5, submission.file_url)
             row2 += 1
     workbook2.close()
 
@@ -207,6 +270,8 @@ def downloadfile(request, filename):
         event_name_list = list(filename.split('_'))[:-1]
         event_id = event_name_list[0]
         get_submissions(event_id, filename)
+    elif 'Event_Participants' in filename:
+        get_all_event_participation()
     file_path += '.xlsx'
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
@@ -392,7 +457,7 @@ def event_info(request, type, eventid):
     wbname = f'{e_name} Participation List.xlsx'
     wbpath = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname))
     workbook = xlsxwriter.Workbook(wbpath)
-    wbname2 = f'{event.name} Eligible Participants List.xlsx'
+    wbname2 = f'{e_name} Eligible Participants List.xlsx'
     wbpath2 = os.path.join(settings.MEDIA_ROOT, os.path.join('workbooks', wbname2))
     workbook2 = xlsxwriter.Workbook(wbpath2)
     if(len(event.name) > 31):
@@ -554,7 +619,7 @@ def mass_mail(request):
                                     bcc.append(participant.user.email)
 
             sender = sendMailID
-            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc)
+            email = EmailMultiAlternatives(form.cleaned_data['subject'], form.cleaned_data['message'], sender, recepients, bcc=bcc, reply_to=('prometeo@iitj.ac.in', ))
             for file in request.FILES.getlist('attachments'):
                 email.attach(file.name, file.read(), file.content_type)
             email.send()

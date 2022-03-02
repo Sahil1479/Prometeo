@@ -97,10 +97,14 @@
             <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
           </div>
           <div class="col-md-4 schedule-data" style="margin: auto !important;">
-            {% if 'https' in event.venue %}
-              <a href='{{event.venue}}'><span><p style="text-align: center;">{{event.venue}}</p></span></a>
+            {% if 'Audi 1' in event.venue %}
+              <a href='https://prometeo.samaaro.com/lobby/auditorium' ><span><p style="text-align: center; color: #29bbff;">{{event.venue}} <i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Audi 2' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/auditorium2'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Panel' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/networking'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
             {% elif event.venue != None %}
-              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            <span><p style="text-align: center;">{{event.venue}}</p></span>
             {% else %}
               <span><p style="text-align: center;"> - </p></span>
             {% endif %}
@@ -119,8 +123,8 @@
         {% if day2.count == 0 %}
           <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
         {% else %}
-          <div class="row schedule-item" style="background: #002050;">
-            <div class="col-md-4 schedule-data schedule-item-head">
+          <div class="row schedule-item schedule-item-head" style="background: #002050;">
+            <div class="col-md-4 schedule-data ">
               <h4 style="color: #49fcff; text-align: center;">Time</h4>
             </div>
             <div class="col-md-4 schedule-data">
@@ -146,8 +150,14 @@
             <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
           </div>
           <div class="col-md-4 schedule-data" style="margin: auto !important;">
-            {% if event.venue != none %}
-              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            {% if 'Audi 1' in event.venue %}
+              <a href='https://prometeo.samaaro.com/lobby/auditorium' ><span><p style="text-align: center; color: #29bbff;">{{event.venue}} <i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Audi 2' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/auditorium2'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Panel' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/networking'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif event.venue != None %}
+            <span><p style="text-align: center;">{{event.venue}}</p></span>
             {% else %}
               <span><p style="text-align: center;"> - </p></span>
             {% endif %}
@@ -166,8 +176,8 @@
         {% if day3.count == 0 %}
           <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
         {% else %}
-          <div class="row schedule-item" style="background: #002050;">
-            <div class="col-md-4 schedule-data schedule-item-head">
+          <div class="row schedule-item schedule-item-head" style="background: #002050;">
+            <div class="col-md-4 schedule-data ">
               <h4 style="color: #49fcff; text-align: center;">Time</h4>
             </div>
             <div class="col-md-4 schedule-data">
@@ -193,8 +203,14 @@
             <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
           </div>
           <div class="col-md-4 schedule-data" style="margin: auto !important;">
-            {% if event.venue != none %}
-              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            {% if 'Audi 1' in event.venue %}
+              <a href='https://prometeo.samaaro.com/lobby/auditorium' ><span><p style="text-align: center; color: #29bbff;">{{event.venue}} <i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Audi 2' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/auditorium2'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Panel' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/networking'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif event.venue != None %}
+            <span><p style="text-align: center;">{{event.venue}}</p></span>
             {% else %}
               <span><p style="text-align: center;"> - </p></span>
             {% endif %}
@@ -213,8 +229,8 @@
         {% if day4.count == 0 %}
           <p data-aos="fade-up" data-aos-delay="1000" data-aos-duration="2000" data-aos-once = "true" style="font-size: xx-large; color: white; text-align: center;">Coming Soon!</p>
         {% else %}
-        <div class="row schedule-item" style="background: #002050;">
-          <div class="col-md-4 schedule-data schedule-item-head">
+        <div class="row schedule-item schedule-item-head" style="background: #002050;">
+          <div class="col-md-4 schedule-data">
             <h4 style="color: #49fcff; text-align: center;">Time</h4>
           </div>
           <div class="col-md-4 schedule-data">
@@ -240,8 +256,14 @@
             <h4 style="color: #ffffff; text-align: center;">{{event.name}}</h4>
           </div>
           <div class="col-md-4 schedule-data" style="margin: auto !important;">
-            {% if event.venue != none %}
-              <span><p style="text-align: center;"><i class="bi bi-geo-alt-fill"></i> {{event.venue}}</p></span>
+            {% if 'Audi 1' in event.venue %}
+              <a href='https://prometeo.samaaro.com/lobby/auditorium' ><span><p style="text-align: center; color: #29bbff;">{{event.venue}} <i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Audi 2' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/auditorium2'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif 'Panel' in event.venue %}
+            <a href='https://prometeo.samaaro.com/lobby/networking'><span><p style="text-align: center;  color: #29bbff;">{{event.venue}}<i class="fa fa-external-link" style="padding:5px;"></i></p></span></a>
+            {% elif event.venue != None %}
+            <span><p style="text-align: center;">{{event.venue}}</p></span>
             {% else %}
               <span><p style="text-align: center;"> - </p></span>
             {% endif %}
