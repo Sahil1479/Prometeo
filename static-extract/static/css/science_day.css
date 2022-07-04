@@ -1,0 +1,388 @@
+/*--------------------------------------------------------------
+# Team
+--------------------------------------------------------------*/
+.section-header h2 {
+  font-size: 36px;
+  text-transform: uppercase;
+  text-align: center !important;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.section-header {
+  position: relative;
+  padding-bottom: 10px;
+  margin: 10px;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-header::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 5px;
+  background: #f82249;
+  bottom: 0;
+  left: calc(50% - 25px);
+}
+
+@media (max-width: 740px){
+  .section-header h2 {
+    font-size: 25px;
+  }
+}
+
+.section-topic {
+  font-size: 24px;
+  text-align: center !important;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 10px;
+  margin: 10px;
+  background: -webkit-linear-gradient(#f8f6f6, #3a90e4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+body{
+  background-color:#110f16;
+}
+#heading{
+  display:flex !important;
+  justify-content: center !important;
+  padding-bottom: 0px;
+}
+.nsdlogo{
+  padding:30px;
+  padding-bottom:10px;
+}
+.blue::before {
+  background-image: linear-gradient(-30deg, rgba(0, 118, 189, 0.1), transparent 50%);
+}
+.tag__item {
+  background: rgba(83, 83, 83, 0.4);
+  border-radius: 3px;
+  padding: 10px 30px;
+  margin: 0 5px 5px 0;
+  cursor: default;
+  user-select: none;
+  width: 10em;
+  position: relative;
+  /* left: 50%;
+  transform: translateX(-50%); */
+  transition: background-color 0.3s;
+}
+
+.span_buttons{
+  margin-right: 15px;
+}
+
+@media (max-width: 480px) {
+  .span_buttons{
+    display: block;
+    margin-bottom: 20px;
+    margin-right: 0px;
+  } 
+}
+
+.hover-button{
+  transition: background-color 0.3s;
+}
+
+.hover-button-blue{
+  transition: background-color 0.3s;
+}
+
+.hover-button:hover{
+  background: rgba(83, 83, 83, 0.8) !important;
+  transition: background-color 0.3s;
+}
+
+.hover-button-blue:hover{
+  background: #0076BD !important;
+  transition: background-color 0.3s;
+}
+
+.tag__item:hover {
+  background: rgba(83, 83, 83, 0.8);
+}
+.tag__item_alrdyregistered {
+  background: rgba(83, 83, 83, 0.4);
+  border-radius: 3px;
+  padding: 10px 30px;
+  margin: 0 5px 5px 0;
+  cursor: default;
+  user-select: none;
+  width: 15em;
+  position: relative;
+  /* left: 50%;
+  transform: translateX(-50%); */
+  transition: background-color 0.3s;
+}
+
+.tag__item_alrdyregistered:hover {
+  background: rgba(83, 83, 83, 0.8);
+}
+.team .member {
+    position: relative;
+    width:500px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 5px;
+    text-align: center;
+    background-image: linear-gradient(to top right, #1c1924, #2c2835f3);
+    border: 2px solid #47b2e4;
+    box-shadow: 0px 5px 8px #888888;
+    transition: 0.2s !important;
+    display: block !important;
+  }
+  @media (min-width: 1000px) {
+    .nsdlogo {
+      height: 80vh;
+    }
+  }
+  /* @media (max-width: 480px)  {
+    .team .member {
+      display: block !important;
+    }
+    
+    .team .member .pic{
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%) !important;
+    }
+   
+    .team .member{
+      text-align: center;
+      padding-top:20px;
+    }
+    .team .member span::after {
+      left: 50% !important;
+      position: relative;
+      transform: translateX(-50%) !important;
+    }
+  } */
+  .team .member .pic {
+    overflow: hidden;
+    width: 200px;
+    padding:10px;
+    border-radius: 20px;
+    align-self: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) !important;
+    text-align: center;
+    padding-top:20px;
+  }
+ 
+  .team .member:hover {
+    transform: translateY(-5px) !important;
+  }
+  .team .member .member-info {
+    padding: 30px;
+  }
+  .team .member h4 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #33f0f0;
+  }
+  .team .member span {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+    position: relative;
+    font-weight: 500;
+  }
+  .team .member span::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 1px;
+    background: #cbd6e9;
+    bottom: -5px;
+    left: 0;
+    left: 50% !important;
+    position: relative;
+    transform: translateX(-50%) !important;
+    transition: 0.2s ease-out;
+  }
+  .team .member:hover span::after {
+    width: 100px;
+  }
+  .team .member p {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+  }
+  .team .member .social {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .team .member .social a {
+    transition: ease-in-out 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    width: 32px;
+    height: 32px;
+    background: #eff2f8;
+  }
+  .team .member .social a i {
+    color: #37517e;
+    font-size: 16px;
+    margin: 0 2px;
+  }
+  .team .member .social a:hover {
+    background: #47b2e4;
+  }
+  .team .member .social a:hover i {
+    color: #fff;
+  }
+  .team .member .social a + a {
+    margin-left: 8px;
+  }
+
+
+  /*--------------------------------------------------------------
+# Schedule Section
+--------------------------------------------------------------*/
+
+/* Sections Header
+--------------------------------*/
+
+#team{
+  padding: 30px 0px 60px 0px;
+  width: 100%;
+ 
+}
+
+#team .schedule-img {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 991px) {
+  #team .nav-tabs a {
+    padding: 8px 60px;
+  }
+}
+@media (max-width: 767px) {
+  #team  .nav-tabs a {
+    padding: 8px 50px;
+  }
+}
+@media (max-width: 480px) {
+  #team   .nav-tabs a {
+    padding: 8px 30px;
+  }
+}
+
+#team  .sub-heading {
+  text-align: center;
+  font-size: 18px;
+  font-style: italic;
+  margin: 0 auto 30px auto;
+}
+@media (min-width: 991px) {
+  #team  .sub-heading {
+    width: 75%;
+  }
+}
+
+@media (max-width: 767px) {
+  #team  .tab-pane {
+    text-align: -webkit-center;
+  }
+  #team  .schedule-item {
+    width: 100%;
+    padding:10px;
+  }
+  #team  .schedule-img {
+    padding: 5px !important;
+  }
+  #team  .schedule-data {
+    text-align: center;
+  }
+  #team  .schedule-item span::after{
+    left: 50% !important;
+    transform:translateX(-50%);
+    bottom:-10px;
+  }
+}
+#team  .tab-pane {
+  transition: ease-in-out 0.2s;
+}
+#team  .schedule-item {
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-image: linear-gradient(to top right, #1c1924, #2c2835f3);
+  border: 2px solid #47b2e4;
+  box-shadow: 0px 5px 8px #888888;
+  
+  padding-top: 15px;
+  padding-bottom: 15px;
+  transition:0.2s;
+}
+#team  .schedule-item:hover {
+  transform: translateY(-10px);
+}
+
+#team .schedule-item .speaker {
+  border: 3px solid #2da2e5;
+  border-radius: 5px;
+  color: #fff;
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+  float: left;
+  margin: 0 10px 10px 0;
+}
+#team .schedule-item .speaker img {
+  height: 100%;
+  width: 100%;
+  transition: all ease-in-out 0.3s;
+}
+#team .schedule-item h4 {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+#team .schedule-item p {
+  color: #fff;
+  margin-bottom: 10px;
+}
+#team .schedule-item .description {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+#team .schedule-item span::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: #82cdf8;
+  bottom: -5px;
+  left: 0px;
+
+  position: relative;
+
+  transition: 0.2s ease-out;
+}
+
+#team .schedule-item:hover span::after{
+  width:80px;
+}
